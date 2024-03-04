@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "text": "속파기 도구 small 10개 사기",
+    "isChecked": true
+  },
+  {
+    "id": 2,
+    "text": "토련 10덩이 해놓기",
+    "isChecked": false
+  }
+]
