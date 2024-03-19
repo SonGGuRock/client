@@ -1,15 +1,26 @@
+import Image from 'next/image';
+
 type ThumbnailProps = {
   userId: number;
-  userName: string;
+  userName?: string;
   isSmall?: boolean;
+  onClick?: () => {};
 };
 
-const Thumbnail = ({ userId, userName, isSmall = true }: ThumbnailProps) => {
+const Thumbnail = ({
+  userId,
+  userName,
+  isSmall = true,
+  onClick,
+}: ThumbnailProps) => {
   return (
-    <img
+    <Image
       className='rounded-full h-8 w-8'
       src='/mock/user/img_user.png'
-      alt={userName}
+      alt={userName || '유저 사진'}
+      width={32}
+      height={32}
+      onClick={onClick}
     />
   );
 };

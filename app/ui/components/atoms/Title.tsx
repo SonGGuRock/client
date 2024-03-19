@@ -5,7 +5,7 @@ type TitleProps = {
 
 const Title = ({ title, subTitle }: TitleProps) => {
   return (
-    <h2 className='text-lg font-semibold mb-4'>
+    <h2 className='text-lg font-semibold'>
       {subTitle && <p className='text-sm text-grey500'>{subTitle}</p>}
       {title}
     </h2>

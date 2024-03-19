@@ -1,20 +1,20 @@
 import Link from 'next/link';
-import Label from '../atoms/Label';
-import Thumbnail from '../atoms/Thumbnail';
+import Label from '../components/atoms/Label';
+import Thumbnail from '../components/atoms/Thumbnail';
 
-export type UserItemProps = {
+export type UserProps = {
   userId: number;
   userName: string;
   lastPaymentDate: string;
   remainingCount: number;
 };
 
-const UserItem = ({
+const User = ({
   userId,
   userName,
   lastPaymentDate,
   remainingCount,
-}: UserItemProps) => {
+}: UserProps) => {
   return (
     <li className='w-full p-3 h-16 bg-grey50 rounded-lg'>
       <Link
@@ -37,4 +37,4 @@ const UserItem = ({
   );
 };
 
-export default UserItem;
+export default User;

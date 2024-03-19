@@ -21,14 +21,13 @@ export default function Calendar() {
     },
   };
   return (
-    <div className='my-6'>
+    <div className='my-8'>
       <div className='relative'>
-        <h2 className='w-full text-base font-semibold'>1월 16일 화요일</h2>
-        <GoTo href='#' title='캘린더 전체보기' />
+        {/* <GoTo href='#' title='캘린더 전체보기' /> */}
         <Swiper
           pagination={pagination}
           modules={[Pagination]}
-          className='h-[204px] mt-4'
+          className='h-[242px] mt-4'
         >
           <SwiperSlide>
             <Daily />

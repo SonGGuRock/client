@@ -1,40 +1,129 @@
-import { fetchTodos } from '../../lib/data';
-import CheckListItem from '../components/modules/CheckListItem';
+'use client';
 
-export default async function Todos() {
-  const todos = await fetchTodos();
+import Image from 'next/image';
+import TodoItem from './TodoItem';
+import ExpandedList from '../components/modules/ExpandedList';
+import sliceItems from '@/app/utils/sliceItems';
+import Title from '../components/atoms/Title';
+import Button from '../components/atoms/Button';
+import usePopup from '@/app/hooks/usePopup';
+import { createPortal } from 'react-dom';
+import BottomSheetWithInput from '../components/modules/BottomSheetWithInput';
+import Toast from '../components/atoms/Toast';
+import useToast from '@/app/hooks/useToast';
+
+type Todo = {
+  id: number;
+  content: string;
+  is_completed: boolean;
+  author: {
+    id: number;
+    profile_picture: string;
+  };
+};
+
+export default function Todos() {
+  const { open: isInputMode, toggle: toggleInputMode } = usePopup();
+  const { toast, toggleToast } = useToast();
+
+  const todos: Todo[] = [
+    {
+      id: 1,
+      content: '속파기 도구 small 10개 사기',
+      is_completed: true,
+      author: {
+        id: 1,
+        profile_picture: '/mock/user/img_user.png',
+      },
+    },
+    {
+      id: 2,
+      content: '속파기 도구 small 10개 사기',
+      is_completed: false,
+      author: {
+        id: 2,
+        profile_picture: '/mock/user/img_user.png',
+      },
+    },
+    {
+      id: 3,
+      content: '속파기 도구 small 10개 사기',
+      is_completed: true,
+      author: {
+        id: 3,
+        profile_picture: '/mock/user/img_user.png',
+      },
+    },
+    {
+      id: 4,
+      content: '속파기 도구 small 10개 사기',
+      is_completed: true,
+      author: {
+        id: 4,
+        profile_picture: '/mock/user/img_user.png',
+      },
+    },
+    {
+      id: 5,
+      content: '속파기 도구 small 10개 사기',
+      is_completed: true,
+      author: {
+        id: 5,
+        profile_picture: '/mock/user/img_user.png',
+      },
+    },
+  ];
+
+  const { limited, rest } = sliceItems(todos, 4);
 
   return (
-    <div className='my-6 relative'>
-      <h2 className='text-lg font-semibold mb-4'>오늘의 할 일</h2>
-      <button className='absolute top-0 right-4'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='28'
-          height='28'
-          viewBox='0 0 28 28'
-          fill='none'
-        >
-          <circle cx='14' cy='14' r='14' fill='#E3BC99' />
-          <path
-            d='M9 14C9.64 14 15.9333 14 19 14'
-            stroke='white'
-            strokeWidth='1.5'
-            strokeLinecap='round'
-          />
-          <path
-            d='M14 9C14 9.64 14 15.9333 14 19'
-            stroke='white'
-            strokeWidth='1.5'
-            strokeLinecap='round'
-          />
-        </svg>
-      </button>
+    <div className='mt-8 mb-2 relative px-4'>
+      <div className='flex justify-between'>
+        <div className='text-lg font-semibold flex items-center gap-2 mb-4'>
+          <Title title='오늘의 할 일' />
+          <span>
+            <strong className='text-brown'>3</strong>/6
+          </span>
+        </div>
+        <Button
+          size='small'
+          text='할 일 추가'
+          onClick={toggleInputMode}
+          icon={
+            <Image
+              src='/icon/ic_plus_white.svg'
+              alt='추가 버튼'
+              width={18}
+              height={18}
+            />
+          }
+        />
+      </div>
+
       <ul className='flex flex-wrap gap-2'>
-        {todos?.map(({ id, text, isChecked }) => (
-          <CheckListItem id={id} text={text} isChecked={isChecked} />
+        {limited.map((todo) => (
+          <TodoItem key={todo.id} {...todo} />
         ))}
       </ul>
+      <ExpandedList>
+        {rest.map((todo) => (
+          <TodoItem key={todo.id} {...todo} />
+        ))}
+      </ExpandedList>
+
+      {isInputMode &&
+        createPortal(
+          <BottomSheetWithInput
+            title='할 일 추가'
+            placeholder='오늘의 할 일을 입력하세요'
+            onDone={() => {
+              toggleToast({ text: '할 일을 추가하였습니다' });
+            }}
+            onClose={toggleInputMode}
+          />,
+          document.body
+        )}
+      {toast && createPortal(<Toast text={toast.text} />, document.body)}
     </div>
   );
 }

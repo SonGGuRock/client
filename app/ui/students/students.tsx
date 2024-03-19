@@ -1,8 +1,10 @@
 import Title from '../components/atoms/Title';
 import GoTo from '../components/atoms/GoTo';
-import UserItem, { UserItemProps } from '../components/modules/UserItem';
+import User, { UserProps } from './User';
+import ExpandedList from '../components/modules/ExpandedList';
+import sliceItems from '@/app/utils/sliceItems';
 
-const students: UserItemProps[] = [
+export const students: UserProps[] = [
   {
     userId: 1,
     userName: '최지영',
@@ -35,16 +37,23 @@ const students: UserItemProps[] = [
   },
 ];
 
-export default async function Students() {
+export default function Students() {
+  const { limited, rest } = sliceItems(students, 4);
+
   return (
-    <div className='my-6 w-full relative'>
-      <Title title='수강생 최근 작품' subTitle='오늘 방문하는' />
+    <div className='mt-8 mb-2 w-full relative px-4'>
+      <Title title='수강생들이에요!' subTitle='오늘 방문하는' />
       <GoTo title='수강생 전체보기' href='' />
-      <ul className='w-full flex flex-wrap gap-2'>
-        {students.map((student) => (
-          <UserItem {...student} />
+      <ul className='w-full flex flex-wrap gap-2 mt-4'>
+        {limited.map((student) => (
+          <User key={student.userId} {...student} />
         ))}
       </ul>
+      <ExpandedList>
+        {rest.map((student) => (
+          <User key={student.userId} {...student} />
+        ))}
+      </ExpandedList>
     </div>
   );
 }

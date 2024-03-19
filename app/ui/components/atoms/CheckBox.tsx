@@ -3,18 +3,29 @@ import clsx from 'clsx';
 type CheckBoxProps = {
   isChecked?: boolean;
   onCheck: () => void;
+  style?: 'brown' | 'grey';
 };
 
-const CheckBox = ({ isChecked = false, onCheck }: CheckBoxProps) => {
+const CheckBox = ({
+  isChecked = false,
+  onCheck,
+  style = 'brown',
+}: CheckBoxProps) => {
   const checkBoxClasses = clsx(
     'appearance-none',
     'w-[24px]',
     'h-[24px]',
-    'bg-grey100',
     'rounded-md',
     {
-      'checked:bg-brown': isChecked,
-      'checked:bg-checked-icon': isChecked,
+      'bg-grey100': style === 'brown',
+      'bg-todo-check-icon': style === 'brown',
+      'checked:bg-brown': isChecked && style === 'brown',
+      'checked:bg-checked-icon': isChecked && style === 'brown',
+    },
+    {
+      'opacity-50': style === 'grey',
+      'bg-grey-check-off-icon': style === 'grey',
+      'checked:bg-grey-check-on-icon': isChecked && style === 'grey',
     }
   );
   return (

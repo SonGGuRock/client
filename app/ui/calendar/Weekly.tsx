@@ -2,7 +2,7 @@ import 'swiper/css/free-mode';
 
 import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import WeeklyItem, { WeeklyItemProps } from '../components/atoms/WeeklyItem';
+import WeeklyItem, { WeeklyItemProps } from './WeeklyItem';
 
 const date: WeeklyItemProps[] = [
   {
@@ -51,24 +51,31 @@ const date: WeeklyItemProps[] = [
 
 const Weekly = () => {
   return (
-    <div className='h-full'>
-      <p className='text-lg'>이번주 스케쥴</p>
-      <Swiper
-        className='h-full'
-        slidesPerView={5.3}
-        spaceBetween={8}
-        freeMode={true}
-        modules={[FreeMode]}
-      >
-        {date.map((data, idx) => {
-          return (
-            <SwiperSlide key={`${idx}-${data.day}`} className='py-2'>
-              <WeeklyItem {...data} />
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-    </div>
+    <>
+      <h2 className=' inline-block px-[12px] py-[6px] text-sm font-bold bg-brown text-white rounded-3xl'>
+        1월 16일 화요일
+      </h2>
+      <div className='h-full'>
+        <p className='text-lg mt-4 ml-2 mb-2 font-bold text-grey900'>
+          이번주 스케줄
+        </p>
+        <Swiper
+          className='h-full'
+          slidesPerView={5.3}
+          spaceBetween={8}
+          freeMode={true}
+          modules={[FreeMode]}
+        >
+          {date.map((data, idx) => {
+            return (
+              <SwiperSlide key={`${idx}-${data.day}`} className='py-2'>
+                <WeeklyItem {...data} />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+    </>
   );
 };
 

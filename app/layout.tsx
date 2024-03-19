@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 
-export const primaryFont = localFont({
+const primaryFont = localFont({
   src: [
     {
       path: './font/Pretendard-Light.woff2',
@@ -40,7 +40,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className={primaryFont.className}>{children}</body>
+      <body className={`${primaryFont.className} min-w-[375px]`}>
+        {children}
+      </body>
     </html>
   );
 }
