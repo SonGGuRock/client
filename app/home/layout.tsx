@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import BottomBar from '../ui/components/modules/BottomBar';
+import BottomBar from '../ui/shared/modules/BottomBar';
 
 export const metadata: Metadata = {
   title: 'OOO 님, 손으로 만드는 즐거움만 느끼세요! ',

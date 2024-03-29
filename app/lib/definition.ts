@@ -21,3 +21,12 @@ export type Announcment = {
 };
 
 export type AnnouncmentRepresentitive = Pick<Announcment, 'id' | 'title'>;
+
+// students
+
+export type Student = {
+  name: string;
+  profile_picture: string;
+  id: number;
+  remaining_class_count: number;
+};

@@ -43,7 +43,7 @@ export default function AnnouncementBanner() {
         {announcement.map(({ id, title }) => (
           <SwiperSlide key={id} className='w-full text-sm'>
             <Link
-              href={`/home/announcement/${id}`}
+              href={`/announcement/${id}`}
               className='w-full flex justify-between'
             >
               <span>{title}</span>

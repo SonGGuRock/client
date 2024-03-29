@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import ModalProvider from './provider/modal-provider';
 
 const primaryFont = localFont({
   src: [
@@ -40,8 +41,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className={`${primaryFont.className} min-w-[375px]`}>
-        {children}
+      <body
+        className={`${primaryFont.className} min-w-[375px] min-h-screen max-w-sm m-auto`}
+      >
+        <ModalProvider>{children}</ModalProvider>
       </body>
     </html>
   );

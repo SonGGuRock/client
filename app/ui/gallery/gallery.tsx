@@ -1,5 +1,5 @@
-import GoTo from '../components/atoms/GoTo';
-import Title from '../components/atoms/Title';
+import GoTo from '../shared/atoms/GoTo';
+import Title from '../shared/atoms/Title';
 import UserCrafts, { UserCraftsProps } from './UserCrafts';
 
 // user별로 craft 최신 6개만 보내주도록

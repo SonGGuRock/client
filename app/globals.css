@@ -30,3 +30,30 @@ body {
 .swiper-pagination-bullet-active {
   background: #565655;
 } */
+
+.react-calendar {
+  width: 350px;
+  max-width: 100%;
+  background: white;
+  border: 1px solid #f2f1ed;
+  border-radius: 4px;
+  line-height: 1.125em;
+}
+
+abbr:where([title]) {
+  text-decoration: none;
+}
+
+.react-calendar__tile--active {
+  background: #794f34 !important;
+  color: white;
+  border-radius: 12px;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #d8ab83 !important;
+}
+.react-calendar__tile--now {
+  background: #fff !important;
+  color: #794f34 !important;
+}

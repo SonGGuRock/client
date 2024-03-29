@@ -2,14 +2,13 @@
 
 import Image from 'next/image';
 import TodoItem from './TodoItem';
-import ExpandedList from '../components/modules/ExpandedList';
+import ExpandedList from '../shared/modules/ExpandedList';
 import sliceItems from '@/app/utils/sliceItems';
-import Title from '../components/atoms/Title';
-import Button from '../components/atoms/Button';
+import Title from '../shared/atoms/Title';
+import Button from '../shared/atoms/button/Button';
 import usePopup from '@/app/hooks/usePopup';
-import { createPortal } from 'react-dom';
-import BottomSheetWithInput from '../components/modules/BottomSheetWithInput';
-import Toast from '../components/atoms/Toast';
+import BottomSheetWithInput from '../shared/modules/BottomSheetWithInput';
+import Toast from '../shared/atoms/Toast';
 import useToast from '@/app/hooks/useToast';
 
 type Todo = {
@@ -111,19 +110,17 @@ export default function Todos() {
         ))}
       </ExpandedList>
 
-      {isInputMode &&
-        createPortal(
-          <BottomSheetWithInput
-            title='할 일 추가'
-            placeholder='오늘의 할 일을 입력하세요'
-            onDone={() => {
-              toggleToast({ text: '할 일을 추가하였습니다' });
-            }}
-            onClose={toggleInputMode}
-          />,
-          document.body
-        )}
-      {toast && createPortal(<Toast text={toast.text} />, document.body)}
+      {isInputMode && (
+        <BottomSheetWithInput
+          title='할 일 추가'
+          placeholder='오늘의 할 일을 입력하세요'
+          onDone={() => {
+            toggleToast({ text: '할 일을 추가하였습니다' });
+          }}
+          onClose={toggleInputMode}
+        />
+      )}
+      {toast && <Toast text={toast.text} />}
     </div>
   );
 }

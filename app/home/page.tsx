@@ -3,15 +3,15 @@ import AnnouncementBanner from '../ui/announcement/AnnouncementBanner';
 import Todos from '../ui/todos/todos';
 import Gallery from '../ui/gallery/gallery';
 import Calendar from '../ui/calendar/Calendar';
-import Divider from '../ui/components/atoms/Divider';
-import Header from '../ui/header/Header';
+import Divider from '../ui/shared/atoms/Divider';
+import HomeHeader from '../ui/home/HomeHeader';
 import Students from '../ui/students/Students';
 
 export default function Page() {
   return (
-    <div className='min-h-screen max-w-sm m-auto '>
+    <div>
       <section className='bg-grey50 h-[376px] w-full px-4 rounded-es-2xl rounded-ee-2xl'>
-        <Header />
+        <HomeHeader />
         <AnnouncementBanner />
         {/* Suspense fallback={Calandar} */}
         <Calendar />

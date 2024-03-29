@@ -2,8 +2,8 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Craft, { CraftProps } from './Craft';
-import GoTo from '../components/atoms/GoTo';
-import Thumbnail from '../components/atoms/Thumbnail';
+import GoTo from '../shared/atoms/GoTo';
+import Thumbnail from '../shared/atoms/Thumbnail';
 import { FreeMode } from 'swiper/modules';
 
 export type UserCraftsProps = {

@@ -2,18 +2,18 @@
 
 import { Todo } from '@/app/lib/definition';
 import { updateTodo } from '../../lib/action';
-import CheckBox from '../components/atoms/CheckBox';
+import CheckBox from '../shared/atoms/CheckBox';
 import Image from 'next/image';
-import Thumbnail from '../components/atoms/Thumbnail';
-import MeatBall from '../components/atoms/MeatBall';
+import Thumbnail from '../shared/atoms/Thumbnail';
+import MeatBall from '../shared/atoms/MeatBall';
 import usePopup from '@/app/hooks/usePopup';
 import useEditor from '@/app/hooks/useEditor';
-import { createPortal } from 'react-dom';
-import BottomSheet from '../components/atoms/BottomSheet';
-import BottomSheetMenu from '../components/atoms/BottomSheetMenu';
-import BottomSheetWithInput from '../components/modules/BottomSheetWithInput';
-import Toast from '../components/atoms/Toast';
+
+import ModalMenu from '../shared/atoms/ModalMenu';
+import BottomSheetWithInput from '../shared/modules/BottomSheetWithInput';
+import Toast from '../shared/atoms/Toast';
 import useToast from '@/app/hooks/useToast';
+import BottomSheet from '../BottomSheet';
 
 const TodoItem = ({ id, content, is_completed, author }: Todo) => {
   const { open: isSelectMode, toggle: toggleSelectMode } = usePopup();
@@ -43,49 +43,42 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
           {/* <Thumbnail userId={author.id} /> */}
         </span>
       </label>
-      {isSelectMode &&
-        createPortal(
-          <BottomSheet
-            toggle={toggleSelectMode}
-            className='flex flex-wrap gap-4'
-          >
-            <BottomSheetMenu
-              key='bsm-1'
-              text='수정하기'
-              iconUrl='/icon/ic-edit_24px.svg'
-              onClick={() => {
-                toggleSelectMode();
-                updateEditor({ id, content });
-              }}
-            />
-            <BottomSheetMenu
-              key='bsm-2'
-              text='삭제하기'
-              iconUrl='/icon/ic-delete_24px.svg'
-              type='secondary'
-              onClick={() => {
-                toggleSelectMode();
-                toggleToast({ text: '할 일을 삭제하였습니다.' });
-              }}
-            />
-          </BottomSheet>,
-          document.body
-        )}
-      {!!edit &&
-        createPortal(
-          <BottomSheetWithInput
-            title='할 일 수정'
-            placeholder={edit.content}
-            onDone={() => {
-              // TODO: updateTodo
-              toggleEditor();
-              toggleToast({ text: '할 일을 수정하였습니다' });
+      {isSelectMode && (
+        <BottomSheet toggle={toggleSelectMode} className='flex flex-wrap gap-4'>
+          <ModalMenu
+            key='bsm-1'
+            text='수정하기'
+            iconUrl='/icon/ic-edit_24px.svg'
+            onClick={() => {
+              toggleSelectMode();
+              updateEditor({ id, content });
             }}
-            onClose={toggleEditor}
-          />,
-          document.body
-        )}
-      {toast && createPortal(<Toast text={toast.text} />, document.body)}
+          />
+          <ModalMenu
+            key='bsm-2'
+            text='삭제하기'
+            iconUrl='/icon/ic-delete_24px.svg'
+            type='secondary'
+            onClick={() => {
+              toggleSelectMode();
+              toggleToast({ text: '할 일을 삭제하였습니다.' });
+            }}
+          />
+        </BottomSheet>
+      )}
+      {!!edit && (
+        <BottomSheetWithInput
+          title='할 일 수정'
+          placeholder={edit.content}
+          onDone={() => {
+            // TODO: updateTodo
+            toggleEditor();
+            toggleToast({ text: '할 일을 수정하였습니다' });
+          }}
+          onClose={toggleEditor}
+        />
+      )}
+      {toast && <Toast text={toast.text} />}
     </li>
   );
 };

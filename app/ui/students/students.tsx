@@ -1,7 +1,7 @@
-import Title from '../components/atoms/Title';
-import GoTo from '../components/atoms/GoTo';
-import User, { UserProps } from './User';
-import ExpandedList from '../components/modules/ExpandedList';
+import Title from '../shared/atoms/Title';
+import GoTo from '../shared/atoms/GoTo';
+import Student, { UserProps } from './student/Student';
+import ExpandedList from '../shared/modules/ExpandedList';
 import sliceItems from '@/app/utils/sliceItems';
 
 export const students: UserProps[] = [
@@ -46,12 +46,12 @@ export default function Students() {
       <GoTo title='수강생 전체보기' href='' />
       <ul className='w-full flex flex-wrap gap-2 mt-4'>
         {limited.map((student) => (
-          <User key={student.userId} {...student} />
+          <Student key={student.userId} {...student} />
         ))}
       </ul>
       <ExpandedList>
         {rest.map((student) => (
-          <User key={student.userId} {...student} />
+          <Student key={student.userId} {...student} />
         ))}
       </ExpandedList>
     </div>
