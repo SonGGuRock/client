@@ -6,7 +6,6 @@ import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 
-import GoTo from '../shared/atoms/GoTo';
 import Weekly from './Weekly';
 import Daily from './Daily';
 

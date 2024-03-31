@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Title from '../shared/atoms/Title';
+import Title from '../../../ui/shared/atoms/Title';
 
 type VisitPiece = {
   date: string;
@@ -28,7 +28,7 @@ type FormattedVisitPiece = {
   [date: string]: { id: number; picture?: string };
 };
 
-const ReservationCalendar = () => {
+const ReservationsStudentCalendar = () => {
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth() + 1;
@@ -131,4 +131,4 @@ const ReservationCalendar = () => {
     </div>
   );
 };
-export default ReservationCalendar;
+export default ReservationsStudentCalendar;

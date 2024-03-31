@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import BottomBar from '../ui/shared/modules/BottomBar';
+import BottomBar from '../../ui/shared/modules/BottomBar';
 
 export const metadata: Metadata = {
-  title: 'OOO 님, 손으로 만드는 즐거움만 느끼세요! ',
-  description: '공방 이용자 대시보드 ',
+  title: '손꾸락 - 알림 ',
+  description: '작품, 수업, 수강생에 대한 알림을 관리합니다 ',
 };
 
 export default function RootLayout({

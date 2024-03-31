@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import BottomBar from '../ui/shared/modules/BottomBar';
+import BottomBar from '../../ui/shared/modules/BottomBar';
 
 export const metadata: Metadata = {
   title: '손꾸락 - 공지 페이지',
