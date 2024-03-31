@@ -1,11 +1,11 @@
-import AnnouncementBanner from '../ui/announcement/AnnouncementBanner';
+import AnnouncementBanner from '../../ui/announcement/AnnouncementBanner';
 
-import Todos from '../ui/todos/todos';
-import Gallery from '../ui/gallery/gallery';
-import Calendar from '../ui/calendar/Calendar';
-import Divider from '../ui/shared/atoms/Divider';
-import HomeHeader from '../ui/home/HomeHeader';
-import Students from '../ui/students/Students';
+import Todos from '../../ui/todos/todos';
+import Gallery from '../../ui/gallery/gallery';
+import Calendar from '../../ui/calendar/Calendar';
+import Divider from '../../ui/shared/atoms/Divider';
+import HomeHeader from '../../ui/home/HomeHeader';
+import Students from '../../ui/students/Students';
 
 export default function Page() {
   return (

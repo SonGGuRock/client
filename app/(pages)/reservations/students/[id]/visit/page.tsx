@@ -1,4 +1,4 @@
-import ReservationCalendar from '@/app/ui/reservation/ReservationCalendar';
+import ReservationsStudentCalendar from '@/app/widget/reservations/ui/reservations-student-calendar';
 import Header from '@/app/ui/shared/modules/header';
 
 const Page = () => {
@@ -12,7 +12,7 @@ const Page = () => {
       </Header>
 
       <div className='grid gap-4'>
-        <ReservationCalendar />
+        <ReservationsStudentCalendar />
       </div>
     </div>
   );

@@ -1,16 +1,16 @@
 import Link from 'next/link';
-import Title from '../ui/shared/atoms/Title';
-import Button from '../ui/shared/atoms/button/Button';
+import Title from '../../ui/shared/atoms/Title';
+import Button from '../../ui/shared/atoms/button/Button';
 import Image from 'next/image';
-import TabLayout from '../ui/shared/modules/tab/TabLayout';
-import TabMenu from '../ui/shared/modules/tab/TabMenu';
-import StudentTab from '../ui/students/StudentTab';
-import StudentsTab from '../ui/students/StudentsTab';
-import Search from '../ui/shared/modules/Search';
-import { Select } from '../ui/shared/atoms/drop-down/Select';
-import DropDown from '../ui/shared/atoms/drop-down';
-import { StudentMain } from '../ui/students/student';
-import BottomBar from '../ui/shared/modules/BottomBar';
+import TabLayout from '../../ui/shared/modules/tab/TabLayout';
+import TabMenu from '../../ui/shared/modules/tab/TabMenu';
+import StudentTab from '../../ui/students/StudentTab';
+import StudentsTab from '../../ui/students/StudentsTab';
+import Search from '../../ui/shared/modules/Search';
+import { Select } from '../../ui/shared/atoms/drop-down/Select';
+import DropDown from '../../ui/shared/atoms/drop-down';
+import { StudentMain } from '../../ui/students/student';
+import BottomBar from '../../ui/shared/modules/BottomBar';
 
 const Page = () => {
   return (

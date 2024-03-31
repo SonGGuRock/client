@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import ModalProvider from './provider/modal-provider';
+import ModalProvider from './_provider/modal-provider';
 
 const primaryFont = localFont({
   src: [
