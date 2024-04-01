@@ -21,7 +21,7 @@ const MyPage = () => {
           phone_number='010=1234=5678'
         />
       </div>
-      <SettingMenu>
+      <SettingMenu className='py-4'>
         <SettingMenu.Label>나의 공방</SettingMenu.Label>
         <SettingMenu.Link href='/workshop/1'>공방 정보 설정</SettingMenu.Link>
         <SettingMenu.Link href='/workshop/1/settings'>
@@ -31,18 +31,18 @@ const MyPage = () => {
         <SettingMenu.Link href='/workshop/1'>등록 관리</SettingMenu.Link>
       </SettingMenu>
 
-      <SettingMenu>
+      <SettingMenu className='py-4'>
         <SettingMenu.Label>알림</SettingMenu.Label>
         <SettingMenu.Link href='/workshop/1'>알림 설정</SettingMenu.Link>
       </SettingMenu>
 
-      <SettingMenu>
+      <SettingMenu className='py-4'>
         <SettingMenu.Label>이용 안내</SettingMenu.Label>
         <SettingMenu.Link href='/workshop/1'>손꾸락 가이드</SettingMenu.Link>
         <SettingMenu.Link href='/workshop/1'>약관 및 정책</SettingMenu.Link>
       </SettingMenu>
 
-      <SettingMenu>
+      <SettingMenu className='py-4'>
         <SettingMenu.Button>로그아웃</SettingMenu.Button>
         <SettingMenu.Button>탈퇴하기</SettingMenu.Button>
       </SettingMenu>

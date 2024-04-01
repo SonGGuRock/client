@@ -19,7 +19,7 @@ export const ReservationsWeeklyPage = () => {
 
         <div className='mt-4'>
           <Header>
-            <Header.Title title='2월 24일 토요일' />
+            <Header.Title>2월 24일 토요일</Header.Title>
             <ButtonIndex size='small'>
               <ButtonIndex.AddIcon />
               수업등록

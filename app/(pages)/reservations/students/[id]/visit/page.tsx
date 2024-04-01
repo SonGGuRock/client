@@ -7,7 +7,7 @@ const Page = () => {
       <Header>
         <div className='flex items-center gap-2'>
           <Header.Back />
-          <Header.Title title='최지영' />
+          <Header.Title>최지영</Header.Title>
         </div>
       </Header>
 
