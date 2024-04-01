@@ -2,12 +2,12 @@
 
 import usePopup from '@/app/hooks/usePopup';
 import useToast from '@/app/hooks/useToast';
-import Back from '@/app/ui/shared/atoms/Back';
-import Modal from '@/app/ui/Modal';
-import ModalMenu from '@/app/ui/shared/atoms/ModalMenu';
-import MeatBall from '@/app/ui/shared/atoms/MeatBall';
-import Toast from '@/app/ui/shared/atoms/Toast';
-import ArtilcePreview from '@/app/ui/shared/modules/ArticlePreview';
+import Back from '@/app/shared/ui/atoms/Back';
+import Modal from '@/app/shared/ui/modules/modal/Modal';
+import ModalMenu from '@/app/shared/ui/atoms/ModalMenu';
+import MeatBall from '@/app/shared/ui/atoms/MeatBall';
+import Toast from '@/app/shared/ui/atoms/Toast';
+import ArtilcePreview from '@/app/shared/ui/modules/ArticlePreview';
 import { usePathname, useRouter } from 'next/navigation';
 
 const Page = () => {

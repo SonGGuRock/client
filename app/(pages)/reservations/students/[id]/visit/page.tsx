@@ -1,5 +1,5 @@
 import ReservationsStudentCalendar from '@/app/widget/reservations/ui/reservations-student-calendar';
-import Header from '@/app/ui/shared/modules/header';
+import Header from '@/app/shared/ui/modules/header';
 
 const Page = () => {
   return (
@@ -7,7 +7,7 @@ const Page = () => {
       <Header>
         <div className='flex items-center gap-2'>
           <Header.Back />
-          <Header.Title title='최지영' />
+          <Header.Title>최지영</Header.Title>
         </div>
       </Header>
 

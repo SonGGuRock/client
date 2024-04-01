@@ -1,9 +1,9 @@
 'use client';
 
-import Modal from '@/app/ui/Modal';
-import Portal from '@/app/ui/Portal';
-import Header from '@/app/ui/shared/modules/header';
-import ModalMenu from '../shared/atoms/ModalMenu';
+import Modal from '@/app/shared/ui/modules/modal/Modal';
+import Portal from '@/app/shared/ui/modules/modal/Portal';
+import Header from '@/app/shared/ui/modules/header';
+import ModalMenu from '../../shared/ui/atoms/ModalMenu';
 
 const StudentHeader = () => {
   return (

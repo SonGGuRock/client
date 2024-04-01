@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Title from '../../../ui/shared/atoms/Title';
+import Title from '../../../shared/ui/atoms/Title';
 
 type VisitPiece = {
   date: string;
@@ -56,7 +56,7 @@ const ReservationsStudentCalendar = () => {
 
   return (
     <div className='pt-4 pb-4'>
-      <Title title={`${year}년 ${month}월`} />
+      <Title>{`${year}년 ${month}월`}</Title>
       {/* {dayOfWeek[day]} */}
       <div className='grid grid-cols-7 w-full justify-center pt-4 pb-3 gap-4'>
         {dayOfWeek.map((day, idx) => (

@@ -1,5 +1,5 @@
 import { PropsWithChildren, ReactNode } from 'react';
-import Label from '../../shared/atoms/Label';
+import Label from '../../../shared/ui/atoms/Label';
 
 type RemainingClassCountType = (props: PropsWithChildren) => ReactNode;
 

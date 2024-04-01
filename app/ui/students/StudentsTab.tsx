@@ -1,8 +1,8 @@
 'use client';
 
 import useToggle from '@/app/hooks/useToggle';
-import TabLayout from '../shared/modules/tab/TabLayout';
-import TabMenu from '../shared/modules/tab/TabMenu';
+import TabLayout from '../../shared/ui/modules/tab/TabLayout';
+import TabMenu from '../../shared/ui/modules/tab/TabMenu';
 
 const StudentsTab = () => {
   const { open: off, toggle } = useToggle();

@@ -1,5 +1,5 @@
-import Thumbnail from '../shared/atoms/Thumbnail';
-import PhoneNumberBox from '../shared/modules/PhoneNumber';
+import Thumbnail from '../../shared/ui/atoms/Thumbnail';
+import PhoneNumberBox from '../../shared/ui/modules/phone-number/PhoneNumber';
 
 const StudentInfo = () => {
   return (

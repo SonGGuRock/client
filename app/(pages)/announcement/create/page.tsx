@@ -1,11 +1,11 @@
 'use client';
 
 import useToast from '@/app/hooks/useToast';
-import Back from '@/app/ui/shared/atoms/Back';
-import Button from '@/app/ui/shared/atoms/button/Button';
-import Title from '@/app/ui/shared/atoms/Title';
-import Toast from '@/app/ui/shared/atoms/Toast';
-import ArticleEditor from '@/app/ui/shared/modules/ArticleEditor';
+import Back from '@/app/shared/ui/atoms/Back';
+import Button from '@/app/shared/ui/atoms/button/Button';
+import Title from '@/app/shared/ui/atoms/Title';
+import Toast from '@/app/shared/ui/atoms/Toast';
+import ArticleEditor from '@/app/shared/ui/modules/ArticleEditor';
 
 const Page = () => {
   const { toast } = useToast();

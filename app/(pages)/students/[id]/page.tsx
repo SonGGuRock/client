@@ -1,8 +1,8 @@
-import AllVisitView from '@/app/ui/reservation/AllVisitView';
-import ReservationItem from '@/app/ui/reservation/ReservationItem';
-import Header from '@/app/ui/shared/modules/header';
-import TabLayout from '@/app/ui/shared/modules/tab/TabLayout';
-import TabMenu from '@/app/ui/shared/modules/tab/TabMenu';
+import AllVisitButton from '@/app/widget/reservations/ui/all-visit-button';
+import ReservationItem from '@/app/widget/reservations/ui/reservations-item';
+import Header from '@/app/shared/ui/modules/header';
+import TabLayout from '@/app/shared/ui/modules/tab/TabLayout';
+import TabMenu from '@/app/shared/ui/modules/tab/TabMenu';
 import StudentInfo from '@/app/ui/students/StudentInfo';
 import StudentTab from '@/app/ui/students/StudentTab';
 
@@ -25,7 +25,7 @@ const Page = () => {
         <ReservationItem isFulfilled={false} />
         <ReservationItem isFulfilled />
 
-        <AllVisitView />
+        <AllVisitButton />
       </div>
     </div>
   );
