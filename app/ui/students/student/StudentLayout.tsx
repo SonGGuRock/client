@@ -1,14 +1,5 @@
-import { Children, PropsWithChildren, ReactElement, ReactNode } from 'react';
+import { Children, PropsWithChildren, ReactNode, isValidElement } from 'react';
 import RemainingClassCount from './RemainingClassCount';
-
-export function isValidElement(object: any): object is ReactElement {
-  return (
-    typeof object === 'object' &&
-    object !== null &&
-    'type' in object &&
-    'props' in object
-  );
-}
 
 const RemainingClassCountType = (<RemainingClassCount />).type;
 

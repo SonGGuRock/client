@@ -1,4 +1,4 @@
-type Status =
+type WorkStepType =
   | {
       ko: '성형';
       en: 'shape';
@@ -9,7 +9,7 @@ type Status =
     }
   | {
       ko: '정형';
-      en: 'carve';
+      en: 'trim';
     }
   | {
       ko: '초벌';
@@ -21,10 +21,10 @@ type Status =
     }
   | {
       ko: '재벌';
-      en: 'refire';
+      en: 'glazeFire';
     };
 
-export const STATUS: Status[] = [
+export const WORK_STEP: WorkStepType[] = [
   {
     ko: '성형',
     en: 'shape',
@@ -35,7 +35,7 @@ export const STATUS: Status[] = [
   },
   {
     ko: '정형',
-    en: 'carve',
+    en: 'trim',
   },
   {
     ko: '초벌',
@@ -47,15 +47,15 @@ export const STATUS: Status[] = [
   },
   {
     ko: '재벌',
-    en: 'refire',
+    en: 'glazeFire',
   },
 ];
 
-export type StatusObj = {
-  status: Pick<Status, 'ko'>;
+export type WorkStepObj = {
+  work_step: Pick<WorkStepType, 'ko'>;
   className: string;
 };
-export default function Status() {
+export default function WorkStepLabel() {
   //   const found = STATUS.find((el) => el.ko === props.status.ko);
 
   return (

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Label from '../../shared/atoms/Label';
-import Thumbnail from '../../shared/atoms/Thumbnail';
+import Label from '../../../shared/ui/atoms/Label';
+import Thumbnail from '../../../shared/ui/atoms/Thumbnail';
 
 export type UserProps = {
   userId: number;

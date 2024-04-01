@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Title from '../../../ui/shared/atoms/Title';
+import Title from '../../../shared/ui/atoms/Title';
 
 type VisitPiece = {
   date: string;

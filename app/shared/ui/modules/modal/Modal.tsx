@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { ReactNode } from 'react';
-import useModalContext from '../hooks/useModalContext';
+import useModalContext from '../../../../hooks/useModalContext';
 
 type BottomSheetProps = {
   children: ReactNode;

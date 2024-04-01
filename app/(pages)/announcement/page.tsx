@@ -1,7 +1,7 @@
-import Back from '@/app/ui/shared/atoms/Back';
-import Button from '@/app/ui/shared/atoms/button/Button';
-import Title from '@/app/ui/shared/atoms/Title';
-import ArtilcePreview from '@/app/ui/shared/modules/ArticlePreview';
+import Back from '@/app/shared/ui/atoms/Back';
+import Button from '@/app/shared/ui/atoms/button/Button';
+import Title from '@/app/shared/ui/atoms/Title';
+import ArtilcePreview from '@/app/shared/ui/modules/ArticlePreview';
 import Image from 'next/image';
 import Link from 'next/link';
 

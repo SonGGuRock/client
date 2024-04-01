@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const AllVisitView = () => {
+const AllVisitButton = () => {
   return (
     <Link
       href='/reservations/students/1/visit'
@@ -18,4 +18,4 @@ const AllVisitView = () => {
   );
 };
 
-export default AllVisitView;
+export default AllVisitButton;

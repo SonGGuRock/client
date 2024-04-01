@@ -1,9 +1,9 @@
 'use client';
 
-import Modal from '../../Modal';
-import Button from '../atoms/button/Button';
-import Title from '../atoms/Title';
-import Input from '../atoms/Input';
+import Modal from './Modal';
+import Button from '../../atoms/button/Button';
+import Title from '../../atoms/Title';
+import Input from '../../atoms/Input';
 
 type BottomSheetWithInputProps = {
   title: string;

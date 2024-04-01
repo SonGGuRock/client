@@ -1,23 +1,19 @@
 import Link from 'next/link';
-import Title from '../../ui/shared/atoms/Title';
-import Button from '../../ui/shared/atoms/button/Button';
+import Title from '../../shared/ui/atoms/Title';
+import Button from '../../shared/ui/atoms/button/Button';
 import Image from 'next/image';
-import TabLayout from '../../ui/shared/modules/tab/TabLayout';
-import TabMenu from '../../ui/shared/modules/tab/TabMenu';
-import StudentTab from '../../ui/students/StudentTab';
 import StudentsTab from '../../ui/students/StudentsTab';
-import Search from '../../ui/shared/modules/Search';
-import { Select } from '../../ui/shared/atoms/drop-down/Select';
-import DropDown from '../../ui/shared/atoms/drop-down';
+import Search from '../../shared/ui/modules/Search';
+import DropDown from '../../shared/ui/atoms/drop-down';
 import { StudentMain } from '../../ui/students/student';
-import BottomBar from '../../ui/shared/modules/BottomBar';
+import BottomBar from '../../shared/ui/modules/BottomBar';
 
 const Page = () => {
   return (
     <div className='py-3'>
       <div className=' px-4 flex w-full items-center justify-between text-lg font-semibold'>
         <div className='flex gap-1 items-center'>
-          <Title title='수강생' />
+          <Title>수강생</Title>
         </div>
         <Link href='/students/create'>
           <Button

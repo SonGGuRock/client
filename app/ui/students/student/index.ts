@@ -1,4 +1,4 @@
-import Thumbnail from '../../shared/atoms/Thumbnail';
+import Thumbnail from '../../../shared/ui/atoms/Thumbnail';
 import LastPaymentDate from './LastPaymentDate';
 import Name from './Name';
 import StudentLayout from './StudentLayout';

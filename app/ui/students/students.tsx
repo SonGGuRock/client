@@ -1,7 +1,7 @@
-import Title from '../shared/atoms/Title';
-import GoTo from '../shared/atoms/GoTo';
+import Title from '../../shared/ui/atoms/Title';
+import GoTo from '../../shared/ui/atoms/GoTo';
 import Student, { UserProps } from './student/Student';
-import ExpandedList from '../shared/modules/ExpandedList';
+import ExpandedList from '../../shared/ui/modules/ExpandedList';
 import sliceItems from '@/app/utils/sliceItems';
 
 export const students: UserProps[] = [

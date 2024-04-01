@@ -2,18 +2,18 @@
 
 import { Todo } from '@/app/lib/definition';
 import { updateTodo } from '../../lib/action';
-import CheckBox from '../shared/atoms/CheckBox';
+import CheckBox from '../../shared/ui/atoms/CheckBox';
 import Image from 'next/image';
-import Thumbnail from '../shared/atoms/Thumbnail';
-import MeatBall from '../shared/atoms/MeatBall';
+import Thumbnail from '../../shared/ui/atoms/Thumbnail';
+import MeatBall from '../../shared/ui/atoms/MeatBall';
 import usePopup from '@/app/hooks/usePopup';
 import useEditor from '@/app/hooks/useEditor';
 
-import ModalMenu from '../shared/atoms/ModalMenu';
-import BottomSheetWithInput from '../shared/modules/BottomSheetWithInput';
-import Toast from '../shared/atoms/Toast';
+import ModalMenu from '../../shared/ui/atoms/ModalMenu';
+import BottomSheetWithInput from '../../shared/ui/modules/modal/BottomSheetWithInput';
+import Toast from '../../shared/ui/atoms/Toast';
 import useToast from '@/app/hooks/useToast';
-import BottomSheet from '../BottomSheet';
+import BottomSheet from '../../shared/ui/modules/modal/BottomSheet';
 
 const TodoItem = ({ id, content, is_completed, author }: Todo) => {
   const { open: isSelectMode, toggle: toggleSelectMode } = usePopup();

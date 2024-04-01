@@ -2,9 +2,9 @@
 
 import 'swiper/css';
 
-import { ButtonIndex } from '@/app/ui/shared/atoms/button';
-import BottomBar from '@/app/ui/shared/modules/BottomBar';
-import Header from '@/app/ui/shared/modules/header';
+import { ButtonIndex } from '@/app/shared/ui/atoms/button';
+import BottomBar from '@/app/shared/ui/modules/BottomBar';
+import Header from '@/app/shared/ui/modules/header';
 
 import DailySchedule from '@/app/ui/calendar/DailySchedule';
 import ReservationsDailyList from '../../../widget/reservations/ui/reservations-daily-list';

@@ -2,13 +2,13 @@
 
 import Image from 'next/image';
 import TodoItem from './TodoItem';
-import ExpandedList from '../shared/modules/ExpandedList';
+import ExpandedList from '../../shared/ui/modules/ExpandedList';
 import sliceItems from '@/app/utils/sliceItems';
-import Title from '../shared/atoms/Title';
-import Button from '../shared/atoms/button/Button';
+import Title from '../../shared/ui/atoms/Title';
+import Button from '../../shared/ui/atoms/button/Button';
 import usePopup from '@/app/hooks/usePopup';
-import BottomSheetWithInput from '../shared/modules/BottomSheetWithInput';
-import Toast from '../shared/atoms/Toast';
+import BottomSheetWithInput from '../../shared/ui/modules/modal/BottomSheetWithInput';
+import Toast from '../../shared/ui/atoms/Toast';
 import useToast from '@/app/hooks/useToast';
 
 type Todo = {
