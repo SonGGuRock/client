@@ -10,7 +10,8 @@ const Page = () => {
       <Header>
         <div className='flex gap-1 items-center'>
           <Header.Back />
-          <Header.Title title='수강생 등록' />
+          <Header.Title>수강생 등록</Header.Title>
+          <Header.Button></Header.Button>
         </div>
       </Header>
 
@@ -29,7 +30,9 @@ const Page = () => {
         <FormInput lableText='메모' inputPlaceholder='(선택사항)' />
       </div>
 
-      <Button text='등록 완료' size='large' disabled />
+      <Button size='large' disabled>
+        등록 완료
+      </Button>
     </div>
   );
 };

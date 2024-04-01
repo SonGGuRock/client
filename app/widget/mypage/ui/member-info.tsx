@@ -6,10 +6,7 @@ import Link from 'next/link';
 
 const MemberInfo = () => {
   return (
-    <Link
-      href='/mypage/profile/update'
-      className='flex gap-4 w-full justify-between'
-    >
+    <Link href='/members/1' className='flex gap-4 w-full justify-between'>
       <div className='flex gap-4 '>
         <Thumbnail id={1} size='medium' />
         <div className='grid grid-rows-2 items-center'>

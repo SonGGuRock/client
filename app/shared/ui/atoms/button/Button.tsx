@@ -1,21 +1,20 @@
 import clsx from 'clsx';
-import { ReactNode } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
-type ButtonProps = {
+interface ButtonProps extends PropsWithChildren {
   type?: 'primary' | 'secodnary';
   size?: 'small' | 'medium' | 'large';
-  text: string;
   onClick?: () => void;
   disabled?: boolean;
   icon?: ReactNode;
-};
+}
 
 const Button = ({
   type = 'primary',
   size = 'medium',
-  text,
-  onClick,
   disabled = false,
+  children,
+  onClick,
   icon,
 }: ButtonProps) => {
   const buttonClasses = clsx(
@@ -60,7 +59,7 @@ const Button = ({
   return (
     <button className={buttonClasses} onClick={onClick} disabled={disabled}>
       {icon}
-      {text}
+      {children}
     </button>
   );
 };
