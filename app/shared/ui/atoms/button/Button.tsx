@@ -27,7 +27,7 @@ const Button = ({
     'h-fit',
     {
       'w-full': size === 'large',
-      'text-base': size === 'large',
+      'text-sm': size === 'large',
       'py-[14px]': size === 'large',
     },
     {
