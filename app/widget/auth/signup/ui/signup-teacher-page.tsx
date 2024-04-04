@@ -7,6 +7,7 @@ import FormInput from '@/app/shared/ui/modules/FormInput';
 import FormSelect from '@/app/shared/ui/modules/FormSelect';
 import Header from '@/app/shared/ui/modules/header';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const SignupTeacherPage = () => {
   const { open: isChecked, toggle } = useToggle();
@@ -26,7 +27,9 @@ const SignupTeacherPage = () => {
             inputPlaceholder='이메일을 입력해주세요'
           >
             <div className='absolute right-0 bottom-2'>
-              <Button size='small'>인증하기</Button>
+              <Link href='/signup/authentication'>
+                <Button size='small'>인증하기</Button>
+              </Link>
               {false && (
                 <Image
                   src='/icon/ic-check-24px.svg'

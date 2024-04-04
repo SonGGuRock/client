@@ -1,6 +1,7 @@
 import Button from '@/app/shared/ui/atoms/button/Button';
 import FormInput from '@/app/shared/ui/modules/FormInput';
-import SigninPassword from '@/app/widget/signin/ui/signin-password';
+import SigninPassword from '@/app/widget/auth/signin/ui/signin-password';
+import Link from 'next/link';
 
 const SignInPage = () => {
   return (
@@ -14,7 +15,7 @@ const SignInPage = () => {
         <SigninPassword />
       </div>
       <p className='w-full text-right text-xs text-grey500 mb-14'>
-        비밀번호를 잊어버리셨나요?
+        <Link href='/reset-password'>비밀번호를 잊어버리셨나요?</Link>
       </p>
 
       <div className='flex flex-wrap gap-4'>
