@@ -16,7 +16,7 @@ const FormInput = ({
         {lableText}
       </label>
       <input
-        className='w-full text-base text-grey300 border-b border-grey100 pb-2'
+        className='w-full text-base text-grey300 border-b border-grey100 py-2'
         placeholder={inputPlaceholder}
       />
       {children}

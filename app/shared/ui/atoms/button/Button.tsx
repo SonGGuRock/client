@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { PropsWithChildren, ReactNode } from 'react';
 
 interface ButtonProps extends PropsWithChildren {
+  className?: string;
   type?: 'primary' | 'secodnary';
   size?: 'small' | 'medium' | 'large';
   onClick?: () => void;
@@ -10,6 +11,7 @@ interface ButtonProps extends PropsWithChildren {
 }
 
 const Button = ({
+  className,
   type = 'primary',
   size = 'medium',
   disabled = false,
@@ -57,7 +59,11 @@ const Button = ({
   );
 
   return (
-    <button className={buttonClasses} onClick={onClick} disabled={disabled}>
+    <button
+      className={`${buttonClasses} ${className}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {icon}
       {children}
     </button>

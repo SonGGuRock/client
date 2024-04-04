@@ -1,4 +1,4 @@
-import MemberTypeCard from '@/app/widget/signup/ui/member-type-card';
+import MemberTypeCard from '@/app/widget/auth/signup/ui/member-type-card';
 
 const SignupPage = () => {
   return (
