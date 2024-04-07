@@ -18,7 +18,6 @@ const Page = () => {
         <Link href='/students/create'>
           <Button
             size='small'
-            text='새 등록'
             icon={
               <Image
                 src='/icon/ic_plus_white.svg'
@@ -27,7 +26,9 @@ const Page = () => {
                 height={18}
               />
             }
-          />
+          >
+            새 등록
+          </Button>
         </Link>
       </div>
 
