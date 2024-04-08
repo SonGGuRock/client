@@ -40,7 +40,6 @@ export function makeRegexByCho(search = '') {
       ),
     search
   );
-
   return new RegExp(`(${regex})`, 'g');
 }
 
