@@ -12,7 +12,7 @@ const WorkshopSearchAddressPage = () => {
         </div>
       </Header>
 
-      <SearchBorder />
+      <SearchBorder placeholder='예) 홍익로3길, 언주로 850' />
       <WorkshopAddressList />
     </div>
   );
