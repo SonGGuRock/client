@@ -1,0 +1,41 @@
+'use client';
+
+import DropDown from '@/app/shared/ui/atoms/drop-down';
+import Search from '../../../shared/ui/modules/search';
+import Link from 'next/link';
+import { StudentMain } from '@/app/ui/students/student';
+import useSearchByInitial from '../lib/useSearchByInitial';
+
+const StudentsWithSearch = () => {
+  const { keyword, handleChange, searched } = useSearchByInitial();
+  return (
+    <>
+      <div className='flex justify-between p-4'>
+        <Search keyword={keyword} handleChange={handleChange} />
+        <DropDown>
+          <DropDown.Option value='횟수순'>횟수순</DropDown.Option>
+        </DropDown>
+      </div>
+
+      <div className='px-4 flex flex-wrap'>
+        {searched.map((student, idx) => (
+          <Link
+            key={`${student}-${idx}`}
+            href={`/students/${1}`}
+            className='border-b border-grey100 w-full py-3 last:border-none'
+          >
+            <StudentMain>
+              <StudentMain.Thumbnail id={1} />
+              <StudentMain.Name>{student}</StudentMain.Name>
+              <StudentMain.RemainingClassCount>
+                1
+              </StudentMain.RemainingClassCount>
+            </StudentMain>
+          </Link>
+        ))}
+      </div>
+    </>
+  );
+};
+
+export default StudentsWithSearch;
