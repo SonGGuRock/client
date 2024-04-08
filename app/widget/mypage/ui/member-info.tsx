@@ -1,5 +1,6 @@
 import Thumbnail from '@/app/shared/ui/atoms/Thumbnail';
 import Title from '@/app/shared/ui/atoms/Title';
+import IconArrowRight from '@/app/shared/ui/atoms/icons/icon-arrow-right';
 import PhoneNumber from '@/app/shared/ui/modules/phone-number';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,12 +15,7 @@ const MemberInfo = () => {
           <PhoneNumber>010-1234-5678</PhoneNumber>
         </div>
       </div>
-      <Image
-        src='icon/ic-arrow-right-20px.svg'
-        alt=' 이동용 화살표 아이콘'
-        width={18}
-        height={18}
-      />
+      <IconArrowRight />
     </Link>
   );
 };

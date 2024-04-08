@@ -1,10 +1,14 @@
 import Image from 'next/image';
 
-const SearchBorder = () => {
+interface SearchBorderProps {
+  placeholder?: string;
+}
+
+const SearchBorder = ({ placeholder }: SearchBorderProps) => {
   return (
     <div className='relative mt-10'>
       <input
-        placeholder='공방 이름을 검색해주세요'
+        placeholder={placeholder}
         className='w-full py-2 border-b-2 border-grey900'
       />
       <Image

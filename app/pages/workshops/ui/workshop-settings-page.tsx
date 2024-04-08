@@ -1,16 +1,11 @@
-import WorkStepLabel, {
-  WORK_STEP,
-} from '@/app/shared/ui/atoms/work-step-label';
+import { WORK_STEP } from '@/app/shared/ui/atoms/work-step-label';
 import Header from '@/app/shared/ui/modules/header';
 import WorkStepIcon from '@/app/shared/ui/modules/workstep-icon';
 import SettingMenu from '@/app/widget/mypage/ui/setting-menu';
-import Image from 'next/image';
-
-WorkStepLabel;
 
 const WorkshopSettingsPage = () => {
   return (
-    <div className='pt-3 pb-10'>
+    <div className='pb-10'>
       <Header className='px-4'>
         <div className='w-full flex gap-1 justify-between items-center'>
           <div className='flex gap-1 items-center'>
