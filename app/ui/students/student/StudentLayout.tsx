@@ -24,9 +24,10 @@ function getStudentInfo(children: ReactNode) {
 const StudentLayout = ({ children }: PropsWithChildren) => {
   const remainingClassCount = getRemainingClassCount(children);
   const studentInfo = getStudentInfo(children);
+
   return (
     <div className='w-full rounded-lg flex justify-between items-center'>
-      <div className='flex items-center gap-2 '>{studentInfo}</div>
+      <div className='w-full flex items-center gap-2 '>{studentInfo}</div>
       {remainingClassCount && <div>{remainingClassCount}</div>}
     </div>
   );

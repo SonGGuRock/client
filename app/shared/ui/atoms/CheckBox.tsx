@@ -2,12 +2,14 @@ import clsx from 'clsx';
 
 type CheckBoxProps = {
   isChecked?: boolean;
-  onCheck: () => void;
+  isReadOnly?: boolean;
+  onCheck?: () => void;
   style?: 'brown' | 'grey';
 };
 
 const CheckBox = ({
   isChecked = false,
+  isReadOnly = false,
   onCheck,
   style = 'brown',
 }: CheckBoxProps) => {
@@ -30,6 +32,7 @@ const CheckBox = ({
   );
   return (
     <input
+      readOnly={isReadOnly}
       type='checkbox'
       className={checkBoxClasses}
       checked={isChecked}

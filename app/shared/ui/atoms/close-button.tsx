@@ -5,14 +5,18 @@ import { useRouter } from 'next/navigation';
 
 interface CloseButtonProps {
   className?: string;
+  onClick?: () => void;
 }
 
-const CloseButton = ({ className }: CloseButtonProps) => {
+const CloseButton = ({ className, onClick }: CloseButtonProps) => {
   const router = useRouter();
+  const goBack = () => {
+    router.back();
+  };
   return (
     <div
       className={`w-fit h-12 flex items-center justify-center ${className}`}
-      onClick={() => router.back()}
+      onClick={onClick || goBack}
     >
       <Image
         src='/icon/ic-close-24px.svg'
