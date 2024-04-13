@@ -3,7 +3,8 @@
 import { ReactNode, useState } from 'react';
 import { Reservation } from './use-reservation-create';
 import { useRouter } from 'next/navigation';
-import StepSelectStudent from '../ui/step-select-student';
+import StepStudent from '../ui/step-student';
+import StepClassTime from '../ui/step-class-time';
 
 type Step = {
   order: number;
@@ -19,19 +20,19 @@ const useReservationSteps = () => {
       order: 0,
       isMount: true,
       data: 'student_name',
-      component: <StepSelectStudent />,
+      component: <StepStudent />,
     },
     {
       order: 1,
       isMount: false,
       data: 'reservation_date',
-      component: <div>hi</div>,
+      component: <StepClassTime />,
     },
   ]);
 
   const handleNext = () => {
     const prevOrder = steps.find((step) => step.isMount)!.order;
-    if (prevOrder === 3) return;
+    if (prevOrder === 2) return;
     const nowOrder = prevOrder + 1;
     const newSteps = steps.map((step) => {
       if (step.order === prevOrder || step.order === nowOrder) {

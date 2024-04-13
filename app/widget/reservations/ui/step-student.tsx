@@ -8,7 +8,7 @@ import CheckBox from '@/app/shared/ui/atoms/CheckBox';
 import { useContext } from 'react';
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
 
-const StepSelectStudent = () => {
+const StepStudent = () => {
   const { keyword, handleChange, searched } = useSearchByInitial();
   const reservation = useContext(ReservationCreateContext);
 
@@ -16,7 +16,7 @@ const StepSelectStudent = () => {
     <div>
       <div className='pt-6 pb-4 px-4 '>
         <p className='pb-4 text-grey400 text-sm'>
-          <span className='text-grey800 text-sm'>1</span> /4
+          <span className='text-grey800 text-sm'>1</span> /3
         </p>
         <Title size='large'>수강생을 선택해주세요</Title>
       </div>
@@ -34,7 +34,8 @@ const StepSelectStudent = () => {
             key={`${student}-${idx}`}
             className='w-full flex gap-2 py-3 border-b border-grey100 last:border-0'
             onClick={() => {
-              const added = { ...reservation, student_name: student };
+              const added = { ...reservation?.data, student_name: student };
+              console.log(added);
               reservation?.fill(added);
             }}
           >
@@ -52,4 +53,4 @@ const StepSelectStudent = () => {
   );
 };
 
-export default StepSelectStudent;
+export default StepStudent;

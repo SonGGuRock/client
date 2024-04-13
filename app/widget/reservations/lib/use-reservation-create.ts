@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type WORK_TYPE = 'throw' | 'hand';
 
@@ -16,9 +16,15 @@ const useReservationCreate = () => {
   const [reservation, setReservation] = useState<Reservation>();
 
   const fill = (reservationProperty: Partial<Reservation>) => {
-    setReservation(reservationProperty);
+    const updated = reservation
+      ? { ...reservation, ...reservationProperty }
+      : reservationProperty;
+    setReservation(updated);
   };
 
+  useEffect(() => {
+    console.log(reservation);
+  }, [reservation]);
   return { data: reservation, fill };
 };
 
