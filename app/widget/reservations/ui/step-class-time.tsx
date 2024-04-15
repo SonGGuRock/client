@@ -19,10 +19,19 @@ const StepClassTime = () => {
         <ReservationsWeeklySwiper
           style='item-primary'
           onClick={reservation!.fill}
+          selectedItem={reservation?.data?.reservation_date}
         />
       </div>
 
-      <ClassTimePicker classNames='mt-4' onClick={reservation!.fill} />
+      <ClassTimePicker
+        classNames='mt-4 px-4'
+        onClick={reservation!.fill}
+        selectedItem={reservation?.data?.reservation_class_time_id}
+      />
+      {/* <div className='my-4 px-4'>
+        <span>수강일 : {reservation?.data?.reservation_date}</span>
+        <span>수강시간 : {reservation?.data?.reservation_class_time_id}</span>
+      </div> */}
     </div>
   );
 };

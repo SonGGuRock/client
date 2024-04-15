@@ -8,11 +8,19 @@ import CloseButton from '@/app/shared/ui/atoms/close-button';
 import Header from '@/app/shared/ui/modules/header';
 
 import { useContext } from 'react';
+import { useRouter } from 'next/navigation';
+
+const END_OF_STEP = 2;
+const START_OF_STEP = 0;
 
 const ReservationsCreatePage = () => {
   const reservation = useContext(ReservationCreateContext);
   const { steps, handleNext, handlePrev } = useReservationSteps();
-
+  const router = useRouter();
+  const handleCreate = () => {
+    // POST 요청 reservation?.data
+    router.push('/reservations/create/success');
+  };
   return (
     <div className='pt-3 pb-10'>
       <Header className='px-4'>
@@ -36,9 +44,11 @@ const ReservationsCreatePage = () => {
                   className='w-full'
                   size='large'
                   disabled={!reservation?.data?.hasOwnProperty(step.data)}
-                  onClick={handleNext}
+                  onClick={
+                    step.order === END_OF_STEP ? handleCreate : handleNext
+                  }
                 >
-                  다음
+                  {step.order === END_OF_STEP ? '등록' : '다음'}
                 </Button>
               )
           )}

@@ -5,6 +5,7 @@ import { Reservation } from './use-reservation-create';
 import { useRouter } from 'next/navigation';
 import StepStudent from '../ui/step-student';
 import StepClassTime from '../ui/step-class-time';
+import StepWorkType from '../ui/step-work-type';
 
 type Step = {
   order: number;
@@ -27,6 +28,12 @@ const useReservationSteps = () => {
       isMount: false,
       data: 'reservation_date',
       component: <StepClassTime />,
+    },
+    {
+      order: 2,
+      isMount: false,
+      data: 'work_type',
+      component: <StepWorkType />,
     },
   ]);
 

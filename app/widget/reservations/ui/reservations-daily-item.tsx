@@ -8,6 +8,7 @@ export interface WeeklyVisitProps extends ReservationsWeeklySwiperProps {
   dayOfWeek: string;
   day: number;
   visit: number[];
+  isSelected: boolean;
 }
 export const ReservationsDailyItem = ({
   date,
@@ -15,7 +16,7 @@ export const ReservationsDailyItem = ({
   day,
   visit,
   onClick,
-  isSelected = false,
+  isSelected,
   style = 'background-primary',
 }: WeeklyVisitProps) => {
   const itemClasses = clsx(

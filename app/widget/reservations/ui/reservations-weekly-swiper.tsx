@@ -1,10 +1,7 @@
 import 'swiper/css';
 import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {
-  ReservationsDailyItem,
-  WeeklyVisitProps,
-} from './reservations-daily-item';
+import { ReservationsDailyItem } from './reservations-daily-item';
 import clsx from 'clsx';
 import { Reservation } from '../lib/use-reservation-create';
 const date = [
@@ -108,11 +105,12 @@ const date = [
 
 export interface ReservationsWeeklySwiperProps {
   style?: 'background-primary' | 'item-primary';
-  isSelected?: boolean;
+  selectedItem?: Reservation['reservation_date'];
   onClick?: (reservationProperty: Partial<Reservation>) => void;
 }
 
 const ReservationsWeeklySwiper = ({
+  selectedItem,
   style = 'background-primary',
   onClick,
 }: ReservationsWeeklySwiperProps) => {
@@ -132,7 +130,12 @@ const ReservationsWeeklySwiper = ({
       {date.map((data, idx) => {
         return (
           <SwiperSlide key={`${idx}-${data.day}`} className='py-2'>
-            <ReservationsDailyItem style={style} onClick={onClick} {...data} />
+            <ReservationsDailyItem
+              style={style}
+              isSelected={selectedItem === data.date}
+              onClick={onClick}
+              {...data}
+            />
           </SwiperSlide>
         );
       })}
