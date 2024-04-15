@@ -5,13 +5,15 @@ import { useRouter } from 'next/navigation';
 
 type BackProps = {
   text?: string;
+  onClick?: () => void;
 };
-const Back = ({ text }: BackProps) => {
+const Back = ({ text, onClick }: BackProps) => {
   const router = useRouter();
+  const goBack = () => router.back();
   return (
     <div
       className='w-fit h-12 flex items-center justify-center'
-      onClick={() => router.back()}
+      onClick={onClick ?? goBack}
     >
       {text ? (
         <span className='w-fit text-base'>{text}</span>
