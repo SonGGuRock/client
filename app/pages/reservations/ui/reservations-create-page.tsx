@@ -1,21 +1,55 @@
 'use client';
 
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
-import useReservationSteps from '@/app/widget/reservations/lib/use-reservation-steps';
+import useSteps, {
+  Step,
+} from '@/app/widget/reservations/lib/use-reservation-steps';
 
 import Button from '@/app/shared/ui/atoms/button/Button';
 import CloseButton from '@/app/shared/ui/atoms/close-button';
 import Header from '@/app/shared/ui/modules/header';
 
-import { useContext } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import StepStudent from '@/app/widget/reservations/ui/step-student';
+import StepClassTime from '@/app/widget/reservations/ui/step-class-time';
+import StepWorkType from '@/app/widget/reservations/ui/step-work-type';
+import useFormFill, {
+  Reservation,
+} from '@/app/widget/reservations/lib/use-form-fill';
 
 const END_OF_STEP = 2;
 const START_OF_STEP = 0;
 
 const ReservationsCreatePage = () => {
-  const reservation = useContext(ReservationCreateContext);
-  const { steps, handleNext, handlePrev } = useReservationSteps();
+  const reservationContext = useFormFill(ReservationCreateContext);
+
+  useEffect(() => {
+    console.log(reservationContext);
+  }, [reservationContext]);
+
+  const RESERVATION_STEPS: Step<Reservation>[] = [
+    {
+      order: 0,
+      isMount: true,
+      data: 'student_name',
+      component: <StepStudent context={ReservationCreateContext} />,
+    },
+    {
+      order: 1,
+      isMount: false,
+      data: 'reservation_date',
+      component: <StepClassTime />,
+    },
+    {
+      order: 2,
+      isMount: false,
+      data: 'work_type',
+      component: <StepWorkType />,
+    },
+  ];
+  const { steps, handleNext, handlePrev } = useSteps(RESERVATION_STEPS);
+
   const router = useRouter();
   const handleCreate = () => {
     // POST 요청 reservation?.data
@@ -43,7 +77,7 @@ const ReservationsCreatePage = () => {
                   key={idx}
                   className='w-full'
                   size='large'
-                  disabled={!reservation?.data?.hasOwnProperty(step.data)}
+                  disabled={!reservationContext.form.hasOwnProperty(step.data)}
                   onClick={
                     step.order === END_OF_STEP ? handleCreate : handleNext
                   }

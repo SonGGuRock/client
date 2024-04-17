@@ -1,4 +1,4 @@
-import { Reservation } from '../lib/use-reservation-create';
+import { Reservation } from '../lib/use-form-fill';
 import ClassTimeItem from './class-time-item';
 
 export type ClassTime = Pick<Reservation, 'reservation_class_time_id'> & {
@@ -17,7 +17,7 @@ export interface ClassNamesProps {
 
 interface ClassTimeProps extends ClassNamesProps {
   selectedItem: Reservation['reservation_class_time_id'];
-  onClick: (reservationProperty: Partial<Reservation>) => void;
+  onClick?: (reservationProperty: Partial<Reservation>) => void;
 }
 const ClassTimePicker = ({
   classNames,

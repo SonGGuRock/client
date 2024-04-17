@@ -1,13 +1,12 @@
 import Image from 'next/image';
 import { ClassNamesProps } from './class-time-picker';
-import { Reservation } from '../lib/use-reservation-create';
-import { useContext } from 'react';
+import useFormFill, { Reservation } from '../lib/use-form-fill';
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
 
 const WORK_TYPES: Reservation['work_type'][] = ['throw', 'hand'];
 
 const WorkTypeSelect = ({ classNames }: ClassNamesProps) => {
-  const reservation = useContext(ReservationCreateContext);
+  const { form, fill } = useFormFill(ReservationCreateContext);
 
   return (
     <div className={`${classNames} flex gap-2 px-4`}>
@@ -15,12 +14,10 @@ const WorkTypeSelect = ({ classNames }: ClassNamesProps) => {
         <div
           key={idx}
           onClick={() => {
-            reservation?.fill({ work_type: type });
+            fill({ work_type: type });
           }}
           className={`${
-            reservation?.data?.work_type === type
-              ? 'border-grey200 bg-grey100'
-              : 'bg-grey50'
+            form.work_type === type ? 'border-grey200 bg-grey100' : 'bg-grey50'
           } rounded-lg py-5 px-10 flex gap-4 flex-wrap justify-center max-w-[168px]`}
         >
           <Image
