@@ -20,7 +20,7 @@ const ModalMenu = ({
   return (
     <div
       onClick={onClick}
-      className='w-full text-sm flex items-center gap-2 py-4'
+      className='w-full text-sm flex items-center gap-2 py-2'
     >
       <Image
         className={type === 'secondary' ? 'text-red' : 'text-grey800'}

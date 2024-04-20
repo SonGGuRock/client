@@ -3,6 +3,7 @@
 import { CraftItemCreateContext } from '@/app/_provider/craft-item-create-provider';
 import Header from '@/app/shared/ui/modules/header';
 import Stepper from '@/app/shared/ui/modules/stepper';
+import CraftItemDetail from '@/app/widget/crafts/ui/craft-item-detail';
 import useFormFill from '@/app/widget/reservations/lib/use-form-fill';
 import { Step } from '@/app/widget/reservations/lib/use-steps';
 import StepStudent from '@/app/widget/reservations/ui/step-student';
@@ -31,7 +32,7 @@ const CraftItemCreatePage = () => {
       order: 1,
       isMount: false,
       data: 'craft_id',
-      component: <div>1</div>,
+      component: <CraftItemDetail />,
     },
     {
       order: 2,
@@ -51,6 +52,8 @@ const CraftItemCreatePage = () => {
           <Header.Close />
         </div>
       </Header>
+
+      {/* <input type='file' accept='image/*' capture></input> */}
       <Stepper steps={CRAFT_STEPS} form={form} />
     </div>
   );

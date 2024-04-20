@@ -1,17 +1,17 @@
 'use client';
 
-import usePopup from '@/app/hooks/usePopup';
 import useToast from '@/app/hooks/useToast';
 import Back from '@/app/shared/ui/atoms/Back';
-import Modal from '@/app/shared/ui/modules/modal/Modal';
+import ModalLayout from '@/app/widget/modal/ui/ModalLayout';
 import ModalMenu from '@/app/shared/ui/atoms/ModalMenu';
 import MeatBall from '@/app/shared/ui/atoms/MeatBall';
 import Toast from '@/app/shared/ui/atoms/Toast';
 import ArtilcePreview from '@/app/shared/ui/modules/ArticlePreview';
 import { usePathname, useRouter } from 'next/navigation';
+import useToggle from '@/app/shared/lib/useToggle';
 
 const Page = () => {
-  const { open: isSelectMode, toggle: toggleSelectMode } = usePopup();
+  const { open: isSelectMode, toggle: toggleSelectMode } = useToggle();
   const { toast, toggleToast } = useToast();
   const path = usePathname();
   const router = useRouter();
@@ -36,7 +36,7 @@ const Page = () => {
         어디서든 기기를 충전할 수 있게 해줍니다.
       </div>
       {isSelectMode && (
-        <Modal toggle={toggleSelectMode} className='flex flex-wrap gap-4'>
+        <ModalLayout className='flex flex-wrap gap-4'>
           <ModalMenu
             key='bsm-0'
             text='대표 공지로 등록하기'
@@ -64,7 +64,7 @@ const Page = () => {
               toggleToast({ text: '할 일을 삭제하였습니다.' });
             }}
           />
-        </Modal>
+        </ModalLayout>
       )}
 
       {toast && <Toast text={toast.text} />}

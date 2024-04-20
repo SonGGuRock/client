@@ -5,7 +5,7 @@ import Gallery from '../../ui/gallery/gallery';
 import Calendar from '../../ui/calendar/Calendar';
 import Divider from '../../shared/ui/atoms/Divider';
 import HomeHeader from '../../ui/home/HomeHeader';
-import Students from '../../ui/students/Students';
+import Students from '@/app/ui/students/students';
 
 export default function Page() {
   return (

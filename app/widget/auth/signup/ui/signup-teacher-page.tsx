@@ -1,6 +1,6 @@
 'use client';
 
-import useToggle from '@/app/hooks/useToggle';
+import useToggle from '@/app/shared/lib/useToggle';
 import CheckBox from '@/app/shared/ui/atoms/CheckBox';
 import Button from '@/app/shared/ui/atoms/button/Button';
 import FormInput from '@/app/shared/ui/modules/FormInput';

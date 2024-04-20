@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import FormDatePicker from './FormDatePicker';
-import useToggle from '@/app/hooks/useToggle';
+import useToggle from '@/app/shared/lib/useToggle';
 
 type ValuePiece = Date | null;
 

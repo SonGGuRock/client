@@ -1,6 +1,6 @@
 'use client';
 
-import useToggle from '@/app/hooks/useToggle';
+import useToggle from '@/app/shared/lib/useToggle';
 import FormInput from '@/app/shared/ui/modules/FormInput';
 import Image from 'next/image';
 

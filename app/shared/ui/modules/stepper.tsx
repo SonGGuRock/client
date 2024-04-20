@@ -24,17 +24,17 @@ const Stepper = ({
     router.push('/reservations/create/success');
   };
   return (
-    <div className='pt-6 pb-4 px-4 '>
+    <div className='pt-6 pb-2 px-4 '>
       <div className='flex gap-2 items-center '>
-        {nowStep !== 1 && <Back onClick={handlePrev} />}
+        {nowStep !== 1 && <Back classNames='h-fit' onClick={handlePrev} />}
         <p className='text-grey400 text-sm py-2'>
           <span className='text-grey800 text-sm'>{nowStep}</span> /
           {END_OF_STEP + 1}
         </p>
       </div>
-      <div className='relative min-h-[560px] '>
+      <div className='min-h-[560px] relative'>
         {steps.filter((step) => step.isMount)[0].component}
-        <div className='w-full absolute bottom-9 left-0'>
+        <div className='w-full px-4 fixed left-0 bottom-8'>
           {steps.map(
             (step, idx) =>
               step.isMount && (
