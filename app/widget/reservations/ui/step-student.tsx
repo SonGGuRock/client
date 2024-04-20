@@ -7,8 +7,9 @@ import Title from '@/app/shared/ui/atoms/Title';
 import CheckBox from '@/app/shared/ui/atoms/CheckBox';
 import { SubmissionContext } from '@/app/_provider/reservation-create-provider';
 import { Context } from 'react';
-import useFormFill, { Reservation } from '../lib/use-form-fill';
+import useFormFill from '../lib/use-form-fill';
 import { CraftItem } from '@/app/pages/crafts/items/craft-item-create.page';
+import { Reservation } from '@/app/pages/reservations/ui/reservations-create-page';
 
 interface StepStudentProps {
   context: Context<SubmissionContext<Reservation | CraftItem> | null>;
@@ -20,13 +21,10 @@ function StepStudent({ context }: StepStudentProps) {
 
   return (
     <div>
-      <div className='pt-6 pb-4 px-4 '>
-        <p className='pb-4 text-grey400 text-sm'>
-          <span className='text-grey800 text-sm'>1</span> /3
-        </p>
+      <div>
         <Title size='large'>수강생을 선택해주세요</Title>
       </div>
-      <div className='flex justify-between p-4'>
+      <div className='flex justify-between py-4'>
         <Search
           classNames='w-full'
           keyword={keyword}
@@ -34,7 +32,7 @@ function StepStudent({ context }: StepStudentProps) {
         />
       </div>
 
-      <div className='px-4 '>
+      <div>
         {searched.map((student, idx) => (
           <div
             key={`${student}-${idx}`}

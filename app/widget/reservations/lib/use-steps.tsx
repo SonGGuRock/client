@@ -1,18 +1,32 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Reservation } from '@/app/pages/reservations/ui/reservations-create-page';
+import { CraftItem } from '@/app/pages/crafts/items/craft-item-create.page';
 
-export type Step<T> = {
-  order: number;
-  isMount: boolean;
-  data: keyof T;
-  component: ReactNode;
-};
+export type Step<T> =
+  | (T extends Reservation
+      ? {
+          order: number;
+          isMount: boolean;
+          data: keyof Reservation;
+          component: ReactNode;
+        }
+      : never)
+  | (T extends CraftItem
+      ? {
+          order: number;
+          isMount: boolean;
+          data: keyof CraftItem;
+          component: ReactNode;
+        }
+      : never);
 
-function useSteps<T>(initial: Step<T>[]) {
+function useSteps(initial: (Step<Reservation> | Step<CraftItem>)[]) {
   const router = useRouter();
-  const [steps, setSteps] = useState<Step<T>[]>(initial);
+  const [steps, setSteps] =
+    useState<(Step<Reservation> | Step<CraftItem>)[]>(initial);
 
   const handleNext = () => {
     const prevOrder = steps.find((step) => step.isMount)!.order;
@@ -31,7 +45,7 @@ function useSteps<T>(initial: Step<T>[]) {
   const handlePrev = () => {
     const prevOrder = steps.find((step) => step.isMount)!.order;
     if (prevOrder === 0) {
-      router.back();
+      return;
     } else {
       const nowOrder = prevOrder - 1;
       const newSteps = steps.map((step) => {

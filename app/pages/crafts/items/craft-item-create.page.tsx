@@ -1,12 +1,11 @@
 'use client';
 
-import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
+import { CraftItemCreateContext } from '@/app/_provider/craft-item-create-provider';
 import Header from '@/app/shared/ui/modules/header';
-import useSteps, {
-  Step,
-} from '@/app/widget/reservations/lib/use-reservation-steps';
+import Stepper from '@/app/shared/ui/modules/stepper';
+import useFormFill from '@/app/widget/reservations/lib/use-form-fill';
+import { Step } from '@/app/widget/reservations/lib/use-steps';
 import StepStudent from '@/app/widget/reservations/ui/step-student';
-import { useContext } from 'react';
 
 export type CraftItem = {
   craft_id: number;
@@ -18,37 +17,41 @@ export type CraftItem = {
   content: string;
 };
 
-const context = useContext(ReservationCreateContext);
-
-const CRAFT_STEPS: Step<CraftItem>[] = [
-  {
-    order: 0,
-    isMount: true,
-    data: 'student_id',
-    component: <StepStudent {...context} />,
-  },
-  {
-    order: 1,
-    isMount: false,
-    data: 'craft_id',
-    component: <div>hi</div>,
-  },
-];
-
 const CraftItemCreatePage = () => {
-  const { steps, handleNext, handlePrev } = useSteps(CRAFT_STEPS);
+  const { form } = useFormFill(CraftItemCreateContext);
+
+  const CRAFT_STEPS: Step<CraftItem>[] = [
+    {
+      order: 0,
+      isMount: true,
+      data: 'student_name',
+      component: <StepStudent context={CraftItemCreateContext} />,
+    },
+    {
+      order: 1,
+      isMount: false,
+      data: 'craft_id',
+      component: <div>1</div>,
+    },
+    {
+      order: 2,
+      isMount: false,
+      data: 'work_type',
+      component: <div>2</div>,
+    },
+  ];
 
   return (
-    <div className='pt-3 pb-10'>
+    <div className='pt-3 '>
       <Header className='px-4'>
         <div className='w-full flex gap-1 justify-between items-center'>
           <div className='flex gap-1 items-center'>
-            <Header.Back onClick={handlePrev} />
-            <Header.Title size='medium'>수업 등록</Header.Title>
+            <Header.Title size='medium'>작품 등록</Header.Title>
           </div>
           <Header.Close />
         </div>
       </Header>
+      <Stepper steps={CRAFT_STEPS} form={form} />
     </div>
   );
 };

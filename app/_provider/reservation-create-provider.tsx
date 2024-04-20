@@ -7,7 +7,7 @@ import {
   createContext,
   useState,
 } from 'react';
-import { Reservation } from '../widget/reservations/lib/use-form-fill';
+import { Reservation } from '../pages/reservations/ui/reservations-create-page';
 
 export type SubmissionContext<T> = {
   form: Partial<T>;
