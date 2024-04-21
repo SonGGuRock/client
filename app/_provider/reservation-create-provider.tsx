@@ -1,25 +1,31 @@
 'use client';
 
-import { ReactNode, createContext } from 'react';
-import useReservationCreate, {
-  Reservation,
-} from '../widget/reservations/lib/use-reservation-create';
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useState,
+} from 'react';
+import { Reservation } from '../pages/reservations/ui/reservations-create-page';
 
-type ReservationCreateContext = {
-  data?: Reservation;
-  fill: (reservationProperty: Partial<Reservation>) => void;
+export type SubmissionContext<T> = {
+  form: Partial<T>;
+  setForm: Dispatch<SetStateAction<Partial<T>>>;
 };
 
 export const ReservationCreateContext =
-  createContext<ReservationCreateContext | null>(null);
+  createContext<SubmissionContext<Reservation> | null>(null);
 
 export default function ReservationCreateProvider({
   children,
 }: {
   children: ReactNode;
 }) {
+  const [form, setForm] = useState<Partial<Reservation>>({});
+
   return (
-    <ReservationCreateContext.Provider value={useReservationCreate()}>
+    <ReservationCreateContext.Provider value={{ form, setForm }}>
       {children}
     </ReservationCreateContext.Provider>
   );

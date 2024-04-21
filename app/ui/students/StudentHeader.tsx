@@ -1,6 +1,6 @@
 'use client';
 
-import Modal from '@/app/shared/ui/modules/modal/Modal';
+import ModalLayout from '@/app/widget/modal/ui/ModalLayout';
 import Portal from '@/app/shared/ui/modules/modal/Portal';
 import Header from '@/app/shared/ui/modules/header';
 import ModalMenu from '../../shared/ui/atoms/ModalMenu';
@@ -12,7 +12,7 @@ const StudentHeader = () => {
         <Header.Back />
         <Header.MeatBall>
           <Portal>
-            <Modal>
+            <ModalLayout>
               <ModalMenu
                 text='프로필 수정하기'
                 iconUrl='/icon/ic-edit_24px.svg'
@@ -24,7 +24,7 @@ const StudentHeader = () => {
                 onClick={() => {}}
                 type='secondary'
               />
-            </Modal>
+            </ModalLayout>
           </Portal>
         </Header.MeatBall>
       </Header>

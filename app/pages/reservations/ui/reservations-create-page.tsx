@@ -1,26 +1,52 @@
 'use client';
 
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
-import useReservationSteps from '@/app/widget/reservations/lib/use-reservation-steps';
+import useSteps, { Step } from '@/app/widget/reservations/lib/use-steps';
 
-import Button from '@/app/shared/ui/atoms/button/Button';
 import CloseButton from '@/app/shared/ui/atoms/close-button';
 import Header from '@/app/shared/ui/modules/header';
 
-import { useContext } from 'react';
-import { useRouter } from 'next/navigation';
+import StepStudent from '@/app/widget/reservations/ui/step-student';
+import StepClassTime from '@/app/widget/reservations/ui/step-class-time';
+import StepWorkType from '@/app/widget/reservations/ui/step-work-type';
+import useFormFill from '@/app/widget/reservations/lib/use-form-fill';
+import Stepper from '@/app/shared/ui/modules/stepper';
 
-const END_OF_STEP = 2;
-const START_OF_STEP = 0;
+type WORK_TYPE = 'throw' | 'hand';
+
+export type Reservation = {
+  student_id?: number;
+  student_name?: string;
+  reservation_date?: string;
+  reservation_class_time_id?: string;
+  work_type?: WORK_TYPE;
+};
 
 const ReservationsCreatePage = () => {
-  const reservation = useContext(ReservationCreateContext);
-  const { steps, handleNext, handlePrev } = useReservationSteps();
-  const router = useRouter();
-  const handleCreate = () => {
-    // POST 요청 reservation?.data
-    router.push('/reservations/create/success');
-  };
+  const { form } = useFormFill(ReservationCreateContext);
+
+  const RESERVATION_STEPS: Step<Reservation>[] = [
+    {
+      order: 0,
+      isMount: true,
+      data: 'student_name',
+      component: <StepStudent context={ReservationCreateContext} />,
+    },
+    {
+      order: 1,
+      isMount: false,
+      data: 'reservation_date',
+      component: <StepClassTime />,
+    },
+    {
+      order: 2,
+      isMount: false,
+      data: 'work_type',
+      component: <StepWorkType />,
+    },
+  ];
+  const { handlePrev } = useSteps(RESERVATION_STEPS);
+
   return (
     <div className='pt-3 pb-10'>
       <Header className='px-4'>
@@ -32,28 +58,7 @@ const ReservationsCreatePage = () => {
           <CloseButton />
         </div>
       </Header>
-
-      <div className='relative min-h-[600px] '>
-        {steps.map((step) => step.isMount && step.component)}
-        <div className='px-4 w-full absolute bottom-9 left-0'>
-          {steps.map(
-            (step, idx) =>
-              step.isMount && (
-                <Button
-                  key={idx}
-                  className='w-full'
-                  size='large'
-                  disabled={!reservation?.data?.hasOwnProperty(step.data)}
-                  onClick={
-                    step.order === END_OF_STEP ? handleCreate : handleNext
-                  }
-                >
-                  {step.order === END_OF_STEP ? '등록' : '다음'}
-                </Button>
-              )
-          )}
-        </div>
-      </div>
+      <Stepper steps={RESERVATION_STEPS} form={form} />
     </div>
   );
 };

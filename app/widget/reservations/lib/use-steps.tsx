@@ -1,41 +1,32 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
-import { Reservation } from './use-reservation-create';
+import { ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import StepStudent from '../ui/step-student';
-import StepClassTime from '../ui/step-class-time';
-import StepWorkType from '../ui/step-work-type';
+import { Reservation } from '@/app/pages/reservations/ui/reservations-create-page';
+import { CraftItem } from '@/app/pages/crafts/items/craft-item-create.page';
 
-type Step = {
-  order: number;
-  isMount: boolean;
-  data: keyof Reservation;
-  component: ReactNode;
-};
+export type Step<T> =
+  | (T extends Reservation
+      ? {
+          order: number;
+          isMount: boolean;
+          data: keyof Reservation;
+          component: ReactNode;
+        }
+      : never)
+  | (T extends CraftItem
+      ? {
+          order: number;
+          isMount: boolean;
+          data: keyof CraftItem;
+          component: ReactNode;
+        }
+      : never);
 
-const useReservationSteps = () => {
+function useSteps(initial: (Step<Reservation> | Step<CraftItem>)[]) {
   const router = useRouter();
-  const [steps, setSteps] = useState<Step[]>([
-    {
-      order: 0,
-      isMount: true,
-      data: 'student_name',
-      component: <StepStudent />,
-    },
-    {
-      order: 1,
-      isMount: false,
-      data: 'reservation_date',
-      component: <StepClassTime />,
-    },
-    {
-      order: 2,
-      isMount: false,
-      data: 'work_type',
-      component: <StepWorkType />,
-    },
-  ]);
+  const [steps, setSteps] =
+    useState<(Step<Reservation> | Step<CraftItem>)[]>(initial);
 
   const handleNext = () => {
     const prevOrder = steps.find((step) => step.isMount)!.order;
@@ -54,7 +45,7 @@ const useReservationSteps = () => {
   const handlePrev = () => {
     const prevOrder = steps.find((step) => step.isMount)!.order;
     if (prevOrder === 0) {
-      router.back();
+      return;
     } else {
       const nowOrder = prevOrder - 1;
       const newSteps = steps.map((step) => {
@@ -69,6 +60,6 @@ const useReservationSteps = () => {
   };
 
   return { steps, handleNext, handlePrev };
-};
+}
 
-export default useReservationSteps;
+export default useSteps;

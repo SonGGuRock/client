@@ -2,17 +2,18 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { ClassNamesProps } from '@/app/widget/reservations/ui/class-time-picker';
 
-type BackProps = {
+interface BackProps extends ClassNamesProps {
   text?: string;
   onClick?: () => void;
-};
-const Back = ({ text, onClick }: BackProps) => {
+}
+const Back = ({ text, onClick, classNames }: BackProps) => {
   const router = useRouter();
   const goBack = () => router.back();
   return (
     <div
-      className='w-fit h-12 flex items-center justify-center'
+      className={`w-fit h-12 flex items-center justify-center ${classNames}`}
       onClick={onClick ?? goBack}
     >
       {text ? (

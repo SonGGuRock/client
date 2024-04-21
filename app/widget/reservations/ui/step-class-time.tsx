@@ -3,9 +3,10 @@ import Title from '@/app/shared/ui/atoms/Title';
 import { useContext } from 'react';
 import ReservationsWeeklySwiper from './reservations-weekly-swiper';
 import ClassTimePicker from './class-time-picker';
+import useFormFill from '../lib/use-form-fill';
 
 const StepClassTime = () => {
-  const reservation = useContext(ReservationCreateContext);
+  const { form, fill } = useFormFill(ReservationCreateContext);
 
   return (
     <div>
@@ -18,15 +19,15 @@ const StepClassTime = () => {
       <div>
         <ReservationsWeeklySwiper
           style='item-primary'
-          onClick={reservation!.fill}
-          selectedItem={reservation?.data?.reservation_date}
+          onClick={fill}
+          selectedItem={form.reservation_date}
         />
       </div>
 
       <ClassTimePicker
         classNames='mt-4 px-4'
-        onClick={reservation!.fill}
-        selectedItem={reservation?.data?.reservation_class_time_id}
+        onClick={fill}
+        selectedItem={form.reservation_class_time_id}
       />
       {/* <div className='my-4 px-4'>
         <span>수강일 : {reservation?.data?.reservation_date}</span>

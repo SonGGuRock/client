@@ -1,6 +1,6 @@
 'use client';
 
-import useToggle from '@/app/hooks/useToggle';
+import useToggle from '@/app/shared/lib/useToggle';
 import TabLayout from '../../shared/ui/modules/tab/TabLayout';
 import TabMenu from '../../shared/ui/modules/tab/TabMenu';
 

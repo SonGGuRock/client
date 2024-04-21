@@ -1,11 +1,11 @@
 'use client';
 
-import useModalContext from '@/app/hooks/useModalContext';
+import useModal from '@/app/widget/modal/lib/useModal';
 import Image from 'next/image';
 import { PropsWithChildren } from 'react';
 
 const MeatBall = ({ children }: PropsWithChildren) => {
-  const { open, toggle } = useModalContext();
+  const { open, toggle } = useModal();
   return (
     <div>
       <button onClick={toggle}>

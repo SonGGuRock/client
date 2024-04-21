@@ -6,10 +6,12 @@ import ExpandedList from '../../shared/ui/modules/ExpandedList';
 import sliceItems from '@/app/utils/sliceItems';
 import Title from '../../shared/ui/atoms/Title';
 import Button from '../../shared/ui/atoms/button/Button';
-import usePopup from '@/app/hooks/usePopup';
-import BottomSheetWithInput from '../../shared/ui/modules/modal/BottomSheetWithInput';
+
+import ModalContentWithInput from '../../widget/modal/ui/ModalContentWithInput';
 import Toast from '../../shared/ui/atoms/Toast';
 import useToast from '@/app/hooks/useToast';
+import useModal from '@/app/widget/modal/lib/useModal';
+import PortalModal from '@/app/widget/modal/ui/PotalModal';
 
 type Todo = {
   id: number;
@@ -22,7 +24,7 @@ type Todo = {
 };
 
 export default function Todos() {
-  const { open: isInputMode, toggle: toggleInputMode } = usePopup();
+  const { openModal, closeModal } = useModal();
   const { toast, toggleToast } = useToast();
 
   const todos: Todo[] = [
@@ -75,19 +77,32 @@ export default function Todos() {
 
   const { limited, rest } = sliceItems(todos, 4);
 
+  const handleOpenModalAddTodo = () => {
+    openModal(
+      <ModalContentWithInput
+        title='할 일 추가'
+        placeholder='오늘의 할 일을 입력하세요'
+        onDone={() => {
+          closeModal();
+          toggleToast({ text: '할 일을 추가하였습니다' });
+        }}
+        onClose={closeModal}
+      />
+    );
+  };
+
   return (
     <div className='mt-8 mb-2 relative px-4'>
       <div className='flex justify-between'>
         <div className='text-lg font-semibold flex items-center gap-2 mb-4'>
-          <Title title='오늘의 할 일' />
+          <Title>오늘의 할 일</Title>
           <span>
             <strong className='text-brown'>3</strong>/6
           </span>
         </div>
         <Button
           size='small'
-          text='할 일 추가'
-          onClick={toggleInputMode}
+          onClick={handleOpenModalAddTodo}
           icon={
             <Image
               src='/icon/ic_plus_white.svg'
@@ -96,7 +111,9 @@ export default function Todos() {
               height={18}
             />
           }
-        />
+        >
+          할 일 추가
+        </Button>
       </div>
 
       <ul className='flex flex-wrap gap-2'>
@@ -109,17 +126,7 @@ export default function Todos() {
           <TodoItem key={todo.id} {...todo} />
         ))}
       </ExpandedList>
-
-      {isInputMode && (
-        <BottomSheetWithInput
-          title='할 일 추가'
-          placeholder='오늘의 할 일을 입력하세요'
-          onDone={() => {
-            toggleToast({ text: '할 일을 추가하였습니다' });
-          }}
-          onClose={toggleInputMode}
-        />
-      )}
+      <PortalModal />
       {toast && <Toast text={toast.text} />}
     </div>
   );

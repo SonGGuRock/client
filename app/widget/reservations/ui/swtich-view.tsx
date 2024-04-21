@@ -1,5 +1,5 @@
 'use client';
-import useToggle from '@/app/hooks/useToggle';
+import useToggle from '@/app/shared/lib/useToggle';
 import Image from 'next/image';
 import Link from 'next/link';
 

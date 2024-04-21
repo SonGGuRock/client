@@ -1,27 +1,63 @@
 'use client';
 
 import { Todo } from '@/app/lib/definition';
-import { updateTodo } from '../../lib/action';
 import CheckBox from '../../shared/ui/atoms/CheckBox';
-import Image from 'next/image';
-import Thumbnail from '../../shared/ui/atoms/Thumbnail';
 import MeatBall from '../../shared/ui/atoms/MeatBall';
-import usePopup from '@/app/hooks/usePopup';
-import useEditor from '@/app/hooks/useEditor';
 
 import ModalMenu from '../../shared/ui/atoms/ModalMenu';
-import BottomSheetWithInput from '../../shared/ui/modules/modal/BottomSheetWithInput';
+import ModalContentWithInput from '../../widget/modal/ui/ModalContentWithInput';
 import Toast from '../../shared/ui/atoms/Toast';
 import useToast from '@/app/hooks/useToast';
-import BottomSheet from '../../shared/ui/modules/modal/BottomSheet';
+import useModal from '@/app/widget/modal/lib/useModal';
 
 const TodoItem = ({ id, content, is_completed, author }: Todo) => {
-  const { open: isSelectMode, toggle: toggleSelectMode } = usePopup();
-  const { edit, update: updateEditor, toggle: toggleEditor } = useEditor();
+  const { closeModal, openModal } = useModal();
+
   const { toast, toggleToast } = useToast();
 
   const handleCheck = (id: number) => {
     // updateTodo(id);
+  };
+
+  const handleOpenModalEditMenu = () => {
+    openModal(
+      <div className='flex flex-wrap gap-4'>
+        <ModalMenu
+          key='bsm-1'
+          text='수정하기'
+          iconUrl='/icon/ic-edit_24px.svg'
+          onClick={() => {
+            closeModal();
+            handleOpenModalEditor();
+          }}
+        />
+        <ModalMenu
+          key='bsm-2'
+          text='삭제하기'
+          iconUrl='/icon/ic-delete_24px.svg'
+          type='secondary'
+          onClick={() => {
+            closeModal();
+            toggleToast({ text: '할 일을 삭제하였습니다.' });
+          }}
+        />
+      </div>
+    );
+  };
+
+  const handleOpenModalEditor = () => {
+    openModal(
+      <ModalContentWithInput
+        title='할 일 수정'
+        placeholder={content}
+        onDone={() => {
+          // TODO: updateTodo
+          closeModal();
+          toggleToast({ text: '할 일을 수정하였습니다' });
+        }}
+        onClose={closeModal}
+      />
+    );
   };
   return (
     <li
@@ -39,45 +75,11 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
         {content}
         <span>
           {/* author.id === userId -> meatball menu*/}
-          <MeatBall onClick={toggleSelectMode} />
+          <MeatBall onClick={handleOpenModalEditMenu} />
           {/* <Thumbnail userId={author.id} /> */}
         </span>
       </label>
-      {isSelectMode && (
-        <BottomSheet toggle={toggleSelectMode} className='flex flex-wrap gap-4'>
-          <ModalMenu
-            key='bsm-1'
-            text='수정하기'
-            iconUrl='/icon/ic-edit_24px.svg'
-            onClick={() => {
-              toggleSelectMode();
-              updateEditor({ id, content });
-            }}
-          />
-          <ModalMenu
-            key='bsm-2'
-            text='삭제하기'
-            iconUrl='/icon/ic-delete_24px.svg'
-            type='secondary'
-            onClick={() => {
-              toggleSelectMode();
-              toggleToast({ text: '할 일을 삭제하였습니다.' });
-            }}
-          />
-        </BottomSheet>
-      )}
-      {!!edit && (
-        <BottomSheetWithInput
-          title='할 일 수정'
-          placeholder={edit.content}
-          onDone={() => {
-            // TODO: updateTodo
-            toggleEditor();
-            toggleToast({ text: '할 일을 수정하였습니다' });
-          }}
-          onClose={toggleEditor}
-        />
-      )}
+
       {toast && <Toast text={toast.text} />}
     </li>
   );
