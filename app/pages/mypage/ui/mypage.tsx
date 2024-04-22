@@ -2,7 +2,7 @@ import Title from '@/app/shared/atoms/Title';
 import BottomBar from '@/app/shared/modules/BottomBar';
 import MemberInfo from '@/app/widget/mypage/ui/member-info';
 import SettingMenu from '@/app/widget/mypage/ui/setting-menu';
-import WorkShopInfo from '@/app/widget/mypage/ui/workshop-info';
+import WorkShopInfo from '@/app/widget/workshops/ui/workshop-info';
 
 const MyPage = () => {
   return (
@@ -15,13 +15,14 @@ const MyPage = () => {
         </div>
 
         <WorkShopInfo
+          href='/workshops/1/settings'
           id={1}
           name='손꾸락 공방'
           address='경기도 수원시 팔달구 성문로 45'
           phone_number='010=1234=5678'
         />
       </div>
-      <SettingMenu className='py-4'>
+      {/* <SettingMenu className='py-4'>
         <SettingMenu.Label>나의 공방</SettingMenu.Label>
         <SettingMenu.Link href='/workshop/1'>공방 정보 설정</SettingMenu.Link>
         <SettingMenu.Link href='/workshop/1/settings'>
@@ -34,7 +35,7 @@ const MyPage = () => {
       <SettingMenu className='py-4'>
         <SettingMenu.Label>알림</SettingMenu.Label>
         <SettingMenu.Link href='/workshop/1'>알림 설정</SettingMenu.Link>
-      </SettingMenu>
+      </SettingMenu> */}
 
       <SettingMenu className='py-4'>
         <SettingMenu.Label>이용 안내</SettingMenu.Label>
@@ -44,7 +45,7 @@ const MyPage = () => {
 
       <SettingMenu className='py-4'>
         <SettingMenu.Button>로그아웃</SettingMenu.Button>
-        <SettingMenu.Button>탈퇴하기</SettingMenu.Button>
+        <SettingMenu.Button>서비스 탈퇴</SettingMenu.Button>
       </SettingMenu>
       <BottomBar />
     </div>
