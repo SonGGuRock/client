@@ -1,6 +1,6 @@
-import Title from '@/app/shared/ui/atoms/Title';
-import Button from '@/app/shared/ui/atoms/button/Button';
-import FormInput from '@/app/shared/ui/modules/FormInput';
+import Title from '@/app/shared/atoms/Title';
+import Button from '@/app/shared/atoms/button/Button';
+import FormInput from '@/app/shared/modules/FormInput';
 
 const AuthenticationSuccessPage = () => {
   return (

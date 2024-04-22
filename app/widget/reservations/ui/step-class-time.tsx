@@ -1,9 +1,9 @@
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
-import Title from '@/app/shared/ui/atoms/Title';
+import Title from '@/app/shared/atoms/Title';
 import { useContext } from 'react';
 import ReservationsWeeklySwiper from './reservations-weekly-swiper';
 import ClassTimePicker from './class-time-picker';
-import useFormFill from '../lib/use-form-fill';
+import useFormFill from '../../../shared/modules/stepper/lib/use-form-fill';
 
 const StepClassTime = () => {
   const { form, fill } = useFormFill(ReservationCreateContext);

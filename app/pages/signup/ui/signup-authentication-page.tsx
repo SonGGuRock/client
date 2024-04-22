@@ -1,4 +1,4 @@
-import CloseButton from '@/app/shared/ui/atoms/close-button';
+import CloseButton from '@/app/shared/atoms/close-button';
 import EmailAuthentication from '@/app/widget/auth/email-authentication';
 
 const SignupAuthenticationPage = () => {

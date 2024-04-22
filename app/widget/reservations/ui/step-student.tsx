@@ -1,13 +1,13 @@
 'use client';
 
-import { StudentMain } from '@/app/ui/students/student';
-import Search from '@/app/shared/ui/modules/Search';
+import { StudentMain } from '@/app/widget/students/ui/student-list-item';
+import Search from '@/app/shared/modules/Search';
 import useSearchByInitial from '../../students/lib/useSearchByInitial';
-import Title from '@/app/shared/ui/atoms/Title';
-import CheckBox from '@/app/shared/ui/atoms/CheckBox';
+import Title from '@/app/shared/atoms/Title';
+import CheckBox from '@/app/shared/atoms/CheckBox';
 import { SubmissionContext } from '@/app/_provider/reservation-create-provider';
 import { Context } from 'react';
-import useFormFill from '../lib/use-form-fill';
+import useFormFill from '../../../shared/modules/stepper/lib/use-form-fill';
 import { CraftItem } from '@/app/pages/crafts/items/craft-item-create.page';
 import { Reservation } from '@/app/pages/reservations/ui/reservations-create-page';
 

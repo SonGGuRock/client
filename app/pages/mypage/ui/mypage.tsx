@@ -1,5 +1,5 @@
-import Title from '@/app/shared/ui/atoms/Title';
-import BottomBar from '@/app/shared/ui/modules/BottomBar';
+import Title from '@/app/shared/atoms/Title';
+import BottomBar from '@/app/shared/modules/BottomBar';
 import MemberInfo from '@/app/widget/mypage/ui/member-info';
 import SettingMenu from '@/app/widget/mypage/ui/setting-menu';
 import WorkShopInfo from '@/app/widget/mypage/ui/workshop-info';

@@ -1,4 +1,4 @@
-import PhoneNumber from '@/app/shared/ui/modules/phone-number';
+import PhoneNumber from '@/app/shared/modules/phone-number';
 import Image from 'next/image';
 
 interface WorkShopInfo {

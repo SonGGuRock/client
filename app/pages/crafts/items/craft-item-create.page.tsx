@@ -1,11 +1,11 @@
 'use client';
 
 import { CraftItemCreateContext } from '@/app/_provider/craft-item-create-provider';
-import Header from '@/app/shared/ui/modules/header';
-import Stepper from '@/app/shared/ui/modules/stepper';
+import Header from '@/app/shared/modules/header';
+import Stepper from '@/app/shared/modules/stepper';
 import CraftItemDetail from '@/app/widget/crafts/ui/craft-item-detail';
-import useFormFill from '@/app/widget/reservations/lib/use-form-fill';
-import { Step } from '@/app/widget/reservations/lib/use-steps';
+import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
+import { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 import StepStudent from '@/app/widget/reservations/ui/step-student';
 
 export type CraftItem = {

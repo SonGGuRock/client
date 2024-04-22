@@ -1,5 +1,5 @@
 import ReservationsStudentCalendar from '@/app/widget/reservations/ui/reservations-student-calendar';
-import Header from '@/app/shared/ui/modules/header';
+import Header from '@/app/shared/modules/header';
 
 const Page = () => {
   return (

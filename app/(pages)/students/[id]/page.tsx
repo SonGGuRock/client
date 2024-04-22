@@ -1,10 +1,10 @@
 import AllVisitButton from '@/app/widget/reservations/ui/all-visit-button';
 import ReservationItem from '@/app/widget/reservations/ui/reservations-item';
-import Header from '@/app/shared/ui/modules/header';
-import TabLayout from '@/app/shared/ui/modules/tab/TabLayout';
-import TabMenu from '@/app/shared/ui/modules/tab/TabMenu';
-import StudentInfo from '@/app/ui/students/StudentInfo';
-import StudentTab from '@/app/ui/students/StudentTab';
+import Header from '@/app/shared/modules/header';
+import TabLayout from '@/app/shared/modules/tab/TabLayout';
+import TabMenu from '@/app/shared/modules/tab/TabMenu';
+import StudentInfo from '@/app/widget/students/ui/student-info';
+import StudentTab from '@/app/widget/students/ui/student-tab';
 
 const Page = () => {
   return (

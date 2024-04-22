@@ -1,6 +1,6 @@
-import Thumbnail from '@/app/shared/ui/atoms/Thumbnail';
-import Title from '@/app/shared/ui/atoms/Title';
-import PhoneNumber from '@/app/shared/ui/modules/phone-number';
+import Thumbnail from '@/app/shared/atoms/Thumbnail';
+import Title from '@/app/shared/atoms/Title';
+import PhoneNumber from '@/app/shared/modules/phone-number';
 import Image from 'next/image';
 import Link from 'next/link';
 

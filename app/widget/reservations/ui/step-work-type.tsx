@@ -1,4 +1,4 @@
-import Title from '@/app/shared/ui/atoms/Title';
+import Title from '@/app/shared/atoms/Title';
 import WorkTypeSelect from './work-type-select';
 
 const StepWorkType = () => {

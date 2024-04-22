@@ -1,12 +1,12 @@
 'use client';
 
-import useToast from '@/app/hooks/useToast';
-import Back from '@/app/shared/ui/atoms/Back';
+import useToast from '@/app/widget/toast/lib/useToast';
+import Back from '@/app/shared/atoms/Back';
 import ModalLayout from '@/app/widget/modal/ui/ModalLayout';
-import ModalMenu from '@/app/shared/ui/atoms/ModalMenu';
-import MeatBall from '@/app/shared/ui/atoms/MeatBall';
-import Toast from '@/app/shared/ui/atoms/Toast';
-import ArtilcePreview from '@/app/shared/ui/modules/ArticlePreview';
+import ModalMenu from '@/app/shared/atoms/ModalMenu';
+import MeatBall from '@/app/shared/atoms/MeatBall';
+import Toast from '@/app/widget/toast/ui/toast';
+import ArtilcePreview from '@/app/shared/modules/ArticlePreview';
 import { usePathname, useRouter } from 'next/navigation';
 import useToggle from '@/app/shared/lib/useToggle';
 

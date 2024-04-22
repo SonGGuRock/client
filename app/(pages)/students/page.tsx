@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import Title from '../../shared/ui/atoms/Title';
-import Button from '../../shared/ui/atoms/button/Button';
+import Title from '../../shared/atoms/Title';
+import Button from '../../shared/atoms/button/Button';
 import Image from 'next/image';
-import StudentsTab from '../../ui/students/StudentsTab';
-import BottomBar from '../../shared/ui/modules/BottomBar';
+import StudentsTab from '../../widget/students/ui/students-tab';
+import BottomBar from '../../shared/modules/BottomBar';
 import StudentsWithSearch from '@/app/widget/students/ui/students-with-search';
 
 const Page = () => {

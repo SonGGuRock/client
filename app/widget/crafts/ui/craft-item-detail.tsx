@@ -1,11 +1,11 @@
 import { ModalContext } from '@/app/_provider/modal-provider';
 import PortalModal from '@/app/widget/modal/ui/PotalModal';
 import useModal from '@/app/widget/modal/lib/useModal';
-import ModalMenu from '@/app/shared/ui/atoms/ModalMenu';
-import Title from '@/app/shared/ui/atoms/Title';
-import IconPlusCircle from '@/app/shared/ui/atoms/icons/icon-plus-circle';
-import SelectLikeButton from '@/app/shared/ui/atoms/select-like-button';
-import Textarea from '@/app/shared/ui/atoms/textarea';
+import ModalMenu from '@/app/shared/atoms/ModalMenu';
+import Title from '@/app/shared/atoms/Title';
+import IconPlusCircle from '@/app/shared/atoms/icons/icon-plus-circle';
+import SelectLikeButton from '@/app/shared/atoms/select-like-button';
+import Textarea from '@/app/shared/atoms/textarea';
 
 const CraftItemDetail = () => {
   const { openModal, closeModal } = useModal(ModalContext);

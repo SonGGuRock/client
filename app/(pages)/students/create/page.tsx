@@ -1,8 +1,8 @@
-import Button from '@/app/shared/ui/atoms/button/Button';
-import FormInput from '@/app/shared/ui/modules/FormInput';
-import FormSelect from '@/app/shared/ui/modules/FormSelect';
-import ProfileDefault from '@/app/shared/ui/modules/ProfileDefault';
-import Header from '@/app/shared/ui/modules/header';
+import Button from '@/app/shared/atoms/button/Button';
+import FormInput from '@/app/shared/modules/FormInput';
+import FormSelect from '@/app/shared/modules/FormSelect';
+import ProfileDefault from '@/app/shared/modules/ProfileDefault';
+import Header from '@/app/shared/modules/header';
 
 const Page = () => {
   return (

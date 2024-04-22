@@ -1,7 +1,7 @@
-import FormInput from '@/app/shared/ui/modules/FormInput';
-import FormSelect from '@/app/shared/ui/modules/FormSelect';
-import Header from '@/app/shared/ui/modules/header';
-import ProfilePictureEdit from '@/app/shared/ui/modules/profile-picture-edit';
+import FormInput from '@/app/shared/modules/FormInput';
+import FormSelect from '@/app/shared/modules/FormSelect';
+import Header from '@/app/shared/modules/header';
+import ProfilePictureEdit from '@/app/shared/modules/profile-picture-edit';
 
 const MemberPage = () => {
   return (

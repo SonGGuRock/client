@@ -1,16 +1,16 @@
 'use client';
 
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
-import useSteps, { Step } from '@/app/widget/reservations/lib/use-steps';
+import useSteps, { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 
-import CloseButton from '@/app/shared/ui/atoms/close-button';
-import Header from '@/app/shared/ui/modules/header';
+import CloseButton from '@/app/shared/atoms/close-button';
+import Header from '@/app/shared/modules/header';
 
 import StepStudent from '@/app/widget/reservations/ui/step-student';
 import StepClassTime from '@/app/widget/reservations/ui/step-class-time';
 import StepWorkType from '@/app/widget/reservations/ui/step-work-type';
-import useFormFill from '@/app/widget/reservations/lib/use-form-fill';
-import Stepper from '@/app/shared/ui/modules/stepper';
+import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
+import Stepper from '@/app/shared/modules/stepper';
 
 type WORK_TYPE = 'throw' | 'hand';
 

@@ -1,5 +1,5 @@
-import DailySchedule from '@/app/ui/calendar/DailySchedule';
-import BottomBar from '@/app/shared/ui/modules/BottomBar';
+import DailySchedule from '@/app/widget/calendar/DailySchedule';
+import BottomBar from '@/app/shared/modules/BottomBar';
 import ReservationsDailyList from '@/app/widget/reservations/ui/reservations-daily-list';
 import ReservationsHeader from '@/app/widget/reservations/ui/reservations-header';
 import ReservationsMonthlyCalendar from '@/app/widget/reservations/ui/reservations-monthly-calendar';

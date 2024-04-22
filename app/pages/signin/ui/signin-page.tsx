@@ -1,5 +1,5 @@
-import Button from '@/app/shared/ui/atoms/button/Button';
-import FormInput from '@/app/shared/ui/modules/FormInput';
+import Button from '@/app/shared/atoms/button/Button';
+import FormInput from '@/app/shared/modules/FormInput';
 import SigninPassword from '@/app/widget/auth/signin/ui/signin-password';
 import Link from 'next/link';
 

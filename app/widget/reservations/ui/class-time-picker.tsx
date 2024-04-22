@@ -1,4 +1,4 @@
-import { Reservation } from '../lib/use-form-fill';
+import { Reservation } from '../../../shared/modules/stepper/lib/use-form-fill';
 import ClassTimeItem from './class-time-item';
 
 export type ClassTime = Pick<Reservation, 'reservation_class_time_id'> & {

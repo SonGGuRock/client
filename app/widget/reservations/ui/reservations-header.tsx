@@ -1,4 +1,4 @@
-import Header from '@/app/shared/ui/modules/header';
+import Header from '@/app/shared/modules/header';
 import { SwitchView } from '@/app/widget/reservations/ui/swtich-view';
 
 const ReservationsHeader = () => {

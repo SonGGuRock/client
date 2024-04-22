@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { ClassNamesProps } from './class-time-picker';
-import useFormFill, { Reservation } from '../lib/use-form-fill';
+import useFormFill, {
+  Reservation,
+} from '../../../shared/modules/stepper/lib/use-form-fill';
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
 
 const WORK_TYPES: Reservation['work_type'][] = ['throw', 'hand'];

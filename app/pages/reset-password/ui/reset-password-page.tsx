@@ -1,17 +1,41 @@
-import Title from '@/app/shared/ui/atoms/Title';
-import Button from '@/app/shared/ui/atoms/button/Button';
-import FormInput from '@/app/shared/ui/modules/FormInput';
-import Header from '@/app/shared/ui/modules/header';
+'use client';
+
+import Title from '@/app/shared/atoms/Title';
+import Button from '@/app/shared/atoms/button/Button';
+import isValidEmail from '@/app/shared/lib/validation-email';
+import FormInput from '@/app/shared/modules/FormInput';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, useState } from 'react';
 
 const ResetPasswordPage = () => {
+  const [inputValue, setInputValue] = useState('');
+  const router = useRouter();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    router.push('/reset-password/authentication');
+  };
+
   return (
     <div>
       <div className='pt-[77px] flex gap-10 flex-wrap'>
         <Title size='large'>가입한 이메일 주소를 입력해주세요</Title>
-        <FormInput lableText='이메일' inputPlaceholder='id@ggurak.com' />
+        <FormInput
+          value={inputValue}
+          onChange={handleChange}
+          lableText='이메일'
+          inputPlaceholder='id@ggurak.com'
+        />
       </div>
       <div className='absolute bottom-9 left-0 w-full px-4'>
-        <Button size='large' disabled>
+        <Button
+          size='large'
+          disabled={!isValidEmail(inputValue)}
+          onClick={handleSubmit}
+        >
           이메일 인증하기
         </Button>
       </div>

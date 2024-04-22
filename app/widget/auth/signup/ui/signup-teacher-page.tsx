@@ -1,11 +1,11 @@
 'use client';
 
 import useToggle from '@/app/shared/lib/useToggle';
-import CheckBox from '@/app/shared/ui/atoms/CheckBox';
-import Button from '@/app/shared/ui/atoms/button/Button';
-import FormInput from '@/app/shared/ui/modules/FormInput';
-import FormSelect from '@/app/shared/ui/modules/FormSelect';
-import Header from '@/app/shared/ui/modules/header';
+import CheckBox from '@/app/shared/atoms/CheckBox';
+import Button from '@/app/shared/atoms/button/Button';
+import FormInput from '@/app/shared/modules/FormInput';
+import FormSelect from '@/app/shared/modules/FormSelect';
+import Header from '@/app/shared/modules/header';
 import Image from 'next/image';
 import Link from 'next/link';
 

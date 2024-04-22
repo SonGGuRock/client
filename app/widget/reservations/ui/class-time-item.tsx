@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Reservation } from '../lib/use-form-fill';
+import { Reservation } from '../../../shared/modules/stepper/lib/use-form-fill';
 import { ClassTime } from './class-time-picker';
 
 interface ClassTimeItemProps {

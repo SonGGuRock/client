@@ -1,11 +1,11 @@
-import AnnouncementBanner from '../../ui/announcement/AnnouncementBanner';
+import AnnouncementBanner from '../../widget/announcement/AnnouncementBanner';
 
-import Todos from '../../ui/todos/todos';
-import Gallery from '../../ui/gallery/gallery';
-import Calendar from '../../ui/calendar/Calendar';
-import Divider from '../../shared/ui/atoms/Divider';
-import HomeHeader from '../../ui/home/HomeHeader';
-import Students from '@/app/ui/students/students';
+import Todos from '../../widget/todos/todos';
+import Gallery from '../../widget/crafts/ui/crafts-preview';
+import Calendar from '../../widget/calendar/Calendar';
+import Divider from '../../shared/atoms/Divider';
+import HomeHeader from '../../widget/home/ui/home-header';
+import Students from '@/app/widget/students/ui/students';
 
 export default function Page() {
   return (

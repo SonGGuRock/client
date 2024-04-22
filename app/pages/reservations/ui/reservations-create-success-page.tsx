@@ -1,4 +1,4 @@
-import SubmissionSuccess from '@/app/shared/ui/modules/success';
+import SubmissionSuccess from '@/app/shared/modules/success';
 
 const ReservationsCreateSuccessPage = () => {
   const fields = [
