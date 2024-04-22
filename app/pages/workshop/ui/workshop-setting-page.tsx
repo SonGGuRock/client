@@ -1,4 +1,4 @@
-import Header from '@/app/shared/ui/modules/header';
+import Header from '@/app/shared/modules/header';
 import SettingMenu from '@/app/widget/mypage/ui/setting-menu';
 
 const WorkshopSettingPage = () => {

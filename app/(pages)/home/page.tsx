@@ -1,8 +1,8 @@
 import AnnouncementBanner from '../../widget/announcement/AnnouncementBanner';
 
 import Todos from '../../widget/todos/todos';
-import Gallery from '../../widget/crafts/ui/crafts-preview';
-import Calendar from '../../widget/calendar/Calendar';
+import CraftsPreview from '../../widget/crafts/ui/crafts-preview';
+import Reservations from '../../widget/reservations/preview/reservation-preview-swiper';
 import Divider from '../../shared/atoms/Divider';
 import HomeHeader from '../../widget/home/ui/home-header';
 import Students from '@/app/widget/students/ui/students';
@@ -14,7 +14,7 @@ export default function Page() {
         <HomeHeader />
         <AnnouncementBanner />
         {/* Suspense fallback={Calandar} */}
-        <Calendar />
+        <Reservations />
       </section>
 
       <section>
@@ -25,7 +25,7 @@ export default function Page() {
         {/* Suspense fallback={Students} */}
         <Students />
         <Divider />
-        <Gallery />
+        <CraftsPreview />
       </section>
     </div>
   );

@@ -52,7 +52,6 @@ const ReservationsCreatePage = () => {
       <Header className='px-4'>
         <div className='w-full flex gap-1 justify-between items-center'>
           <div className='flex gap-1 items-center'>
-            <Header.Back onClick={handlePrev} />
             <Header.Title size='medium'>수업 등록</Header.Title>
           </div>
           <CloseButton />

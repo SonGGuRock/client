@@ -2,7 +2,7 @@ import 'swiper/css/free-mode';
 
 import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import WeeklyItem, { WeeklyItemProps } from './WeeklyItem';
+import WeeklyItem, { WeeklyItemProps } from './reservations-weekly-Item';
 
 const date: WeeklyItemProps[] = [
   {

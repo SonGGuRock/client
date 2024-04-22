@@ -8,11 +8,11 @@ type ValuePiece = Date | null;
 
 export type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-interface FormSelectProps {
+interface FormDateSelectProps {
   labelText: string;
 }
 
-const FormSelect = ({ labelText }: FormSelectProps) => {
+const FormDateSelect = ({ labelText }: FormDateSelectProps) => {
   const { open, toggle } = useToggle();
   const [value, onChange] = useState<Value>(new Date());
 
@@ -36,4 +36,4 @@ const FormSelect = ({ labelText }: FormSelectProps) => {
   );
 };
 
-export default FormSelect;
+export default FormDateSelect;

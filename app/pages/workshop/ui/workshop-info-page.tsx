@@ -1,7 +1,7 @@
 'use client';
 
-import FormInput from '@/app/shared/ui/modules/FormInput';
-import Header from '@/app/shared/ui/modules/header';
+import FormInput from '@/app/shared/modules/FormInput';
+import Header from '@/app/shared/modules/header';
 import WorkshopProfilePicture from '@/app/widget/workshops/ui/workshop-profile-picture';
 
 const WorkshopInfoPage = () => {

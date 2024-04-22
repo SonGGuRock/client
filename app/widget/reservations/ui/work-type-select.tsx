@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import { ClassNamesProps } from './class-time-picker';
-import useFormFill, {
-  Reservation,
-} from '../../../shared/modules/stepper/lib/use-form-fill';
+import useFormFill from '../../../shared/modules/stepper/lib/use-form-fill';
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
+import { Reservation } from '@/app/pages/reservations/ui/reservations-create-page';
 
 const WORK_TYPES: Reservation['work_type'][] = ['throw', 'hand'];
 
@@ -11,7 +10,7 @@ const WorkTypeSelect = ({ classNames }: ClassNamesProps) => {
   const { form, fill } = useFormFill(ReservationCreateContext);
 
   return (
-    <div className={`${classNames} flex gap-2 px-4`}>
+    <div className={`${classNames} flex gap-2`}>
       {WORK_TYPES.map((type, idx) => (
         <div
           key={idx}

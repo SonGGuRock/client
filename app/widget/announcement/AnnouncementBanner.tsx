@@ -48,7 +48,7 @@ export default function AnnouncementBanner() {
             >
               <span>{title}</span>
               <Image
-                src='/icon/icon_goTo.svg'
+                src='/icon/ic-arrow-right-20px.svg'
                 alt='더보기'
                 width={18}
                 height={18}

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 type menu =
   | {
@@ -6,16 +7,16 @@ type menu =
       kr: '홈';
     }
   | {
-      en: 'member';
+      en: 'students';
       kr: '수강생';
     }
   | {
-      en: 'calendar';
-      kr: '달력';
+      en: 'reservations';
+      kr: '예약';
     }
   | {
-      en: 'gallery';
-      kr: '갤러리';
+      en: 'crafts';
+      kr: '작품';
     }
   | {
       en: 'mypage';
@@ -28,16 +29,16 @@ const menus: menu[] = [
     kr: '홈',
   },
   {
-    en: 'member',
+    en: 'students',
     kr: '수강생',
   },
   {
-    en: 'calendar',
-    kr: '달력',
+    en: 'reservations',
+    kr: '예약',
   },
   {
-    en: 'gallery',
-    kr: '갤러리',
+    en: 'crafts',
+    kr: '작품',
   },
   {
     en: 'mypage',
@@ -47,9 +48,12 @@ const menus: menu[] = [
 const BottomBar = () => {
   return (
     <div className='w-full h-14 fixed bottom-0 left-0 z-50'>
-      <ul className='flex w-[375px] mx-auto h-full'>
+      <div className='flex w-[375px] mx-auto h-full'>
         {menus.map((menu) => (
-          <li className='w-full bg-white flex flex-wrap justify-center items-center flex-col'>
+          <Link
+            href={menu.en}
+            className='w-full bg-white flex flex-wrap justify-center items-center flex-col'
+          >
             <Image
               src={`/icon/bottombar/${menu.en}_normal_24px.svg`}
               alt={menu.kr}
@@ -59,9 +63,9 @@ const BottomBar = () => {
             <span className='w-full text-center text-xs text-grey300'>
               {menu.kr}
             </span>
-          </li>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

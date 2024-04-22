@@ -9,20 +9,20 @@ const ReservationItem = ({ isFulfilled }: ReservationItemsProps) => {
         isFulfilled ? 'bg-grey200' : 'bg-grey50'
       } rounded-lg flex gap-2 items-center justfiy-between`}
     >
-      <div className='flex gap-2'>
+      <div className='flex gap-2 w-full'>
         <Image
           src='/icon/ic-hand-circle-32px.svg'
           alt='핸드빌딩 아이콘'
           width={32}
           height={32}
         />
-        <div className='flex flex-wrap gap-2'>
+        <div className='flex flex-wrap  '>
           <p
             className={`w-full text-sm ${
               isFulfilled ? 'text-white' : 'text-grey900'
             }`}
           >
-            2월 23일 금요일
+            한선민
           </p>
           <p
             className={`w-full text-xs ${
@@ -33,7 +33,7 @@ const ReservationItem = ({ isFulfilled }: ReservationItemsProps) => {
           </p>
         </div>
       </div>
-      <div className='flex gap-2'>
+      <div className='flex gap-2 min-w-[64px]'>
         <p
           className={`w-fit text-xs min-w-10 ${
             isFulfilled ? 'text-white' : 'text-grey500'

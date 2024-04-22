@@ -1,5 +1,5 @@
-import IconArrowRightWhite from '@/app/shared/ui/atoms/icons/icon-arrow-right-white';
-import PhoneNumber from '@/app/shared/ui/modules/phone-number';
+import IconArrowRightWhite from '@/app/shared/atoms/icons/icon-arrow-right-white';
+import PhoneNumber from '@/app/shared/modules/phone-number';
 import Image from 'next/image';
 import Link from 'next/link';
 

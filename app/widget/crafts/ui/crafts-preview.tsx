@@ -48,11 +48,11 @@ const usersCrafts: UserCraftsProps[] = [
   },
 ];
 
-export default function Gallery() {
+export default function CraftsPreview() {
   return (
     <div className='relative px-4 mt-6 pb-10'>
       <Title subTitle='오늘 방문하는'>수강생의 최근 작품</Title>
-      <GoTo href='#' title='갤러리 전체보기' />
+      <GoTo href='#' title='작품 전체보기' />
       {usersCrafts.map((userCraft) => (
         <UserCrafts {...userCraft} />
       ))}

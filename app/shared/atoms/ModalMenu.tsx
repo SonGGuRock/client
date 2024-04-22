@@ -1,36 +1,36 @@
 import Image from 'next/image';
+import { PropsWithChildren } from 'react';
 
-type ModalMenuProps = {
-  text: string;
+interface ModalMenuProps extends PropsWithChildren {
   iconUrl: string;
   onClick: () => void;
   iconWidth?: number;
   iconHeight?: number;
   type?: 'primary' | 'secondary';
-};
+}
 
 const ModalMenu = ({
-  text,
   iconUrl,
   onClick,
   iconWidth,
   iconHeight,
   type = 'primary',
+  children,
 }: ModalMenuProps) => {
   return (
     <div
       onClick={onClick}
-      className='w-full text-sm flex items-center gap-2 py-2'
+      className='w-full text-sm flex items-center gap-2 py-3'
     >
       <Image
         className={type === 'secondary' ? 'text-red' : 'text-grey800'}
         src={iconUrl}
-        alt={text}
+        alt='모달 메뉴'
         width={iconWidth ?? 24}
         height={iconHeight ?? 24}
       />
       <span className={type === 'secondary' ? 'text-red' : 'text-grey800'}>
-        {text}
+        {children}
       </span>
     </div>
   );

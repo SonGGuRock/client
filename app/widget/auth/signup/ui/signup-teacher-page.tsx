@@ -4,7 +4,7 @@ import useToggle from '@/app/shared/lib/useToggle';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 import Button from '@/app/shared/atoms/button/Button';
 import FormInput from '@/app/shared/modules/FormInput';
-import FormSelect from '@/app/shared/modules/FormSelect';
+import FormDateSelect from '@/app/shared/modules/form-date-select';
 import Header from '@/app/shared/modules/header';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -49,7 +49,7 @@ const SignupTeacherPage = () => {
           lableText='비밀번호'
           inputPlaceholder='비밀번호를 입력해주세요'
         />
-        <FormSelect labelText='생년월일' />
+        <FormDateSelect labelText='생년월일' />
         <FormInput lableText='전화번호' inputPlaceholder='- 구분없이 입력' />
       </div>
       <div className='mt-18 flex gap-4 flex-wrap mb-8'>

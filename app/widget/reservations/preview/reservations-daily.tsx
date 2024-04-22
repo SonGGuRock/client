@@ -1,9 +1,10 @@
 import Image from 'next/image';
-import DailySchedule from './DailySchedule';
+import DailySchedule from './reservation-daily-schedule';
+import Link from 'next/link';
 
 const Daily = () => {
   return (
-    <>
+    <Link href='/reservations'>
       <h2 className=' inline-block px-[12px] py-[6px] text-sm font-bold bg-brown text-white rounded-3xl'>
         1월 16일 화요일
       </h2>
@@ -22,7 +23,7 @@ const Daily = () => {
         />
         <DailySchedule />
       </div>
-    </>
+    </Link>
   );
 };
 

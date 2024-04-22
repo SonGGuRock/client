@@ -6,10 +6,10 @@ import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 
-import Weekly from './Weekly';
-import Daily from './Daily';
+import Weekly from './reservations-weekly';
+import Daily from './reservations-daily';
 
-export default function Calendar() {
+export default function ReservationPreviewSwiper() {
   const pagination = {
     renderBullet: function (index: number, className: string) {
       return (

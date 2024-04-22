@@ -1,6 +1,6 @@
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { Value } from './FormSelect';
+import { Value } from './form-date-select';
 import { Dispatch, SetStateAction } from 'react';
 import clsx from 'clsx';
 

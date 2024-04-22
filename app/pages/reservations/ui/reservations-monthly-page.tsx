@@ -1,4 +1,4 @@
-import DailySchedule from '@/app/widget/calendar/DailySchedule';
+import DailySchedule from '@/app/widget/reservations/preview/reservation-daily-schedule';
 import BottomBar from '@/app/shared/modules/BottomBar';
 import ReservationsDailyList from '@/app/widget/reservations/ui/reservations-daily-list';
 import ReservationsHeader from '@/app/widget/reservations/ui/reservations-header';
