@@ -1,4 +1,3 @@
-import Header from '@/app/shared/ui/modules/header';
 import EmailAuthentication from '@/app/widget/auth/email-authentication';
 
 const ResetPasswordAuthenticationPage = () => {
