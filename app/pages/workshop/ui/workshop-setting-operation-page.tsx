@@ -4,18 +4,17 @@ import WorkStepLabel, {
 import Header from '@/app/shared/ui/modules/header';
 import WorkStepIcon from '@/app/shared/ui/modules/workstep-icon';
 import SettingMenu from '@/app/widget/mypage/ui/setting-menu';
-import Image from 'next/image';
 
 WorkStepLabel;
 
-const WorkshopSettingsPage = () => {
+const WorkshopSettingOperationPage = () => {
   return (
     <div className='pt-3 pb-10'>
       <Header className='px-4'>
         <div className='w-full flex gap-1 justify-between items-center'>
           <div className='flex gap-1 items-center'>
             <Header.Back />
-            <Header.Title size='medium'>운영 설정</Header.Title>
+            <Header.Title size='medium'>공방 운영 설정</Header.Title>
           </div>
           <Header.Button size='small'>완료</Header.Button>
         </div>
@@ -72,4 +71,4 @@ const WorkshopSettingsPage = () => {
   );
 };
 
-export default WorkshopSettingsPage;
+export default WorkshopSettingOperationPage;

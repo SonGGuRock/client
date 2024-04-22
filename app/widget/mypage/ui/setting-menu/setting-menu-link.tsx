@@ -12,7 +12,7 @@ export const SettingMenuLink = ({ href, children }: SettingMenuLinkProps) => {
       <Link href={href} className='flex justify-between'>
         {children}
         <Image
-          src='icon/ic-arrow-right-20px.svg'
+          src='/icon/ic-arrow-right-20px.svg'
           alt=' 이동용 화살표 아이콘'
           width={18}
           height={18}
