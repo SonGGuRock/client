@@ -1,3 +1,5 @@
+import IconCloseCircle from '@/app/shared/atoms/icons/icon-close-circle';
+import IconPlusCircle from '@/app/shared/atoms/icons/icon-plus-circle';
 import WorkStepLabel, { WORK_STEP } from '@/app/shared/atoms/work-step-label';
 import Header from '@/app/shared/modules/header';
 import WorkStepIcon from '@/app/shared/modules/workstep-icon';
@@ -14,7 +16,7 @@ const WorkshopSettingOperationPage = () => {
             <Header.Back />
             <Header.Title size='medium'>공방 운영 설정</Header.Title>
           </div>
-          <Header.Button size='small'>완료</Header.Button>
+          <Header.Button size='small'>수정</Header.Button>
         </div>
       </Header>
       <div>
@@ -23,31 +25,49 @@ const WorkshopSettingOperationPage = () => {
         </SettingMenu>
 
         <SettingMenu className='py-6'>
-          <SettingMenu.LinkText href='' linkText='2명'>
-            물레 최대 인원
-          </SettingMenu.LinkText>
-          <SettingMenu.LinkText href='' linkText='2명'>
-            핸드빌딩 최대 인원
-          </SettingMenu.LinkText>
+          <SettingMenu.LabelLayout label='물레 최대 인원'>
+            <SettingMenu.Input value={2} isAutofocus={true} />
+            <SettingMenu.Subtext>명</SettingMenu.Subtext>
+          </SettingMenu.LabelLayout>
+          <SettingMenu.LabelLayout label='물레 최대 인원'>
+            <SettingMenu.Input value={5} />
+            <SettingMenu.Subtext>명</SettingMenu.Subtext>
+          </SettingMenu.LabelLayout>
         </SettingMenu>
 
-        <SettingMenu className='py-6'>
-          공방 운영 시간대
-          <li className='flex gap-2 flex-wrap'>
-            <SettingMenu.ClassTime>09~12시</SettingMenu.ClassTime>
-            <SettingMenu.ClassTime>12~15시</SettingMenu.ClassTime>
-            <SettingMenu.ClassTime>15~18시</SettingMenu.ClassTime>
-            <SettingMenu.ClassTime>18~21시</SettingMenu.ClassTime>
+        <SettingMenu className='pt-6 pb-4'>
+          <p className='flex gap-2 items-center'>
+            <span> 공방 운영 시간대</span>
+            <span className='text-grey500 text-xs'>
+              최대 4개까지 만들 수 있어요
+            </span>
+          </p>
+          <li className='w-full flex gap-2 flex-nowrap  items-center'>
+            <div className='w-full flex justify-center  items-center'>
+              <SettingMenu.Input value={9} />
+              <SettingMenu.Subtext>~</SettingMenu.Subtext>
+              <SettingMenu.Input value={12} />
+              <SettingMenu.Subtext>시</SettingMenu.Subtext>
+            </div>
+            <IconCloseCircle classNames='' />
           </li>
         </SettingMenu>
+        <div className='w-full flex justify-center pb-6'>
+          <IconPlusCircle classNames='w-6 h-6' />
+        </div>
 
         <SettingMenu className='py-6'>
-          <SettingMenu.LinkText href='' linkText='10일~1일 전'>
-            예약 가능 기간
-          </SettingMenu.LinkText>
-          <SettingMenu.LinkText href='' linkText='최소 2일 전'>
-            취소 가능 기간
-          </SettingMenu.LinkText>
+          <SettingMenu.LabelLayout label='수강 예약 가능 날짜'>
+            <SettingMenu.Input value={10} />
+            <SettingMenu.Subtext>일 ~</SettingMenu.Subtext>
+            <SettingMenu.Input value={1} />
+            <SettingMenu.Subtext>일 전</SettingMenu.Subtext>
+          </SettingMenu.LabelLayout>
+          <SettingMenu.LabelLayout label='수강 취소 가능 날짜 '>
+            <SettingMenu.Subtext>최소</SettingMenu.Subtext>
+            <SettingMenu.Input value={2} />
+            <SettingMenu.Subtext>일 전</SettingMenu.Subtext>
+          </SettingMenu.LabelLayout>
         </SettingMenu>
 
         <SettingMenu className='py-6'>
