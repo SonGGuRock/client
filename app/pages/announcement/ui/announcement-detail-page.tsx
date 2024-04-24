@@ -21,27 +21,30 @@ const AnnouncementDetailPage = () => {
       <>
         <ModalMenu
           key='bsm-0'
-          text='대표 공지로 등록하기'
           iconUrl='/icon/ic-notice-empty-24px.svg'
           onClick={() => {}}
-        />
+        >
+          대표 공지로 등록하기
+        </ModalMenu>
         <ModalMenu
           key='bsm-1'
-          text='수정하기'
           iconUrl='/icon/ic-edit_24px.svg'
           onClick={() => {
             router.push(`${path}/edit`);
           }}
-        />
+        >
+          수정하기
+        </ModalMenu>
         <ModalMenu
           key='bsm-2'
-          text='삭제하기'
           iconUrl='/icon/ic-delete_24px.svg'
           type='secondary'
           onClick={() => {
             toggleToast({ text: '삭제하였습니다.' });
           }}
-        />
+        >
+          삭제하기
+        </ModalMenu>
       </>
     );
   };

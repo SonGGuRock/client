@@ -1,4 +1,4 @@
-import WorkshopSettingOperationPage from '@/app/pages/workshop/ui/workshop-setting-operation-page';
+import WorkshopSettingOperationPage from '@/app/pages/workshops/ui/workshop-setting-operation-page';
 
 const Page = () => {
   return <WorkshopSettingOperationPage />;
