@@ -3,7 +3,7 @@ import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ReservationsDailyItem } from './reservations-daily-item';
 import clsx from 'clsx';
-import { Reservation } from '../../../shared/modules/stepper/lib/use-form-fill';
+import { Reservation } from '@/app/pages/reservations/ui/reservations-create-page';
 const date = [
   {
     date: '2024-02-14',

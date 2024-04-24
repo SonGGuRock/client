@@ -15,24 +15,20 @@ import Link from 'next/link';
 export const ReservationsWeeklyPage = () => {
   return (
     <div>
-      <div className='py-3 px-4 bg-beige'>
-        <ReservationsHeader />
-
-        <div className='mt-4'>
-          <Header>
-            <Header.Title>2월 24일 토요일</Header.Title>
-            <ButtonIndex size='small'>
-              <Link href='/reservations/create' className='flex items-center'>
-                <ButtonIndex.AddIcon />
-                수업등록
-              </Link>
-            </ButtonIndex>
-          </Header>
-        </div>
+      <div className='mt-4 px-4'>
+        <Header>
+          <Header.Title>2월 24일 토요일</Header.Title>
+          <ButtonIndex size='small'>
+            <Link href='/reservations/create' className='flex items-center'>
+              <ButtonIndex.AddIcon />
+              수업등록
+            </Link>
+          </ButtonIndex>
+        </Header>
       </div>
 
       <ReservationsWeeklySwiper />
-      <div className='py-6 px-4'>
+      <div className='py-6 bg-white px-4'>
         <DailySchedule />
       </div>
 
