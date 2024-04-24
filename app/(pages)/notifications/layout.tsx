@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import BottomBar from '../../shared/modules/BottomBar';
+import NotificationCategoryProvider from '@/app/_provider/notification-category-provider';
 
 export const metadata: Metadata = {
   title: '손꾸락 - 알림 ',
@@ -12,9 +12,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className='relative'>
-      {children}
-      <BottomBar />
+    <div>
+      <NotificationCategoryProvider>{children}</NotificationCategoryProvider>
     </div>
   );
 }
