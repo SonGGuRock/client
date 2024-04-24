@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/hooks/useModalts"
+    "app/hooks/useModalts",
+    "app/_provider/notification-category-provider.tsㅌ"
   ],
   "exclude": ["node_modules"]
 }

@@ -5,7 +5,7 @@ export default function HomeHeader() {
   return (
     <header className='h-[60px] flex items-center justify-between'>
       <h1 className='font-bold text-xl text-sand'></h1>
-      <Link href='/notification'>
+      <Link href='/notifications'>
         <Image
           src='/icon/icon_bell.png'
           alt='icon of the bell'
