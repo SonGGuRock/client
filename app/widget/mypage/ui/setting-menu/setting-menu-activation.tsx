@@ -1,4 +1,4 @@
-import Switch from '@/app/shared/ui/atoms/Switch';
+import Switch from '@/app/shared/atoms/Switch';
 import { PropsWithChildren } from 'react';
 
 interface SettingMenuActivationProps extends PropsWithChildren {

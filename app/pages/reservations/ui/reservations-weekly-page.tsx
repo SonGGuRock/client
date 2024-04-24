@@ -2,34 +2,33 @@
 
 import 'swiper/css';
 
-import { ButtonIndex } from '@/app/shared/ui/atoms/button';
-import BottomBar from '@/app/shared/ui/modules/BottomBar';
-import Header from '@/app/shared/ui/modules/header';
+import { ButtonIndex } from '@/app/shared/atoms/button';
+import BottomBar from '@/app/shared/modules/BottomBar';
+import Header from '@/app/shared/modules/header';
 
-import DailySchedule from '@/app/ui/calendar/DailySchedule';
+import DailySchedule from '@/app/widget/reservations/preview/reservation-daily-schedule';
 import ReservationsDailyList from '../../../widget/reservations/ui/reservations-daily-list';
 import ReservationsHeader from '../../../widget/reservations/ui/reservations-header';
 import ReservationsWeeklySwiper from '@/app/widget/reservations/ui/reservations-weekly-swiper';
+import Link from 'next/link';
 
 export const ReservationsWeeklyPage = () => {
   return (
     <div>
-      <div className='py-3 px-4 bg-beige'>
-        <ReservationsHeader />
-
-        <div className='mt-4'>
-          <Header>
-            <Header.Title>2월 24일 토요일</Header.Title>
-            <ButtonIndex size='small'>
+      <div className='mt-4 px-4'>
+        <Header>
+          <Header.Title>2월 24일 토요일</Header.Title>
+          <ButtonIndex size='small'>
+            <Link href='/reservations/create' className='flex items-center'>
               <ButtonIndex.AddIcon />
               수업등록
-            </ButtonIndex>
-          </Header>
-        </div>
+            </Link>
+          </ButtonIndex>
+        </Header>
       </div>
 
       <ReservationsWeeklySwiper />
-      <div className='py-6 px-4'>
+      <div className='py-6 bg-white px-4'>
         <DailySchedule />
       </div>
 

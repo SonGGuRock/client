@@ -1,8 +1,7 @@
+import IconArrowRight from '@/app/shared/atoms/icons/icon-arrow-right';
 import Thumbnail from '@/app/shared/ui/atoms/Thumbnail';
 import Title from '@/app/shared/ui/atoms/Title';
-import IconArrowRight from '@/app/shared/ui/atoms/icons/icon-arrow-right';
 import PhoneNumber from '@/app/shared/ui/modules/phone-number';
-import Image from 'next/image';
 import Link from 'next/link';
 
 const MemberInfo = () => {

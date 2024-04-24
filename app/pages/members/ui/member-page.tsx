@@ -1,7 +1,7 @@
-import FormInput from '@/app/shared/ui/modules/FormInput';
-import FormSelect from '@/app/shared/ui/modules/FormSelect';
-import Header from '@/app/shared/ui/modules/header';
-import ProfilePictureEdit from '@/app/shared/ui/modules/profile-picture-edit';
+import FormInput from '@/app/shared/modules/FormInput';
+import FormDateSelect from '@/app/shared/modules/form-date-select';
+import Header from '@/app/shared/modules/header';
+import ProfilePictureEdit from '@/app/shared/modules/profile-picture-edit';
 
 const MemberPage = () => {
   return (
@@ -24,10 +24,10 @@ const MemberPage = () => {
           lableText='이름'
           inputPlaceholder='이름(실명)을 입력해주세요'
         />
-        <FormSelect labelText='생년월일' />
+        <FormDateSelect labelText='생년월일' />
         <FormInput lableText='이메일' inputPlaceholder='' />
         <FormInput lableText='전화번호' inputPlaceholder='- 구분없이 입력' />
-        <FormSelect labelText='가입일' />
+        <FormDateSelect labelText='가입일' />
       </div>
     </div>
   );

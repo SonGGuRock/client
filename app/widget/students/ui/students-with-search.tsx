@@ -1,10 +1,10 @@
 'use client';
 
-import DropDown from '@/app/shared/ui/atoms/drop-down';
-import Search from '../../../shared/ui/modules/search';
+import DropDown from '@/app/shared/atoms/drop-down';
 import Link from 'next/link';
-import { StudentMain } from '@/app/ui/students/student';
+import { StudentMain } from '@/app/widget/students/ui/student-list-item';
 import useSearchByInitial from '../lib/useSearchByInitial';
+import Search from '@/app/shared/modules/Search';
 
 const StudentsWithSearch = () => {
   const { keyword, handleChange, searched } = useSearchByInitial();

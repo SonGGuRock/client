@@ -16,6 +16,7 @@ const config: Config = {
         brown: '#794F34',
         sand: '#D8AB83',
         red: '#E9431D',
+        error: '#F24F29',
         yellowBeige: '#FBEBCB',
         lightBeige: '#FCF4E4',
         beige: '#F4EDE8',

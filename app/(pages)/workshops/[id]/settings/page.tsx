@@ -1,7 +1,7 @@
-import WorkshopSettingsPage from '@/app/pages/workshops/ui/workshop-settings-page';
+import WorkshopSettingPage from '@/app/pages/workshop/ui/workshop-setting-page';
 
 const Page = () => {
-  return <WorkshopSettingsPage />;
+  return <WorkshopSettingPage />;
 };
 
 export default Page;
