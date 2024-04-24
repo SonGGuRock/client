@@ -1,9 +1,7 @@
-import IconArrowRight from '@/app/shared/ui/atoms/icons/icon-arrow-right';
-import FormInput from '@/app/shared/ui/modules/FormInput';
-import AddressInput from '@/app/shared/ui/modules/address-input';
-import Header from '@/app/shared/ui/modules/header';
+import FormInput from '@/app/shared/modules/FormInput';
+import AddressInput from '@/app/shared/modules/address-input';
+import Header from '@/app/shared/modules/header';
 import Image from 'next/image';
-import Link from 'next/link';
 
 const WorkshopCreatePage = () => {
   return (
@@ -36,14 +34,6 @@ const WorkshopCreatePage = () => {
           lableText='전화번호'
           inputPlaceholder='공방의 대표 전화번호를 입력해주세요'
         />
-
-        <Link
-          href='/workshops/1/settings'
-          className='w-full text-grey700 text-sm font-bold flex justify-between'
-        >
-          운영 설정
-          <IconArrowRight />
-        </Link>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import Title from '@/app/shared/ui/atoms/Title';
+import Title from '@/app/shared/atoms/Title';
 import WorkshopOnboardingType from '@/app/widget/workshops/ui/workshop-onboarding-type';
 
 const WorkshopOnboardingPage = () => {

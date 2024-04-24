@@ -1,5 +1,5 @@
-import Title from '@/app/shared/ui/atoms/Title';
-import SearchBorder from '@/app/shared/ui/modules/search-border';
+import Title from '@/app/shared/atoms/Title';
+import SearchBorder from '@/app/shared/modules/search-border';
 import WorkShopInfo from '@/app/widget/mypage/ui/workshop-info';
 import WorkshopOnboardingCreate from '@/app/widget/workshops/ui/workshop-onboarding-create';
 import Link from 'next/link';
