@@ -1,4 +1,4 @@
-import Button from '@/app/shared/ui/atoms/button/Button';
+import Button from '@/app/shared/atoms/button/Button';
 import Image from 'next/image';
 
 const WorkshopRegisterPage = () => {

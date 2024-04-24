@@ -1,6 +1,6 @@
 import IconCloseCircle from '@/app/shared/atoms/icons/icon-close-circle';
 import IconPlusCircle from '@/app/shared/atoms/icons/icon-plus-circle';
-import WorkStepLabel, { WORK_STEP } from '@/app/shared/atoms/work-step-label';
+import { WORK_STEP } from '@/app/shared/atoms/work-step-label';
 import Header from '@/app/shared/modules/header';
 import WorkStepIcon from '@/app/shared/modules/workstep-icon';
 import SettingMenu from '@/app/widget/mypage/ui/setting-menu';

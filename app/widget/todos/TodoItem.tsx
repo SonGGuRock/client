@@ -24,23 +24,25 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
       <div className='flex flex-wrap gap-4'>
         <ModalMenu
           key='bsm-1'
-          text='수정하기'
           iconUrl='/icon/ic-edit_24px.svg'
           onClick={() => {
             closeModal();
             handleOpenModalEditor();
           }}
-        />
+        >
+          수정하기
+        </ModalMenu>
         <ModalMenu
           key='bsm-2'
-          text='삭제하기'
           iconUrl='/icon/ic-delete_24px.svg'
           type='secondary'
           onClick={() => {
             closeModal();
             toggleToast({ text: '할 일을 삭제하였습니다.' });
           }}
-        />
+        >
+          삭제하기
+        </ModalMenu>
       </div>
     );
   };

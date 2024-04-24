@@ -51,7 +51,7 @@ const BottomBar = () => {
       <div className='flex w-[375px] mx-auto h-full'>
         {menus.map((menu) => (
           <Link
-            href={menu.en}
+            href={`/${menu.en}`}
             className='w-full bg-white flex flex-wrap justify-center items-center flex-col'
           >
             <Image

@@ -1,5 +1,5 @@
-import Header from '@/app/shared/ui/modules/header';
-import SearchBorder from '@/app/shared/ui/modules/search-border';
+import Header from '@/app/shared/modules/header';
+import SearchBorder from '@/app/shared/modules/search-border';
 import WorkshopAddressList from '@/app/widget/workshops/ui/workshop-address-list';
 
 const WorkshopSearchAddressPage = () => {
