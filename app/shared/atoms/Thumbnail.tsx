@@ -17,9 +17,7 @@ const Thumbnail = ({
 }: ThumbnailProps) => {
   return (
     <Image
-      className={`block rounded-full ${
-        size === 'small' ? 'h-8 w-8' : 'h-18 w-18'
-      } ${className}`}
+      className={`block rounded-full  ${className}`}
       src='/img/student_default.png'
       alt={name || '유저 사진'}
       width={size === 'small' ? 32 : size === 'medium' ? 56 : 72}
