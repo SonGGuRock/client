@@ -1,21 +1,22 @@
+import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 import Image from 'next/image';
 
-type CraftStatus = {
-  id: number;
-  status: string; //'throw', 'refire'
-  descrption: string; // '성형', '재벌'
-};
+// type CraftStatus = {
+//   id: number;
+//   status: string; //'throw', 'refire'
+//   descrption: string; // '성형', '재벌'
+// };
 
 export type CraftProps = {
-  status: string;
+  workstep: WorkStepType['ko'];
   imgUrl: string;
-  craftName: string;
+  craftName?: string;
   craftId: number;
-  created_at: string;
+  created_at?: string;
 };
 
 export default function Craft({
-  status,
+  workstep,
   imgUrl,
   craftId,
   craftName,
@@ -32,7 +33,7 @@ export default function Craft({
     <li className='w-full max-w-[32%] h-[170px] relative'>
       <div className='flex items-center rounded-tl-lg rounded-br-lg gap-1 absolute left-0 top-0 px-2 py-2  bg-grey900 '>
         <div className='bg-refire-icon w-[20px] h-[20px]'></div>
-        <span className='text-white text-sm'>{status}</span>
+        <span className='text-white text-sm'>{workstep}</span>
       </div>
       <Image
         className='object-cover rounded-lg'
@@ -41,7 +42,7 @@ export default function Craft({
         width={128}
         height={170}
       />
-      <p className='text-sm mt-2'>{craftName}</p>
+      {/* <p className='text-sm mt-2'>{craftName}</p> */}
       <p className='text-sm text-grey400'>{created_at}</p>
     </li>
   );

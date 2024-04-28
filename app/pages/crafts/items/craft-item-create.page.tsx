@@ -3,7 +3,7 @@
 import { CraftItemCreateContext } from '@/app/_provider/craft-item-create-provider';
 import Header from '@/app/shared/modules/header';
 import Stepper from '@/app/shared/modules/stepper';
-import CraftItemDetail from '@/app/widget/crafts/ui/craft-item-detail';
+import CraftItemCreateDetail from '@/app/widget/crafts/ui/craft-item-create-detail';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 import StepStudent from '@/app/widget/reservations/ui/step-student';
@@ -32,7 +32,7 @@ const CraftItemCreatePage = () => {
       order: 1,
       isMount: false,
       data: 'craft_id',
-      component: <CraftItemDetail />,
+      component: <CraftItemCreateDetail />,
     },
     {
       order: 2,
