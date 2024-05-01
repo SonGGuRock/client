@@ -1,23 +1,30 @@
 'use client';
 
 import { clsx } from 'clsx';
-import { Category } from './categories';
-import useNotificationCategories from '@/app/widget/notifications/lib/useNotificationCategories';
+import { Context } from 'react';
+import { NotificationCategories } from './categories';
+import useCategory from './lib/useCategory';
+import { CategoryContext } from '@/app/_provider/craft-workstep-provider';
+import { WorkStepType } from '../../atoms/work-step-label';
 
-interface CategoryProps {
-  category: Category;
+export interface CategoryProps {
+  category: NotificationCategories['ko'];
+  context: Context<
+    | CategoryContext<NotificationCategories['ko'] | null>
+    | CategoryContext<WorkStepType['ko'] | null>
+  >;
 }
 
-const CategoryItem = ({ category }: CategoryProps) => {
-  const { activeCategory, toggleCategory } = useNotificationCategories();
+const CategoryItem = ({ category, context }: CategoryProps) => {
+  const { activeCategory, select } = useCategory(context);
   const classes = clsx(
     {
-      'bg-brown': activeCategory === category.ko,
-      'text-white': activeCategory === category.ko,
+      'bg-brown': activeCategory === category,
+      'text-white': activeCategory === category,
     },
     {
-      'bg-grey100': activeCategory !== category.ko,
-      'text-grey500': activeCategory !== category.ko,
+      'bg-grey100': activeCategory !== category,
+      'text-grey500': activeCategory !== category,
     },
     'rounded-full',
     'py-1',
@@ -30,11 +37,11 @@ const CategoryItem = ({ category }: CategoryProps) => {
   return (
     <li
       onClick={() => {
-        toggleCategory(category.ko);
+        select(category);
       }}
       className={classes}
     >
-      {category.ko}
+      {category}
     </li>
   );
 };

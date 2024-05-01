@@ -2,12 +2,12 @@
 
 import GoTo from '../../../shared/atoms/GoTo';
 import Thumbnail from '../../../shared/atoms/Thumbnail';
-import Craft, { CraftProps } from './craft';
+import CraftThumbnail, { CraftThumbnailProps } from './craft-thumbnail';
 
 export type UserCraftsProps = {
   userId: number;
   userName: string;
-  crafts: CraftProps[];
+  crafts: CraftThumbnailProps[];
 };
 
 const UserCrafts = ({ userId, userName, crafts }: UserCraftsProps) => {
@@ -27,7 +27,7 @@ const UserCrafts = ({ userId, userName, crafts }: UserCraftsProps) => {
         <ul className='flex justify-between gap-2'>
           {crafts.map((craft) => (
             // <SwiperSlide key={craft.craftId}>
-            <Craft {...craft} />
+            <CraftThumbnail {...craft} />
             // </SwiperSlide>
           ))}
         </ul>

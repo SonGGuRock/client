@@ -1,11 +1,13 @@
+import { NotificationContext } from '@/app/_provider/notification-category-provider';
 import Back from '@/app/shared/atoms/Back';
 import Title from '@/app/shared/atoms/Title';
 import Categories, {
-  Category,
+  NotificationCategories,
 } from '@/app/shared/modules/categories/categories';
+import useNotificationCategories from '@/app/widget/notifications/lib/useNotificationCategories';
 import NotificationsList from '@/app/widget/notifications/ui/notifications-list';
 
-const CATEGORIES: Category[] = [
+export const CATEGORIES: NotificationCategories[] = [
   { ko: '전체', en: 'all' },
   { ko: '예약', en: 'reservation' },
   { ko: '작품', en: 'craft' },
@@ -26,7 +28,11 @@ const NotificationsListPage = () => {
         <span className='text-grey900 text-sm'>전체 읽음</span>
       </div>
 
-      <Categories classNames='mt-4 mb-5' categories={CATEGORIES} />
+      <Categories
+        classNames='mt-4 mb-5'
+        categories={CATEGORIES}
+        context={NotificationContext}
+      />
       <NotificationsList />
     </div>
   );

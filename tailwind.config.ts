@@ -41,6 +41,7 @@ const config: Config = {
         primaryBlack: '#242320',
       },
       backgroundImage: {
+        'check-icon': "url('/icon/ic-check_20px.svg')",
         'grey-check-off-icon': "url('/icon/check/ic_check_grey_off.svg')",
         'grey-check-on-icon': "url('/icon/check/ic_check_grey_on.svg')",
         'todo-check-icon': "url('/icon/ic_todo_check.svg')",
