@@ -5,10 +5,10 @@ import CheckBox from '../../shared/atoms/CheckBox';
 import MeatBall from '../../shared/atoms/MeatBall';
 
 import ModalMenu from '../../shared/atoms/ModalMenu';
-import ModalContentWithInput from '../modal/ui/ModalContentWithInput';
+import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWithInput';
 import Toast from '../toast/ui/toast';
 import useToast from '@/app/widget/toast/lib/useToast';
-import useModal from '@/app/widget/modal/lib/useModal';
+import useModal from '@/app/shared/modules/modal/lib/useModal';
 
 const TodoItem = ({ id, content, is_completed, author }: Todo) => {
   const { closeModal, openModal } = useModal();

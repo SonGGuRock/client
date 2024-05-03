@@ -5,13 +5,18 @@ import CraftItem from './craft-item';
 import { CraftThumbnailProps } from './craft-thumbnail';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 import Image from 'next/image';
-import PortalModal from '../../modal/ui/PotalModal';
-import useModal from '../../modal/lib/useModal';
+import PortalModal from '../../../shared/modules/modal/ui/PotalModal';
+import useModal from '../../../shared/modules/modal/lib/useModal';
 import CraftsEditModalContent from './crafts-edit-modal-content';
+import useToast from '../../toast/lib/useToast';
+import Toast from '../../toast/ui/toast';
+import { WorkStepType } from '@/app/shared/atoms/work-step-label';
+import ModalContentInfoType from '@/app/shared/modules/modal/ui/modal-content-info-type';
 
 const Crafts_temp = [1, 2, 3, 4, 5];
 
 const CraftsEditList = () => {
+  const { toast, toggleToast } = useToast();
   const { isOpen, openModal, closeModal } = useModal();
   const [selectedList, setSelectedList] = useState<
     CraftThumbnailProps['craftId'][]
@@ -37,8 +42,27 @@ const CraftsEditList = () => {
   };
 
   const handleOnEditModal = () => {
-    console.log('hi');
-    openModal(<CraftsEditModalContent />);
+    openModal(
+      <CraftsEditModalContent
+        onClick={(workstep: WorkStepType['ko']) =>
+          toggleToast({
+            text: `${selectedList.length} 작품을 ${workstep}로 이동했어요`,
+          })
+        }
+      />
+    );
+  };
+
+  const handleOnDeleteModal = () => {
+    openModal(
+      <ModalContentInfoType
+        text='선택하신 작품을 삭제하시겠습니까?'
+        primaryButtonText='삭제'
+        secondaryButtonText='취소'
+        onClickPrimary={() => {}}
+        onClickSecondary={closeModal}
+      />
+    );
   };
   return (
     <div>
@@ -63,6 +87,8 @@ const CraftsEditList = () => {
           />
         ))}
       </div>
+
+      {toast && <Toast {...toast} />}
 
       {!isOpen && (
         <div className='absolute bottom-0 left-0 w-full h-16 bg-brown flex justify-between'>
@@ -89,6 +115,7 @@ const CraftsEditList = () => {
             className={`w-full text-white text-xs inline-flex flex-col gap-1 flex-wrap justify-center items-center ${
               isDeselectedAll && 'opacity-50'
             }`}
+            onClick={handleOnDeleteModal}
           >
             <Image
               src={'/icon/ic-delete-24px-white.svg'}

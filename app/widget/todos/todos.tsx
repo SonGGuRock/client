@@ -7,11 +7,11 @@ import sliceItems from '@/app/shared/lib/sliceItems';
 import Title from '../../shared/atoms/Title';
 import Button from '../../shared/atoms/button/Button';
 
-import ModalContentWithInput from '../modal/ui/ModalContentWithInput';
+import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWithInput';
 import Toast from '../toast/ui/toast';
 import useToast from '@/app/widget/toast/lib/useToast';
-import useModal from '@/app/widget/modal/lib/useModal';
-import PortalModal from '@/app/widget/modal/ui/PotalModal';
+import useModal from '@/app/shared/modules/modal/lib/useModal';
+import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 
 type Todo = {
   id: number;

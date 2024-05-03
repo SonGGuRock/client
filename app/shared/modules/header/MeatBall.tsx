@@ -1,7 +1,7 @@
 'use client';
 
-import useModal from '@/app/widget/modal/lib/useModal';
-import PortalModal from '@/app/widget/modal/ui/PotalModal';
+import useModal from '@/app/shared/modules/modal/lib/useModal';
+import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 import Image from 'next/image';
 import { PropsWithChildren } from 'react';
 

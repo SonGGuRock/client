@@ -1,5 +1,9 @@
+'use client';
+
 import Title from '@/app/shared/atoms/Title';
 import { useState } from 'react';
+import { WORK_STEP, WorkStepType } from '@/app/shared/atoms/work-step-label';
+import useModal from '../../../shared/modules/modal/lib/useModal';
 
 type Status = {
   id: number;
@@ -21,13 +25,22 @@ const STATUS: Status[] = [
   },
 ];
 
-const CraftsEditModalContent = () => {
+interface CraftsEditModalContentProps {
+  onClick: (workstep: WorkStepType['ko']) => void;
+}
+
+const CraftsEditModalContent = ({ onClick }: CraftsEditModalContentProps) => {
+  const { closeModal } = useModal();
   const [activeStatus, setActiveStatus] = useState<Status>();
 
   const handleClickStatus = (status: Status) => {
     setActiveStatus(status);
   };
 
+  const handleClickWorkstep = (workstep: WorkStepType['ko']) => {
+    closeModal();
+    onClick(workstep);
+  };
   return (
     <div className='py-4'>
       <Title>작품 이동</Title>
@@ -50,12 +63,17 @@ const CraftsEditModalContent = () => {
       </div>
       {activeStatus?.status === '진행중' && (
         <div className='w-full flex gap-2'>
-          <span className=' border border-grey150 text-grey600 text-xs py-[6px] px-3 rounded-lg'>
-            초벌
-          </span>
-          <span className=' border border-grey150 text-grey600 text-xs py-[6px] px-3 rounded-lg'>
-            초벌
-          </span>
+          {WORK_STEP.map((step, idx) => (
+            <span
+              key={idx}
+              onClick={() => {
+                handleClickWorkstep(step.ko);
+              }}
+              className=' border border-grey150 text-grey600 text-xs py-[6px] px-3 rounded-lg'
+            >
+              {step.ko}
+            </span>
+          ))}
         </div>
       )}
     </div>

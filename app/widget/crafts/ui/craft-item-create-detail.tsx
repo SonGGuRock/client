@@ -1,5 +1,5 @@
-import PortalModal from '@/app/widget/modal/ui/PotalModal';
-import useModal from '@/app/widget/modal/lib/useModal';
+import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
+import useModal from '@/app/shared/modules/modal/lib/useModal';
 import ModalMenu from '@/app/shared/atoms/ModalMenu';
 import Title from '@/app/shared/atoms/Title';
 import IconPlusCircle from '@/app/shared/atoms/icons/icon-plus-circle';
