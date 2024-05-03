@@ -1,25 +1,27 @@
 'use client';
-import { ReactNode, createContext } from 'react';
-import useCategory from '../shared/lib/useCategory';
-import { Category } from '../shared/modules/categories/categories';
+import { ReactNode, createContext, useState } from 'react';
+import { NotificationCategories } from '../shared/modules/categories/categories';
+import { CategoryContext } from './craft-workstep-provider';
 
-type NotificationCategoryContext = {
-  activeCategory: Category['ko'];
-  toggleCategory: (categoryName: Category['ko']) => void;
-};
+// export type NotificationCategoryContext = {
+//   activeCategory: NotificationCategories['ko'];
+//   select: (categoryName: NotificationCategories['ko']) => void;
+// };
 
-export const NotificationContext =
-  createContext<NotificationCategoryContext | null>(null);
-
+export const NotificationContext = createContext<CategoryContext<
+  NotificationCategories['ko']
+> | null>(null);
 export default function NotificationCategoryProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const { activeCategory, toggleCategory } = useCategory();
+  const [activeCategory, select] = useState<
+    NotificationCategories['ko'] | null
+  >('전체');
 
   return (
-    <NotificationContext.Provider value={{ activeCategory, toggleCategory }}>
+    <NotificationContext.Provider value={{ activeCategory, select }}>
       {children}
     </NotificationContext.Provider>
   );

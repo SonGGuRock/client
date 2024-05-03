@@ -11,21 +11,21 @@ const usersCrafts: UserCraftsProps[] = [
     userName: '최지영',
     crafts: [
       {
-        status: '재벌',
+        workstep: '재벌',
         imgUrl: '',
         craftName: '팔각 화병',
         craftId: 1,
         created_at: '2024-01-24',
       },
       {
-        status: '초벌',
+        workstep: '초벌',
         imgUrl: '',
         craftName: '손잡이가 큰 머그',
         craftId: 2,
         created_at: '2024-01-24',
       },
       {
-        status: '정형',
+        workstep: '정형',
         imgUrl: '',
         craftName: '작은 면기',
         craftId: 3,
@@ -38,7 +38,7 @@ const usersCrafts: UserCraftsProps[] = [
     userName: '최지영',
     crafts: [
       {
-        status: '재벌',
+        workstep: '재벌',
         imgUrl: '',
         craftName: '팔각 화병',
         craftId: 5,

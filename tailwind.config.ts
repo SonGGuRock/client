@@ -41,11 +41,12 @@ const config: Config = {
         primaryBlack: '#242320',
       },
       backgroundImage: {
+        'check-icon': "url('/icon/ic-check_20px.svg')",
         'grey-check-off-icon': "url('/icon/check/ic_check_grey_off.svg')",
         'grey-check-on-icon': "url('/icon/check/ic_check_grey_on.svg')",
         'todo-check-icon': "url('/icon/ic_todo_check.svg')",
         'checked-icon': "url('/icon/icon_checked.svg')",
-        'goTo-icon': "url('/icon/icon_goTo.svg')",
+        'goTo-icon': "url('/icon/ic-arrow-right-20px.svg')",
         'shape-icon': "url('/status/icon_shape.svg')",
         'dry-icon': "url('/status/icon_dry.svg')",
         'carve-icon': "url('/status/icon_carve.svg')",

@@ -1,6 +1,6 @@
 'use client';
 
-import ModalLayout from '@/app/widget/modal/ui/ModalLayout';
+import ModalLayout from '@/app/shared/modules/modal/ui/ModalLayout';
 import Header from '@/app/shared/modules/header';
 import ModalMenu from '../../../shared/atoms/ModalMenu';
 

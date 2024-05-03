@@ -1,29 +1,24 @@
-import { ModalContext } from '@/app/_provider/modal-provider';
-import PortalModal from '@/app/widget/modal/ui/PotalModal';
-import useModal from '@/app/widget/modal/lib/useModal';
+import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
+import useModal from '@/app/shared/modules/modal/lib/useModal';
 import ModalMenu from '@/app/shared/atoms/ModalMenu';
 import Title from '@/app/shared/atoms/Title';
 import IconPlusCircle from '@/app/shared/atoms/icons/icon-plus-circle';
 import SelectLikeButton from '@/app/shared/atoms/select-like-button';
 import Textarea from '@/app/shared/atoms/textarea';
 
-const CraftItemDetail = () => {
-  const { openModal, closeModal } = useModal(ModalContext);
+const CraftItemCreateDetail = () => {
+  const { openModal } = useModal();
   const statusModalContent = <div>statusModalContent</div>;
 
   const handleOpenModalUploadPicture = () => {
     openModal(
       <div className='w-full flex flex-wrap gap-2'>
-        <ModalMenu
-          text='앨범에서 선택하기'
-          onClick={() => {}}
-          iconUrl='/icon/ic-gallery-black-24px.svg'
-        />
-        <ModalMenu
-          text='촬영하기'
-          onClick={() => {}}
-          iconUrl='/icon/ic-camera-24px.svg'
-        />
+        <ModalMenu onClick={() => {}} iconUrl='/icon/ic-gallery-black-24px.svg'>
+          앨범에서 선택하기
+        </ModalMenu>
+        <ModalMenu onClick={() => {}} iconUrl='/icon/ic-camera-24px.svg'>
+          촬영하기
+        </ModalMenu>
       </div>
     );
   };
@@ -55,10 +50,14 @@ const CraftItemDetail = () => {
         </SelectLikeButton>
       </div>
 
-      <Textarea placeholder='작품을 설명해주세요' classNames='mt-4 w-full' />
+      <Textarea
+        placeholder='작품을 설명해주세요'
+        value=''
+        classNames='mt-4 w-full'
+      />
       <PortalModal />
     </div>
   );
 };
 
-export default CraftItemDetail;
+export default CraftItemCreateDetail;

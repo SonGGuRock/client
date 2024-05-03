@@ -3,7 +3,7 @@ import { PropsWithChildren, ReactNode } from 'react';
 
 interface ButtonProps extends PropsWithChildren {
   className?: string;
-  type?: 'primary' | 'secodnary';
+  type?: 'primary' | 'secondary';
   size?: 'small' | 'medium' | 'large';
   onClick?: () => void;
   disabled?: boolean;
@@ -47,11 +47,11 @@ const Button = ({
       'text-white': type === 'primary' || disabled,
     },
     {
-      'bg-white': type === 'secodnary',
-      'text-grey900': type === 'secodnary',
-      border: type === 'secodnary',
-      'border-sand': type === 'secodnary',
-      'border-solid': type === 'secodnary',
+      'bg-white': type === 'secondary',
+      'text-grey900': type === 'secondary',
+      border: type === 'secondary',
+      'border-sand': type === 'secondary',
+      'border-solid': type === 'secondary',
     },
     {
       'bg-grey200': disabled,

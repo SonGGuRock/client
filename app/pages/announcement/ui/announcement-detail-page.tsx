@@ -7,8 +7,8 @@ import MeatBall from '@/app/shared/atoms/MeatBall';
 import Toast from '@/app/widget/toast/ui/toast';
 import ArtilcePreview from '@/app/shared/modules/ArticlePreview';
 import { usePathname, useRouter } from 'next/navigation';
-import useModal from '@/app/widget/modal/lib/useModal';
-import PortalModal from '@/app/widget/modal/ui/PotalModal';
+import useModal from '@/app/shared/modules/modal/lib/useModal';
+import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 
 const AnnouncementDetailPage = () => {
   const { openModal } = useModal();

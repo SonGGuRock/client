@@ -1,8 +1,8 @@
 'use client';
 
-import Button from '../../../shared/atoms/button/Button';
-import Title from '../../../shared/atoms/Title';
-import Input from '../../../shared/atoms/Input';
+import Button from '../../../atoms/button/Button';
+import Title from '../../../atoms/Title';
+import Input from '../../../atoms/Input';
 
 type ModalContentWithInputProps = {
   title: string;

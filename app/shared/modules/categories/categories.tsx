@@ -6,9 +6,12 @@ import 'swiper/css/pagination';
 import CategoryItem from './category';
 import { ClassNamesProps } from '@/app/widget/reservations/ui/class-time-picker';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Pagination } from 'swiper/modules';
+import { FreeMode } from 'swiper/modules';
+import { Context } from 'react';
+import { CategoryContext } from '@/app/_provider/craft-workstep-provider';
+import { WorkStepType } from '../../atoms/work-step-label';
 
-export type Category =
+export type NotificationCategories =
   | {
       ko: '전체';
       en: 'all';
@@ -39,10 +42,14 @@ export type Category =
     };
 
 interface CategoriesProps extends ClassNamesProps {
-  categories: Category[];
+  categories: NotificationCategories[];
+  context: Context<
+    | CategoryContext<NotificationCategories['ko'] | null>
+    | CategoryContext<WorkStepType['ko'] | null>
+  >;
 }
 
-const Categories = ({ categories, classNames }: CategoriesProps) => {
+const Categories = ({ categories, classNames, context }: CategoriesProps) => {
   return (
     <Swiper
       modules={[FreeMode]}
@@ -53,7 +60,7 @@ const Categories = ({ categories, classNames }: CategoriesProps) => {
     >
       {categories.map((category, idx) => (
         <SwiperSlide key={idx}>
-          <CategoryItem category={category} />
+          <CategoryItem category={category.ko} context={context} />
         </SwiperSlide>
       ))}
     </Swiper>

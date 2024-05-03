@@ -1,4 +1,4 @@
-type WorkStepType =
+export type WorkStepType =
   | {
       ko: '성형';
       en: 'shape';
@@ -67,10 +67,10 @@ export const WORK_STEP: WorkStepType[] = [
   },
 ];
 
-export type WorkStepObj = {
-  work_step: Pick<WorkStepType, 'ko'>;
+export interface WorkStepLabelProps {
+  work_step: WorkStepType['ko'];
   className: string;
-};
+}
 export default function WorkStepLabel() {
   //   const found = STATUS.find((el) => el.ko === props.status.ko);
 

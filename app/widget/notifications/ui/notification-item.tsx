@@ -1,12 +1,12 @@
 'use client';
 
-import { Category } from '@/app/shared/modules/categories/categories';
+import { NotificationCategories } from '@/app/shared/modules/categories/categories';
 import { clsx } from 'clsx';
 import { useState } from 'react';
 
 export type Notification = {
   id: number;
-  category: Category['ko'];
+  category: NotificationCategories['ko'];
   title: string;
   content: string;
   updated_at: string;
