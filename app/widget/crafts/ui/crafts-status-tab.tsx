@@ -6,6 +6,7 @@ import { ClassNamesProps } from '../../reservations/ui/class-time-picker';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { clsx } from 'clsx';
 import { FreeMode } from 'swiper/modules';
+import { WORK_STEP } from '@/app/shared/atoms/work-step-label';
 
 type CratsStatus = '진행중' | '완성' | '보관';
 
@@ -81,15 +82,13 @@ const CraftsStatusTab = ({ classNames }: ClassNamesProps) => {
           spaceBetween={8}
           freeMode={true}
         >
-          <SwiperSlide>
-            <li className={classes}>초벌</li>
-          </SwiperSlide>
-          <SwiperSlide>
-            <li className={classes}>초벌</li>
-          </SwiperSlide>
-          <SwiperSlide>
-            <li className={classes}>초벌</li>
-          </SwiperSlide>
+          {WORK_STEP.map((step, idx) => (
+            <SwiperSlide>
+              <li key={`${step.en}-${idx}`} className={classes}>
+                {step.ko}
+              </li>
+            </SwiperSlide>
+          ))}
         </Swiper>
       )}
     </div>
