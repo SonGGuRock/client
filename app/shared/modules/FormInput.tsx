@@ -1,10 +1,11 @@
-import { PropsWithChildren } from 'react';
+import { ChangeEvent, PropsWithChildren, useState } from 'react';
 
 interface FormInputProps extends PropsWithChildren {
   lableText: string;
   inputPlaceholder?: string;
   value?: string;
   disabled?: boolean;
+  onChange?: (value: string) => void;
 }
 
 const FormInput = ({
@@ -13,6 +14,7 @@ const FormInput = ({
   children,
   value,
   disabled = false,
+  onChange,
 }: FormInputProps) => {
   return (
     <div className='flex flex-wrap gap-2 w-full'>
@@ -22,8 +24,11 @@ const FormInput = ({
       <input
         value={value}
         disabled={disabled}
-        className='w-full text-base text-grey300 border-b border-grey100 py-2'
+        className='w-full text-base place-holder::text-grey300 text-grey900 border-b border-grey100 py-2'
         placeholder={inputPlaceholder}
+        onChange={(e) => {
+          onChange && onChange(e.target.value);
+        }}
       />
       {children}
     </div>

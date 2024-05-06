@@ -6,8 +6,8 @@ import Button from '@/app/shared/atoms/button/Button';
 import FormInput from '@/app/shared/modules/FormInput';
 import FormDateSelect from '@/app/shared/modules/form-date-select';
 import Header from '@/app/shared/modules/header';
-import Image from 'next/image';
-import Link from 'next/link';
+
+import EmailValidationField from '../email-validation-field';
 
 const SignupTeacherPage = () => {
   const { open: isChecked, toggle } = useToggle();
@@ -21,26 +21,8 @@ const SignupTeacherPage = () => {
       </Header>
 
       <div className='flex gap-6 pt-4 flex-wrap pb-12'>
-        <div className='relative w-full'>
-          <FormInput
-            lableText='이메일'
-            inputPlaceholder='이메일을 입력해주세요'
-          >
-            <div className='absolute right-0 bottom-2'>
-              <Link href='/signup/authentication'>
-                <Button size='small'>인증하기</Button>
-              </Link>
-              {false && (
-                <Image
-                  src='/icon/ic-check-24px.svg'
-                  alt='인증 완료 아이콘'
-                  width={24}
-                  height={24}
-                />
-              )}
-            </div>
-          </FormInput>
-        </div>
+        <EmailValidationField />
+
         <FormInput
           lableText='이름'
           inputPlaceholder='이름(실명)을 입력해주세요'

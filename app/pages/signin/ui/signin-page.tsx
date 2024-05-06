@@ -22,7 +22,9 @@ const SignInPage = () => {
         <Button size='large' disabled>
           로그인
         </Button>
-        <Button size='large'>이메일로 회원가입</Button>
+        <Button size='large'>
+          <Link href='/signup'>이메일로 회원가입</Link>
+        </Button>
       </div>
     </div>
   );
