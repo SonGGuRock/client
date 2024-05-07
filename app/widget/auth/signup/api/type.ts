@@ -5,7 +5,12 @@ export type VerficationEmailRequest = {
   email: string;
 };
 
-export type VerificationEmailResponse = {
+export type NoDataResponse = {
   result: ResponseResult;
   data: {};
+};
+
+export type VerficationCodeRequest = {
+  code: string;
+  email: string;
 };

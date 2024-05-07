@@ -18,6 +18,11 @@ export const POST = async <T, K>(path: string, body: T): Promise<K> => {
     },
     body: JSON.stringify(body),
   });
+
+  if (!res.ok) {
+    throw new Error('Network response was not ok');
+  }
+
   return res.json();
 };
 

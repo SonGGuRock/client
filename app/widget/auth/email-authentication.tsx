@@ -5,15 +5,35 @@ import Button from '@/app/shared/atoms/button/Button';
 import VerificationCode from './verification-code';
 import { useState } from 'react';
 import CountDownTimer from '@/app/shared/modules/countdown/countdown-timer';
-import { useRouter } from 'next/navigation';
+import isValidVerficationCode from '@/app/shared/lib/validation-verification-code';
+import useVerificationCode from './signup/api/useVerificationCode';
 
-type ValidationStatus = 'awaiting' | 'inactive' | 'active' | 'expired';
+type ValidationStatus =
+  | 'awaiting'
+  | 'inactive'
+  | 'active'
+  | 'expired'
+  | 'error';
 
-const EmailAuthentication = () => {
-  const router = useRouter();
+interface EmailAuthenticationProps {
+  email: string;
+}
+
+const EmailAuthentication = ({ email }: EmailAuthenticationProps) => {
   const [status, setStatus] = useState<ValidationStatus>('awaiting');
-  const handleComplete = (isCompleted: boolean) => {
-    setStatus(isCompleted ? 'active' : 'inactive');
+  const [code, setCode] = useState('');
+  const { mutate } = useVerificationCode();
+
+  const onValid = (code: string) => {
+    setStatus('active');
+    setCode(code);
+  };
+
+  const onInvalid = () => {
+    setStatus('inactive');
+  };
+  const handleComplete = (code: string) => {
+    isValidVerficationCode(code) ? onValid(code) : onInvalid();
   };
 
   const handleExpired = () => {
@@ -21,13 +41,14 @@ const EmailAuthentication = () => {
   };
 
   const handleSubmit = () => {
-    router.push('/reset-password/authentication/success');
+    mutate({ code, email });
   };
+
   return (
     <div className='h-full '>
       <Title size='large'>이메일로 인증 코드를 보냈어요</Title>
       <p className='text-grey800 text-sm'>
-        ggurak@gmail.com 으로 전송된 코드를 입력해주세요
+        {email}으로 전송된 코드를 입력해주세요
       </p>
       <div className=' px-14 py-20 flex flex-wrap justify-center gap-2'>
         <VerificationCode onComplete={handleComplete} />
@@ -39,6 +60,8 @@ const EmailAuthentication = () => {
           {status === 'inactive' && '올바른 인증 코드를 입력하세요'}{' '}
           {status === 'expired' &&
             '인증 시간이 만료되었습니다. 다시 시도하세요'}
+          {status === 'error' &&
+            '인증 코드가 유효하지 않습니다. 다시 시도하세요'}
         </div>
 
         <Button

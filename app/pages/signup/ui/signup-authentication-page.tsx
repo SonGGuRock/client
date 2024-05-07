@@ -5,7 +5,7 @@ const SignupAuthenticationPage = () => {
   return (
     <div className='relative px-4 pt-[124px] min-h-screen'>
       <CloseButton className='absolute top-0 right-3' />
-      <EmailAuthentication />
+      <EmailAuthentication email='cwd05011@gmail.com' />
     </div>
   );
 };

@@ -1,48 +1,32 @@
 'use client';
 
 import Button from '@/app/shared/atoms/button/Button';
-import { POST } from '@/app/shared/api/fetch';
 import isValidEmail from '@/app/shared/lib/validation-email';
 import FormInput from '@/app/shared/modules/FormInput';
-import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { VerficationEmailRequest, VerificationEmailResponse } from './api/type';
+import useVerificationEmaiil from './api/useVerificationEmail';
 
 const EmailValidationField = () => {
-  const [emailValue, setEmailValue] = useState('');
+  const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter();
 
-  const { isLoading, isError, data, error, refetch, isFetched } = useQuery({
-    queryKey: ['signup'],
-    queryFn: async () => {
-      return POST<VerficationEmailRequest, VerificationEmailResponse>(
-        'members/verifications/emails',
-        {
-          is_new_member: true,
-          email: emailValue,
-        }
-      );
-    },
-    enabled: false,
-  });
+  const { mutate } = useVerificationEmaiil(email);
 
   const onSubmitSuccess = () => {
-    refetch();
-    // router.push('/signup/authentication');
+    setErrorMessage('');
+    mutate({ is_new_member: true, email });
   };
 
   const onSubmitFail = () => {
     setErrorMessage('유효한 이메일 주소를 입력해주세요');
   };
   const handleClick = () => {
-    isValidEmail(emailValue) ? onSubmitSuccess() : onSubmitFail();
+    isValidEmail(email) ? onSubmitSuccess() : onSubmitFail();
   };
 
   const handleChange = (value: string) => {
-    setEmailValue(value);
+    setEmail(value);
   };
   return (
     <div className='relative w-full'>
