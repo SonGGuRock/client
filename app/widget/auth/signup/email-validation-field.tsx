@@ -6,9 +6,15 @@ import FormInput from '@/app/shared/modules/FormInput';
 import Image from 'next/image';
 import { useState } from 'react';
 import useVerificationEmaiil from './api/useVerificationEmail';
+import useSignupEmail from './api/useSignupEmail';
 
-const EmailValidationField = () => {
-  const [email, setEmail] = useState('');
+interface EmailValidationFieldProps {
+  isAuthenticated: boolean;
+}
+const EmailValidationField = ({
+  isAuthenticated,
+}: EmailValidationFieldProps) => {
+  const { email, set } = useSignupEmail();
   const [errorMessage, setErrorMessage] = useState('');
 
   const { mutate } = useVerificationEmaiil(email);
@@ -26,22 +32,23 @@ const EmailValidationField = () => {
   };
 
   const handleChange = (value: string) => {
-    setEmail(value);
+    set(value);
   };
   return (
     <div className='relative w-full'>
       <FormInput
         lableText='이메일'
         inputPlaceholder='이메일을 입력해주세요'
-        onChange={handleChange}
+        onChange={!isAuthenticated ? handleChange : undefined}
+        // value={isAuthenticated && email }
+        value={isAuthenticated ? email : undefined}
       >
         <div className='absolute right-0 top-8'>
-          {/* <Link href='/signup/authentication'> */}
-          <Button size='small' onClick={handleClick}>
-            인증하기
-          </Button>
-          {/* </Link> */}
-          {false && (
+          {!isAuthenticated ? (
+            <Button size='small' onClick={handleClick}>
+              인증하기
+            </Button>
+          ) : (
             <Image
               src='/icon/ic-check-24px.svg'
               alt='인증 완료 아이콘'

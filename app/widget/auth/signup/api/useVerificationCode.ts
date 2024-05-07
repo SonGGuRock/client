@@ -13,7 +13,7 @@ const useVerificationCode = () => {
       ),
     onSuccess(data) {
       console.log('Network Request Success:', data.result);
-      router.push('/signup/teacher?valid=1');
+      router.push('/signup/teacher?authenticated=1');
     },
     onError(err) {
       console.error('Network Request Fail:', err);

@@ -8,8 +8,14 @@ import FormDateSelect from '@/app/shared/modules/form-date-select';
 import Header from '@/app/shared/modules/header';
 
 import EmailValidationField from '../email-validation-field';
+import { useSearchParams } from 'next/navigation';
+
+const SUCCESS = '1';
 
 const SignupTeacherPage = () => {
+  const searchParam = useSearchParams();
+  const isAuthenticated = searchParam.get('authenticated') === SUCCESS;
+
   const { open: isChecked, toggle } = useToggle();
   return (
     <div className='py-3 px-4'>
@@ -21,7 +27,7 @@ const SignupTeacherPage = () => {
       </Header>
 
       <div className='flex gap-6 pt-4 flex-wrap pb-12'>
-        <EmailValidationField />
+        <EmailValidationField isAuthenticated={isAuthenticated} />
 
         <FormInput
           lableText='이름'
