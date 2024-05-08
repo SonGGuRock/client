@@ -6,7 +6,7 @@ import FormInput from '@/app/shared/modules/FormInput';
 import Image from 'next/image';
 import { useState } from 'react';
 import useVerificationEmaiil from './api/useVerificationEmail';
-import useSignupEmail from './api/useSignupEmail';
+import useSignupEmailContext from './api/useSignupEmailContext';
 
 interface EmailValidationFieldProps {
   isAuthenticated: boolean;
@@ -14,10 +14,10 @@ interface EmailValidationFieldProps {
 const EmailValidationField = ({
   isAuthenticated,
 }: EmailValidationFieldProps) => {
-  const { email, set } = useSignupEmail();
+  const { email, set } = useSignupEmailContext();
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { mutate } = useVerificationEmaiil(email);
+  const { mutate } = useVerificationEmaiil();
 
   const onSubmitSuccess = () => {
     setErrorMessage('');
@@ -37,15 +37,17 @@ const EmailValidationField = ({
   return (
     <div className='relative w-full'>
       <FormInput
+        name='email'
+        type='email'
         lableText='이메일'
+        required={true}
         inputPlaceholder='이메일을 입력해주세요'
         onChange={!isAuthenticated ? handleChange : undefined}
-        // value={isAuthenticated && email }
         value={isAuthenticated ? email : undefined}
       >
         <div className='absolute right-0 top-8'>
           {!isAuthenticated ? (
-            <Button size='small' onClick={handleClick}>
+            <Button size='small' onClick={handleClick} type='button'>
               인증하기
             </Button>
           ) : (

@@ -1,6 +1,6 @@
 import Button from '@/app/shared/atoms/button/Button';
 import FormInput from '@/app/shared/modules/FormInput';
-import FormDateSelect from '@/app/shared/modules/form-date-select';
+import FormDatePicker from '@/app/shared/modules/form-date-select';
 import Header from '@/app/shared/modules/header';
 import ProfilePictureEdit from '@/app/shared/modules/profile-picture-edit';
 
@@ -25,7 +25,7 @@ const MemberPage = () => {
           lableText='이름'
           inputPlaceholder='이름(실명)을 입력해주세요'
         />
-        <FormDateSelect labelText='생년월일' />
+        <FormDatePicker labelText='생년월일' />
         <FormInput lableText='이메일' inputPlaceholder='' />
         <FormInput lableText='전화번호' inputPlaceholder='- 구분없이 입력' />
         <div className='relative w-full'>

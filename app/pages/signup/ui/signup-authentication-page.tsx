@@ -2,10 +2,10 @@
 
 import CloseButton from '@/app/shared/atoms/close-button';
 import EmailAuthentication from '@/app/widget/auth/email-authentication';
-import useSignupEmail from '@/app/widget/auth/signup/api/useSignupEmail';
+import useSignupEmailContext from '@/app/widget/auth/signup/api/useSignupEmailContext';
 
 const SignupAuthenticationPage = () => {
-  const { email } = useSignupEmail();
+  const { email } = useSignupEmailContext();
 
   return (
     <div className='relative px-4 pt-[124px] min-h-screen'>

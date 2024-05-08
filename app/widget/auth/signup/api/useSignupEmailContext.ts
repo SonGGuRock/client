@@ -3,7 +3,7 @@
 import { useContext } from 'react';
 import { SignupContext } from '@/app/_provider/signup-email-provider';
 
-const useSignupEmail = () => {
+const useSignupEmailContext = () => {
   const emailContext = useContext(SignupContext);
 
   if (!emailContext) {
@@ -12,4 +12,4 @@ const useSignupEmail = () => {
   return emailContext;
 };
 
-export default useSignupEmail;
+export default useSignupEmailContext;
