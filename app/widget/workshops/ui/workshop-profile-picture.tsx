@@ -2,24 +2,25 @@
 
 import Image from 'next/image';
 import { ClassNamesProps } from '../../reservations/ui/class-time-picker';
+import Link from 'next/link';
 
 interface WorkshopProfilePictureProps extends ClassNamesProps {
-  onClick: () => void;
+  id: string;
 }
 
 const WorkshopProfilePicture = ({
-  onClick,
+  id,
   classNames,
 }: WorkshopProfilePictureProps) => {
   return (
-    <div onClick={onClick} className={`my-6 ${classNames}`}>
+    <Link href={`/workshops/${id}/settings`} className={`my-6 ${classNames}`}>
       <Image
         src={'/img/workshop_default.png'}
         alt='공방 기본 이미지'
         width={343}
         height={136}
       />
-    </div>
+    </Link>
   );
 };
 

@@ -1,11 +1,10 @@
 'use client';
 
-import isValidVerficationCode from '@/app/shared/lib/validation-verification-code';
 import { ChangeEvent, useRef, useState } from 'react';
 
 interface VerificationCodeProps {
   codeLength?: number;
-  onComplete: (isCompleted: boolean) => void;
+  onComplete: (isCompleted: string) => void;
 }
 
 const VerificationCode = ({
@@ -37,8 +36,7 @@ const VerificationCode = ({
     }
     if (value && index === codeLength - 1) {
       const code = inputRefs.current.map((ref) => ref?.value || '').join('');
-      const isValid = isValidVerficationCode(code);
-      onComplete(isValid);
+      onComplete(code);
     }
   };
 

@@ -19,9 +19,11 @@ const WorkshopSettingPage = () => {
             공방 정보 설정
           </SettingMenu.Link>
           <SettingMenu.Link href='/workshops/1/settings/operation'>
-            공방 운영 설정
+            운영 설정
           </SettingMenu.Link>
-          <SettingMenu.Link href=''>알림/할일 설정</SettingMenu.Link>
+          <SettingMenu.Link href='/workshops/1/settings/environment'>
+            알림/할일 설정
+          </SettingMenu.Link>
         </SettingMenu>
 
         <SettingMenu className='py-6'>

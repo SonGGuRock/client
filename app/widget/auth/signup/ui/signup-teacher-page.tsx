@@ -4,13 +4,43 @@ import useToggle from '@/app/shared/lib/useToggle';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 import Button from '@/app/shared/atoms/button/Button';
 import FormInput from '@/app/shared/modules/FormInput';
-import FormDateSelect from '@/app/shared/modules/form-date-select';
+import FormDateInput from '@/app/shared/modules/form-date-select';
 import Header from '@/app/shared/modules/header';
-import Image from 'next/image';
-import Link from 'next/link';
+
+import EmailValidationField from '../email-validation-field';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { FormEventHandler, useRef } from 'react';
+import { formDataToJSON } from '@/app/shared/lib/formDataToJSON';
+import useSignupForm from '../api/useSignupForm';
+import { SignupRequest } from '../api/type';
+import { formatPhoneNumber } from '@/app/shared/lib/formatPhoneNumber';
+
+const SUCCESS = '1';
 
 const SignupTeacherPage = () => {
+  const searchParam = useSearchParams();
+  const isAuthenticated = searchParam.get('authenticated') === SUCCESS;
+  const path = usePathname();
+  const { mutate } = useSignupForm();
+
   const { open: isChecked, toggle } = useToggle();
+  const formRef = useRef<HTMLFormElement>(null);
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    const formData = new FormData(formRef.current!);
+
+    const phoneNumber: FormDataEntryValue | null = formData.get('phone_number');
+    if (phoneNumber && typeof phoneNumber === 'string') {
+      const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
+      formData.set('phone_number', formattedPhoneNumber);
+    }
+
+    const userType = path.includes('teacher') ? 'teacher' : 'student';
+    formData.set('user_type', userType);
+
+    const body = formDataToJSON(formData);
+    mutate(body as SignupRequest);
+  };
   return (
     <div className='py-3 px-4'>
       <Header>
@@ -20,53 +50,49 @@ const SignupTeacherPage = () => {
         </div>
       </Header>
 
-      <div className='flex gap-6 pt-4 flex-wrap pb-12'>
-        <div className='relative w-full'>
-          <FormInput
-            lableText='이메일'
-            inputPlaceholder='이메일을 입력해주세요'
-          >
-            <div className='absolute right-0 bottom-2'>
-              <Link href='/signup/authentication'>
-                <Button size='small'>인증하기</Button>
-              </Link>
-              {false && (
-                <Image
-                  src='/icon/ic-check-24px.svg'
-                  alt='인증 완료 아이콘'
-                  width={24}
-                  height={24}
-                />
-              )}
-            </div>
-          </FormInput>
-        </div>
+      <form
+        ref={formRef}
+        className='flex gap-6 pt-4 flex-wrap pb-12'
+        onSubmit={handleSubmit}
+      >
+        <EmailValidationField isAuthenticated={isAuthenticated} />
+
         <FormInput
+          name='name'
           lableText='이름'
           inputPlaceholder='이름(실명)을 입력해주세요'
         />
         <FormInput
+          name='password'
+          type='password'
           lableText='비밀번호'
           inputPlaceholder='비밀번호를 입력해주세요'
         />
-        <FormDateSelect labelText='생년월일' />
-        <FormInput lableText='전화번호' inputPlaceholder='- 구분없이 입력' />
-      </div>
-      <div className='mt-18 flex gap-4 flex-wrap mb-8'>
-        <div className='flex gap-1 w-full'>
-          <CheckBox onCheck={toggle} isChecked={isChecked} style='grey' />
-          <label className='text-grey700 text-sm'>이용약관 (필수)</label>
+        <FormDateInput name='birthday' required={true} labelText='생년월일' />
+        <FormInput
+          name='phone_number'
+          type='tel'
+          maxLength={11}
+          lableText='전화번호'
+          inputPlaceholder='- 구분없이 입력'
+        />
+
+        <div className='mt-18 flex gap-4 flex-wrap mb-8'>
+          <div className='flex gap-1 w-full'>
+            <CheckBox onCheck={toggle} isChecked={isChecked} style='grey' />
+            <label className='text-grey700 text-sm'>이용약관 (필수)</label>
+          </div>
+          <div className='flex gap-1 w-full'>
+            <CheckBox onCheck={toggle} isChecked={isChecked} style='grey' />
+            <label className='text-grey700 text-sm'>
+              개인정보 수집 및 이용 (필수)
+            </label>
+          </div>
         </div>
-        <div className='flex gap-1 w-full'>
-          <CheckBox onCheck={toggle} isChecked={isChecked} style='grey' />
-          <label className='text-grey700 text-sm'>
-            개인정보 수집 및 이용 (필수)
-          </label>
-        </div>
-      </div>
-      <Button size='large' disabled>
-        가입 완료
-      </Button>
+        <Button size='large' type='submit'>
+          가입 완료
+        </Button>
+      </form>
     </div>
   );
 };

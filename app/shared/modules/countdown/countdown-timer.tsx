@@ -7,7 +7,7 @@ interface CountDownTimerProps extends ClassNamesProps {
 }
 
 const CountDownTimer = ({ classNames, onZero }: CountDownTimerProps) => {
-  const [timeRemaining, setTimeRemaining] = useState(600);
+  const [timeRemaining, setTimeRemaining] = useState(300);
 
   useEffect(() => {
     const timer = setInterval(() => {

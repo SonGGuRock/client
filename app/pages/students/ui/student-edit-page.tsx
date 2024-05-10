@@ -1,5 +1,5 @@
 import FormInput from '@/app/shared/modules/FormInput';
-import FormDateSelect from '@/app/shared/modules/form-date-select';
+import FormDatePicker from '@/app/shared/modules/form-date-select';
 import Header from '@/app/shared/modules/header';
 import ProfilePictureEdit from '@/app/shared/modules/profile-picture-edit';
 
@@ -25,8 +25,8 @@ const StudentEditPage = () => {
           inputPlaceholder='이름(실명)을 입력해주세요'
         />
         <FormInput lableText='전화번호' inputPlaceholder='- 구분없이 입력' />
-        <FormDateSelect labelText='등록일' />
-        <FormDateSelect labelText='지난 결제일' />
+        <FormDatePicker labelText='등록일' />
+        <FormDatePicker labelText='지난 결제일' />
         <FormInput lableText='메모(선택)' inputPlaceholder='' />
       </div>
     </div>

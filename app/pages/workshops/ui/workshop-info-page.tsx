@@ -16,7 +16,7 @@ const WorkshopInfoPage = () => {
           <Header.Button size='small'>완료</Header.Button>
         </div>
       </Header>
-      <WorkshopProfilePicture onClick={() => {}} />
+      <WorkshopProfilePicture id='1' />
 
       <div className='flex gap-6 flex-wrap pb-12'>
         <FormInput lableText='공방 이름' value='손꾸락 공방' />
