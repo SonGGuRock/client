@@ -1,5 +1,5 @@
 import { searchAddress } from '@/app/entities/workshops';
-import Badge from '@/app/shared/ui/atoms/badge';
+import Badge from '@/app/shared/atoms/badge';
 
 export type Juso = {
   detBdNmList: string;
