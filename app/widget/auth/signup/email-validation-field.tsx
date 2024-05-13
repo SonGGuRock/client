@@ -6,22 +6,24 @@ import FormInput from '@/app/shared/modules/FormInput';
 import Image from 'next/image';
 import { useState } from 'react';
 import useVerificationEmaiil from './api/useVerificationEmail';
-import useSignupEmailContext from './api/useSignupEmailContext';
+import useEmailContext from './api/useSignupEmailContext';
 
 interface EmailValidationFieldProps {
   isAuthenticated: boolean;
+  isNewMember: boolean;
 }
 const EmailValidationField = ({
   isAuthenticated,
+  isNewMember,
 }: EmailValidationFieldProps) => {
-  const { email, set } = useSignupEmailContext();
+  const { email, set } = useEmailContext();
   const [errorMessage, setErrorMessage] = useState('');
 
   const { mutate } = useVerificationEmaiil();
 
   const onSubmitSuccess = () => {
     setErrorMessage('');
-    mutate({ is_new_member: true, email });
+    mutate({ is_new_member: isNewMember, email });
   };
 
   const onSubmitFail = () => {
@@ -41,7 +43,7 @@ const EmailValidationField = ({
         type='email'
         lableText='이메일'
         required={true}
-        inputPlaceholder='이메일을 입력해주세요'
+        inputPlaceholder='id@ggurak.com'
         onChange={!isAuthenticated ? handleChange : undefined}
         value={isAuthenticated ? email : undefined}
       >

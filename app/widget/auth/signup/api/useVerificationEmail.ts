@@ -1,14 +1,15 @@
-import { POST } from '@/app/shared/api/fetch';
+import { postAsync } from '@/app/shared/api/fetch';
 import { useMutation } from '@tanstack/react-query';
-import { NoDataResponse, VerficationEmailRequest } from './type';
+import { VerficationEmailRequest } from './type';
 import { useRouter } from 'next/navigation';
+import { NoDataResponse } from '@/app/shared/api/type';
 
 const useVerificationEmaiil = () => {
   const router = useRouter();
 
   return useMutation<NoDataResponse, unknown, VerficationEmailRequest>({
     mutationFn: ({ is_new_member, email }) =>
-      POST<VerficationEmailRequest, NoDataResponse>(
+      postAsync<VerficationEmailRequest, NoDataResponse>(
         'members/verifications/emails',
         { is_new_member, email }
       ),

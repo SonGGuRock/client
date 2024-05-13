@@ -1,6 +1,6 @@
 export const BASE_URL = 'http://182.231.88.125:8080/v1';
 
-export const GET = async <T>(path: string): Promise<T> => {
+export const getAsync = async <T>(path: string): Promise<T> => {
   const res = await fetch(`${BASE_URL}/${path}`, {
     method: 'GET',
     headers: {
@@ -10,8 +10,12 @@ export const GET = async <T>(path: string): Promise<T> => {
   return res.json();
 };
 
-export const POST = async <T, K>(path: string, body: T): Promise<K> => {
-  const res = await fetch(`${BASE_URL}/${path}`, {
+export const postAsync = async <T, K>(
+  path: string,
+  body: T,
+  baseUrl = BASE_URL
+): Promise<K> => {
+  const res = await fetch(`${baseUrl}/${path}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -26,7 +30,7 @@ export const POST = async <T, K>(path: string, body: T): Promise<K> => {
   return res.json();
 };
 
-export const DELETE = async (path: string) => {
+export const deleteAsync = async (path: string) => {
   const res = await fetch(`${BASE_URL}/${path}`, {
     method: 'DELETE',
     headers: {
