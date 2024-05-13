@@ -2,24 +2,24 @@
 
 import { PropsWithChildren, createContext, useState } from 'react';
 
-export type SignupEmail = {
+export type Email = {
   email: string;
   set: (email: string) => void;
 };
 
-export const SignupContext = createContext<SignupEmail | null>(null);
+export const EmailContext = createContext<Email | null>(null);
 
 const SignupEmailProvider = ({ children }: PropsWithChildren) => {
-  const [email, setEmail] = useState<SignupEmail['email']>('');
+  const [email, setEmail] = useState<Email['email']>('');
 
   const set = (email: string) => {
     setEmail(email);
   };
 
   return (
-    <SignupContext.Provider value={{ email, set }}>
+    <EmailContext.Provider value={{ email, set }}>
       {children}
-    </SignupContext.Provider>
+    </EmailContext.Provider>
   );
 };
 

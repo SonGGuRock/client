@@ -18,6 +18,7 @@ const Page = () => {
         address='경기도 수원시 팔달구 성문로 45'
         phone_number='010=1234=5678'
       />
+
       <Link
         href='/workshops/create'
         className='w-full absolute left-0 bottom-9 px-4'

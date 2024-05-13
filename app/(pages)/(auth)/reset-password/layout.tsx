@@ -1,3 +1,4 @@
+import SignupEmailProvider from '@/app/_provider/email-provider';
 import Header from '@/app/shared/modules/header';
 
 export default function RootLayout({
@@ -13,7 +14,7 @@ export default function RootLayout({
           <Header.Title>비밀번호 재설정</Header.Title>
         </div>
       </Header>
-      {children}
+      <SignupEmailProvider>{children}</SignupEmailProvider>
     </div>
   );
 }

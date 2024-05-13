@@ -1,4 +1,4 @@
-import { POST } from '@/app/shared/api/fetch';
+import { postAsync } from '@/app/shared/api/fetch';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { NoDataResponse, VerficationCodeRequest } from './type';
 import { useRouter } from 'next/navigation';
@@ -7,7 +7,7 @@ const useVerificationCode = () => {
   const router = useRouter();
   return useMutation<NoDataResponse, unknown, VerficationCodeRequest>({
     mutationFn: ({ code, email }) =>
-      POST<VerficationCodeRequest, NoDataResponse>(
+      postAsync<VerficationCodeRequest, NoDataResponse>(
         'members/verifications/codes',
         { code, email }
       ),

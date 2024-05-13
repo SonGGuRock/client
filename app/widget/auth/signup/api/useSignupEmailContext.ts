@@ -1,10 +1,10 @@
 'use client';
 
 import { useContext } from 'react';
-import { SignupContext } from '@/app/_provider/signup-email-provider';
+import { EmailContext } from '@/app/_provider/email-provider';
 
-const useSignupEmailContext = () => {
-  const emailContext = useContext(SignupContext);
+const useEmailContext = () => {
+  const emailContext = useContext(EmailContext);
 
   if (!emailContext) {
     throw 'Context Not Provided';
@@ -12,4 +12,4 @@ const useSignupEmailContext = () => {
   return emailContext;
 };
 
-export default useSignupEmailContext;
+export default useEmailContext;
