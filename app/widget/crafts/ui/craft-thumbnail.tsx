@@ -13,7 +13,7 @@ export interface CraftThumbnailProps extends ClassNamesProps {
   workstep: WorkStepType['ko'];
   imgUrl: string;
   craftName?: string;
-  craftId: number;
+  craftId: string;
   created_at?: string;
 }
 

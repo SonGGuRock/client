@@ -3,8 +3,8 @@ import CraftThumbnail from './craft-thumbnail';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 
 interface CraftItemProps extends ClassNamesProps {
-  craftId: number;
-  onClick: (id: number) => void;
+  craftId: string;
+  onClick: (id: string) => void;
   isEditMode?: boolean;
   isChecked?: boolean;
 }
