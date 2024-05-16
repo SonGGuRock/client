@@ -1,23 +1,27 @@
+'use client';
+
 import Image from 'next/image';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
+import useSearchAddress from './search-address/useSearchAddress';
 
 interface SearchBorderProps {
   placeholder?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onClickSearch?: () => void;
+  onClickSearch: (keyword: string) => void;
 }
 
-const SearchBorder = ({
-  placeholder,
-  onChange,
-  onClickSearch,
-}: SearchBorderProps) => {
+const SearchBorder = ({ placeholder, onClickSearch }: SearchBorderProps) => {
+  const [keyword, setKeyword] = useState('');
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+  };
+
   return (
     <div className='relative mt-10'>
       <input
+        value={keyword}
         placeholder={placeholder}
         className='w-full py-2 border-b-2 border-grey900'
-        onChange={onChange}
+        onChange={handleChange}
       />
       <Image
         src='/icon/ic-search-18px.svg'
@@ -25,7 +29,9 @@ const SearchBorder = ({
         width={24}
         height={24}
         className='absolute right-0 bottom-2'
-        onClick={onClickSearch}
+        onClick={() => {
+          onClickSearch(keyword);
+        }}
       />
     </div>
   );

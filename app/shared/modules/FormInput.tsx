@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { ChangeEvent, PropsWithChildren } from 'react';
 
 interface FormInputProps extends PropsWithChildren {
   lableText: string;
@@ -9,7 +9,8 @@ interface FormInputProps extends PropsWithChildren {
   disabled?: boolean;
   required?: boolean;
   maxLength?: number;
-  onChange?: (value: string) => void;
+  // onChange?: (value: string, name?:string) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const FormInput = ({
@@ -38,9 +39,7 @@ const FormInput = ({
         maxLength={maxLength}
         className='w-full text-base place-holder::text-grey300 text-grey900 border-b border-grey100 py-2'
         placeholder={inputPlaceholder}
-        onChange={(e) => {
-          onChange && onChange(e.target.value);
-        }}
+        onChange={onChange}
       />
       {children}
     </div>

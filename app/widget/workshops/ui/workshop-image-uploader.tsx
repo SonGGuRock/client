@@ -6,9 +6,13 @@ import { ChangeEvent, useEffect, useRef } from 'react';
 
 interface WorkshopImageUploaderProps {
   onUpload: (imageUrl: string) => void;
+  uploaded?: string;
 }
 
-const WorkshopImageUploader = ({ onUpload }: WorkshopImageUploaderProps) => {
+const WorkshopImageUploader = ({
+  onUpload,
+  uploaded,
+}: WorkshopImageUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
   const { mutate, data, isSuccess } = useFileUpload();
@@ -48,7 +52,7 @@ const WorkshopImageUploader = ({ onUpload }: WorkshopImageUploaderProps) => {
         </button>
       </form>
       <div className='w-full h-[136px] mb-6'>
-        {!data && (
+        {!data && !uploaded && (
           <Image
             src='/img/workshops-add-btn.png'
             alt='공방 등록 이미지'
@@ -58,9 +62,9 @@ const WorkshopImageUploader = ({ onUpload }: WorkshopImageUploaderProps) => {
             onClick={handleUploadClick}
           />
         )}
-        {data && (
+        {uploaded && (
           <Image
-            src={data.data.file_name}
+            src={uploaded}
             alt='공방 썸네일'
             width={343}
             height={136}
