@@ -9,3 +9,5 @@ export type DataResponse<T> = {
   result: ResponseResult;
   data: T;
 };
+
+export type ImageResponse = DataResponse<{ file_name: string }>;

@@ -1,16 +1,20 @@
+'use client';
+
 import PhoneNumber from '@/app/shared/modules/phone-number';
 import Image from 'next/image';
+import { Workshop } from '../../workshops/api/type';
 
-interface WorkShopInfo {
-  id: number;
-  name: string;
-  address: string;
-  phone_number: string;
+interface WorkShopInfoProps {
+  workshop: Workshop;
+  onClick?: () => void;
 }
 
-const WorkShopInfo = ({ name, address, phone_number }: WorkShopInfo) => {
+const WorkShopInfo = ({
+  workshop: { name, address, phone_number },
+  onClick,
+}: WorkShopInfoProps) => {
   return (
-    <div className='relative my-6'>
+    <div className='relative my-6' onClick={onClick}>
       <Image
         src={'/img/workshop_default.png'}
         alt='공방 기본 이미지'
