@@ -7,7 +7,7 @@ import FormInput from '@/app/shared/modules/FormInput';
 import FormDateInput from '@/app/shared/modules/form-date-select';
 import Header from '@/app/shared/modules/header';
 
-import EmailValidationField from '../email-validation-field';
+import EmailAuthCodeSender from '../email-auth-code-sender';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { FormEventHandler, useRef } from 'react';
 import { formDataToJSON } from '@/app/shared/lib/formDataToJSON';
@@ -55,7 +55,7 @@ const SignupTeacherPage = () => {
         className='flex gap-6 pt-4 flex-wrap pb-12'
         onSubmit={handleSubmit}
       >
-        <EmailValidationField isAuthenticated={isAuthenticated} />
+        <EmailAuthCodeSender isAuthenticated={isAuthenticated} />
 
         <FormInput
           name='name'

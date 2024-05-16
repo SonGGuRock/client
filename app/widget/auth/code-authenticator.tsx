@@ -17,9 +17,13 @@ type ValidationStatus =
 
 interface EmailAuthenticationProps {
   email: string;
+  onAuthSuccess: () => void;
 }
 
-const EmailAuthentication = ({ email }: EmailAuthenticationProps) => {
+const CodeAuthenticator = ({
+  email,
+  onAuthSuccess,
+}: EmailAuthenticationProps) => {
   const [status, setStatus] = useState<ValidationStatus>('awaiting');
   const [code, setCode] = useState('');
   const { mutate } = useVerificationCode();
@@ -41,7 +45,12 @@ const EmailAuthentication = ({ email }: EmailAuthenticationProps) => {
   };
 
   const handleSubmit = () => {
-    mutate({ code, email });
+    mutate(
+      { code, email },
+      {
+        onSuccess: onAuthSuccess,
+      }
+    );
   };
 
   return (
@@ -76,4 +85,4 @@ const EmailAuthentication = ({ email }: EmailAuthenticationProps) => {
   );
 };
 
-export default EmailAuthentication;
+export default CodeAuthenticator;

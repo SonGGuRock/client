@@ -4,26 +4,31 @@ import Button from '@/app/shared/atoms/button/Button';
 import isValidEmail from '@/app/shared/lib/validation-email';
 import FormInput from '@/app/shared/modules/FormInput';
 import Image from 'next/image';
-import { useState } from 'react';
-import useVerificationEmaiil from './api/useVerificationEmail';
+import { ChangeEvent, useState } from 'react';
+import useVerificationEmail from './api/useVerificationEmail';
 import useEmailContext from './api/useSignupEmailContext';
 
-interface EmailValidationFieldProps {
+interface EmailAuthCodeSenderProps {
   isAuthenticated: boolean;
   isNewMember: boolean;
+  onValidationSuccess: () => void;
 }
-const EmailValidationField = ({
+const EmailAuthCodeSender = ({
   isAuthenticated,
   isNewMember,
-}: EmailValidationFieldProps) => {
+  onValidationSuccess,
+}: EmailAuthCodeSenderProps) => {
   const { email, set } = useEmailContext();
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { mutate } = useVerificationEmaiil();
+  const { mutate } = useVerificationEmail();
 
   const onSubmitSuccess = () => {
     setErrorMessage('');
-    mutate({ is_new_member: isNewMember, email });
+    mutate(
+      { is_new_member: isNewMember, email },
+      { onSuccess: onValidationSuccess }
+    );
   };
 
   const onSubmitFail = () => {
@@ -33,8 +38,8 @@ const EmailValidationField = ({
     isValidEmail(email) ? onSubmitSuccess() : onSubmitFail();
   };
 
-  const handleChange = (value: string) => {
-    set(value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    set(e.target.value);
   };
   return (
     <div className='relative w-full'>
@@ -49,7 +54,12 @@ const EmailValidationField = ({
       >
         <div className='absolute right-0 top-8'>
           {!isAuthenticated ? (
-            <Button size='small' onClick={handleClick} type='button'>
+            <Button
+              size='small'
+              onClick={handleClick}
+              type='button'
+              disabled={!isValidEmail(email)}
+            >
               인증하기
             </Button>
           ) : (
@@ -69,4 +79,4 @@ const EmailValidationField = ({
   );
 };
 
-export default EmailValidationField;
+export default EmailAuthCodeSender;

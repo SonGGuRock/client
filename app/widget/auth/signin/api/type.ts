@@ -1,6 +1,6 @@
 import { DataResponse } from '@/app/shared/api/type';
 
-export type SigninRequest = {
+export type Credentials = {
   email: string;
   password: string;
 };

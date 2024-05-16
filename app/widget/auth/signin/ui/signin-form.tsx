@@ -7,7 +7,7 @@ import Button from '@/app/shared/atoms/button/Button';
 import { FormEventHandler, useRef } from 'react';
 import { formDataToJSON } from '@/app/shared/lib/formDataToJSON';
 import useSigninForm from '../api/useSigninForm';
-import { SigninRequest } from '../api/type';
+import { Credentials } from '../api/type';
 
 const SigninForm = () => {
   const { mutate } = useSigninForm();
@@ -17,7 +17,7 @@ const SigninForm = () => {
     e.preventDefault();
     const formData = new FormData(formRef.current!);
     const body = formDataToJSON(formData);
-    mutate(body as SigninRequest);
+    mutate(body as Credentials);
   };
 
   return (

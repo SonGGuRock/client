@@ -9,7 +9,7 @@ export type Email = {
 
 export const EmailContext = createContext<Email | null>(null);
 
-const SignupEmailProvider = ({ children }: PropsWithChildren) => {
+const AuthEmailProvider = ({ children }: PropsWithChildren) => {
   const [email, setEmail] = useState<Email['email']>('');
 
   const set = (email: string) => {
@@ -23,4 +23,4 @@ const SignupEmailProvider = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default SignupEmailProvider;
+export default AuthEmailProvider;

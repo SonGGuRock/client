@@ -1,8 +1,8 @@
-import SignupEmailProvider from '@/app/_provider/email-provider';
+import AuthEmailProvider from '@/app/_provider/auth-email-provider';
 import { PropsWithChildren } from 'react';
 
 const Layout = ({ children }: PropsWithChildren) => {
-  return <SignupEmailProvider>{children}</SignupEmailProvider>;
+  return <AuthEmailProvider>{children}</AuthEmailProvider>;
 };
 
 export default Layout;

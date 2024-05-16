@@ -1,9 +1,11 @@
-import EmailAuthentication from '@/app/widget/auth/email-authentication';
+import CodeAuthenticator from '@/app/widget/auth/code-authenticator';
+import useEmailContext from '@/app/widget/auth/signup/api/useSignupEmailContext';
 
 const ResetPasswordAuthenticationPage = () => {
+  const { email } = useEmailContext();
   return (
     <div className='mt-20'>
-      <EmailAuthentication />
+      <CodeAuthenticator email={email} />
     </div>
   );
 };
