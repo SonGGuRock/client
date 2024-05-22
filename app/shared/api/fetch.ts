@@ -1,48 +1,6 @@
-import axios, {
-  AxiosRequestConfig,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
-
-const BASE_URL = 'http://182.231.88.125:8080/v1';
-
-const instance = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-// export const getAsync = async <T>(
-//   path: string,
-//   params?: Record<'name', any>
-// ): Promise<T> => {
-//   const queryParams = new URLSearchParams(params).toString();
-
-//   const accessToken = Cookies.get('accessToken');
-//   const url = `${BASE_URL}/${path}?${queryParams ? `${queryParams}` : ''}`;
-//   const res = await fetch(url, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${accessToken}`,
-//     },
-//   });
-//   return res.json();
-// };
-
-instance.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    const accessToken = Cookies.get('accessToken');
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+import instance, { BASE_URL } from './axios-instance';
 
 export const getAsync = async <T>(
   path: string,
@@ -54,7 +12,7 @@ export const getAsync = async <T>(
 
 export const postAsync = async <T, K>(
   path: string,
-  body: T,
+  body?: T,
   isRouteRequest?: true,
   params?: Record<string, any>
 ): Promise<K> => {

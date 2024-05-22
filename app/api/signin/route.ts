@@ -1,11 +1,14 @@
 import { postAsync } from '@/app/shared/api/fetch';
-import { Credentials, SigninResponse } from '@/app/widget/auth/signin/api/type';
+import {
+  Credentials,
+  AuthTokenResponse,
+} from '@/app/widget/auth/signin/api/type';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   const body: Credentials = await request.json();
-  const res = await postAsync<Credentials, SigninResponse>(
+  const res = await postAsync<Credentials, AuthTokenResponse>(
     'members/login',
     body
   );
