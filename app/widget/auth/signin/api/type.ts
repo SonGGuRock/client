@@ -5,7 +5,7 @@ export type Credentials = {
   password: string;
 };
 
-export type SigninResponse = DataResponse<{
+export type AuthTokenResponse = DataResponse<{
   access_token: string;
   refresh_token: string;
 }>;

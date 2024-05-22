@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'default-workshop-thumbnail',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };
