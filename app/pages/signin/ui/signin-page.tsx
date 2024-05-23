@@ -10,7 +10,7 @@ const SignInPage = () => {
         <br /> 손꾸락이 도와드릴게요
       </p>
       <SigninForm />
-      <Button size='large' type='button'>
+      <Button size='large' type='button' style='secondary'>
         <Link href='/signup'>이메일로 회원가입</Link>
       </Button>
     </div>
