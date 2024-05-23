@@ -1,25 +1,50 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export function middleware(request: NextRequest) {
-  const accessToken = request.cookies.get('accessToken');
+export async function middleware(req: NextRequest) {
+  const accessToken = req.cookies.get('accessToken')?.value;
+  const { pathname } = req.nextUrl;
+  const isAuthPage =
+    pathname.includes('/signin') || pathname.includes('/signup');
 
-  //   if (!accessToken) {
-  //     return NextResponse.redirect(new URL('/signin', request.url));
-  //   }
+  console.log('Request pathname:', pathname);
+  console.log('Access token:', accessToken);
+  console.log('Is auth page:', isAuthPage);
 
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('Authorization', `Bearer ${accessToken}`);
+  if (isStaticAssetRequest(req)) {
+    return NextResponse.next();
+  }
 
-  const response = NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  });
+  if (!accessToken && !isAuthPage) {
+    const url = req.nextUrl.clone();
+    url.pathname = '/signin';
+    return NextResponse.redirect(url);
+  }
 
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/workshops/:path*'],
+  matcher: ['/((?!signin|signup|$).*)'],
 };
+
+function isStaticAssetRequest(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  const assetExtensions = [
+    '.js',
+    '.css',
+    '.png',
+    '.jpg',
+    '.svg',
+    '.ico',
+    '.woff',
+    '.woff2',
+  ];
+  const isAssetRequest = assetExtensions.some((extension) =>
+    pathname.endsWith(extension)
+  );
+
+  const isBundleRequest =
+    pathname.startsWith('/_next/static') || pathname.startsWith('/_next/data');
+
+  return isAssetRequest || isBundleRequest;
+}
