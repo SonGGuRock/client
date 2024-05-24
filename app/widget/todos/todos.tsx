@@ -2,8 +2,6 @@
 
 import Image from 'next/image';
 import TodoItem from './TodoItem';
-import ExpandedList from '../../shared/modules/ExpandedList';
-import sliceItems from '@/app/shared/lib/sliceItems';
 import Title from '../../shared/atoms/Title';
 import Button from '../../shared/atoms/button/Button';
 
@@ -12,70 +10,12 @@ import Toast from '../toast/ui/toast';
 import useToast from '@/app/widget/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
-
-type Todo = {
-  id: number;
-  content: string;
-  is_completed: boolean;
-  author: {
-    id: number;
-    profile_picture: string;
-  };
-};
+import useTodos from './lib/useTodos';
 
 export default function Todos() {
   const { openModal, closeModal } = useModal();
   const { toast, toggleToast } = useToast();
-
-  const todos: Todo[] = [
-    {
-      id: 1,
-      content: '속파기 도구 small 10개 사기',
-      is_completed: true,
-      author: {
-        id: 1,
-        profile_picture: '/mock/user/img_user.png',
-      },
-    },
-    {
-      id: 2,
-      content: '속파기 도구 small 10개 사기',
-      is_completed: false,
-      author: {
-        id: 2,
-        profile_picture: '/mock/user/img_user.png',
-      },
-    },
-    {
-      id: 3,
-      content: '속파기 도구 small 10개 사기',
-      is_completed: true,
-      author: {
-        id: 3,
-        profile_picture: '/mock/user/img_user.png',
-      },
-    },
-    {
-      id: 4,
-      content: '속파기 도구 small 10개 사기',
-      is_completed: true,
-      author: {
-        id: 4,
-        profile_picture: '/mock/user/img_user.png',
-      },
-    },
-    {
-      id: 5,
-      content: '속파기 도구 small 10개 사기',
-      is_completed: true,
-      author: {
-        id: 5,
-        profile_picture: '/mock/user/img_user.png',
-      },
-    },
-  ];
-
-  const { limited, rest } = sliceItems(todos, 4);
+  const { data: todos } = useTodos();
 
   const handleOpenModalAddTodo = () => {
     openModal(
@@ -117,15 +57,15 @@ export default function Todos() {
       </div>
 
       <ul className='flex flex-wrap gap-2'>
-        {limited.map((todo) => (
+        {todos?.map((todo) => (
           <TodoItem key={todo.id} {...todo} />
         ))}
       </ul>
-      <ExpandedList>
-        {rest.map((todo) => (
+      {/* <ExpandedList>
+        {items?.rest.map((todo) => (
           <TodoItem key={todo.id} {...todo} />
         ))}
-      </ExpandedList>
+      </ExpandedList> */}
       <PortalModal />
       {toast && <Toast text={toast.text} />}
     </div>
