@@ -6,9 +6,9 @@ export async function middleware(req: NextRequest) {
   const isAuthPage =
     pathname.includes('/signin') || pathname.includes('/signup');
 
-  console.log('Request pathname:', pathname);
-  console.log('Access token:', accessToken);
-  console.log('Is auth page:', isAuthPage);
+  // console.log('Request pathname:', pathname);
+  // console.log('Access token:', accessToken);
+  // console.log('Is auth page:', isAuthPage);
 
   if (isStaticAssetRequest(req)) {
     return NextResponse.next();
