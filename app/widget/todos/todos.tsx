@@ -8,8 +8,8 @@ import Title from '../../shared/atoms/Title';
 import Button from '../../shared/atoms/button/Button';
 
 import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWithInput';
-import Toast from '../toast/ui/toast';
-import useToast from '@/app/widget/toast/lib/useToast';
+import Toast from '../../shared/modules/toast/ui/toast';
+import useToast from '@/app/shared/modules/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 

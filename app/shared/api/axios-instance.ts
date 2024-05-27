@@ -96,6 +96,7 @@ instance.interceptors.response.use(
       } catch (err) {
         processQueue(err as AxiosError, null);
         isRefreshing = false;
+        window.location.href = '/signin';
         return Promise.reject(err);
       }
     }

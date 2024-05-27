@@ -13,7 +13,7 @@ interface ButtonProps extends PropsWithChildren {
 
 const Button = ({
   className,
-  style = 'primary',
+  style,
   size = 'medium',
   disabled = false,
   children,

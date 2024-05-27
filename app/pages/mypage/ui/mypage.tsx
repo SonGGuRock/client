@@ -1,8 +1,9 @@
 import Title from '@/app/shared/atoms/Title';
 import BottomBar from '@/app/shared/modules/BottomBar';
+import LogoutButton from '@/app/widget/mypage/ui/logout-button';
 import MemberInfo from '@/app/widget/mypage/ui/member-info';
 import SettingMenu from '@/app/widget/mypage/ui/setting-menu';
-import WorkShopInfo from '@/app/widget/workshops/ui/workshop-info';
+import WithdrawalButton from '@/app/widget/mypage/ui/withdrawal-button';
 
 const MyPage = () => {
   return (
@@ -14,13 +15,13 @@ const MyPage = () => {
           <MemberInfo />
         </div>
 
-        <WorkShopInfo
+        {/* <WorkShopInfo
           href='/workshops/1/settings'
           id={1}
           name='손꾸락 공방'
           address='경기도 수원시 팔달구 성문로 45'
           phone_number='010=1234=5678'
-        />
+        /> */}
       </div>
 
       <SettingMenu className='py-4'>
@@ -30,8 +31,8 @@ const MyPage = () => {
       </SettingMenu>
 
       <SettingMenu className='py-4'>
-        <SettingMenu.Button>로그아웃</SettingMenu.Button>
-        <SettingMenu.Button>서비스 탈퇴</SettingMenu.Button>
+        <LogoutButton />
+        <WithdrawalButton />
       </SettingMenu>
       <BottomBar />
     </div>

@@ -1,5 +1,9 @@
 import { PropsWithChildren } from 'react';
 
-export const SettingMenuButton = ({ children }: PropsWithChildren) => {
-  return <li>{children}</li>;
+interface Props extends PropsWithChildren {
+  onClick?: () => void;
+}
+
+export const SettingMenuButton = ({ children, onClick }: Props) => {
+  return <li onClick={onClick}>{children}</li>;
 };
