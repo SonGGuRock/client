@@ -5,11 +5,11 @@ import CodeAuthenticator from '@/app/widget/auth/code-authenticator';
 import useEmailContext from '@/app/widget/auth/signup/api/useSignupEmailContext';
 import { useRouter } from 'next/navigation';
 
-const CodeAuthenticationPage = () => {
+const SignupCodePage = () => {
   const { email } = useEmailContext();
   const router = useRouter();
   const handleAuthSuccess = () => {
-    router.push('/reset-password/authentication/update');
+    router.push('/signup/teacher?authenticated=1');
   };
   return (
     <div className='relative px-4 pt-[124px] min-h-screen'>
@@ -19,4 +19,4 @@ const CodeAuthenticationPage = () => {
   );
 };
 
-export default CodeAuthenticationPage;
+export default SignupCodePage;

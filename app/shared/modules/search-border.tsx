@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
-import useSearchAddress from './search-address/useSearchAddress';
 
 interface SearchBorderProps {
   placeholder?: string;
@@ -13,6 +12,10 @@ const SearchBorder = ({ placeholder, onClickSearch }: SearchBorderProps) => {
   const [keyword, setKeyword] = useState('');
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
+  };
+
+  const handleSearch = () => {
+    onClickSearch(keyword);
   };
 
   return (
@@ -29,9 +32,7 @@ const SearchBorder = ({ placeholder, onClickSearch }: SearchBorderProps) => {
         width={24}
         height={24}
         className='absolute right-0 bottom-2'
-        onClick={() => {
-          onClickSearch(keyword);
-        }}
+        onClick={handleSearch}
       />
     </div>
   );

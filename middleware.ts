@@ -4,11 +4,9 @@ export async function middleware(req: NextRequest) {
   const accessToken = req.cookies.get('accessToken')?.value;
   const { pathname } = req.nextUrl;
   const isAuthPage =
-    pathname.includes('/signin') || pathname.includes('/signup');
-
-  console.log('Request pathname:', pathname);
-  console.log('Access token:', accessToken);
-  console.log('Is auth page:', isAuthPage);
+    pathname.includes('/signin') ||
+    pathname.includes('/signup') ||
+    pathname.includes('/reset-password');
 
   if (isStaticAssetRequest(req)) {
     return NextResponse.next();
@@ -20,11 +18,17 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  if (accessToken && isAuthPage) {
+    const url = req.nextUrl.clone();
+    url.pathname = '/workshops';
+    return NextResponse.redirect(url);
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/((?!signin|signup|$).*)'],
+  matcher: ['/((?!$).*)'],
 };
 
 function isStaticAssetRequest(req: NextRequest) {
