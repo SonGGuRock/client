@@ -7,19 +7,13 @@ import useTeacherRegister from '@/app/widget/workshops/api/useTeacherRegister';
 import useWorkshopSearch from '@/app/widget/workshops/api/useWorkshopSearch';
 import WorkshopOnboardingCreate from '@/app/widget/workshops/ui/workshop-onboarding-create';
 import Link from 'next/link';
-import { ChangeEvent, useState } from 'react';
 
 const WorkshopSelectPage = () => {
-  const [kerword, setKeyword] = useState('');
-  const { data, refetch } = useWorkshopSearch({ name: kerword });
+  const { data, refetch } = useWorkshopSearch({ name: '' });
   const { mutate } = useTeacherRegister();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.target.value);
-  };
-
-  const handleClickSearch = () => {
-    refetch();
+  const handleClickSearch = (keyword: string) => {
+    refetch({ name: keyword });
   };
 
   const handleClickWorkshop = (workshopId: number) => {
@@ -31,7 +25,7 @@ const WorkshopSelectPage = () => {
         이미 등록된 공방이 있나요? <br />
         공방을 선택해주세요
       </Title>
-      <SearchBorder onChange={handleChange} onClickSearch={handleClickSearch} />
+      <SearchBorder onClickSearch={handleClickSearch} />
       {data?.map((workshop) => (
         <WorkShopInfo
           key={workshop.id}

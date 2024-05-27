@@ -1,4 +1,4 @@
-import SignupTeacherPage from '@/app/widget/auth/signup/ui/signup-teacher-page';
+import SignupTeacherPage from '@/app/pages/signup/ui/signup-teacher-page';
 
 const Page = () => {
   return <SignupTeacherPage />;
