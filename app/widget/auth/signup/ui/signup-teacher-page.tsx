@@ -8,7 +8,7 @@ import FormDateInput from '@/app/shared/modules/form-date-select';
 import Header from '@/app/shared/modules/header';
 
 import EmailAuthCodeSender from '../email-auth-code-sender';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FormEventHandler, useRef } from 'react';
 import { formDataToJSON } from '@/app/shared/lib/formDataToJSON';
 import useSignupForm from '../api/useSignupForm';
@@ -22,6 +22,7 @@ const SignupTeacherPage = () => {
   const isAuthenticated = searchParam.get('authenticated') === SUCCESS;
   const path = usePathname();
   const { mutate } = useSignupForm();
+  const router = useRouter();
 
   const { open: isChecked, toggle } = useToggle();
   const formRef = useRef<HTMLFormElement>(null);
@@ -55,7 +56,13 @@ const SignupTeacherPage = () => {
         className='flex gap-6 pt-4 flex-wrap pb-12'
         onSubmit={handleSubmit}
       >
-        <EmailAuthCodeSender isAuthenticated={isAuthenticated} />
+        <EmailAuthCodeSender
+          isAuthenticated={isAuthenticated}
+          isNewMember={true}
+          onValidationSuccess={() => {
+            router.push('');
+          }}
+        />
 
         <FormInput
           name='name'

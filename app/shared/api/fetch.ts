@@ -29,6 +29,25 @@ export const postAsync = async <T, K>(
   return response.data;
 };
 
+export const putAsync = async <T, K>(
+  path: string,
+  body?: T,
+  isRouteRequest?: true,
+  params?: Record<string, any>
+): Promise<K> => {
+  if (isRouteRequest) {
+    const response: AxiosResponse<K> = await axios.put(path, body, {
+      params,
+    });
+    return response.data;
+  }
+
+  const response: AxiosResponse<K> = await instance.put(path, body, {
+    params,
+  });
+  return response.data;
+};
+
 export const postFileAsync = async <T, K>(
   path: string,
   body: T,
@@ -51,11 +70,10 @@ export const postFileAsync = async <T, K>(
   return res.json();
 };
 
-export const deleteAsync = async (path: string) => {
-  const res = await fetch(`${BASE_URL}/${path}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+export const deleteAsync = async <T>(
+  path: string,
+  params?: Record<string, any>
+): Promise<T> => {
+  const response: AxiosResponse<T> = await instance.delete(path, { params });
+  return response.data;
 };
