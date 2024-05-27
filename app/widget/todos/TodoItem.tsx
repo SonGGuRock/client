@@ -6,8 +6,8 @@ import MeatBall from '../../shared/atoms/MeatBall';
 
 import ModalMenu from '../../shared/atoms/ModalMenu';
 import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWithInput';
-import Toast from '../toast/ui/toast';
-import useToast from '@/app/widget/toast/lib/useToast';
+import Toast from '../../shared/modules/toast/ui/toast';
+import useToast from '@/app/shared/modules/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 
 const TodoItem = ({ id, content, is_completed, author }: Todo) => {

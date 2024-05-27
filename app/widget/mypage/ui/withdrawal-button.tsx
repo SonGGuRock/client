@@ -7,15 +7,16 @@ import deleteAuthToken from '@/app/shared/lib/deleteAuthToken';
 
 const WithdrawalButton = () => {
   const router = useRouter();
-  const { mutate } = useWithdrawal();
+  // const { mutate } = useWithdrawal();
 
   const handleWitndrawl = () => {
-    mutate(undefined, {
-      onSuccess: () => {
-        deleteAuthToken();
-        router.push('/signin');
-      },
-    });
+    // mutate(undefined, {
+    //   onSuccess: () => {
+    //     deleteAuthToken();
+    //     router.push('/signin');
+    //   },
+    // });
+    router.push('/members/withdrawal');
   };
   return (
     <SettingMenu.Button onClick={handleWitndrawl}>

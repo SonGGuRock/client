@@ -1,4 +1,4 @@
-import { Toast } from '@/app/widget/toast/lib/useToast';
+import { Toast } from '@/app/shared/modules/toast/lib/useToast';
 import { createPortal } from 'react-dom';
 
 const Toast = ({ text }: Toast) => {

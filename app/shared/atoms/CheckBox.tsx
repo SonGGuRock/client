@@ -17,9 +17,9 @@ const CheckBox = ({
 }: CheckBoxProps) => {
   const checkBoxClasses = clsx(
     'appearance-none',
-    'w-[24px]',
+    'min-w-[24px]',
     'h-[24px]',
-    'rounded-lg',
+    'rounded',
     {
       'bg-grey100': style === 'brown',
       'bg-todo-check-icon': style === 'brown',
@@ -28,8 +28,8 @@ const CheckBox = ({
     },
     {
       'opacity-50': style === 'grey',
-      // 'bg--check-off-icon': style === 'grey',
-      'checked:bg-check-icon': isChecked && style === 'grey',
+      'bg-grey-check-off-icon': style === 'grey',
+      'checked:bg-grey-check-on-icon': isChecked && style === 'grey',
       'bg-center': style === 'grey',
       border: style === 'grey',
       'border-white': style === 'grey',
