@@ -3,13 +3,14 @@ import Cookies from 'js-cookie';
 import { ErrorResponse } from './type';
 import { AuthTokenResponse } from '@/app/widget/auth/signin/api/type';
 
-export const BASE_URL = 'http://182.231.88.125:8080/v1';
+export const BASE_URL = 'https://182.231.88.125:8080/v1';
 
 const instance = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 let isRefreshing = false;
