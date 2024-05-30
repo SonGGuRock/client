@@ -103,7 +103,7 @@ const SignupTeacherPage = () => {
             </label>
           </div>
         </div>
-        <Button size='large' type='submit'>
+        <Button size='large' type='submit' style='primary'>
           가입 완료
         </Button>
       </form>
