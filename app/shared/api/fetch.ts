@@ -16,17 +16,22 @@ export const postAsync = async <T, K>(
   isRouteRequest?: true,
   params?: Record<string, any>
 ): Promise<K> => {
-  if (isRouteRequest) {
-    const response: AxiosResponse<K> = await axios.post(path, body, {
-      params,
-    });
-    return response.data;
+  try {
+    if (isRouteRequest) {
+      const response: AxiosResponse<K> = await axios.post(path, body, {
+        params,
+      });
+      return response.data;
+    } else {
+      const response: AxiosResponse<K> = await instance.post(path, body, {
+        params,
+      });
+      return response.data;
+    }
+  } catch (error) {
+    console.error('Error in postAsync:', error); // 오류 발생 시 콘솔에 오류를 출력합니다.
+    throw error; // 오류를 호출자에게 전파합니다.
   }
-
-  const response: AxiosResponse<K> = await instance.post(path, body, {
-    params,
-  });
-  return response.data;
 };
 
 export const postFileAsync = async <T, K>(
