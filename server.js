@@ -4,7 +4,6 @@ const next = require('next');
 const fs = require('fs');
 
 const dev = process.env.NODE_ENV !== 'production';
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const app = next({ dev, dir: __dirname });
 const handle = app.getRequestHandler();
