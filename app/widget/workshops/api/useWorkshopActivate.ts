@@ -3,11 +3,19 @@ import { NoDataResponse } from '@/app/shared/api/type';
 import { useMutation } from '@tanstack/react-query';
 
 const useWorkshopActivate = () => {
-  return useMutation<NoDataResponse, unknown, number>({
+  return useMutation<any, unknown, number>({
     mutationFn: (workshop_id: number) =>
-      postAsync<any, NoDataResponse>(
-        `workshops/${workshop_id}/teachers/active`
-      ),
+      fetch(`api/workshops/${workshop_id}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+      }).then((res) => {
+        if (!res.ok) throw new Error('api Route reqeust fail');
+        return res;
+      }),
     onSuccess(data) {
       console.log('Network Request Success:', data);
     },
