@@ -9,7 +9,7 @@ const useWorkshopActivate = () => {
         `workshops/${workshop_id}/teachers/active`
       ),
     onSuccess(data) {
-      console.log('Network Request Success:', data.result);
+      console.log('Network Request Success:', data);
     },
 
     onError(err) {

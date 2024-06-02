@@ -1,7 +1,7 @@
-import CodeAuthenticationPage from '@/app/pages/reset-password/ui/code-authentication-page';
+import ResetPasswordCodePage from '@/app/pages/reset-password/ui/reset-password-code-page';
 
 const Page = () => {
-  return <CodeAuthenticationPage />;
+  return <ResetPasswordCodePage />;
 };
 
 export default Page;

@@ -7,24 +7,33 @@ import FormInput from '@/app/shared/modules/FormInput';
 import FormDateInput from '@/app/shared/modules/form-date-select';
 import Header from '@/app/shared/modules/header';
 
-import EmailAuthCodeSender from '../email-auth-code-sender';
-import { usePathname, useSearchParams } from 'next/navigation';
+import EmailAuthCodeSender from '../../../widget/auth/signup/email-auth-code-sender';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FormEventHandler, useRef } from 'react';
 import { formDataToJSON } from '@/app/shared/lib/formDataToJSON';
-import useSignupForm from '../api/useSignupForm';
-import { SignupRequest } from '../api/type';
+import useSignupForm from '../../../widget/auth/signup/api/useSignupForm';
+import { SignupRequest } from '../../../widget/auth/signup/api/type';
 import { formatPhoneNumber } from '@/app/shared/lib/formatPhoneNumber';
 
 const SUCCESS = '1';
 
 const SignupTeacherPage = () => {
   const searchParam = useSearchParams();
+  const router = useRouter();
+
   const isAuthenticated = searchParam.get('authenticated') === SUCCESS;
   const path = usePathname();
+
+  const handleValidationSuccess = () => {
+    router.push('/signup/authentication/code');
+  };
+
   const { mutate } = useSignupForm();
 
   const { open: isChecked, toggle } = useToggle();
+
   const formRef = useRef<HTMLFormElement>(null);
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const formData = new FormData(formRef.current!);
@@ -41,6 +50,7 @@ const SignupTeacherPage = () => {
     const body = formDataToJSON(formData);
     mutate(body as SignupRequest);
   };
+
   return (
     <div className='py-3 px-4'>
       <Header>
@@ -55,7 +65,11 @@ const SignupTeacherPage = () => {
         className='flex gap-6 pt-4 flex-wrap pb-12'
         onSubmit={handleSubmit}
       >
-        <EmailAuthCodeSender isAuthenticated={isAuthenticated} />
+        <EmailAuthCodeSender
+          isAuthenticated={isAuthenticated}
+          isNewMember={true}
+          onValidationSuccess={handleValidationSuccess}
+        />
 
         <FormInput
           name='name'
