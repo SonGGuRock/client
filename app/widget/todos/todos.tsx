@@ -10,22 +10,25 @@ import Toast from '../toast/ui/toast';
 import useToast from '@/app/widget/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
-import useTodos from './lib/useTodos';
+import { useGetTodos, useMutateTodos } from './lib/useTodos';
 
 export default function Todos() {
   const { openModal, closeModal } = useModal();
   const { toast, toggleToast } = useToast();
-  const { data: todos } = useTodos();
+  const { data: todos } = useGetTodos();
+  const { mutate } = useMutateTodos<{ content: string }>('todos', 'POST');
+
+  const handleAddDone = (content: string) => {
+    mutate({ content });
+    toggleToast({ text: '할 일을 추가하였습니다' });
+  };
 
   const handleOpenModalAddTodo = () => {
     openModal(
       <ModalContentWithInput
         title='할 일 추가'
         placeholder='오늘의 할 일을 입력하세요'
-        onDone={() => {
-          closeModal();
-          toggleToast({ text: '할 일을 추가하였습니다' });
-        }}
+        onDone={handleAddDone}
         onClose={closeModal}
       />
     );

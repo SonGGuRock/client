@@ -1,5 +1,4 @@
-// app/api/set-cookie/[workshopId]/route.ts
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import axios, { AxiosResponse } from 'axios';
 import https from 'https';
 import { BASE_URL } from '@/app/shared/api/axios-instance';
@@ -9,7 +8,7 @@ interface Params {
   id: string;
 }
 
-export async function POST(request: Request, context: { params: Params }) {
+export async function POST(request: NextRequest, context: { params: Params }) {
   const { id } = context.params;
   const cookieStore = cookies();
   const accessToken = cookieStore.get('accessToken')?.value;
@@ -23,7 +22,6 @@ export async function POST(request: Request, context: { params: Params }) {
     httpsAgent: new https.Agent({ rejectUnauthorized: false }),
   });
   try {
-    // 다른 서버로 요청 보내기 (동적 workshop id 포함)
     const response: AxiosResponse = await instance.post(
       `workshops/${id}/teachers/active`,
       undefined
@@ -34,12 +32,11 @@ export async function POST(request: Request, context: { params: Params }) {
       statusText: response.statusText,
       headers: {
         'Content-Type': 'application/json',
-        // 기타 필요한 헤더 추가
       },
     });
+
     const setCookieHeader = response.headers['set-cookie'];
 
-    // Set-Cookie 헤더 값이 있다면, 응답 헤더에 설정
     if (setCookieHeader) {
       if (Array.isArray(setCookieHeader)) {
         setCookieHeader.forEach((cookie) => {

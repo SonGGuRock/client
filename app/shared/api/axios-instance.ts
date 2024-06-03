@@ -32,21 +32,12 @@ const instance = axios.create({
 //   failedQueue = [];
 // };
 
-const allowedCookies = ['ISADMIN', 'TEACHERID', 'WORKSHOPID'];
-
 instance.interceptors.request.use(
   (config) => {
     const accessToken = Cookies.get('accessToken');
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
-    const cookies = Cookies.get();
-    const filteredCookies = Object.entries(cookies)
-      .filter(([key]) => allowedCookies.includes(key))
-      .map(([key, value]) => `${key}=${value}`);
-
-    const cookieHeader = filteredCookies.join('; ');
-    config.headers.Cookie = cookieHeader;
 
     return config;
   },

@@ -1,5 +1,3 @@
-import { postAsync } from '@/app/shared/api/fetch';
-import { NoDataResponse } from '@/app/shared/api/type';
 import { useMutation } from '@tanstack/react-query';
 
 const useWorkshopActivate = () => {

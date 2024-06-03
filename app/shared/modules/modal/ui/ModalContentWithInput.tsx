@@ -3,12 +3,13 @@
 import Button from '../../../atoms/button/Button';
 import Title from '../../../atoms/Title';
 import Input from '../../../atoms/Input';
+import { FormEvent } from 'react';
 
 type ModalContentWithInputProps = {
   title: string;
   placeholder?: string;
   onClose: () => void;
-  onDone: () => void;
+  onDone: (content: string) => void;
 };
 const ModalContentWithInput = ({
   title,
@@ -16,23 +17,24 @@ const ModalContentWithInput = ({
   onClose,
   onDone,
 }: ModalContentWithInputProps) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const content = formData.get('content') as string;
+    onDone(content);
+    onClose();
+  };
+
   return (
     <>
       <Title size='small'>{title}</Title>
-      <form className='w-full mt-4'>
-        <Input placeholder={placeholder ?? ''} />
+      <form className='w-full mt-4' onSubmit={handleSubmit}>
+        <Input placeholder={placeholder ?? ''} name='content' />
         <div className='mt-4 flex gap-4 justify-center '>
-          <Button type='secodnary' size='large' onClick={onClose}>
+          <Button style='secondary' size='large' onClick={onClose}>
             취소
           </Button>
-          <Button
-            type='primary'
-            size='large'
-            onClick={() => {
-              onDone();
-              onClose();
-            }}
-          >
+          <Button style='primary' size='large' type='submit'>
             확인
           </Button>
         </div>
