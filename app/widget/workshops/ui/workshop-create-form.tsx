@@ -2,8 +2,8 @@
 
 import FormInput from '@/app/shared/modules/FormInput';
 import AddressInput from '@/app/shared/modules/address-input';
-import WorkshopImageUploader from './workshop-image-uploader';
-import { ChangeEvent, FormEvent, useState } from 'react';
+
+import { ChangeEvent, FormEvent } from 'react';
 import Button from '@/app/shared/atoms/button/Button';
 import useWorkshopCreate from '../api/useWorkshopCreate';
 import { formDataToJSON } from '@/app/shared/lib/formDataToJSON';
@@ -11,6 +11,17 @@ import { WorkshopCreateRequest } from '../api/type';
 import useWorkshopForm from '../lib/useWorkshopAddress';
 import { formatPhoneNumber } from '@/app/shared/lib/formatPhoneNumber';
 import { useRouter } from 'next/navigation';
+import ImageUploader, {
+  defaultImage,
+} from '@/app/shared/modules/image-uploader/imageUploader';
+
+const DEFAULT_WORKSHOP: defaultImage = {
+  imageUrl: '/img/workshops-add-btn.png',
+  imageAlt: '공방 등록 이미지',
+  width: 143,
+  height: 136,
+  className: 'rounded-lg',
+};
 
 const WorkshopCreateForm = () => {
   const { workshopForm, setWorkshopForm } = useWorkshopForm();
@@ -62,9 +73,10 @@ const WorkshopCreateForm = () => {
   };
   return (
     <div className='relative'>
-      <WorkshopImageUploader
+      <ImageUploader
         onUpload={handleUpload}
         uploaded={workshopForm.profile_picture}
+        defaultImage={DEFAULT_WORKSHOP}
       />
       <form className='flex flex-wrap gap-6' onSubmit={handleSubmit}>
         <FormInput
