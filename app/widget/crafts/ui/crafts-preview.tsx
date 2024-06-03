@@ -54,7 +54,7 @@ export default function CraftsPreview() {
       <Title subTitle='오늘 방문하는'>수강생의 최근 작품</Title>
       <GoTo href='#' title='작품 전체보기' />
       {usersCrafts.map((userCraft) => (
-        <UserCrafts {...userCraft} />
+        <UserCrafts key={userCraft.userId} {...userCraft} />
       ))}
     </div>
   );

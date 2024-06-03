@@ -23,7 +23,7 @@ export default function Page() {
         <Divider />
         {/* Suspense fallback={Gallery} */}
         {/* Suspense fallback={Students} */}
-        <Students />
+        {/* <Students /> */}
         <Divider />
         <CraftsPreview />
       </section>

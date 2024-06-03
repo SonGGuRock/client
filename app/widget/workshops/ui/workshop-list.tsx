@@ -16,6 +16,7 @@ const WorkshopList = ({ workshopList }: WorkshopListProps) => {
   const handleClickWorkshop = (workshopId: number) => {
     mutate(workshopId, { onSuccess: () => router.push('/home') });
   };
+
   return (
     <div>
       {workshopList?.map((workshop) => (

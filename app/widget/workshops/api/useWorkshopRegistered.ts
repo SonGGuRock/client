@@ -6,10 +6,8 @@ import { getAsync } from '@/app/shared/api/fetch';
 const useWorkshopRegistered = () => {
   return useQuery<DataResponse<Workshop[]>, unknown, Workshop[]>({
     queryKey: ['workshops', 'registered'],
-    queryFn: () => {
-      return getAsync<DataResponse<Workshop[]>>('workshops/registered');
-    },
-    select: (data: DataResponse<Workshop[]>) => data.data,
+    queryFn: () => getAsync('workshops/registered'),
+    select: (data) => data.data,
   });
 };
 

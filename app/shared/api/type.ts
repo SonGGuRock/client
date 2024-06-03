@@ -17,3 +17,5 @@ export type ErrorResponse = {
   code: string;
   message: string;
 };
+
+// export type DataCodeResponse<T>

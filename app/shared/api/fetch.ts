@@ -6,8 +6,13 @@ export const getAsync = async <T>(
   path: string,
   params?: Record<string, any>
 ): Promise<T> => {
-  const response: AxiosResponse<T> = await instance.get(path, { params });
-  return response.data;
+  try {
+    const response: AxiosResponse<T> = await instance.get(path, { params });
+    return response.data;
+  } catch (error) {
+    console.error('getAsync Error:', error);
+    throw error;
+  }
 };
 
 export const postAsync = async <T, K>(

@@ -4,7 +4,6 @@ import { Credentials, AuthTokenResponse } from './type';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
-const IS_ROUTE_REQUEST = true;
 
 const useSigninForm = () => {
   const router = useRouter();
@@ -14,7 +13,7 @@ const useSigninForm = () => {
     onSuccess(data) {
       console.log('Network Request Success:', data);
       Cookies.set('accessToken', data.data.access_token);
-      Cookies.set('refreshToken', data.data.access_token);
+      Cookies.set('refreshToken', data.data.refresh_token);
       router.push('/workshops');
     },
 
