@@ -68,6 +68,7 @@ async function handleRequest(request: NextRequest, method: Method) {
             return instance(originalRequest);
           }
         } catch (err) {
+          console.log('💛왜???', err);
           cookieStore.delete('accessToken');
           cookieStore.delete('refreshToken');
           return NextResponse.redirect(`http://localhost:3000/signin`);
