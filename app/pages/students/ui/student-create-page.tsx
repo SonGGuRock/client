@@ -1,8 +1,9 @@
 import Button from '@/app/shared/atoms/button/Button';
 import FormInput from '@/app/shared/modules/FormInput';
-import FormDatePicker from '@/app/shared/modules/form-date-select';
+import FormDatePicker from '@/app/shared/modules/form-date-input';
 import ProfileDefault from '@/app/shared/modules/ProfileDefault';
 import Header from '@/app/shared/modules/header';
+import StudentCreateForm from '@/app/widget/students/ui/student-create-form';
 
 const StudentCreatePage = () => {
   return (
@@ -14,24 +15,11 @@ const StudentCreatePage = () => {
         </div>
       </Header>
 
-      <div className='flex justify-center items-center w-full py-8'>
+      {/* <div className='flex justify-center items-center w-full py-8'>
         <ProfileDefault />
-      </div>
+      </div> */}
 
-      <div className='flex gap-6 flex-wrap pb-12'>
-        <FormInput
-          lableText='이름'
-          inputPlaceholder='이름(실명)을 입력해주세요'
-        />
-        <FormInput lableText='전화번호' inputPlaceholder='- 구분없이 입력' />
-        <FormDatePicker labelText='등록일' />
-        <FormDatePicker labelText='결제일' />
-        <FormInput lableText='메모' inputPlaceholder='(선택사항)' />
-      </div>
-
-      <Button size='large' disabled>
-        등록 완료
-      </Button>
+      <StudentCreateForm />
     </div>
   );
 };

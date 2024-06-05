@@ -13,7 +13,7 @@ import { formatPhoneNumber } from '@/app/shared/lib/formatPhoneNumber';
 import { useRouter } from 'next/navigation';
 import ImageUploader, {
   defaultImage,
-} from '@/app/shared/modules/image-uploader/imageUploader';
+} from '@/app/shared/modules/image-uploader/ImageUploader';
 
 const DEFAULT_WORKSHOP: defaultImage = {
   imageUrl: '/img/workshops-add-btn.png',

@@ -1,5 +1,5 @@
 import FormInput from '@/app/shared/modules/FormInput';
-import FormDatePicker from '@/app/shared/modules/form-date-select';
+import FormDatePicker from '@/app/shared/modules/form-date-input';
 import Header from '@/app/shared/modules/header';
 import ProfilePictureEdit from '@/app/shared/modules/profile-picture-edit';
 

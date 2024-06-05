@@ -61,7 +61,9 @@ const ImageUploader = ({
           Upload
         </button>
       </form>
-      <div className='w-full h-[136px] mb-6'>
+      <div
+        className={`w-full flex justify-center h-[${defaultImage.height}px] mb-6`}
+      >
         {!data && !uploaded && (
           <Image
             src={defaultImage.imageUrl}
@@ -71,7 +73,7 @@ const ImageUploader = ({
             // width={343}
             height={defaultImage.height}
             // height={136}
-            className='w-full'
+            className={defaultImage.className}
             onClick={handleUploadClick}
           />
         )}
@@ -81,7 +83,8 @@ const ImageUploader = ({
             alt={defaultImage.imageAlt}
             width={defaultImage.width}
             height={defaultImage.height}
-            className={`w-full object-cover h-[${defaultImage.height}px] ${defaultImage.className}`}
+            className={`w-full h-[${defaultImage.height}px] ${defaultImage.className}`}
+            // object-cover
           />
         )}
       </div>

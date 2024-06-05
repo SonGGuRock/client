@@ -1,29 +1,39 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormDatePicker from './FormDatePicker';
 import useToggle from '@/app/shared/lib/useToggle';
 import { formatDate } from '../lib/formatDate';
+import formatCalendarDate from '../lib/formatCalendarDate';
 
-// type ValuePiece = Date | null;
+type ValuePiece = Date | null;
 
-// export type Value = ValuePiece | [ValuePiece, ValuePiece];
+export type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 interface FormDateInputProps {
-  name?: string;
+  name: string;
   type?: string;
   required?: boolean;
   labelText: string;
+  onSelect: (value: { [key: string]: string }) => void;
 }
 
 const FormDateInput = ({
   labelText,
   name,
   required,
+  onSelect,
   type = 'text',
 }: FormDateInputProps) => {
   const { open, toggle } = useToggle();
-  const [value, onChange] = useState<Date>(new Date());
+  const [value, setValue] = useState<Value>(new Date());
+
+  const formattedValue = formatCalendarDate(value);
+
+  const handleChange = (value: Value) => {
+    setValue(value);
+    onSelect({ [name]: formatCalendarDate(value) });
+  };
 
   return (
     <div className='relative flex flex-wrap gap-2 w-full'>
@@ -36,11 +46,11 @@ const FormDateInput = ({
         required={required}
         className='appear w-full text-base text-grey900 border-b border-grey100 pb-2 bg-chevron-down-icon bg-no-repeat bg-right'
         onClick={toggle}
-        value={formatDate(value)}
+        value={formattedValue}
+        readOnly
       />
-      {/* TODO: 바로 입력이 편의성이 높음 */}
       {open && (
-        <FormDatePicker value={value} onChange={onChange} toggle={toggle} />
+        <FormDatePicker value={value} onChange={handleChange} toggle={toggle} />
       )}
     </div>
   );

@@ -10,7 +10,10 @@ export const useGetTodos = () =>
     select: (data) => data.data,
   });
 
-export function useMutateTodos<T>(path: string, method: 'POST' | 'DELETE') {
+export function useMutateWithCrendetials<T>(
+  path: string,
+  method: 'POST' | 'DELETE'
+) {
   const url = `/api/credentials/${path}`;
   return useMutation({
     mutationFn: (body: T) =>
