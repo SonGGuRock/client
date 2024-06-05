@@ -10,13 +10,16 @@ import Toast from '../toast/ui/toast';
 import useToast from '@/app/widget/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
-import { useGetTodos, useMutateTodos } from './lib/useTodos';
+import { useGetTodos, useMutateWithCrendetials } from './lib/useTodos';
 
 export default function Todos() {
   const { openModal, closeModal } = useModal();
   const { toast, toggleToast } = useToast();
   const { data: todos } = useGetTodos();
-  const { mutate } = useMutateTodos<{ content: string }>('todos', 'POST');
+  const { mutate } = useMutateWithCrendetials<{ content: string }>(
+    'todos',
+    'POST'
+  );
 
   const handleAddDone = (content: string) => {
     mutate({ content });
