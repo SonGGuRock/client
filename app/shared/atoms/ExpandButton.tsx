@@ -15,7 +15,7 @@ const ExpandButton = ({ onClick, expanded }: ExpandButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className='my-6 text-sm text-grey600 flex align-center w-full justify-center'
+      className='my-4 text-sm text-grey600 flex align-center w-full justify-center'
     >
       {!expanded ? '펼치기' : '접기'}
       <Image

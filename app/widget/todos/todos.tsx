@@ -13,6 +13,8 @@ import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 import { useGetTodos } from './lib/useTodos';
 import { useQueryClient } from '@tanstack/react-query';
 import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
+import ExpandedList from '@/app/shared/modules/ExpandedList';
+import sliceItems from '@/app/shared/lib/sliceItems';
 
 export default function Todos() {
   const queryClient = useQueryClient();
@@ -35,6 +37,8 @@ export default function Todos() {
     );
     toggleToast({ text: '할 일을 추가하였습니다' });
   };
+
+  const slicedTodos = sliceItems(4, todos);
 
   const handleOpenModalAddTodo = () => {
     openModal(
@@ -73,15 +77,15 @@ export default function Todos() {
       </div>
 
       <ul className='flex flex-wrap gap-2'>
-        {todos?.map((todo) => (
+        {slicedTodos?.limited?.map((todo) => (
           <TodoItem key={todo.id} {...todo} />
         ))}
       </ul>
-      {/* <ExpandedList>
-        {items?.rest.map((todo) => (
+      <ExpandedList>
+        {slicedTodos?.rest.map((todo) => (
           <TodoItem key={todo.id} {...todo} />
         ))}
-      </ExpandedList> */}
+      </ExpandedList>
       <PortalModal />
       {toast && <Toast text={toast.text} />}
     </div>

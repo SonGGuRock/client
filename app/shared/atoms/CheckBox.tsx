@@ -17,9 +17,9 @@ const CheckBox = ({
 }: CheckBoxProps) => {
   const checkBoxClasses = clsx(
     'appearance-none',
-    'w-[24px]',
+    'w-[28px]',
     'h-[24px]',
-    'rounded-lg',
+    'rounded-base',
     {
       'bg-grey100': style === 'brown',
       'bg-todo-check-icon': style === 'brown',

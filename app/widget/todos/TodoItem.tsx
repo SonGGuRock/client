@@ -10,10 +10,12 @@ import Toast from '../toast/ui/toast';
 import useToast from '@/app/widget/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
-import { useState } from 'react';
+
 import { useQueryClient } from '@tanstack/react-query';
+import Cookies from 'js-cookie';
 
 const TodoItem = ({ id, content, is_completed, author }: Todo) => {
+  // const memberId = Cookies.get('MEMBERID');
   const queryClient = useQueryClient();
   const { closeModal, openModal } = useModal();
   const { mutate } = useMutateWithCrendetials<
@@ -33,6 +35,24 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
         body: {
           content,
           is_completed: !is_completed,
+        },
+      },
+      {
+        onSuccess: () =>
+          queryClient.invalidateQueries({
+            queryKey: ['todos'],
+          }),
+      }
+    );
+  };
+
+  const handleEdit = (newContent: string) => {
+    mutate(
+      {
+        method: 'PUT',
+        body: {
+          content: newContent,
+          is_completed,
         },
       },
       {
@@ -92,7 +112,8 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
       <ModalContentWithInput
         title='할 일 수정'
         placeholder={content}
-        onDone={() => {
+        onDone={(content) => {
+          handleEdit(content);
           closeModal();
           toggleToast({ text: '할 일을 수정하였습니다' });
         }}
@@ -114,12 +135,11 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
       >
         {content}
         <span>
-          {/* author.id === userId -> meatball menu*/}
+          {/* {author.id === Number(memberID) && ( */}
           <MeatBall onClick={handleOpenModalEditMenu} />
           {/* <Thumbnail userId={author.id} /> */}
         </span>
       </label>
-
       {toast && <Toast text={toast.text} />}
     </li>
   );
