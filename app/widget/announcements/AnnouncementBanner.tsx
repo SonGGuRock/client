@@ -1,27 +1,17 @@
 'use client';
 
-import { AnnouncmentRepresentitive } from '@/app/lib-temp/definition';
+import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-export const announcement: AnnouncmentRepresentitive[] = [
-  {
-    id: 1,
-    title: '12/31 ~ 1/1 휴무',
-  },
-  {
-    id: 2,
-    title: '3월 도자기 워크숍 신청',
-  },
-  {
-    id: 3,
-    title: '신규 등록 진행 중',
-  },
-];
+import { AnnouncmentRepresentitive } from './lib/type';
 
 export default function AnnouncementBanner() {
+  const { data: announcements } = useQueryWithCredentials<
+    AnnouncmentRepresentitive[]
+  >('announcements/representative');
+
   return (
     <div
       data-desc='notice'
@@ -40,13 +30,13 @@ export default function AnnouncementBanner() {
         direction={'vertical'}
         modules={[Autoplay]}
       >
-        {announcement.map(({ id, title }) => (
+        {announcements?.map(({ id, content }) => (
           <SwiperSlide key={id} className='w-full text-sm'>
             <Link
-              href={`/announcement/${id}`}
-              className='w-full flex justify-between'
+              href={`/announcements/${id}`}
+              className='w-full flex justify-between items-center'
             >
-              <span>{title}</span>
+              <p className='w-full truncate'>{content}</p>
               <Image
                 src='/icon/ic-arrow-right-20px.svg'
                 alt='더보기'

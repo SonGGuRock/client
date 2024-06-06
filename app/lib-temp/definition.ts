@@ -13,15 +13,6 @@ export type TodosResponse = {
   todosMock: Todo[];
 };
 
-export type Announcment = {
-  id: number;
-  title: string;
-  updated_at: string;
-  is_representative_announcement: boolean;
-};
-
-export type AnnouncmentRepresentitive = Pick<Announcment, 'id' | 'title'>;
-
 // students
 
 export type Student = {

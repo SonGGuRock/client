@@ -6,9 +6,29 @@ import Button from '@/app/shared/atoms/button/Button';
 import Title from '@/app/shared/atoms/Title';
 import Toast from '@/app/widget/toast/ui/toast';
 import ArticleEditor from '@/app/shared/modules/ArticleEditor';
+import { useQueryClient } from '@tanstack/react-query';
+import { usePathname } from 'next/navigation';
+import {
+  AnnouncementEditRequest,
+  Announcment,
+} from '@/app/widget/announcements/lib/type';
+import {
+  useMutateWithCrendetials,
+  useQueryWithCredentials,
+} from '@/app/shared/api/fetch-with-credentials';
 
 const AnnouncementEditPage = () => {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const editPath = usePathname();
+  const path = editPath.split('/')[1] + '/' + editPath.split('/')[2];
+  const { data: announcement } = useQueryWithCredentials<Announcment>(
+    `${path}`
+  );
+
+  const { mutate } = useMutateWithCrendetials<AnnouncementEditRequest>(
+    `${path}`
+  );
 
   return (
     <div className='py-3 px-4'>
@@ -19,15 +39,7 @@ const AnnouncementEditPage = () => {
           저장
         </Button>
       </div>
-      <ArticleEditor
-        title='12/31 쉽니다'
-        content=' 여행은 새로운 경험과 추억을 선사하지만, 올바른 준비가 필수입니다. 이번
-        블로그 포스트에서는 여행자가 가져가야 할 10가지 필수 아이템을 상세히
-        소개합니다. 첫째, 편안한 여행을 위한 양질의 여행 가방. 두 번째는 다양한
-        환경에 대비할 수 있는 다용도 의류. 세 번째 아이템은 여행 중 긴급 상황에
-        대비한 응급 키트입니다. 네 번째는 휴대용 충전기와 보조 배터리로, 언제
-        어디서든 기기를 충전할 수 있게 해줍니다.'
-      />
+      <ArticleEditor title='12/31 쉽니다' content={announcement?.content} />
       {toast && <Toast text={toast.text} />}
     </div>
   );
