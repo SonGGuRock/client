@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import { ErrorResponse } from './type';
 import getRefreshTokenPromise, { isErrorResponse } from './refreshTokens';
+import https from 'https';
 
 export const BASE_URL = 'https://182.231.88.125:8080/v1';
 
@@ -11,6 +12,7 @@ const instance = axios.create({
     'Content-Type': 'application/json',
   },
   withCredentials: true,
+  httpsAgent: new https.Agent({ rejectUnauthorized: false }),
 });
 
 // let failedQueue: Array<{

@@ -11,6 +11,7 @@ import { Credentials } from '../api/type';
 
 const SigninForm = () => {
   const { mutate } = useSigninForm();
+  // const { mutate } = useMutateWithCrendetials('members/login');
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
@@ -18,6 +19,7 @@ const SigninForm = () => {
     const formData = new FormData(formRef.current!);
     const body = formDataToJSON(formData);
     mutate(body as Credentials);
+    // mutate({ method: 'POST', body: body as Credentials });
   };
 
   return (

@@ -9,14 +9,73 @@ import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWit
 import Toast from '../toast/ui/toast';
 import useToast from '@/app/widget/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
+import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
+
+import { useQueryClient } from '@tanstack/react-query';
+import Cookies from 'js-cookie';
 
 const TodoItem = ({ id, content, is_completed, author }: Todo) => {
+  // const memberId = Cookies.get('MEMBERID');
+  const queryClient = useQueryClient();
   const { closeModal, openModal } = useModal();
+  const { mutate } = useMutateWithCrendetials<
+    | {
+        is_completed: boolean;
+        content: string;
+      }
+    | undefined
+  >(`todos/${id}`);
 
   const { toast, toggleToast } = useToast();
 
-  const handleCheck = (id: number) => {
-    // updateTodo(id);
+  const handleCheck = () => {
+    mutate(
+      {
+        method: 'PUT',
+        body: {
+          content,
+          is_completed: !is_completed,
+        },
+      },
+      {
+        onSuccess: () =>
+          queryClient.invalidateQueries({
+            queryKey: ['todos'],
+          }),
+      }
+    );
+  };
+
+  const handleEdit = (newContent: string) => {
+    mutate(
+      {
+        method: 'PUT',
+        body: {
+          content: newContent,
+          is_completed,
+        },
+      },
+      {
+        onSuccess: () =>
+          queryClient.invalidateQueries({
+            queryKey: ['todos'],
+          }),
+      }
+    );
+  };
+
+  const handleDelete = () => {
+    mutate(
+      {
+        method: 'DELETE',
+      },
+      {
+        onSuccess: () =>
+          queryClient.invalidateQueries({
+            queryKey: ['todos'],
+          }),
+      }
+    );
   };
 
   const handleOpenModalEditMenu = () => {
@@ -37,6 +96,7 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
           iconUrl='/icon/ic-delete_24px.svg'
           type='secondary'
           onClick={() => {
+            handleDelete();
             closeModal();
             toggleToast({ text: '할 일을 삭제하였습니다.' });
           }}
@@ -52,8 +112,8 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
       <ModalContentWithInput
         title='할 일 수정'
         placeholder={content}
-        onDone={() => {
-          // TODO: updateTodo
+        onDone={(content) => {
+          handleEdit(content);
           closeModal();
           toggleToast({ text: '할 일을 수정하였습니다' });
         }}
@@ -65,9 +125,8 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
     <li
       key={`${id}`}
       className='w-full bg-grey50 rounded-md px-3 py-4 flex items-center gap-4 cursor-pointer '
-      onClick={() => handleCheck(id)}
     >
-      <CheckBox isChecked={is_completed} onCheck={() => handleCheck(id)} />
+      <CheckBox isChecked={is_completed} onCheck={handleCheck} />
       <label
         htmlFor='memo1'
         className={`w-full text-sm cursor-pointer flex items-center justify-between  ${
@@ -76,12 +135,11 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
       >
         {content}
         <span>
-          {/* author.id === userId -> meatball menu*/}
+          {/* {author.id === Number(memberID) && ( */}
           <MeatBall onClick={handleOpenModalEditMenu} />
           {/* <Thumbnail userId={author.id} /> */}
         </span>
       </label>
-
       {toast && <Toast text={toast.text} />}
     </li>
   );

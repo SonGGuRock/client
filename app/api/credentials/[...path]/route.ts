@@ -51,7 +51,9 @@ async function handleRequest(request: NextRequest, method: Method) {
   });
 
   instance.interceptors.response.use(
-    (response) => response,
+    (response) => {
+      return response;
+    },
     async (error: AxiosError<ErrorResponse>) => {
       const originalRequest = error.config;
       if (
@@ -84,11 +86,12 @@ async function handleRequest(request: NextRequest, method: Method) {
       headers: {
         Cookie: cookieHeader,
       },
-      data: request.body ? await request.json() : undefined,
+      data:
+        method !== 'DELETE' && request.body ? await request.json() : undefined,
     };
 
+    console.log('🐶🐶🐶🐶🐶', requestConfig);
     const response = await instance.request(requestConfig);
-
     return NextResponse.json(response.data);
   } catch (error: unknown) {
     if (isAxiosError(error)) {
@@ -121,9 +124,10 @@ async function handleRequest(request: NextRequest, method: Method) {
     } else {
       console.error('Unknown error:', error);
 
-      cookieStore.delete('accessToken');
-      cookieStore.delete('refreshToken');
-      return NextResponse.redirect(`http://localhost:3000/signin`);
+      // cookieStore.delete('accessToken');
+      // cookieStore.delete('refreshToken');
+      // return NextResponse.redirect(`http://localhost:3000/signin`);
+      return NextResponse.json(error, { status: 500 });
     }
   }
 }
