@@ -12,7 +12,10 @@ import useModal from '@/app/shared/modules/modal/lib/useModal';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 import { useGetTodos } from './lib/useTodos';
 import { useQueryClient } from '@tanstack/react-query';
-import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
+import {
+  useMutateWithCrendetials,
+  useOptimisticUpdateWithCrendetials,
+} from '@/app/shared/api/fetch-with-credentials';
 import ExpandedList from '@/app/shared/modules/ExpandedList';
 import sliceItems from '@/app/shared/lib/sliceItems';
 
@@ -21,7 +24,9 @@ export default function Todos() {
   const { openModal, closeModal } = useModal();
   const { toast, toggleToast } = useToast();
   const { data: todos } = useGetTodos();
-  const { mutate } = useMutateWithCrendetials<{ content: string }>('todos');
+  const { mutate } = useMutateWithCrendetials<{
+    content: string;
+  }>('todos');
 
   const handleAddDone = (content: string) => {
     mutate(
@@ -39,6 +44,7 @@ export default function Todos() {
   };
 
   const slicedTodos = sliceItems(4, todos);
+  const notCompletedTodos = todos?.filter((todo) => !todo.is_completed);
 
   const handleOpenModalAddTodo = () => {
     openModal(
@@ -57,7 +63,8 @@ export default function Todos() {
         <div className='text-lg font-semibold flex items-center gap-2 mb-4'>
           <Title>오늘의 할 일</Title>
           <span>
-            <strong className='text-brown'>3</strong>/6
+            <strong className='text-brown'>{notCompletedTodos?.length}</strong>/
+            {todos?.length}
           </span>
         </div>
         <Button
