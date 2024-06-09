@@ -22,6 +22,7 @@ import { useQueryClient } from '@tanstack/react-query';
 const AnnouncementDetailPage = () => {
   const queryClient = useQueryClient();
   const path = usePathname();
+  const router = useRouter();
   const { data: announcement } = useQueryWithCredentials<Announcment>(
     `${path}`
   );
@@ -31,7 +32,6 @@ const AnnouncementDetailPage = () => {
   );
   const { openModal } = useModal();
   const { toast, toggleToast } = useToast();
-  const router = useRouter();
 
   const handleRepresentitive = () => {
     announcement &&
@@ -102,7 +102,11 @@ const AnnouncementDetailPage = () => {
   return (
     <div className='py-3 px-4'>
       <div className='flex justify-between items-center'>
-        <Back />
+        <Back
+          onClick={() => {
+            router.push('/announcements');
+          }}
+        />
         <MeatBall onClick={handleOpenModal} />
       </div>
       <ArtilcePreview size='large' title='임의 title' updated_at='2024-01-24' />

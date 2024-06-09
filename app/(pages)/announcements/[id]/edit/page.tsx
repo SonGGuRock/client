@@ -1,4 +1,4 @@
-import AnnouncementEditPage from '@/app/pages/announcement/ui/announcement-edit-page';
+import AnnouncementEditPage from '@/app/pages/announcements/ui/announcement-edit-page';
 
 const Page = () => {
   return <AnnouncementEditPage />;

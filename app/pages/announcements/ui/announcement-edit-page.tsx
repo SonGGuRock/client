@@ -5,7 +5,7 @@ import Back from '@/app/shared/atoms/Back';
 import Button from '@/app/shared/atoms/button/Button';
 import Title from '@/app/shared/atoms/Title';
 import Toast from '@/app/widget/toast/ui/toast';
-import ArticleEditor from '@/app/shared/modules/ArticleEditor';
+import ArticleWriter from '@/app/shared/modules/ArticleWriter';
 import { useQueryClient } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import {
@@ -39,7 +39,7 @@ const AnnouncementEditPage = () => {
           저장
         </Button>
       </div>
-      <ArticleEditor title='12/31 쉽니다' content={announcement?.content} />
+      <ArticleWriter title='12/31 쉽니다' content={announcement?.content} />
       {toast && <Toast text={toast.text} />}
     </div>
   );

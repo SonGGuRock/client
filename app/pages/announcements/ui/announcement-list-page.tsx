@@ -23,7 +23,7 @@ const AnnouncementListPage = () => {
           <Back />
           <Title>공지사항</Title>
         </div>
-        <Link href='/announcement/create'>
+        <Link href='/announcements/create'>
           <Button
             size='small'
             icon={

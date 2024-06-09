@@ -1,11 +1,13 @@
 import { ClassNamesProps } from '@/app/widget/reservations/ui/class-time-picker';
 import clsx from 'clsx';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
 interface CheckBoxProps extends ClassNamesProps {
   isChecked?: boolean;
   isReadOnly?: boolean;
   onCheck?: () => void;
   style?: 'brown' | 'grey';
+  name?: string;
 }
 
 const CheckBox = ({
@@ -14,6 +16,7 @@ const CheckBox = ({
   onCheck,
   style = 'brown',
   classNames,
+  name,
 }: CheckBoxProps) => {
   const checkBoxClasses = clsx(
     'appearance-none',
@@ -28,7 +31,6 @@ const CheckBox = ({
     },
     {
       'opacity-50': style === 'grey',
-      // 'bg--check-off-icon': style === 'grey',
       'checked:bg-check-icon': isChecked && style === 'grey',
       'bg-center': style === 'grey',
       border: style === 'grey',
@@ -38,6 +40,7 @@ const CheckBox = ({
   return (
     <input
       readOnly={isReadOnly}
+      name={name}
       type='checkbox'
       className={`${checkBoxClasses} ${classNames}`}
       checked={isChecked}
@@ -47,3 +50,40 @@ const CheckBox = ({
 };
 
 export default CheckBox;
+
+interface FormCheckBoxProps<T extends FieldValues> {
+  register: UseFormRegister<T>;
+  name: Path<T>;
+  style?: 'brown' | 'grey';
+  classNames?: string;
+}
+
+export const FormCheckBox = <T extends FieldValues>({
+  register,
+  name,
+  style = 'brown',
+  classNames = '',
+}: FormCheckBoxProps<T>) => {
+  const checkBoxClasses = clsx(
+    'appearance-none',
+    'w-[24px]',
+    'h-[24px]',
+    'rounded-lg',
+    {
+      'bg-grey100': style === 'brown',
+      'bg-todo-check-icon': style === 'brown',
+      'checked:bg-brown': style === 'brown',
+      'checked:bg-checked-icon': style === 'brown',
+      'opacity-50': style === 'grey',
+      'checked:bg-check-icon': style === 'grey',
+      'bg-center': style === 'grey',
+      border: style === 'grey',
+      'border-white': style === 'grey',
+    },
+    classNames
+  );
+
+  return (
+    <input type='checkbox' className={checkBoxClasses} {...register(name)} />
+  );
+};

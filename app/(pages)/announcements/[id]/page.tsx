@@ -1,4 +1,4 @@
-import AnnouncementDetailPage from '@/app/pages/announcement/ui/announcement-detail-page';
+import AnnouncementDetailPage from '@/app/pages/announcements/ui/announcement-detail-page';
 
 const Page = () => {
   return <AnnouncementDetailPage />;
