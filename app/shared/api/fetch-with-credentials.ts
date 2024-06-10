@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { DataResponse } from './type';
+import { useRouter } from 'next/navigation';
 
 export function useMutateWithCrendetials<T>(
   path: string,
@@ -33,6 +34,7 @@ export function useQueryWithCredentials<T>(
   path: string,
   params?: { [key: string]: string | number | boolean }
 ) {
+  const router = useRouter();
   let url = `/api/credentials/${path}`;
   if (params) {
     const queryParams = new URLSearchParams();
@@ -42,14 +44,23 @@ export function useQueryWithCredentials<T>(
     url += `?${queryParams.toString()}`;
   }
 
-  return useQuery<DataResponse<T>, unknown, T>({
+  const { data, isError } = useQuery<DataResponse<T>, unknown, T>({
     queryKey: [path, params],
-    queryFn: () =>
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => data),
+    queryFn: async () => {
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return res.json();
+    },
     select: (data) => data.data,
   });
+
+  if (isError) {
+    router.push('/signin');
+  } else {
+    return data;
+  }
 }
 
 export function useOptimisticUpdateWithCrendetials<T>(

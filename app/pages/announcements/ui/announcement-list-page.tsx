@@ -10,7 +10,7 @@ import Link from 'next/link';
 import ArticlePreview from '@/app/shared/modules/ArticlePreview';
 
 const AnnouncementListPage = () => {
-  const { data: announcements } =
+  const announcements =
     useQueryWithCredentials<AnnouncmentRepresentitive[]>('announcements');
 
   return (

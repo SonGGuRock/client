@@ -23,9 +23,7 @@ const AnnouncementDetailPage = () => {
   const queryClient = useQueryClient();
   const path = usePathname();
   const router = useRouter();
-  const { data: announcement } = useQueryWithCredentials<Announcment>(
-    `${path}`
-  );
+  const announcement = useQueryWithCredentials<Announcment>(`${path}`);
 
   const { mutate } = useMutateWithCrendetials<AnnouncementEditRequest>(
     `${path}`
