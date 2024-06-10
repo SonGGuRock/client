@@ -1,5 +1,5 @@
 'use client';
-
+import Cookies from 'js-cookie';
 import { Todo } from '@/app/lib-temp/definition';
 import CheckBox from '../../shared/atoms/CheckBox';
 import MeatBall from '../../shared/atoms/MeatBall';
@@ -9,19 +9,17 @@ import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWit
 import Toast from '../toast/ui/toast';
 import useToast from '@/app/widget/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
-import {
-  useMutateWithCrendetials,
-  useOptimisticUpdateWithCrendetials,
-} from '@/app/shared/api/fetch-with-credentials';
+import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
+import Thumbnail from '@/app/shared/atoms/Thumbnail';
 
 const TodoItem = ({ id, content, is_completed, author }: Todo) => {
-  // const memberId = Cookies.get('MEMBERID');
+  const memberId = Cookies.get('MEMBERID');
   const queryClient = useQueryClient();
   const { closeModal, openModal } = useModal();
 
-  const { mutate } = useMutateWithCrendetials<
+  const { mutate, isPending, variables, isSuccess } = useMutateWithCrendetials<
     | {
         is_completed: boolean;
         content: string;
@@ -41,7 +39,7 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
         },
       },
       {
-        onSuccess: () =>
+        onSettled: () =>
           queryClient.invalidateQueries({
             queryKey: ['todos'],
           }),
@@ -59,7 +57,7 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
         },
       },
       {
-        onSuccess: () =>
+        onSettled: () =>
           queryClient.invalidateQueries({
             queryKey: ['todos'],
           }),
@@ -73,7 +71,7 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
         method: 'DELETE',
       },
       {
-        onSuccess: () =>
+        onSettled: () =>
           queryClient.invalidateQueries({
             queryKey: ['todos'],
           }),
@@ -114,7 +112,7 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
     openModal(
       <ModalContentWithInput
         title='할 일 수정'
-        placeholder={content}
+        defaultValue={content}
         onDone={(content) => {
           handleEdit(content);
           closeModal();
@@ -129,18 +127,28 @@ const TodoItem = ({ id, content, is_completed, author }: Todo) => {
       key={`${id}`}
       className='w-full bg-grey50 rounded-md px-3 py-4 flex items-center gap-4 cursor-pointer '
     >
-      <CheckBox isChecked={is_completed} onCheck={handleCheck} />
+      {isPending ? (
+        <CheckBox
+          isChecked={variables.body?.is_completed}
+          onCheck={handleCheck}
+          classNames='opacity-50'
+        />
+      ) : (
+        <CheckBox isChecked={is_completed} onCheck={handleCheck} />
+      )}
       <label
         htmlFor='memo1'
         className={`w-full text-sm cursor-pointer flex items-center justify-between  ${
           is_completed && 'text-grey500'
         }`}
       >
-        {content}
+        {isPending ? variables.body?.content : content}
         <span>
-          {/* {author.id === Number(memberID) && ( */}
-          <MeatBall onClick={handleOpenModalEditMenu} />
-          {/* <Thumbnail userId={author.id} /> */}
+          {author.id === Number(memberId) ? (
+            <MeatBall onClick={handleOpenModalEditMenu} />
+          ) : (
+            <Thumbnail id={author.id} imageUrl={author.profile_picture} />
+          )}
         </span>
       </label>
       {toast && <Toast text={toast.text} />}

@@ -9,9 +9,9 @@ import { AnnouncmentRepresentitive } from './lib/type';
 import IconNoticeFill from '@/app/shared/atoms/icons/icon-notice-fill';
 
 export default function AnnouncementBanner() {
-  const { data: announcements } = useQueryWithCredentials<
-    AnnouncmentRepresentitive[]
-  >('announcements/representative');
+  const announcements = useQueryWithCredentials<AnnouncmentRepresentitive[]>(
+    'announcements/representative'
+  );
 
   return (
     <div

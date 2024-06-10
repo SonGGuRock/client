@@ -8,8 +8,10 @@ import { AnnouncmentRepresentitive } from '@/app/widget/announcements/lib/type';
 import Image from 'next/image';
 import Link from 'next/link';
 import ArticlePreview from '@/app/shared/modules/ArticlePreview';
+import { useRouter } from 'next/navigation';
 
 const AnnouncementListPage = () => {
+  const router = useRouter();
   const announcements =
     useQueryWithCredentials<AnnouncmentRepresentitive[]>('announcements');
 
@@ -17,7 +19,11 @@ const AnnouncementListPage = () => {
     <div className='py-3 px-4'>
       <div className='flex w-full items-center justify-between text-lg font-semibold'>
         <div className='flex gap-1 items-center'>
-          <Back />
+          <Back
+            onClick={() => {
+              router.push('/home');
+            }}
+          />
           <Title>공지사항</Title>
         </div>
         <Link href='/announcements/create'>

@@ -10,12 +10,14 @@ type ModalContentWithInputProps = {
   placeholder?: string;
   onClose: () => void;
   onDone: (content: string) => void;
+  defaultValue?: string;
 };
 const ModalContentWithInput = ({
   title,
   placeholder,
   onClose,
   onDone,
+  defaultValue,
 }: ModalContentWithInputProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +31,11 @@ const ModalContentWithInput = ({
     <>
       <Title size='small'>{title}</Title>
       <form className='w-full mt-4' onSubmit={handleSubmit}>
-        <Input placeholder={placeholder ?? ''} name='content' />
+        <Input
+          placeholder={placeholder ?? ''}
+          name='content'
+          defaultValue={defaultValue}
+        />
         <div className='mt-4 flex gap-4 justify-center '>
           <Button style='secondary' size='large' onClick={onClose}>
             취소

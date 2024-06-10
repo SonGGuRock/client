@@ -22,7 +22,7 @@ const CheckBox = ({
     'appearance-none',
     'w-[28px]',
     'h-[24px]',
-    'rounded-base',
+    'rounded',
     {
       'bg-grey100': style === 'brown',
       'bg-todo-check-icon': style === 'brown',
