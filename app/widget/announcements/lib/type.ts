@@ -1,12 +1,14 @@
 export type AnnouncmentRepresentitive = {
   id: number;
-  content: string;
+  title: string;
+  updated_at: string;
+  is_representative_announcement: boolean;
 };
 
 export type Announcment = {
   title: string;
   content: string;
-  // updated_at: string;
+  update_at: string;
   is_representative_announcement: boolean;
   author: {
     name: string;
@@ -15,4 +17,8 @@ export type Announcment = {
   };
 };
 
-export type AnnouncementEditRequest = Omit<Announcment, 'author'>;
+export type AnnouncementEditRequest = {
+  title: string;
+  content: string;
+  is_representative_announcement: boolean;
+};

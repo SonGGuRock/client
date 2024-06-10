@@ -7,13 +7,14 @@ type ArticleEditorProps = {
   register: UseFormRegister<ArticleCreateRequest>;
 };
 
-const ArticleWriter = ({ register }: ArticleEditorProps) => {
+const ArticleWriter = ({ body, register }: ArticleEditorProps) => {
   return (
     <div className='mt-4'>
       <div className='border-b pb-4'>
         <input
           placeholder='제목을 입력하세요'
           className='text-base mb-1 w-full'
+          defaultValue={body?.title}
           autoFocus
           {...register('title', { required: true, maxLength: 20 })}
         />
@@ -21,6 +22,7 @@ const ArticleWriter = ({ register }: ArticleEditorProps) => {
       </div>
       <textarea
         placeholder='내용을 입력하세요'
+        defaultValue={body?.content}
         className='mt-8 w-full min-h-[320px]'
         {...register('content', { required: true })}
       />
@@ -29,6 +31,7 @@ const ArticleWriter = ({ register }: ArticleEditorProps) => {
           register={register}
           name='is_representative_announcement'
           style='brown'
+          defaultValue={body?.is_representative_announcement}
         />
         <label>대표 공지로 등록</label>
       </div>

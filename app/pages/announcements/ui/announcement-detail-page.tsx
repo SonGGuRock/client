@@ -5,7 +5,7 @@ import Back from '@/app/shared/atoms/Back';
 import ModalMenu from '@/app/shared/atoms/ModalMenu';
 import MeatBall from '@/app/shared/atoms/MeatBall';
 import Toast from '@/app/widget/toast/ui/toast';
-import ArtilcePreview from '@/app/shared/modules/ArticlePreview';
+import Article from '@/app/shared/modules/Article';
 import { usePathname, useRouter } from 'next/navigation';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
@@ -30,7 +30,7 @@ const AnnouncementDetailPage = () => {
   const { mutate } = useMutateWithCrendetials<AnnouncementEditRequest>(
     `${path}`
   );
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
   const { toast, toggleToast } = useToast();
 
   const handleRepresentitive = () => {
@@ -39,15 +39,24 @@ const AnnouncementDetailPage = () => {
         {
           method: 'PUT',
           body: {
-            title: '테스트용',
-            content: announcement.content + 'test',
+            title: announcement.title,
+            content: announcement.content,
             is_representative_announcement:
               !announcement.is_representative_announcement,
           },
         },
         {
-          onSuccess: () =>
-            queryClient.invalidateQueries({ queryKey: [`${path}`] }),
+          onSuccess: () => {
+            toggleToast({
+              text: `${
+                announcement.is_representative_announcement
+                  ? '대표 공지를 해제하였습니다'
+                  : '대표 공지로 등록하였습니다'
+              }`,
+            });
+            closeModal();
+            queryClient.invalidateQueries({ queryKey: [`${path}`] });
+          },
         }
       );
   };
@@ -75,12 +84,15 @@ const AnnouncementDetailPage = () => {
           iconUrl='/icon/ic-notice-empty-24px.svg'
           onClick={handleRepresentitive}
         >
-          대표 공지로 등록하기
+          대표 공지{' '}
+          {`${announcement?.is_representative_announcement ? '해제' : '등록'}`}
+          하기
         </ModalMenu>
         <ModalMenu
           key='bsm-1'
           iconUrl='/icon/ic-edit_24px.svg'
           onClick={() => {
+            closeModal();
             router.push(`${path}/edit`);
           }}
         >
@@ -109,7 +121,7 @@ const AnnouncementDetailPage = () => {
         />
         <MeatBall onClick={handleOpenModal} />
       </div>
-      <ArtilcePreview size='large' title='임의 title' updated_at='2024-01-24' />
+      {announcement && <Article content={announcement} />}
       <div className='pt-8'>{announcement?.content}</div>
       <PortalModal />
       {toast && <Toast text={toast.text} />}

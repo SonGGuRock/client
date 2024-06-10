@@ -84,13 +84,15 @@ export function useOptimisticUpdateWithCrendetials<T>(
 
       const previousTodos = queryClient.getQueryData(['todos']);
       queryClient.setQueryData(['todos'], (old: any) => [...old, newTodo]);
+      console.log('onMutate');
       return { previousTodos };
-    }, // mutation 실패 - onMutate의 리턴값이 context로 들어감
+    },
     onError: (err, newTodo, context) => {
+      console.log('onError');
       queryClient.setQueryData(['todos'], context?.previousTodos);
     },
-    // mutation 성공 - 서버의 최신 상태와 동기화 위해 임의로 교체해둔 쿼리 무효화
     onSettled: () => {
+      console.log('onSettled');
       queryClient.invalidateQueries({ queryKey: ['todos'] });
     },
   });

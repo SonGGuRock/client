@@ -54,6 +54,7 @@ export default CheckBox;
 interface FormCheckBoxProps<T extends FieldValues> {
   register: UseFormRegister<T>;
   name: Path<T>;
+  defaultValue?: boolean;
   style?: 'brown' | 'grey';
   classNames?: string;
 }
@@ -61,6 +62,7 @@ interface FormCheckBoxProps<T extends FieldValues> {
 export const FormCheckBox = <T extends FieldValues>({
   register,
   name,
+  defaultValue = false,
   style = 'brown',
   classNames = '',
 }: FormCheckBoxProps<T>) => {
@@ -84,6 +86,11 @@ export const FormCheckBox = <T extends FieldValues>({
   );
 
   return (
-    <input type='checkbox' className={checkBoxClasses} {...register(name)} />
+    <input
+      type='checkbox'
+      className={checkBoxClasses}
+      defaultChecked={defaultValue}
+      {...register(name)}
+    />
   );
 };

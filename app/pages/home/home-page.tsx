@@ -25,7 +25,7 @@ const HomePage = () => {
         {/* Suspense fallback={Students} */}
         {/* <Students /> */}
         <Divider />
-        <CraftsPreview />
+        {/* <CraftsPreview /> */}
       </section>
     </div>
   );

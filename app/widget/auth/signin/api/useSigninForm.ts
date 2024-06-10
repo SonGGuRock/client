@@ -13,6 +13,7 @@ const useSigninForm = () => {
       console.log('Network Request Success:', data);
       Cookies.set('accessToken', data.data.access_token);
       Cookies.set('refreshToken', data.data.refresh_token);
+      Cookies.set('MEMBERID', String(data.data.id));
       router.push('/workshops');
     },
 

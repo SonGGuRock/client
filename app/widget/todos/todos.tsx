@@ -24,24 +24,38 @@ export default function Todos() {
   const { openModal, closeModal } = useModal();
   const { toast, toggleToast } = useToast();
   const { data: todos } = useGetTodos();
-  const { mutate } = useMutateWithCrendetials<{
+
+  const { mutate } = useOptimisticUpdateWithCrendetials<{
     content: string;
   }>('todos');
 
   const handleAddDone = (content: string) => {
-    mutate(
-      {
-        method: 'POST',
-        body: {
-          content,
-        },
+    mutate({
+      method: 'POST',
+      body: {
+        content,
       },
-      {
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['todos'] }),
-      }
-    );
-    toggleToast({ text: '할 일을 추가하였습니다' });
+    });
   };
+
+  // const { mutate } = useMutateWithCrendetials<{
+  //   content: string;
+  // }>('todos');
+
+  // const handleAddDone = (content: string) => {
+  //   mutate(
+  //     {
+  //       method: 'POST',
+  //       body: {
+  //         content,
+  //       },
+  //     },
+  //     {
+  //       onSuccess: () => queryClient.invalidateQueries({ queryKey: ['todos'] }),
+  //     }
+  //   );
+  //   toggleToast({ text: '할 일을 추가하였습니다' });
+  // };
 
   const slicedTodos = sliceItems(4, todos);
   const notCompletedTodos = todos?.filter((todo) => !todo.is_completed);
@@ -58,7 +72,7 @@ export default function Todos() {
   };
 
   return (
-    <div className='mt-8 mb-2 relative px-4'>
+    <div className='mt-8 mb-4 relative px-4'>
       <div className='flex justify-between'>
         <div className='text-lg font-semibold flex items-center gap-2 mb-4'>
           <Title>오늘의 할 일</Title>
@@ -88,11 +102,13 @@ export default function Todos() {
           <TodoItem key={todo.id} {...todo} />
         ))}
       </ul>
-      <ExpandedList>
-        {slicedTodos?.rest.map((todo) => (
-          <TodoItem key={todo.id} {...todo} />
-        ))}
-      </ExpandedList>
+      {todos && todos.length > 4 && (
+        <ExpandedList>
+          {slicedTodos?.rest.map((todo) => (
+            <TodoItem key={todo.id} {...todo} />
+          ))}
+        </ExpandedList>
+      )}
       <PortalModal />
       {toast && <Toast text={toast.text} />}
     </div>

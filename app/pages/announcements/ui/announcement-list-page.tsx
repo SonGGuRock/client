@@ -4,13 +4,10 @@ import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials
 import Back from '@/app/shared/atoms/Back';
 import Button from '@/app/shared/atoms/button/Button';
 import Title from '@/app/shared/atoms/Title';
-import ArtilcePreview from '@/app/shared/modules/ArticlePreview';
-import {
-  Announcment,
-  AnnouncmentRepresentitive,
-} from '@/app/widget/announcements/lib/type';
+import { AnnouncmentRepresentitive } from '@/app/widget/announcements/lib/type';
 import Image from 'next/image';
 import Link from 'next/link';
+import ArticlePreview from '@/app/shared/modules/ArticlePreview';
 
 const AnnouncementListPage = () => {
   const { data: announcements } =
@@ -39,16 +36,25 @@ const AnnouncementListPage = () => {
           </Button>
         </Link>
       </div>
-      {announcements?.map((announcement) => (
-        <div key={announcement.id} className='pt-4 first:pt-0'>
-          <Link href={`/announcements/${announcement.id}`}>
-            <ArtilcePreview
-              title={announcement.content}
-              updated_at='2024-01-24'
-            />
-          </Link>
-        </div>
-      ))}
+      {announcements &&
+        [
+          ...announcements
+            .filter(
+              (announcement) => announcement.is_representative_announcement
+            )
+            .reverse(),
+          ...announcements
+            .filter(
+              (announcement) => !announcement.is_representative_announcement
+            )
+            .reverse(),
+        ].map((announcement) => (
+          <div key={announcement.id} className='pt-4 first:pt-0'>
+            <Link href={`/announcements/${announcement.id}`}>
+              <ArticlePreview content={announcement} />
+            </Link>
+          </div>
+        ))}
     </div>
   );
 };

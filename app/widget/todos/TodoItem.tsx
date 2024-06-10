@@ -9,15 +9,18 @@ import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWit
 import Toast from '../toast/ui/toast';
 import useToast from '@/app/widget/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
-import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
+import {
+  useMutateWithCrendetials,
+  useOptimisticUpdateWithCrendetials,
+} from '@/app/shared/api/fetch-with-credentials';
 
-import { useQueryClient } from '@tanstack/react-query';
-import Cookies from 'js-cookie';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const TodoItem = ({ id, content, is_completed, author }: Todo) => {
   // const memberId = Cookies.get('MEMBERID');
   const queryClient = useQueryClient();
   const { closeModal, openModal } = useModal();
+
   const { mutate } = useMutateWithCrendetials<
     | {
         is_completed: boolean;
