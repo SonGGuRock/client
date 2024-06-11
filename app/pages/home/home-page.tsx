@@ -1,7 +1,6 @@
 import AnnouncementBanner from '../../widget/announcements/AnnouncementBanner';
 
 import Todos from '../../widget/todos/todos';
-import CraftsPreview from '../../widget/crafts/ui/crafts-preview';
 import Reservations from '../../widget/reservations/preview/reservation-preview-swiper';
 import Divider from '../../shared/atoms/Divider';
 import HomeHeader from '../../widget/home/ui/home-header';
@@ -23,7 +22,7 @@ const HomePage = () => {
         <Divider />
         {/* Suspense fallback={Gallery} */}
         {/* Suspense fallback={Students} */}
-        {/* <Students /> */}
+        <Students />
         <Divider />
         {/* <CraftsPreview /> */}
       </section>

@@ -1,44 +1,19 @@
+'use client';
+
 import Title from '../../../shared/atoms/Title';
 import GoTo from '../../../shared/atoms/GoTo';
-import Student, { UserProps } from './student-list-item/Student';
+import Student from './student-list-item/Student';
 import ExpandedList from '../../../shared/modules/ExpandedList';
 import sliceItems from '@/app/shared/lib/sliceItems';
-
-export const students: UserProps[] = [
-  {
-    userId: 1,
-    userName: '최지영',
-    lastPaymentDate: '2024. 01. 25',
-    remainingCount: 1,
-  },
-  {
-    userId: 2,
-    userName: '한선민',
-    lastPaymentDate: '2024. 01. 25',
-    remainingCount: 1,
-  },
-  {
-    userId: 3,
-    userName: '이민지',
-    lastPaymentDate: '2024. 01. 25',
-    remainingCount: 1,
-  },
-  {
-    userId: 4,
-    userName: '최지영',
-    lastPaymentDate: '2024. 01. 25',
-    remainingCount: 1,
-  },
-  {
-    userId: 5,
-    userName: '최지영',
-    lastPaymentDate: '2024. 01. 25',
-    remainingCount: 1,
-  },
-];
+import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { Student as StudentType } from '@/app/lib-temp/definition';
 
 export default function Students() {
-  const { limited, rest } = sliceItems(students, 4);
+  const students = useQueryWithCredentials<StudentType[]>(
+    'reservations/students/today'
+  );
+
+  const { limited, rest } = sliceItems<StudentType>(4, students);
 
   return (
     <div className='mt-8 mb-2 w-full relative px-4'>
@@ -46,12 +21,12 @@ export default function Students() {
       <GoTo title='수강생 전체보기' href='' />
       <ul className='w-full flex flex-wrap gap-2 mt-4'>
         {limited.map((student) => (
-          <Student key={student.userId} {...student} />
+          <Student key={student.id} student={student} />
         ))}
       </ul>
       <ExpandedList>
         {rest.map((student) => (
-          <Student key={student.userId} {...student} />
+          <Student key={student.id} student={student} />
         ))}
       </ExpandedList>
     </div>
