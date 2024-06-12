@@ -5,30 +5,42 @@ import Link from 'next/link';
 import { StudentMain } from '@/app/widget/students/ui/student-list-item';
 import useSearchByInitial from '../lib/useSearchByInitial';
 import Search from '@/app/shared/modules/Search';
+import { Student } from '@/app/lib-temp/definition';
+import { StudentSearchParams } from '@/app/pages/students/ui/students-list-page';
 
-const StudentsWithSearch = () => {
-  const { keyword, handleChange, searched } = useSearchByInitial();
+interface StudentsWithSearch {
+  students: Student[];
+  onSort: (newParams: Partial<StudentSearchParams>) => void;
+}
+
+const StudentsWithSearch = ({ students, onSort }: StudentsWithSearch) => {
+  const { keyword, handleChange, searched } = useSearchByInitial(students);
   return (
     <>
       <div className='flex justify-between p-4'>
         <Search keyword={keyword} handleChange={handleChange} />
-        <DropDown>
-          <DropDown.Option value='횟수순'>횟수순</DropDown.Option>
+        <DropDown onSort={onSort}>
+          <DropDown.Option value='count'>횟수순</DropDown.Option>
+          <DropDown.Option value='name'>이름순</DropDown.Option>
+          <DropDown.Option value='register_date'>등록순</DropDown.Option>
         </DropDown>
       </div>
 
       <div className='px-4 flex flex-wrap'>
-        {searched.map((student, idx) => (
+        {searched?.map((student) => (
           <Link
-            key={`${student}-${idx}`}
-            href={`/students/${1}`}
+            key={student.id}
+            href={`/students/${student.id}`}
             className='border-b border-grey100 w-full py-3 last:border-none'
           >
             <StudentMain>
-              <StudentMain.Thumbnail id={1} />
-              <StudentMain.Name>{student}</StudentMain.Name>
+              <StudentMain.Thumbnail
+                id={student.id}
+                imageUrl={student.profile_picture}
+              />
+              <StudentMain.Name>{student.name}</StudentMain.Name>
               <StudentMain.RemainingClassCount>
-                1
+                {student.remaining_class_count}
               </StudentMain.RemainingClassCount>
             </StudentMain>
           </Link>

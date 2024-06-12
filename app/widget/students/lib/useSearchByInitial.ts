@@ -2,27 +2,40 @@
 
 import { ChangeEvent, useState } from 'react';
 import { makeRegexByCho } from './search-by-initial-consonant';
+import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { Student } from '@/app/lib-temp/definition';
 
-const useSearchByInitial = () => {
-  const students = ['김철수', '김민수', '최지연', '최지민', '채은아'];
+type StudentSearchParams = {
+  active?: 0 | 1;
+  sort?: 'count' | 'name' | 'register_date';
+};
 
+interface useSearchByInitialProps {
+  params: StudentSearchParams;
+}
+// const students = useQueryWithCredentials<Student[]>('students', {
+//   active,
+//   sort,
+// });
+
+const useSearchByInitial = (students: Student[]) => {
   const [searched, setSearched] = useState(students);
   const [keyword, setKeyword] = useState('');
 
-  const handleSearch = (newStudents: string[]) => {
+  const handleSearch = (newStudents: Student[]) => {
     setSearched(newStudents);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
     const search = e.target.value.trim();
-    const matched: string[] = [];
+    const matched: Student[] = [];
 
-    students.forEach((name) => {
+    students?.forEach((student) => {
       const regex = makeRegexByCho(search);
-      const isMatched = regex.test(name);
+      const isMatched = regex.test(student.name);
       if (isMatched) {
-        matched.push(name);
+        matched.push(student);
       }
     });
 
