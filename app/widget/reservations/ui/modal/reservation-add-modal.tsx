@@ -17,17 +17,13 @@ import { DayliyItemDate } from '../reservations-daily-item';
 
 interface ReservationAddModalProps {
   studentId: Student['id'];
+  onAddSuccess: (count: number) => void;
 }
 
-const ReservationAddModal = ({ studentId }: ReservationAddModalProps) => {
-  console.log(
-    getDateArray({ beforeCount: 4, afterCount: 3 }).map((date) => {
-      return {
-        date,
-        dayName: getDayName(new Date(date)) as DayliyItemDate['dayName'],
-      };
-    })
-  );
+const ReservationAddModal = ({
+  studentId,
+  onAddSuccess,
+}: ReservationAddModalProps) => {
   const [addBody, setAddBody] = useState<ReservationAddRequestBody>({
     class_count: 1,
     payment_date: '',
@@ -36,7 +32,7 @@ const ReservationAddModal = ({ studentId }: ReservationAddModalProps) => {
     `/students/${studentId}/addition`
   );
   const { closeModal } = useModal();
-  const { toast, toggleToast } = useToast();
+
   const queryClient = useQueryClient();
 
   const handleAddButton = () => {
@@ -54,10 +50,9 @@ const ReservationAddModal = ({ studentId }: ReservationAddModalProps) => {
               });
             },
           });
-          toggleToast({
-            text: `수강 횟수를 ${addBody.class_count}회 추가하였습니다`,
-          });
+
           closeModal();
+          onAddSuccess(addBody.class_count);
         },
       }
     );
@@ -108,7 +103,6 @@ const ReservationAddModal = ({ studentId }: ReservationAddModalProps) => {
           추가
         </Button>
       </div>
-      <Toast text={toast?.text ?? ''} />
     </div>
   );
 };

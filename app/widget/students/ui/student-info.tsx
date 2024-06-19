@@ -7,6 +7,8 @@ import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials
 import IconPlusCircle from '@/app/shared/atoms/icons/icon-plus-circle';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import ReservationAddModal from '../../reservations/ui/modal/reservation-add-modal';
+import useToast from '@/app/shared/modules/toast/lib/useToast';
+import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 
 interface StudentInfoProps {
   id: Student['id'];
@@ -20,9 +22,18 @@ const StudentInfo = ({ id }: StudentInfoProps) => {
   if (!student) return <div>학생을 찾을 수 없습니다</div>;
 
   const { openModal } = useModal();
-
+  const { toast, toggleToast } = useToast();
   const handleAddButton = () => {
-    openModal(<ReservationAddModal studentId={id} />);
+    openModal(
+      <ReservationAddModal
+        studentId={id}
+        onAddSuccess={(addedCount: number) => {
+          toggleToast({
+            text: `수강 횟수를 ${addedCount}회 추가하였습니다`,
+          });
+        }}
+      />
+    );
   };
 
   return (
@@ -59,6 +70,8 @@ const StudentInfo = ({ id }: StudentInfoProps) => {
           <IconPlusCircle />
         </div>
       </div>
+
+      {toast && <Toast text={toast.text} />}
     </div>
   );
 };

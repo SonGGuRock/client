@@ -9,6 +9,8 @@ import StudentReservationList from '@/app/widget/students/ui/student-reservation
 import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
 import { useQueryClient } from '@tanstack/react-query';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
+import useToast from '@/app/shared/modules/toast/lib/useToast';
+import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 
 const StudentDetailPage = () => {
   const router = useRouter();
@@ -16,6 +18,7 @@ const StudentDetailPage = () => {
   const studentId = Number(path.split('/')[2]);
   const queryClient = useQueryClient();
   const { closeModal } = useModal();
+  const { toggleToast, toast } = useToast();
 
   const { mutate } = useMutateWithCrendetials(
     `/students/${studentId}/inactive`
@@ -36,10 +39,10 @@ const StudentDetailPage = () => {
                 (key) => typeof key === 'string' && key.includes(`students`)
               ),
           });
-          // toggleToast({
-          //   text: `수강 횟수를 ${addBody.class_count}회 추가하였습니다`,
-          // });
           closeModal();
+          toggleToast({
+            text: '수강을 종료하였습니다',
+          });
         },
       }
     );
@@ -73,6 +76,7 @@ const StudentDetailPage = () => {
       <StudentTab />
 
       <StudentReservationList id={studentId} />
+      {toast && <Toast text={toast.text ?? ''} />}
     </div>
   );
 };
