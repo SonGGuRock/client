@@ -14,6 +14,7 @@ export const Select = ({
 }: SelectProps) => {
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
+    console.log(value);
     onChange && onChange(value);
   };
 

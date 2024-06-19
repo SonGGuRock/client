@@ -82,7 +82,9 @@ async function handleRequest(request: NextRequest, method: Method) {
   try {
     const requestConfig: AxiosRequestConfig = {
       method,
-      url: request.nextUrl.pathname.replace('/api/credentials', ''),
+      url:
+        request.nextUrl.pathname.replace('/api/credentials', '') +
+        request.nextUrl.search,
       headers: {
         Cookie: cookieHeader,
       },
@@ -93,7 +95,6 @@ async function handleRequest(request: NextRequest, method: Method) {
           : undefined,
     };
 
-    console.log('🐶🐶🐶🐶🐶', requestConfig);
     const response = await instance.request(requestConfig);
     return NextResponse.json(response.data);
   } catch (error: unknown) {
