@@ -1,20 +1,27 @@
-import { StudentSearchParams } from '@/app/pages/students/ui/students-list-page';
+import { ClassNamesProps } from '@/app/widget/reservations/ui/class-time-picker';
 import { ChangeEvent, PropsWithChildren, useState } from 'react';
 
-interface SelectProps extends PropsWithChildren {
-  onSort: (newParams: Partial<StudentSearchParams>) => void;
+interface SelectProps extends PropsWithChildren, ClassNamesProps {
+  onChange?: (value: any) => void;
+  defaultValue?: any;
 }
 
-export const Select = ({ children, onSort }: SelectProps) => {
+export const Select = ({
+  children,
+  onChange,
+  classNames,
+  defaultValue,
+}: SelectProps) => {
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
-    onSort({ sort: value as 'count' | 'name' | 'register_date' });
+    onChange && onChange(value);
   };
 
   return (
     <select
-      className='text-grey500 text-sm text-right'
+      className={`text-grey500 text-sm text-center ${classNames}`}
       onChange={handleSelectChange}
+      defaultValue={defaultValue}
     >
       {children}
     </select>

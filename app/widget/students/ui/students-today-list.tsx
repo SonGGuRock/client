@@ -9,7 +9,7 @@ import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials
 import { Student as StudentType } from '@/app/lib-temp/definition';
 
 export default function StudentsTodayList() {
-  const students = useQueryWithCredentials<StudentType[]>(
+  const { data: students } = useQueryWithCredentials<StudentType[]>(
     'reservations/students/today'
   );
 

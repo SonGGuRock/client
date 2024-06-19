@@ -8,8 +8,7 @@ import Title from '../../shared/atoms/Title';
 import Button from '../../shared/atoms/button/Button';
 
 import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWithInput';
-import Toast from '../toast/ui/toast';
-import useToast from '@/app/widget/toast/lib/useToast';
+import useToast from '@/app/shared/modules/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 import { useQueryClient } from '@tanstack/react-query';
@@ -21,13 +20,14 @@ import {
 import ExpandedList from '@/app/shared/modules/ExpandedList';
 import sliceItems from '@/app/shared/lib/sliceItems';
 import { Todo } from './lib/type';
+import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 
 export default function Todos() {
   const memberId = Cookies.get('MEMBERID');
   const queryClient = useQueryClient();
   const { openModal, closeModal } = useModal();
   const { toast, toggleToast } = useToast();
-  const todos = useQueryWithCredentials<Todo[]>('todos');
+  const { data: todos } = useQueryWithCredentials<Todo[]>('todos');
 
   const { mutate, isPending, variables } =
     useMutateWithCrendetials<TodoCreateBody>('todos');

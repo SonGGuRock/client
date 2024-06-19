@@ -3,23 +3,20 @@
 import DropDown from '@/app/shared/atoms/drop-down';
 import Link from 'next/link';
 import { StudentMain } from '@/app/widget/students/ui/student-list-item';
-import useSearchByInitial from '../lib/useSearchByInitial';
+import useSearchStudentsByInitial from '../lib/useSearchByInitial';
 import Search from '@/app/shared/modules/Search';
-import { Student } from '@/app/lib-temp/definition';
-import { StudentSearchParams } from '@/app/pages/students/ui/students-list-page';
+import StudentsTab from './students-tab';
 
-interface StudentsWithSearch {
-  students: Student[];
-  onSort: (newParams: Partial<StudentSearchParams>) => void;
-}
+const StudentsWithSearch = () => {
+  const { searchKeyword, handleKeywordChange, handleParams, searchedStudents } =
+    useSearchStudentsByInitial();
 
-const StudentsWithSearch = ({ students, onSort }: StudentsWithSearch) => {
-  const { keyword, handleChange, searched } = useSearchByInitial(students);
   return (
     <>
+      <StudentsTab onSwitch={handleParams} />
       <div className='flex justify-between p-4'>
-        <Search keyword={keyword} handleChange={handleChange} />
-        <DropDown onSort={onSort}>
+        <Search keyword={searchKeyword} handleChange={handleKeywordChange} />
+        <DropDown onChange={handleParams}>
           <DropDown.Option value='count'>횟수순</DropDown.Option>
           <DropDown.Option value='name'>이름순</DropDown.Option>
           <DropDown.Option value='register_date'>등록순</DropDown.Option>
@@ -27,7 +24,7 @@ const StudentsWithSearch = ({ students, onSort }: StudentsWithSearch) => {
       </div>
 
       <div className='px-4 flex flex-wrap'>
-        {searched?.map((student) => (
+        {searchedStudents?.map((student) => (
           <Link
             key={student.id}
             href={`/students/${student.id}`}

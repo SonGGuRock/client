@@ -1,10 +1,9 @@
 'use client';
 
-import useToast from '@/app/widget/toast/lib/useToast';
+import useToast from '@/app/shared/modules/toast/lib/useToast';
 import Back from '@/app/shared/atoms/Back';
-import ModalMenu from '@/app/shared/atoms/ModalMenu';
+import ModalMenu from '@/app/shared/modules/modal/ui/ModalMenu';
 import MeatBall from '@/app/shared/atoms/MeatBall';
-import Toast from '@/app/widget/toast/ui/toast';
 import Article from '@/app/shared/modules/Article';
 import { usePathname, useRouter } from 'next/navigation';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
@@ -18,13 +17,15 @@ import {
   Announcment,
 } from '@/app/widget/announcements/lib/type';
 import { useQueryClient } from '@tanstack/react-query';
+import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 
 const AnnouncementDetailPage = () => {
   const queryClient = useQueryClient();
   const path = usePathname();
   const router = useRouter();
-  const announcement = useQueryWithCredentials<Announcment>(`${path}`);
-
+  const { data: announcement } = useQueryWithCredentials<Announcment>(
+    `${path}`
+  );
   const { mutate } = useMutateWithCrendetials<AnnouncementEditRequest>(
     `${path}`
   );
@@ -74,6 +75,7 @@ const AnnouncementDetailPage = () => {
         }
       );
   };
+
   const handleOpenModal = () => {
     openModal(
       <>
@@ -109,6 +111,7 @@ const AnnouncementDetailPage = () => {
       </>
     );
   };
+
   return (
     <div className='py-3 px-4'>
       <div className='flex justify-between items-center'>

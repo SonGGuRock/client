@@ -86,8 +86,11 @@ async function handleRequest(request: NextRequest, method: Method) {
       headers: {
         Cookie: cookieHeader,
       },
+      //TODO: PUT, 바디가 없는 경우를 추가하기 위해 변경
       data:
-        method !== 'DELETE' && request.body ? await request.json() : undefined,
+        method !== 'DELETE' && method !== 'PUT' && request.body
+          ? await request.json()
+          : undefined,
     };
 
     console.log('🐶🐶🐶🐶🐶', requestConfig);

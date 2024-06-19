@@ -1,4 +1,4 @@
-import ModalMenu from '@/app/shared/atoms/ModalMenu';
+import ModalMenu from '@/app/shared/modules/modal/ui/ModalMenu';
 import Header from '@/app/shared/modules/header';
 
 const CraftItemDetailHeader = () => {

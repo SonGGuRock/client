@@ -1,23 +1,30 @@
 import clsx from 'clsx';
-import { ReservationsWeeklySwiperProps } from './reservations-weekly-swiper';
+import { DateWeeklySwiperProps } from './reservations-weekly-swiper';
 import { TimeCrowds } from './time-crowds';
 import { TodayBullet } from './today-bullet';
+import formatDateString from '@/app/shared/lib/formatDateString';
 
-export interface WeeklyVisitProps extends ReservationsWeeklySwiperProps {
+export type DayliyItemDate = {
   date: string;
-  dayOfWeek: string;
-  day: number;
-  visit: number[];
+  dayName: '월' | '화' | '수' | '목' | '금' | '토' | '일';
+};
+
+export interface WeeklyVisitProps {
+  // visit: number[];
+  dateItem: DayliyItemDate;
   isSelected: boolean;
+  style?: 'background-primary' | 'item-primary';
+  selectedItem?: string;
+  onClick?: (date: string) => void;
+  isWithTimeCrowds?: boolean;
 }
 export const ReservationsDailyItem = ({
-  date,
-  dayOfWeek,
-  day,
-  visit,
+  dateItem,
+  // visit,
   onClick,
   isSelected,
   style = 'background-primary',
+  isWithTimeCrowds,
 }: WeeklyVisitProps) => {
   const itemClasses = clsx(
     {
@@ -35,8 +42,24 @@ export const ReservationsDailyItem = ({
     if (!onClick) {
       return;
     } else {
-      onClick({ reservation_date: date });
+      onClick(dateItem.date);
     }
+  };
+
+  const getDay = (formatDate: string) => {
+    return formatDate.split('-')[2];
+  };
+
+  const getToday = () => {
+    return formatDateString({
+      fullDateString: String(new Date()),
+      options: {
+        includeYear: false,
+        includeMonth: false,
+        includeHours: false,
+        includeMinutes: false,
+      },
+    });
   };
 
   return (
@@ -44,10 +67,14 @@ export const ReservationsDailyItem = ({
       onClick={handleClick}
       className={`relative p-3  w-14 h-18 flex flex-wrap gap-[2px] justify-center itmes-center rounded-lg ${itemClasses}`}
     >
-      {day === 17 && <TodayBullet />}
-      <p className='w-full text-center text-sm text-grey500'>{dayOfWeek}</p>
-      <p className='w-full text-center text-base text-grey900'>{day}</p>
-      <TimeCrowds />
+      {getDay(dateItem.date) === getToday() && <TodayBullet />}
+      <p className='w-full text-center text-sm text-grey500'>
+        {dateItem.dayName}
+      </p>
+      <p className='w-full text-center text-base text-grey900'>
+        {getDay(dateItem.date)}
+      </p>
+      {isWithTimeCrowds && <TimeCrowds />}
     </div>
   );
 };

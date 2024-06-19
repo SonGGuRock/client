@@ -54,7 +54,7 @@ const StudentCreateForm = () => {
           queryClient.invalidateQueries({
             predicate: (query) => {
               return query.queryKey.some((key) => {
-                Array.isArray(key) && key.includes('students');
+                return Array.isArray(key) && key.includes('students');
               });
             },
           });

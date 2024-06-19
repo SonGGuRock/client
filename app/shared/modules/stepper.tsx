@@ -1,9 +1,8 @@
-import { CraftItem } from '@/app/pages/crafts/items/craft-item-create.page';
-import { Reservation } from '@/app/pages/reservations/ui/reservations-create-page';
 import useSteps, { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 import Button from '../atoms/button/Button';
 import { useRouter } from 'next/navigation';
 import Back from '../atoms/Back';
+import { CraftItem, Reservation } from '@/app/lib-temp/definition';
 
 interface StepperProps<T extends Reservation | CraftItem> {
   steps: Step<T>[];
