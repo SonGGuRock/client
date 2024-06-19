@@ -31,10 +31,11 @@ const CheckBox = ({
     },
     {
       'opacity-50': style === 'grey',
-      'checked:bg-check-icon': isChecked && style === 'grey',
+      'checked:bg-checked-icon': isChecked && style === 'grey',
       'bg-center': style === 'grey',
       border: style === 'grey',
       'border-white': style === 'grey',
+      'bg-grey900': style === 'grey',
     }
   );
   return (

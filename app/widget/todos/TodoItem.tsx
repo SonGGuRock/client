@@ -4,10 +4,10 @@ import { Todo } from '@/app/lib-temp/definition';
 import CheckBox from '../../shared/atoms/CheckBox';
 import MeatBall from '../../shared/atoms/MeatBall';
 
-import ModalMenu from '../../shared/atoms/ModalMenu';
+import ModalMenu from '../../shared/modules/modal/ui/ModalMenu';
 import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWithInput';
-import Toast from '../toast/ui/toast';
-import useToast from '@/app/widget/toast/lib/useToast';
+import ToastContent from '../../shared/modules/toast/ui/Toast';
+import useToast from '@/app/shared/modules/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
 

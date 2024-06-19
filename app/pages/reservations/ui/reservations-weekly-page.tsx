@@ -6,15 +6,16 @@ import { ButtonIndex } from '@/app/shared/atoms/button';
 import BottomBar from '@/app/shared/modules/BottomBar';
 import Header from '@/app/shared/modules/header';
 
-import DailySchedule from '@/app/widget/reservations/preview/reservation-daily-schedule';
+import DailySchedule from '@/app/widget/reservations/ui/preview/reservation-daily-schedule';
 import ReservationsDailyList from '../../../widget/reservations/ui/reservations-daily-list';
-import ReservationsHeader from '../../../widget/reservations/ui/reservations-header';
-import ReservationsWeeklySwiper from '@/app/widget/reservations/ui/reservations-weekly-swiper';
+import DateWeeklySwiper from '@/app/widget/reservations/ui/reservations-weekly-swiper';
 import Link from 'next/link';
+import ReservationsHeader from '@/app/widget/reservations/ui/reservations-header';
 
 export const ReservationsWeeklyPage = () => {
   return (
     <div>
+      <ReservationsHeader />
       <div className='mt-4 px-4'>
         <Header>
           <Header.Title>2월 24일 토요일</Header.Title>
@@ -27,7 +28,7 @@ export const ReservationsWeeklyPage = () => {
         </Header>
       </div>
 
-      <ReservationsWeeklySwiper />
+      <DateWeeklySwiper />
       <div className='py-6 bg-white px-4'>
         <DailySchedule />
       </div>

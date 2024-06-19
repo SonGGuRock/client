@@ -1,10 +1,10 @@
 import AnnouncementBanner from '../../widget/announcements/AnnouncementBanner';
 
 import Todos from '../../widget/todos/todos';
-import Reservations from '../../widget/reservations/preview/reservation-preview-swiper';
+import Reservations from '../../widget/reservations/ui/preview/reservation-preview-swiper';
 import Divider from '../../shared/atoms/Divider';
 import HomeHeader from '../../widget/home/ui/home-header';
-import Students from '@/app/widget/students/ui/students';
+import StudentsTodayList from '@/app/widget/students/ui/students-today-list';
 
 const HomePage = () => {
   return (
@@ -22,7 +22,7 @@ const HomePage = () => {
         <Divider />
         {/* Suspense fallback={Gallery} */}
         {/* Suspense fallback={Students} */}
-        <Students />
+        <StudentsTodayList />
         <Divider />
         {/* <CraftsPreview /> */}
       </section>

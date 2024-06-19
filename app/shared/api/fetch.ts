@@ -34,8 +34,8 @@ export const postAsync = async <T, K>(
       return response.data;
     }
   } catch (error) {
-    console.error('Error in postAsync:', error); // 오류 발생 시 콘솔에 오류를 출력합니다.
-    throw error; // 오류를 호출자에게 전파합니다.
+    console.error('Error in postAsync:', error);
+    throw error;
   }
 };
 

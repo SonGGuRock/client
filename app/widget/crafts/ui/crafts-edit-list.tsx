@@ -8,8 +8,8 @@ import Image from 'next/image';
 import PortalModal from '../../../shared/modules/modal/ui/PotalModal';
 import useModal from '../../../shared/modules/modal/lib/useModal';
 import CraftsEditModalContent from './crafts-edit-modal-content';
-import useToast from '../../toast/lib/useToast';
-import Toast from '../../toast/ui/toast';
+import useToast from '../../../shared/modules/toast/lib/useToast';
+import ToastContent from '../../../shared/modules/toast/ui/Toast';
 import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 import ModalContentInfoType from '@/app/shared/modules/modal/ui/modal-content-info-type';
 

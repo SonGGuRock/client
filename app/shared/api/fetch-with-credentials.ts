@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { DataResponse } from './type';
 import { useRouter } from 'next/navigation';
-import { Todo } from '@/app/lib-temp/definition';
 
 export function useMutateWithCrendetials<T>(
   path: string,
@@ -23,11 +22,17 @@ export function useMutateWithCrendetials<T>(
     }: {
       method: 'POST' | 'DELETE' | 'PUT';
       body?: T;
-    }) =>
-      fetch(url, {
+    }) => {
+      const options = {
         method,
-        body: body ? JSON.stringify(body) : undefined,
-      }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        ...(body && { body: JSON.stringify(body) }),
+      };
+
+      return fetch(url, options);
+    },
   });
 }
 
@@ -45,7 +50,7 @@ export function useQueryWithCredentials<T>(
     url += `?${queryParams.toString()}`;
   }
 
-  const { data, isError } = useQuery<DataResponse<T>, unknown, T>({
+  const { data, isError, isLoading } = useQuery<DataResponse<T>, unknown, T>({
     queryKey: [path, params],
     queryFn: async () => {
       const res = await fetch(url);
@@ -55,17 +60,19 @@ export function useQueryWithCredentials<T>(
       return res.json();
     },
     select: (data) => data.data,
+    refetchOnMount: true,
   });
 
   if (isError) {
     router.push('/signin');
-  } else {
-    return data;
   }
+
+  return { data, isLoading, isError };
 }
 
 export type TodoEditBody = {
   content: string;
   is_completed: boolean;
 };
+
 export type TodoCreateBody = Pick<TodoEditBody, 'content'>;

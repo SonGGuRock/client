@@ -82,15 +82,19 @@ async function handleRequest(request: NextRequest, method: Method) {
   try {
     const requestConfig: AxiosRequestConfig = {
       method,
-      url: request.nextUrl.pathname.replace('/api/credentials', ''),
+      url:
+        request.nextUrl.pathname.replace('/api/credentials', '') +
+        request.nextUrl.search,
       headers: {
         Cookie: cookieHeader,
       },
+      //TODO: PUT, 바디가 없는 경우를 추가하기 위해 변경
       data:
-        method !== 'DELETE' && request.body ? await request.json() : undefined,
+        method !== 'DELETE' && method !== 'PUT' && request.body
+          ? await request.json()
+          : undefined,
     };
 
-    console.log('🐶🐶🐶🐶🐶', requestConfig);
     const response = await instance.request(requestConfig);
     return NextResponse.json(response.data);
   } catch (error: unknown) {

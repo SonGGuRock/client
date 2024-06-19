@@ -1,10 +1,10 @@
 'use client';
 
-import useToast from '@/app/widget/toast/lib/useToast';
+import useToast from '@/app/shared/modules/toast/lib/useToast';
 import Back from '@/app/shared/atoms/Back';
 import Button from '@/app/shared/atoms/button/Button';
 import Title from '@/app/shared/atoms/Title';
-import Toast from '@/app/widget/toast/ui/toast';
+import ToastContent from '@/app/shared/modules/toast/ui/Toast';
 import ArticleWriter from '@/app/shared/modules/ArticleWriter';
 import { useQueryClient } from '@tanstack/react-query';
 import { usePathname, useRouter } from 'next/navigation';

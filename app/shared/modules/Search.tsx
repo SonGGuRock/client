@@ -6,7 +6,7 @@ import { ChangeEvent } from 'react';
 
 interface SearchByInitialConsonantProps {
   keyword: string;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Search = ({

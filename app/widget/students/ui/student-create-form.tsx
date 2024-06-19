@@ -9,9 +9,11 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { StudentCreateRequest } from '../lib/type';
 import { formatPhoneNumber } from '@/app/shared/lib/formatPhoneNumber';
 import FormDateInput from '@/app/shared/modules/form-date-input';
-import { useMutateWithCrendetials } from '../../todos/lib/useTodos';
+import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
+import { Query, QueryKey, useQueryClient } from '@tanstack/react-query';
 
 const StudentCreateForm = () => {
+  const queryClient = useQueryClient();
   const [studentForm, setStudentForm] = useState<StudentCreateRequest>({
     profile_picture: '',
     name: '',
@@ -20,7 +22,7 @@ const StudentCreateForm = () => {
     last_payment_date: '',
     memo: '',
   });
-  const { mutate } = useMutateWithCrendetials('students', 'POST');
+  const { mutate } = useMutateWithCrendetials('students');
   const router = useRouter();
 
   const handleUpload = (url: string) => {
@@ -42,9 +44,26 @@ const StudentCreateForm = () => {
 
     const body = formDataToJSON(formData);
     console.log('✅', body);
-    mutate(body as StudentCreateRequest, {
-      //   onSuccess: () => router.push('/student/create/success'),
-    });
+    mutate(
+      {
+        method: 'POST',
+        body: body as StudentCreateRequest,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            predicate: (query) => {
+              return query.queryKey.some((key) => {
+                return Array.isArray(key) && key.includes('students');
+              });
+            },
+          });
+          window.location.href = '/students';
+          // router.push('/students');
+          // router.push('/student/create/success')
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -80,7 +99,7 @@ const StudentCreateForm = () => {
           imageAlt: '수강생 등록 기본',
           width: 88,
           height: 88,
-          className: 'object-contain rounded-full',
+          className: 'object-contain',
         }}
       />
       <form className='flex flex-wrap gap-6' onSubmit={handleSubmit}>

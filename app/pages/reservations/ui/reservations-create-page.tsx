@@ -11,16 +11,7 @@ import StepClassTime from '@/app/widget/reservations/ui/step-class-time';
 import StepWorkType from '@/app/widget/reservations/ui/step-work-type';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import Stepper from '@/app/shared/modules/stepper';
-
-type WORK_TYPE = 'throw' | 'hand';
-
-export type Reservation = {
-  student_id?: number;
-  student_name?: string;
-  reservation_date?: string;
-  reservation_class_time_id?: string;
-  work_type?: WORK_TYPE;
-};
+import { Reservation } from '@/app/lib-temp/definition';
 
 const ReservationsCreatePage = () => {
   const { form } = useFormFill(ReservationCreateContext);
@@ -29,7 +20,7 @@ const ReservationsCreatePage = () => {
     {
       order: 0,
       isMount: true,
-      data: 'student_name',
+      data: 'student_id',
       component: <StepStudent context={ReservationCreateContext} />,
     },
     {
@@ -45,10 +36,10 @@ const ReservationsCreatePage = () => {
       component: <StepWorkType />,
     },
   ];
-  const { handlePrev } = useSteps(RESERVATION_STEPS);
+  // const { handlePrev } = useSteps(RESERVATION_STEPS);
 
   return (
-    <div className='pt-3 pb-10'>
+    <div className='pt-3 pb-10 bg-white'>
       <Header className='px-4'>
         <div className='w-full flex gap-1 justify-between items-center'>
           <div className='flex gap-1 items-center'>

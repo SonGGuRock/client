@@ -8,7 +8,7 @@ export type AnnouncmentRepresentitive = {
 export type Announcment = {
   title: string;
   content: string;
-  update_at: string;
+  updated_at: string;
   is_representative_announcement: boolean;
   author: {
     name: string;

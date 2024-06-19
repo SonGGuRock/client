@@ -1,6 +1,6 @@
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
-import ModalMenu from '@/app/shared/atoms/ModalMenu';
+import ModalMenu from '@/app/shared/modules/modal/ui/ModalMenu';
 import Title from '@/app/shared/atoms/Title';
 import IconPlusCircle from '@/app/shared/atoms/icons/icon-plus-circle';
 import SelectLikeButton from '@/app/shared/atoms/select-like-button';
