@@ -8,11 +8,13 @@ export async function middleware(req: NextRequest) {
     pathname.includes('/signup') ||
     pathname.includes('/reset-password');
 
+  const apiPage = pathname.includes('/api');
+
   if (isStaticAssetRequest(req)) {
     return NextResponse.next();
   }
 
-  if (!accessToken && !isAuthPage) {
+  if (!accessToken && !isAuthPage && !apiPage) {
     const url = req.nextUrl.clone();
     url.pathname = '/signin';
     return NextResponse.redirect(url);

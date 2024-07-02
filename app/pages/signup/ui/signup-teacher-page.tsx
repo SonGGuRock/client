@@ -48,7 +48,11 @@ const SignupTeacherPage = () => {
     formData.set('user_type', userType);
 
     const body = formDataToJSON(formData);
-    mutate(body as SignupRequest);
+    mutate(body as SignupRequest, {
+      onSuccess: () => {
+        router.push('/signin');
+      },
+    });
   };
 
   return (

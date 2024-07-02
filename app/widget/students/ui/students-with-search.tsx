@@ -8,10 +8,16 @@ import useSearchStudentsByInitial, {
 } from '../lib/useSearchByInitial';
 import Search from '@/app/shared/modules/Search';
 import StudentsTab from './students-tab';
+import EmptyDataNotice from '@/app/shared/atoms/EmptyDataNotice';
 
 const StudentsWithSearch = () => {
-  const { searchKeyword, handleKeywordChange, handleParams, searchedStudents } =
-    useSearchStudentsByInitial();
+  const {
+    searchKeyword,
+    handleKeywordChange,
+    handleParams,
+    searchedStudents,
+    tabActiveStatus,
+  } = useSearchStudentsByInitial();
 
   const onSelect = (value: StudentSearchParams['sort']) => {
     handleParams({ sort: value });
@@ -34,7 +40,9 @@ const StudentsWithSearch = () => {
           <Link
             key={student.id}
             href={`/students/${student.id}`}
-            className='border-b border-grey100 w-full py-3 last:border-none'
+            className={`border-b border-grey100 w-full py-3 last:border-none ${
+              tabActiveStatus === 0 && 'opacity-50'
+            }`}
           >
             <StudentMain>
               <StudentMain.Thumbnail
@@ -48,6 +56,9 @@ const StudentsWithSearch = () => {
             </StudentMain>
           </Link>
         ))}
+        {searchedStudents?.length === 0 && (
+          <EmptyDataNotice>등록된 수강생이 없습니다</EmptyDataNotice>
+        )}
       </div>
     </>
   );

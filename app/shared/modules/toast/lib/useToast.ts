@@ -5,7 +5,7 @@ export type ToastContent = {
 };
 
 const useToast = () => {
-  const [toast, setToast] = useState<ToastContent | null>();
+  const [toast, setToast] = useState<ToastContent | null>(null);
 
   const toggleToast = (text: ToastContent) => {
     setToast(text);

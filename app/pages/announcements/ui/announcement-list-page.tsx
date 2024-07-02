@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 
 const AnnouncementListPage = () => {
   const router = useRouter();
-  const announcements =
+  const { data: announcements } =
     useQueryWithCredentials<AnnouncmentRepresentitive[]>('announcements');
 
   return (
@@ -42,7 +42,7 @@ const AnnouncementListPage = () => {
           </Button>
         </Link>
       </div>
-      {announcements &&
+      {announcements && announcements.length !== 0 ? (
         [
           ...announcements
             .filter(
@@ -60,7 +60,12 @@ const AnnouncementListPage = () => {
               <ArticlePreview content={announcement} />
             </Link>
           </div>
-        ))}
+        ))
+      ) : (
+        <div className='w-full pt-16 flex justify-center items-center'>
+          작성된 공지가 없습니다
+        </div>
+      )}
     </div>
   );
 };

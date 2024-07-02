@@ -18,7 +18,7 @@ import ImageUploader, {
 const DEFAULT_WORKSHOP: defaultImage = {
   imageUrl: '/img/workshops-add-btn.png',
   imageAlt: '공방 등록 이미지',
-  width: 143,
+  width: 375,
   height: 136,
   className: 'rounded-lg',
 };

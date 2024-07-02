@@ -7,6 +7,7 @@ import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { AnnouncmentRepresentitive } from './lib/type';
 import IconNoticeFill from '@/app/shared/atoms/icons/icon-notice-fill';
+import { useEffect } from 'react';
 
 export default function AnnouncementBanner() {
   const { data: announcements } = useQueryWithCredentials<
@@ -25,13 +26,30 @@ export default function AnnouncementBanner() {
         direction={'vertical'}
         modules={[Autoplay]}
       >
-        {announcements?.map(({ id, title }) => (
-          <SwiperSlide key={id} className='w-full text-sm'>
+        {announcements && announcements.length !== 0 ? (
+          announcements.map(({ id, title }) => (
+            <SwiperSlide key={id} className='w-full text-sm'>
+              <Link
+                href={`/announcements/${id}`}
+                className='w-full flex justify-between items-center'
+              >
+                <p className='w-full truncate'>{title}</p>
+                <Image
+                  src='/icon/ic-arrow-right-20px.svg'
+                  alt='더보기'
+                  width={18}
+                  height={18}
+                />
+              </Link>
+            </SwiperSlide>
+          ))
+        ) : (
+          <SwiperSlide className='w-full text-sm'>
             <Link
-              href={`/announcements/${id}`}
+              href={`/announcements`}
               className='w-full flex justify-between items-center'
             >
-              <p className='w-full truncate'>{title}</p>
+              <p className='w-full truncate'>공지 쓰러 가기</p>
               <Image
                 src='/icon/ic-arrow-right-20px.svg'
                 alt='더보기'
@@ -40,7 +58,7 @@ export default function AnnouncementBanner() {
               />
             </Link>
           </SwiperSlide>
-        ))}
+        )}
       </Swiper>
     </div>
   );

@@ -6,13 +6,13 @@ import MeatBall from '../../shared/atoms/MeatBall';
 
 import ModalMenu from '../../shared/modules/modal/ui/ModalMenu';
 import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWithInput';
-import ToastContent from '../../shared/modules/toast/ui/Toast';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
 
 import { useQueryClient } from '@tanstack/react-query';
 import Thumbnail from '@/app/shared/atoms/Thumbnail';
+import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 
 const TodoItem = ({ id, content, is_completed, author }: Todo) => {
   const memberId = Cookies.get('MEMBERID');

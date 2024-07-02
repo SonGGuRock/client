@@ -1,4 +1,4 @@
-import MyPage from '@/app/pages/mypage/ui/mypage';
+import MyPage from '@/app/pages/notifications/mypage/ui/mypage';
 
 const Page = () => {
   return <MyPage />;

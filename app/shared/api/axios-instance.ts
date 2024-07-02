@@ -4,7 +4,7 @@ import { ErrorResponse } from './type';
 import getRefreshTokenPromise, { isErrorResponse } from './refreshTokens';
 import https from 'https';
 
-export const BASE_URL = 'https://182.231.88.125:8080/v1';
+export const BASE_URL = 'https:/songgurock.duckdns.org/v1';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -12,8 +12,12 @@ const instance = axios.create({
     'Content-Type': 'application/json',
   },
   withCredentials: true,
-  httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+  // httpsAgent: new https.Agent({
+  //   rejectUnauthorized: false,
+  // }),
 });
+
+// new https.Agent({ rejectUnauthorized: false }
 
 // let failedQueue: Array<{
 //   resolve: (value: string) => void;
@@ -54,6 +58,9 @@ instance.interceptors.response.use(
   },
   async (error: AxiosError<ErrorResponse>) => {
     const originalRequest = error.config;
+
+    console.log(error, '📌📌📌');
+
     if (
       error.response &&
       isErrorResponse(error.response.data) &&
