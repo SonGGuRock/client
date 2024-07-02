@@ -7,10 +7,15 @@ import WorkshopList from '@/app/widget/workshops/ui/workshop-list';
 
 const WorkshopOnboardingPage = () => {
   const { data } = useWorkshopRegistered();
+
   return (
     <div className='px-4 pt-[124px] '>
       <Title size='large'>이용할 공방을 선택해주세요</Title>
-      {data && <WorkshopList workshopList={data} />}
+      {data && <WorkshopList workshopList={data.approval} status='approval' />}
+      {data && <WorkshopList workshopList={data.pending} status='pending' />}
+      {data && (
+        <WorkshopList workshopList={data.rejection} status='rejection' />
+      )}
       <WorkshopOnboardingType />
     </div>
   );

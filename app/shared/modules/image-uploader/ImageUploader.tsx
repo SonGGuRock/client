@@ -4,15 +4,25 @@ import useFileUpload from '@/app/shared/api/useFileUpload';
 import Image from 'next/image';
 import { ChangeEvent, useEffect, useRef } from 'react';
 
-interface WorkshopImageUploaderProps {
+export type defaultImage = {
+  imageUrl: string;
+  imageAlt: string;
+  width: number;
+  height: number;
+  className?: string;
+};
+
+interface ImageUploaderProps {
   onUpload: (imageUrl: string) => void;
   uploaded?: string;
+  defaultImage: defaultImage;
 }
 
-const WorkshopImageUploader = ({
+const ImageUploader = ({
   onUpload,
   uploaded,
-}: WorkshopImageUploaderProps) => {
+  defaultImage,
+}: ImageUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
   const { mutate, data, isSuccess } = useFileUpload();
@@ -51,24 +61,30 @@ const WorkshopImageUploader = ({
           Upload
         </button>
       </form>
-      <div className='w-full h-[136px] mb-6'>
+      <div
+        className={`w-full flex justify-center h-[${defaultImage.height}px] mb-6`}
+      >
         {!data && !uploaded && (
           <Image
-            src='/img/workshops-add-btn.png'
-            alt='공방 등록 이미지'
-            width={343}
-            height={136}
-            className='w-full'
+            src={defaultImage.imageUrl}
+            // src='/img/workshops-add-btn.png'
+            alt={defaultImage.imageAlt}
+            width={defaultImage.width}
+            // width={343}
+            height={defaultImage.height}
+            // height={136}
+            className={defaultImage.className}
             onClick={handleUploadClick}
           />
         )}
         {uploaded && (
           <Image
             src={uploaded}
-            alt='공방 썸네일'
-            width={343}
-            height={136}
-            className='w-full object-cover h-[136px] rounded-lg'
+            alt={defaultImage.imageAlt}
+            width={defaultImage.width}
+            height={defaultImage.height}
+            className={`w-[${defaultImage.width}px] rounded-full h-[${defaultImage.height}px] ${defaultImage.className}`}
+            // object-cover
           />
         )}
       </div>
@@ -76,4 +92,4 @@ const WorkshopImageUploader = ({
   );
 };
 
-export default WorkshopImageUploader;
+export default ImageUploader;

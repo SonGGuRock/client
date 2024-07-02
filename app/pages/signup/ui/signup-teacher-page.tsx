@@ -4,7 +4,7 @@ import useToggle from '@/app/shared/lib/useToggle';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 import Button from '@/app/shared/atoms/button/Button';
 import FormInput from '@/app/shared/modules/FormInput';
-import FormDateInput from '@/app/shared/modules/form-date-select';
+import FormDateInput from '@/app/shared/modules/form-date-input';
 import Header from '@/app/shared/modules/header';
 
 import EmailAuthCodeSender from '../../../widget/auth/signup/email-auth-code-sender';
@@ -48,7 +48,11 @@ const SignupTeacherPage = () => {
     formData.set('user_type', userType);
 
     const body = formDataToJSON(formData);
-    mutate(body as SignupRequest);
+    mutate(body as SignupRequest, {
+      onSuccess: () => {
+        router.push('/signin');
+      },
+    });
   };
 
   return (

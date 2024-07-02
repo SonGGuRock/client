@@ -2,7 +2,7 @@
 
 import ModalLayout from '@/app/shared/modules/modal/ui/ModalLayout';
 import Header from '@/app/shared/modules/header';
-import ModalMenu from '../../../shared/atoms/ModalMenu';
+import ModalMenu from '../../../shared/modules/modal/ui/ModalMenu';
 
 const StudentHeader = () => {
   return (

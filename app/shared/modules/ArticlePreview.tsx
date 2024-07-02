@@ -1,24 +1,24 @@
-export type ArtilcePreview = {
-  title: string;
-  updated_at: string;
-  size?: 'small' | 'large';
+import { AnnouncmentRepresentitive } from '@/app/widget/announcements/lib/type';
+import IconNoticeFill from '../atoms/icons/icon-notice-fill';
+import formatDateString from '../lib/formatDateString';
+
+export type ArtilcePreviewProps = {
+  content: AnnouncmentRepresentitive;
 };
 
-const ArtilcePreview = ({
-  title,
-  updated_at,
-  size = 'small',
-}: ArtilcePreview) => {
+const ArticlePreview = ({ content }: ArtilcePreviewProps) => {
   return (
     <div className='border-b pb-4'>
-      <h4 className={`${size === 'large' ? 'text-base' : 'text-sm'} mb-1`}>
-        {title}
+      <h4 className='text-base mb-1 flex gap-2'>
+        {content.is_representative_announcement && <IconNoticeFill />}
+        {content.title}
       </h4>
-      <p className={`${size === 'large' ? 'text-sm' : 'text-xs'} text-grey300`}>
-        {updated_at}
+
+      <p className='text-grey400 text-xs'>
+        {content && content.updated_at.slice(0, 10)}
       </p>
     </div>
   );
 };
 
-export default ArtilcePreview;
+export default ArticlePreview;

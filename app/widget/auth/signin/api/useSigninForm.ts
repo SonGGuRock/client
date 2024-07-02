@@ -4,17 +4,23 @@ import { Credentials, AuthTokenResponse } from './type';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
-const IS_ROUTE_REQUEST = true;
-
 const useSigninForm = () => {
   const router = useRouter();
-  return useMutation<AuthTokenResponse, unknown, Credentials>({
+  return useMutation<any, unknown, Credentials>({
     mutationFn: (body: Credentials) =>
+      // fetch('/api/authorize/members/login', {
+      //   method: 'POST',
+      //   body: JSON.stringify(body),
+      // }).then((res) => {
+      //   if (!res.ok) throw new Error('api Route reqeust fail');
+      //   return res.json();
+      // }),
       postAsync<Credentials, AuthTokenResponse>('members/login', body),
     onSuccess(data) {
       console.log('Network Request Success:', data);
       Cookies.set('accessToken', data.data.access_token);
-      Cookies.set('refreshToken', data.data.access_token);
+      Cookies.set('refreshToken', data.data.refresh_token);
+      Cookies.set('MEMBERID', String(data.data.id));
       router.push('/workshops');
     },
 

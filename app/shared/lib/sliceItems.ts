@@ -1,8 +1,15 @@
 export default function sliceItems<T>(
-  data: T[],
-  limit: number
+  limit: number,
+  data?: T[]
 ): { limited: T[]; rest: T[] } {
-  const limited = data.slice(0, limit);
-  const rest = data.slice(limit);
-  return { limited, rest };
+  if (!data) {
+    return {
+      limited: [],
+      rest: [],
+    };
+  } else {
+    const limited = data.slice(0, limit);
+    const rest = data.slice(limit);
+    return { limited, rest };
+  }
 }

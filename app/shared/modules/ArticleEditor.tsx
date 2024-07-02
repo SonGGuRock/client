@@ -1,23 +1,19 @@
+import { ArticleCreateRequest } from '@/app/pages/announcements/ui/announcement-create-page';
 import CheckBox from '../atoms/CheckBox';
+import { UseFormRegister } from 'react-hook-form';
 
 type ArticleEditorProps = {
-  title?: string;
-  content?: string;
-  is_representative_announcement?: boolean;
+  body?: ArticleCreateRequest;
+  register: UseFormRegister<ArticleCreateRequest>;
 };
 
-const ArticleEditor = ({
-  title,
-  content,
-  is_representative_announcement = false,
-}: ArticleEditorProps) => {
+const ArticleEditor = ({}: ArticleEditorProps) => {
   return (
     <div className='mt-4'>
       <div className='border-b pb-4'>
         <input
           placeholder='제목을 입력하세요'
           className='text-base mb-1 w-full'
-          value={title}
           autoFocus
           maxLength={20}
         />

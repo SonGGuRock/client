@@ -1,7 +1,7 @@
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
 import Title from '@/app/shared/atoms/Title';
 import { useContext } from 'react';
-import ReservationsWeeklySwiper from './reservations-weekly-swiper';
+import DateWeeklySwiper from './reservations-weekly-swiper';
 import ClassTimePicker from './class-time-picker';
 import useFormFill from '../../../shared/modules/stepper/lib/use-form-fill';
 
@@ -14,7 +14,7 @@ const StepClassTime = () => {
         <Title size='large'>수강 날짜와 시간을 선택해주세요</Title>
       </div>
       <div>
-        <ReservationsWeeklySwiper
+        <DateWeeklySwiper
           style='item-primary'
           onClick={fill}
           selectedItem={form.reservation_date}

@@ -2,15 +2,15 @@
 
 import { ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Reservation } from '@/app/pages/reservations/ui/reservations-create-page';
+import { ReservationTemp } from '@/app/pages/reservations/ui/reservations-create-page';
 import { CraftItem } from '@/app/pages/crafts/items/craft-item-create.page';
 
 export type Step<T> =
-  | (T extends Reservation
+  | (T extends ReservationTemp
       ? {
           order: number;
           isMount: boolean;
-          data: keyof Reservation;
+          data: keyof ReservationTemp;
           component: ReactNode;
         }
       : never)
@@ -23,10 +23,10 @@ export type Step<T> =
         }
       : never);
 
-function useSteps(initial: (Step<Reservation> | Step<CraftItem>)[]) {
+function useSteps(initial: (Step<ReservationTemp> | Step<CraftItem>)[]) {
   const router = useRouter();
   const [steps, setSteps] =
-    useState<(Step<Reservation> | Step<CraftItem>)[]>(initial);
+    useState<(Step<ReservationTemp> | Step<CraftItem>)[]>(initial);
 
   const handleNext = () => {
     const prevOrder = steps.find((step) => step.isMount)!.order;

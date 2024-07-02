@@ -9,8 +9,8 @@ interface FormInputProps extends PropsWithChildren {
   disabled?: boolean;
   required?: boolean;
   maxLength?: number;
-  // onChange?: (value: string, name?:string) => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  defaultValue?: string;
 }
 
 const FormInput = ({
@@ -24,6 +24,7 @@ const FormInput = ({
   maxLength,
   onChange,
   required,
+  defaultValue,
 }: FormInputProps) => {
   return (
     <div className='flex flex-wrap gap-2 w-full'>
@@ -40,6 +41,7 @@ const FormInput = ({
         className='w-full text-base place-holder::text-grey300 text-grey900 border-b border-grey100 py-2'
         placeholder={inputPlaceholder}
         onChange={onChange}
+        defaultValue={defaultValue}
       />
       {children}
     </div>

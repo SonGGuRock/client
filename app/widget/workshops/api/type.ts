@@ -8,6 +8,12 @@ export type Workshop = {
   profile_picture: string;
 };
 
+export type WorkshopRegisterListResponse = {
+  approval: Workshop[] | [];
+  pending: Workshop[] | [];
+  rejection: Workshop[] | [];
+};
+
 export type TeacherRegisterResponse = {
   teacher_id: number;
 };

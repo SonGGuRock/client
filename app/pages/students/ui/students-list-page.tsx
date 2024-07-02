@@ -1,9 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import StudentsWithSearch from '@/app/widget/students/ui/students-with-search';
 import Title from '@/app/shared/atoms/Title';
 import Button from '@/app/shared/atoms/button/Button';
-import StudentsTab from '@/app/widget/students/ui/students-tab';
 import BottomBar from '@/app/shared/modules/BottomBar';
 
 const StudentsListPage = () => {
@@ -30,7 +31,6 @@ const StudentsListPage = () => {
         </Link>
       </div>
 
-      <StudentsTab />
       <StudentsWithSearch />
       <BottomBar />
     </div>

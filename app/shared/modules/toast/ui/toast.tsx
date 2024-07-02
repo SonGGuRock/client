@@ -1,7 +1,7 @@
-import { Toast } from '@/app/shared/modules/toast/lib/useToast';
+import { ToastContent } from '@/app/shared/modules/toast/lib/useToast';
 import { createPortal } from 'react-dom';
 
-const Toast = ({ text }: Toast) => {
+export function Toast({ text }: ToastContent) {
   return createPortal(
     <div className='inset-0 w-full fixed z-100 '>
       <div className='absolute left-0 bottom-16 flex justify-center w-full h-10'>
@@ -12,6 +12,4 @@ const Toast = ({ text }: Toast) => {
     </div>,
     document.body
   );
-};
-
-export default Toast;
+}

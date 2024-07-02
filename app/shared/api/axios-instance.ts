@@ -1,9 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import { ErrorResponse } from './type';
-import { AuthTokenResponse } from '@/app/widget/auth/signin/api/type';
+import getRefreshTokenPromise, { isErrorResponse } from './refreshTokens';
+import https from 'https';
 
-export const BASE_URL = 'https://182.231.88.125:8080/v1';
+export const BASE_URL = 'https:/songgurock.duckdns.org/v1';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -11,27 +12,31 @@ const instance = axios.create({
     'Content-Type': 'application/json',
   },
   withCredentials: true,
+  // httpsAgent: new https.Agent({
+  //   rejectUnauthorized: false,
+  // }),
 });
 
-let isRefreshing = false;
-let failedQueue: Array<{
-  resolve: (value: string) => void;
-  reject: (reason?: any) => void;
-}> = [];
+// new https.Agent({ rejectUnauthorized: false }
 
-const processQueue = (
-  error: AxiosError | null,
-  token: string | null = null
-) => {
-  failedQueue.forEach((promise) => {
-    if (error) {
-      promise.reject(error);
-    } else {
-      promise.resolve(token!);
-    }
-  });
-  failedQueue = [];
-};
+// let failedQueue: Array<{
+//   resolve: (value: string) => void;
+//   reject: (reason?: any) => void;
+// }> = [];
+
+// const processQueue = (
+//   error: AxiosError | null,
+//   token: string | null = null
+// ) => {
+//   failedQueue.forEach((promise) => {
+//     if (error) {
+//       promise.reject(error);
+//     } else {
+//       promise.resolve(token!);
+//     }
+//   });
+//   failedQueue = [];
+// };
 
 instance.interceptors.request.use(
   (config) => {
@@ -39,6 +44,7 @@ instance.interceptors.request.use(
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
+
     return config;
   },
   (error: AxiosError) => {
@@ -53,54 +59,28 @@ instance.interceptors.response.use(
   async (error: AxiosError<ErrorResponse>) => {
     const originalRequest = error.config;
 
-    if (error.response?.data.code === '1110') {
-      if (isRefreshing) {
-        return new Promise<string>(function (resolve, reject) {
-          failedQueue.push({ resolve, reject });
-        })
-          .then((token: string) => {
-            if (originalRequest) {
-              originalRequest.headers[`Authorization`] = `Bearer ` + token;
-              return instance(originalRequest);
-            }
-          })
-          .catch((err) => {
-            return Promise.reject(err);
-          });
-      }
+    console.log(error, '📌📌📌');
 
-      isRefreshing = true;
-
+    if (
+      error.response &&
+      isErrorResponse(error.response.data) &&
+      error.response.data.code === '1110'
+    ) {
       try {
-        const response = await axios.post<AuthTokenResponse>(
-          BASE_URL + '/members/reissue',
-          {
-            access_token: Cookies.get('accessToken'),
-            refresh_token: Cookies.get('refreshToken'),
-          }
-        );
-
-        const newAccessToken = response.data.data.access_token;
-        const newRefreshToken = response.data.data.refresh_token;
-
-        Cookies.set('accessToken', newAccessToken);
-        Cookies.set('refreshToken', newRefreshToken);
-
-        instance.defaults.headers[`Authorization`] = `Bearer ` + newAccessToken;
-        processQueue(null, newAccessToken);
-        isRefreshing = false;
+        const { accessToken } = await getRefreshTokenPromise();
+        instance.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
 
         if (originalRequest) {
-          originalRequest.headers[`Authorization`] = `Bearer ` + newAccessToken;
+          originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
           return instance(originalRequest);
         }
       } catch (err) {
-        processQueue(err as AxiosError, null);
-        isRefreshing = false;
         window.location.href = '/signin';
         return Promise.reject(err);
       }
     }
+
+    return Promise.reject(error);
   }
 );
 

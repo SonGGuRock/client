@@ -27,7 +27,7 @@ const WorkShopInfo = ({
       <div className='absolute bottom-3 left-3 grid grid-rows-3'>
         <span className='font-bold text-white'>{name}</span>
         <span className=' text-white text-xs'>{address}</span>
-        <PhoneNumber className='text-white'>{phone_number}</PhoneNumber>
+        <PhoneNumber className='text-white' phoneNumber={phone_number} />
       </div>
     </div>
   );

@@ -1,8 +1,25 @@
+import { Reservation } from '@/app/lib-temp/definition';
+import IconHand from '@/app/shared/atoms/icons/icon-hand';
+import IconPot from '@/app/shared/atoms/icons/icon-pot';
+import isDateInThePast from '@/app/shared/lib/isDateInThePast';
 import Image from 'next/image';
+
 interface ReservationItemsProps {
-  isFulfilled: boolean;
+  reservation: Reservation;
 }
-const ReservationItem = ({ isFulfilled }: ReservationItemsProps) => {
+
+const ReservationItem = ({
+  reservation: {
+    id,
+    reservation_date,
+    day_name,
+    start_time,
+    work_type,
+    remaining_class_count,
+    total_class_count,
+  },
+}: ReservationItemsProps) => {
+  const isFulfilled = isDateInThePast(reservation_date);
   return (
     <div
       className={`w-full p-3 ${
@@ -10,12 +27,7 @@ const ReservationItem = ({ isFulfilled }: ReservationItemsProps) => {
       } rounded-lg flex gap-2 items-center justfiy-between`}
     >
       <div className='flex gap-2 w-full'>
-        <Image
-          src='/icon/ic-hand-circle-32px.svg'
-          alt='핸드빌딩 아이콘'
-          width={32}
-          height={32}
-        />
+        {work_type === 'hand' ? <IconHand /> : <IconPot />}
         <div className='flex flex-wrap  '>
           <p
             className={`w-full text-sm ${
@@ -29,7 +41,8 @@ const ReservationItem = ({ isFulfilled }: ReservationItemsProps) => {
               isFulfilled ? 'text-white' : 'text-grey400'
             }`}
           >
-            오전 10:00 ~ 오후 12:00
+            {/* 오전 10:00 ~ 오후 12:00 */}
+            {start_time}
           </p>
         </div>
       </div>
@@ -39,7 +52,7 @@ const ReservationItem = ({ isFulfilled }: ReservationItemsProps) => {
             isFulfilled ? 'text-white' : 'text-grey500'
           }`}
         >
-          4 / 4회
+          {remaining_class_count} / {total_class_count}회
         </p>
         <Image
           src='/icon/ic-close-circle-18px.svg'

@@ -1,10 +1,35 @@
-import Button from '@/app/shared/atoms/button/Button';
-import FormInput from '@/app/shared/modules/FormInput';
-import FormDatePicker from '@/app/shared/modules/form-date-select';
-import ProfileDefault from '@/app/shared/modules/ProfileDefault';
+'use client';
+
 import Header from '@/app/shared/modules/header';
+import StudentForm from '@/app/widget/students/ui/student-form';
+import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
+import { useQueryClient } from '@tanstack/react-query';
+import { StudentMutateRequest } from '@/app/widget/students/lib/type';
 
 const StudentCreatePage = () => {
+  const { mutate } = useMutateWithCrendetials('students');
+  const queryClient = useQueryClient();
+  const createStudent = (body: StudentMutateRequest) =>
+    mutate(
+      {
+        method: 'POST',
+        body,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            predicate: (query) => {
+              return query.queryKey.some((key) => {
+                return Array.isArray(key) && key.includes('students');
+              });
+            },
+          });
+          window.location.href = '/students';
+          // router.push('/students');
+          // router.push('/student/create/success')
+        },
+      }
+    );
   return (
     <div className='py-3 px-4'>
       <Header>
@@ -14,24 +39,11 @@ const StudentCreatePage = () => {
         </div>
       </Header>
 
-      <div className='flex justify-center items-center w-full py-8'>
+      {/* <div className='flex justify-center items-center w-full py-8'>
         <ProfileDefault />
-      </div>
+      </div> */}
 
-      <div className='flex gap-6 flex-wrap pb-12'>
-        <FormInput
-          lableText='이름'
-          inputPlaceholder='이름(실명)을 입력해주세요'
-        />
-        <FormInput lableText='전화번호' inputPlaceholder='- 구분없이 입력' />
-        <FormDatePicker labelText='등록일' />
-        <FormDatePicker labelText='결제일' />
-        <FormInput lableText='메모' inputPlaceholder='(선택사항)' />
-      </div>
-
-      <Button size='large' disabled>
-        등록 완료
-      </Button>
+      <StudentForm onSubmit={createStudent} />
     </div>
   );
 };

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-export type Toast = {
+export type ToastContent = {
   text: string;
 };
 
 const useToast = () => {
-  const [toast, setToast] = useState<Toast | null>();
+  const [toast, setToast] = useState<ToastContent | null>(null);
 
-  const toggleToast = (text: Toast) => {
+  const toggleToast = (text: ToastContent) => {
     setToast(text);
   };
 

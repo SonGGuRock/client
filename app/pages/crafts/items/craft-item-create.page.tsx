@@ -7,16 +7,7 @@ import CraftItemCreateDetail from '@/app/widget/crafts/ui/craft-item-create-deta
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 import StepStudent from '@/app/widget/reservations/ui/step-student';
-
-export type CraftItem = {
-  craft_id: number;
-  reservation_id: number;
-  student_id: number;
-  student_name: string;
-  craft_item_picture: string;
-  craft_item_work_step: string;
-  content: string;
-};
+import { CraftItem } from '@/app/lib-temp/definition';
 
 const CraftItemCreatePage = () => {
   const { form } = useFormFill(CraftItemCreateContext);

@@ -1,103 +1,74 @@
 'use client';
 
+import Cookies from 'js-cookie';
+
 import Image from 'next/image';
 import TodoItem from './TodoItem';
-import ExpandedList from '../../shared/modules/ExpandedList';
-import sliceItems from '@/app/shared/lib/sliceItems';
 import Title from '../../shared/atoms/Title';
 import Button from '../../shared/atoms/button/Button';
 
 import ModalContentWithInput from '../../shared/modules/modal/ui/ModalContentWithInput';
-import Toast from '../../shared/modules/toast/ui/toast';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
-
-type Todo = {
-  id: number;
-  content: string;
-  is_completed: boolean;
-  author: {
-    id: number;
-    profile_picture: string;
-  };
-};
+import { useQueryClient } from '@tanstack/react-query';
+import {
+  TodoCreateBody,
+  useQueryWithCredentials,
+  useMutateWithCrendetials,
+} from '@/app/shared/api/fetch-with-credentials';
+import ExpandedList from '@/app/shared/modules/ExpandedList';
+import sliceItems from '@/app/shared/lib/sliceItems';
+import { Todo } from './lib/type';
+import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 
 export default function Todos() {
+  const memberId = Cookies.get('MEMBERID');
+  const queryClient = useQueryClient();
   const { openModal, closeModal } = useModal();
   const { toast, toggleToast } = useToast();
+  const { data: todos } = useQueryWithCredentials<Todo[]>('todos');
 
-  const todos: Todo[] = [
-    {
-      id: 1,
-      content: '속파기 도구 small 10개 사기',
-      is_completed: true,
-      author: {
-        id: 1,
-        profile_picture: '/mock/user/img_user.png',
-      },
-    },
-    {
-      id: 2,
-      content: '속파기 도구 small 10개 사기',
-      is_completed: false,
-      author: {
-        id: 2,
-        profile_picture: '/mock/user/img_user.png',
-      },
-    },
-    {
-      id: 3,
-      content: '속파기 도구 small 10개 사기',
-      is_completed: true,
-      author: {
-        id: 3,
-        profile_picture: '/mock/user/img_user.png',
-      },
-    },
-    {
-      id: 4,
-      content: '속파기 도구 small 10개 사기',
-      is_completed: true,
-      author: {
-        id: 4,
-        profile_picture: '/mock/user/img_user.png',
-      },
-    },
-    {
-      id: 5,
-      content: '속파기 도구 small 10개 사기',
-      is_completed: true,
-      author: {
-        id: 5,
-        profile_picture: '/mock/user/img_user.png',
-      },
-    },
-  ];
+  const { mutate, isPending, variables } =
+    useMutateWithCrendetials<TodoCreateBody>('todos');
 
-  const { limited, rest } = sliceItems(todos, 4);
+  const handleAddDone = (content: string) => {
+    mutate(
+      {
+        method: 'POST',
+        body: {
+          content,
+        },
+      },
+      {
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['todos'] }),
+      }
+    );
+    toggleToast({ text: '할 일을 추가하였습니다' });
+  };
+
+  const slicedTodos = sliceItems(4, todos);
+  const notCompletedTodos = todos?.filter((todo) => !todo.is_completed);
 
   const handleOpenModalAddTodo = () => {
     openModal(
       <ModalContentWithInput
         title='할 일 추가'
         placeholder='오늘의 할 일을 입력하세요'
-        onDone={() => {
-          closeModal();
-          toggleToast({ text: '할 일을 추가하였습니다' });
-        }}
+        onDone={handleAddDone}
         onClose={closeModal}
       />
     );
   };
 
   return (
-    <div className='mt-8 mb-2 relative px-4'>
+    <div className='mt-8 mb-4 relative px-4'>
       <div className='flex justify-between'>
         <div className='text-lg font-semibold flex items-center gap-2 mb-4'>
           <Title>오늘의 할 일</Title>
           <span>
-            <strong className='text-brown'>3</strong>/6
+            <strong className='text-brown'>{notCompletedTodos?.length}</strong>/
+            {todos?.length}
           </span>
         </div>
         <Button
@@ -117,15 +88,30 @@ export default function Todos() {
       </div>
 
       <ul className='flex flex-wrap gap-2'>
-        {limited.map((todo) => (
+        {slicedTodos?.limited?.map((todo) => (
           <TodoItem key={todo.id} {...todo} />
         ))}
+        {isPending && (
+          <div className='opacity-50'>
+            <TodoItem
+              content={variables?.body?.content!}
+              id={0}
+              is_completed={false}
+              author={{
+                id: Number(memberId),
+                profile_picture: '/img/teacher-charactar.png',
+              }}
+            />
+          </div>
+        )}
       </ul>
-      <ExpandedList>
-        {rest.map((todo) => (
-          <TodoItem key={todo.id} {...todo} />
-        ))}
-      </ExpandedList>
+      {todos && todos.length > 4 && (
+        <ExpandedList>
+          {slicedTodos?.rest.map((todo) => (
+            <TodoItem key={todo.id} {...todo} />
+          ))}
+        </ExpandedList>
+      )}
       <PortalModal />
       {toast && <Toast text={toast.text} />}
     </div>

@@ -1,22 +1,22 @@
-import { Reservation } from '../../../shared/modules/stepper/lib/use-form-fill';
+import { Reservation } from '@/app/lib-temp/definition';
 import ClassTimeItem from './class-time-item';
 
-export type ClassTime = Pick<Reservation, 'reservation_class_time_id'> & {
+export type ClassTime = Pick<Reservation, 'reservation_date'> & {
   text: string;
 };
 
 const CLASS_TIMES: ClassTime[] = [
-  { reservation_class_time_id: '1', text: '09-12시' },
-  { reservation_class_time_id: '2', text: '12-15시' },
-  { reservation_class_time_id: '3', text: '15-18시' },
-  { reservation_class_time_id: '4', text: '18-21시' },
+  { reservation_date: '1', text: '09-12시' },
+  { reservation_date: '2', text: '12-15시' },
+  { reservation_date: '3', text: '15-18시' },
+  { reservation_date: '4', text: '18-21시' },
 ];
 export interface ClassNamesProps {
   classNames?: string;
 }
 
 interface ClassTimeProps extends ClassNamesProps {
-  selectedItem: Reservation['reservation_class_time_id'];
+  selectedItem: Reservation['reservation_date'];
   onClick?: (reservationProperty: Partial<Reservation>) => void;
 }
 const ClassTimePicker = ({
@@ -29,7 +29,7 @@ const ClassTimePicker = ({
       {CLASS_TIMES.map((time) => (
         <ClassTimeItem
           time={time}
-          isSelected={selectedItem === time.reservation_class_time_id}
+          isSelected={selectedItem === time.reservation_date}
           onClick={onClick}
         />
       ))}

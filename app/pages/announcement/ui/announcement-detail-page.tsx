@@ -4,7 +4,7 @@ import useToast from '@/app/shared/modules/toast/lib/useToast';
 import Back from '@/app/shared/atoms/Back';
 import ModalMenu from '@/app/shared/atoms/ModalMenu';
 import MeatBall from '@/app/shared/atoms/MeatBall';
-import Toast from '@/app/shared/modules/toast/ui/toast';
+import Toast from '@/app/shared/modules/toast/ui/Toast';
 import ArtilcePreview from '@/app/shared/modules/ArticlePreview';
 import { usePathname, useRouter } from 'next/navigation';
 import useModal from '@/app/shared/modules/modal/lib/useModal';

@@ -8,4 +8,5 @@ export type Credentials = {
 export type AuthTokenResponse = DataResponse<{
   access_token: string;
   refresh_token: string;
+  id: number;
 }>;

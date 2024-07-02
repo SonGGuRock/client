@@ -1,10 +1,23 @@
+'use client';
+
 import { PropsWithChildren } from 'react';
+import IconCopy from '../../atoms/icons/icon-copy';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import useToast from '../toast/lib/useToast';
+import { Toast } from '../toast/ui/Toast';
 
 interface PhoneNumberBoxProps extends PropsWithChildren {
   className?: string;
+  phoneNumber: string;
 }
 
-const PhoneNumberBox = ({ className, children }: PhoneNumberBoxProps) => {
+const PhoneNumberBox = ({ className, phoneNumber }: PhoneNumberBoxProps) => {
+  const { toast, toggleToast } = useToast();
+
+  const handleOnCopy = () => {
+    toggleToast({ text: '복사되었습니다' });
+  };
+
   return (
     <div className={`flex gap-2 text-sm ${className}`}>
       <svg
@@ -19,8 +32,12 @@ const PhoneNumberBox = ({ className, children }: PhoneNumberBoxProps) => {
           fill='currentColor'
         />
       </svg>
-
-      {children}
+      <CopyToClipboard text={phoneNumber ?? ''} onCopy={handleOnCopy}>
+        <span className='flex gap-2 cursor-pointer'>
+          {phoneNumber} <IconCopy />
+        </span>
+      </CopyToClipboard>
+      {toast && <Toast text={toast.text} />}
     </div>
   );
 };

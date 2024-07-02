@@ -7,7 +7,7 @@ import {
   createContext,
   useState,
 } from 'react';
-import { Reservation } from '../pages/reservations/ui/reservations-create-page';
+import { ReservationTemp } from '../pages/reservations/ui/reservations-create-page';
 
 export type SubmissionContext<T> = {
   form: Partial<T>;
@@ -15,14 +15,14 @@ export type SubmissionContext<T> = {
 };
 
 export const ReservationCreateContext =
-  createContext<SubmissionContext<Reservation> | null>(null);
+  createContext<SubmissionContext<ReservationTemp> | null>(null);
 
 export default function ReservationCreateProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [form, setForm] = useState<Partial<Reservation>>({});
+  const [form, setForm] = useState<Partial<ReservationTemp>>({});
 
   return (
     <ReservationCreateContext.Provider value={{ form, setForm }}>
