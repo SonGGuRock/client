@@ -1,9 +1,46 @@
-import FormInput from '@/app/shared/modules/FormInput';
-import FormDatePicker from '@/app/shared/modules/form-date-input';
+'use client';
+
+import { StudentDetail } from '@/app/lib-temp/definition';
+import {
+  useMutateWithCrendetials,
+  useQueryWithCredentials,
+} from '@/app/shared/api/fetch-with-credentials';
 import Header from '@/app/shared/modules/header';
-import ProfilePictureEdit from '@/app/shared/modules/profile-picture-edit';
+import { StudentMutateRequest } from '@/app/widget/students/lib/type';
+import StudentForm from '@/app/widget/students/ui/student-form';
+import { useQueryClient } from '@tanstack/react-query';
+import { usePathname, useRouter } from 'next/navigation';
 
 const StudentEditPage = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const studentId = pathname.split('/')[2];
+  const { data: student } = useQueryWithCredentials<StudentDetail>(
+    `students/${studentId}`
+  );
+  const queryClient = useQueryClient();
+  const { mutate } = useMutateWithCrendetials(`students/${studentId}`);
+
+  const updateStudent = (body: StudentMutateRequest) =>
+    mutate(
+      {
+        method: 'PUT',
+        body,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            predicate: (query) => {
+              return query.queryKey.some((key) => {
+                return Array.isArray(key) && key.includes('students');
+              });
+            },
+          });
+          router.push(`/students/${studentId}`);
+        },
+      }
+    );
+
   return (
     <div className='py-3 px-4'>
       <Header>
@@ -15,20 +52,8 @@ const StudentEditPage = () => {
           <Header.Button size='small'>완료</Header.Button>
         </div>
       </Header>
-      <div className='w-full flex justify-center items center my-8'>
-        <ProfilePictureEdit id={1} name='최지영' />
-      </div>
 
-      <div className='flex gap-6 flex-wrap pb-12'>
-        <FormInput
-          lableText='이름'
-          inputPlaceholder='이름(실명)을 입력해주세요'
-        />
-        <FormInput lableText='전화번호' inputPlaceholder='- 구분없이 입력' />
-        <FormDatePicker labelText='등록일' />
-        <FormDatePicker labelText='지난 결제일' />
-        <FormInput lableText='메모(선택)' inputPlaceholder='' />
-      </div>
+      <StudentForm onSubmit={updateStudent} initialData={student} />
     </div>
   );
 };

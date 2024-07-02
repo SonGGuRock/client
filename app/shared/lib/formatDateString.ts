@@ -21,7 +21,6 @@ export default function formatDateString({
     includeMinutes: true,
   };
   const fullOption = { ...defaultOptions, ...options };
-  console.log(fullOption);
   const date = new Date(fullDateString);
 
   const year = date.getFullYear();
@@ -32,7 +31,6 @@ export default function formatDateString({
 
   let formattedDate = '';
   if (fullOption.includeYear === true) {
-    console.log('Including year:', year);
     formattedDate += `${year}`;
   }
   if (fullOption.includeMonth)
@@ -45,6 +43,5 @@ export default function formatDateString({
   if (fullOption.includeMinutes)
     formattedDate += `${fullOption.includeHours ? ':' : ''}${minutes}`;
 
-  // console.log(minutes, '💛');
   return formattedDate.trim();
 }

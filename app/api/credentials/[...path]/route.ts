@@ -80,6 +80,7 @@ async function handleRequest(request: NextRequest, method: Method) {
   );
 
   try {
+    console.log('🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶', method, '👉🏼', request.body);
     const requestConfig: AxiosRequestConfig = {
       method,
       url:
@@ -90,7 +91,14 @@ async function handleRequest(request: NextRequest, method: Method) {
       },
       //TODO: PUT, 바디가 없는 경우를 추가하기 위해 변경
       data:
-        method !== 'DELETE' && method !== 'PUT' && request.body
+        method === 'DELETE'
+          ? undefined
+          : method === 'PUT'
+          ? await request
+              .clone()
+              .text()
+              .then((bodyText) => (bodyText ? JSON.parse(bodyText) : undefined))
+          : request.body
           ? await request.json()
           : undefined,
     };

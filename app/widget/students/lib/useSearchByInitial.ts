@@ -92,6 +92,7 @@ const useSearchStudentsByInitial = () => {
     searchKeyword,
     handleKeywordChange,
     handleParams,
+    tabActiveStatus: params.active,
   };
 };
 

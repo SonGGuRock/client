@@ -3,7 +3,7 @@
 import useToggle from '@/app/shared/lib/useToggle';
 import TabLayout from '../../../shared/modules/tab/TabLayout';
 import TabMenu from '../../../shared/modules/tab/TabMenu';
-import { StudentSearchParams } from '@/app/pages/students/ui/students-list-page';
+import { StudentSearchParams } from '../lib/useSearchByInitial';
 
 interface StudentsTabProps {
   onSwitch: (newParams: Partial<StudentSearchParams>) => void;

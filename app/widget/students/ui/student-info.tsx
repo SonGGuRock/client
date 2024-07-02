@@ -18,8 +18,6 @@ const StudentInfo = ({ id }: StudentInfoProps) => {
   const { data: student, isLoading } = useQueryWithCredentials<StudentDetail>(
     `students/${id}`
   );
-  if (isLoading) return <div>학생 정보를 불러오고 있어요</div>;
-  if (!student) return <div>학생을 찾을 수 없습니다</div>;
 
   const { openModal } = useModal();
   const { toast, toggleToast } = useToast();
@@ -38,39 +36,55 @@ const StudentInfo = ({ id }: StudentInfoProps) => {
 
   return (
     <div className='pb-8 px-4'>
-      <div className='grid justify-items-center pt-4 pb-8'>
-        <Thumbnail
-          id={student.id}
-          imageUrl={student.profile_picture}
-          size='large'
-        />
-        <p className='pt-2 pb-4 text-center'>{student.name}</p>
-        <PhoneNumberBox phoneNumber={student.phone_number} />
-      </div>
-
-      <div className='grid grid-cols-2 grid-rows-2 gap-2'>
-        <div className='bg-grey50 p-3 rounded-lg'>
-          <label className='text-xs text-grey400'>등록일</label>
-          <p className='text-sm text-grey800'>{student.register_date}</p>
-        </div>
-        <div className='bg-grey50 p-3 rounded-lg'>
-          <label className='text-xs text-grey400'>지난 결제일</label>
-          <p className='text-sm text-grey800'>{student.last_payment_date}</p>
-        </div>
-        <div
-          className='bg-grey50 p-3 rounded-lg flex justify-between'
-          onClick={handleAddButton}
-        >
-          <div>
-            <label className='text-xs text-grey400'>수강횟수</label>
-            <p className='text-sm text-grey800'>
-              {student.remaining_class_count}/{student.total_class_count}
-            </p>
+      {student ? (
+        <div>
+          <div className='grid justify-items-center pt-4 pb-8'>
+            <Thumbnail
+              id={student.id}
+              imageUrl={student.profile_picture}
+              size='large'
+            />
+            <p className='pt-2 pb-4 text-center'>{student.name}</p>
+            <PhoneNumberBox phoneNumber={student.phone_number} />
           </div>
-          <IconPlusCircle />
-        </div>
-      </div>
+          <div className='grid grid-cols-2 grid-rows-2 gap-2'>
+            <div className='bg-grey50 p-3 rounded-lg'>
+              <label className='text-xs text-grey400'>등록일</label>
+              <p className='text-sm text-grey800'>{student.register_date}</p>
+            </div>
+            <div className='bg-grey50 p-3 rounded-lg'>
+              <label className='text-xs text-grey400'>지난 결제일</label>
+              <p className='text-sm text-grey800'>
+                {student.last_payment_date}
+              </p>
+            </div>
 
+            {student.is_active ? (
+              <div
+                className='bg-grey50 p-3 rounded-lg flex justify-between'
+                onClick={handleAddButton}
+              >
+                <div>
+                  <label className='text-xs text-grey400'>수강횟수</label>
+                  <p className='text-sm text-grey800'>
+                    {student.remaining_class_count}/{student.total_class_count}
+                  </p>
+                </div>
+                <IconPlusCircle />
+              </div>
+            ) : (
+              <div className='bg-grey50 p-3 rounded-lg flex justify-between'>
+                <div>
+                  <label className='text-xs text-grey400'>수강상태</label>
+                  <p className='text-sm text-grey800'>수강 종료</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div>수강생 정보를 확인하고 있어요!</div>
+      )}
       {toast && <Toast text={toast.text} />}
     </div>
   );

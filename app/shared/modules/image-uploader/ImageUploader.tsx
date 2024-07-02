@@ -83,7 +83,7 @@ const ImageUploader = ({
             alt={defaultImage.imageAlt}
             width={defaultImage.width}
             height={defaultImage.height}
-            className={`w-full rounded-full h-[${defaultImage.height}px] ${defaultImage.className}`}
+            className={`w-[${defaultImage.width}px] rounded-full h-[${defaultImage.height}px] ${defaultImage.className}`}
             // object-cover
           />
         )}

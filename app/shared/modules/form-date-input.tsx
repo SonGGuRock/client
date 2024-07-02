@@ -15,7 +15,8 @@ interface FormDateInputProps {
   type?: string;
   required?: boolean;
   labelText: string;
-  onSelect: (value: { [key: string]: string }) => void;
+  onSelect?: (value: { [key: string]: string }) => void;
+  defaultValue?: string;
 }
 
 const FormDateInput = ({
@@ -24,6 +25,7 @@ const FormDateInput = ({
   required,
   onSelect,
   type = 'text',
+  defaultValue,
 }: FormDateInputProps) => {
   const { open, toggle } = useToggle();
   const [value, setValue] = useState<Value>(new Date());
@@ -32,7 +34,7 @@ const FormDateInput = ({
 
   const handleChange = (value: Value) => {
     setValue(value);
-    onSelect({ [name]: formatCalendarDate(value) });
+    onSelect && onSelect({ [name]: formatCalendarDate(value) });
   };
 
   return (
@@ -47,6 +49,7 @@ const FormDateInput = ({
         className='appear w-full text-base text-grey900 border-b border-grey100 pb-2 bg-chevron-down-icon bg-no-repeat bg-right'
         onClick={toggle}
         value={formattedValue}
+        defaultValue={defaultValue}
         readOnly
       />
       {open && (

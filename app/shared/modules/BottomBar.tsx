@@ -49,8 +49,9 @@ const BottomBar = () => {
   return (
     <div className='w-full h-14 fixed bottom-0 left-0 z-50'>
       <div className='flex w-[375px] mx-auto h-full'>
-        {menus.map((menu) => (
+        {menus.map((menu, idx) => (
           <Link
+            id={menu.en + idx}
             href={`/${menu.en}`}
             className='w-full bg-white flex flex-wrap justify-center items-center flex-col'
           >

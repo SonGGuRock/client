@@ -6,11 +6,15 @@ import StudentTab from '@/app/widget/students/ui/student-tab';
 import ModalMenu from '@/app/shared/modules/modal/ui/ModalMenu';
 import { usePathname, useRouter } from 'next/navigation';
 import StudentReservationList from '@/app/widget/students/ui/student-reservation-list';
-import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
+import {
+  useMutateWithCrendetials,
+  useQueryWithCredentials,
+} from '@/app/shared/api/fetch-with-credentials';
 import { useQueryClient } from '@tanstack/react-query';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
 import { Toast } from '@/app/shared/modules/toast/ui/Toast';
+import { StudentDetail } from '@/app/lib-temp/definition';
 
 const StudentDetailPage = () => {
   const router = useRouter();
@@ -20,15 +24,22 @@ const StudentDetailPage = () => {
   const { closeModal } = useModal();
   const { toggleToast, toast } = useToast();
 
-  const { mutate } = useMutateWithCrendetials(
-    `/students/${studentId}/inactive`
+  const { data: student } = useQueryWithCredentials<StudentDetail>(
+    `students/${studentId}`
   );
 
+  const { mutate } = useMutateWithCrendetials(
+    `/students/${studentId}/${student?.is_active ? 'inactive' : 'active'}`
+  );
+
+  const { mutate: remove } = useMutateWithCrendetials(`/students/${studentId}`);
+
   const handleClickEdit = () => {
+    closeModal();
     router.push(`/students/${studentId}/edit`);
   };
 
-  const handleClickDeactivateStudent = () => {
+  const toggleActiveStudent = () => {
     mutate(
       { method: 'PUT' },
       {
@@ -41,8 +52,29 @@ const StudentDetailPage = () => {
           });
           closeModal();
           toggleToast({
-            text: '수강을 종료하였습니다',
+            text: '수강 상태를 변경하였습니다',
           });
+        },
+      }
+    );
+  };
+
+  const deleteStudent = () => {
+    remove(
+      { method: 'DELETE' },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            predicate: (query) =>
+              query.queryKey.some(
+                (key) => typeof key === 'string' && key.includes(`students`)
+              ),
+          });
+          closeModal();
+          toggleToast({
+            text: '수강생 정보를 삭제하였습니다',
+          });
+          router.push('/students');
         },
       }
     );
@@ -53,29 +85,47 @@ const StudentDetailPage = () => {
         <Header>
           <Header.Back />
           <Header.MeatBall>
-            <>
-              <ModalMenu
-                iconUrl='/icon/ic-edit_24px.svg'
-                onClick={handleClickEdit}
-              >
-                프로필 수정하기
-              </ModalMenu>
-              <ModalMenu
-                type='secondary'
-                iconUrl='/icon/ic-complete-24px.svg'
-                onClick={handleClickDeactivateStudent}
-              >
-                수강 종료하기
-              </ModalMenu>
-            </>
+            {student?.is_active ? (
+              <>
+                <ModalMenu
+                  iconUrl='/icon/ic-edit_24px.svg'
+                  onClick={handleClickEdit}
+                >
+                  프로필 수정하기
+                </ModalMenu>
+                <ModalMenu
+                  type='secondary'
+                  iconUrl='/icon/ic-complete-24px.svg'
+                  onClick={toggleActiveStudent}
+                >
+                  수강 종료하기
+                </ModalMenu>
+              </>
+            ) : (
+              <>
+                <ModalMenu
+                  iconUrl='/icon/ic-edit_24px.svg'
+                  onClick={toggleActiveStudent}
+                >
+                  수강 중으로 전환하기
+                </ModalMenu>
+                <ModalMenu
+                  type='secondary'
+                  iconUrl='/icon/ic-complete-24px.svg'
+                  onClick={deleteStudent}
+                >
+                  수강생 정보 삭제하기
+                </ModalMenu>
+              </>
+            )}
           </Header.MeatBall>
         </Header>
       </div>
 
-      <StudentInfo id={studentId} />
+      <StudentInfo id={Number(studentId)} />
       <StudentTab />
 
-      <StudentReservationList id={studentId} />
+      <StudentReservationList id={Number(studentId)} />
       {toast && <Toast text={toast.text ?? ''} />}
     </div>
   );

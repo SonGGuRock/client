@@ -4,7 +4,7 @@ import useToast from '@/app/shared/modules/toast/lib/useToast';
 import Back from '@/app/shared/atoms/Back';
 import Button from '@/app/shared/atoms/button/Button';
 import Title from '@/app/shared/atoms/Title';
-import ToastContent from '@/app/shared/modules/toast/ui/Toast';
+import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 import ArticleWriter from '@/app/shared/modules/ArticleWriter';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';

@@ -29,7 +29,14 @@ const Article = ({ content }: ArticleProps) => {
           <div className='w-full flex flex-wrap text-base text-grey900'>
             <p className='w-full'>{content.author.name}</p>
             <p className='text-grey400 text-xs'>
-              {content && formatDateString(content.updated_at)}
+              {content &&
+                formatDateString({
+                  fullDateString: content.updated_at,
+                  options: {
+                    includeHours: false,
+                    includeMinutes: false,
+                  },
+                })}
             </p>
           </div>
         </div>
