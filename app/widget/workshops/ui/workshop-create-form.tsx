@@ -7,7 +7,7 @@ import { ChangeEvent, FormEvent } from 'react';
 import Button from '@/app/shared/atoms/button/Button';
 import useWorkshopCreate from '../api/useWorkshopCreate';
 import { formDataToJSON } from '@/app/shared/lib/formDataToJSON';
-import { WorkshopCreateRequest } from '../api/type';
+import { WorkshopMutateRequest } from '../api/type';
 import useWorkshopForm from '../lib/useWorkshopAddress';
 import { formatPhoneNumber } from '@/app/shared/lib/formatPhoneNumber';
 import { useRouter } from 'next/navigation';
@@ -54,7 +54,7 @@ const WorkshopCreateForm = () => {
       );
 
     const body = formDataToJSON(formData);
-    mutate(body as WorkshopCreateRequest, {
+    mutate(body as WorkshopMutateRequest, {
       onSuccess: () => router.push('/workshops/create/success'),
     });
   };

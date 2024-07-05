@@ -40,6 +40,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'default-profile-picture',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

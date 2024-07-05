@@ -4,11 +4,19 @@ import instance, { BASE_URL } from './axios-instance';
 
 export const getAsync = async <T>(
   path: string,
+  isRouteRequest?: true,
   params?: Record<string, any>
 ): Promise<T> => {
   try {
-    const response: AxiosResponse<T> = await instance.get(path, { params });
-    return response.data;
+    if (isRouteRequest) {
+      const response: AxiosResponse<T> = await axios.get(path, {
+        params,
+      });
+      return response.data;
+    } else {
+      const response: AxiosResponse<T> = await instance.get(path, { params });
+      return response.data;
+    }
   } catch (error) {
     console.error('getAsync Error:', error);
     throw error;

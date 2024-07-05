@@ -74,6 +74,7 @@ export default function Todos() {
         <Button
           size='small'
           onClick={handleOpenModalAddTodo}
+          style='primary'
           icon={
             <Image
               src='/icon/ic_plus_white.svg'

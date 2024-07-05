@@ -3,6 +3,7 @@
 import useFileUpload from '@/app/shared/api/useFileUpload';
 import Image from 'next/image';
 import { ChangeEvent, useEffect, useRef } from 'react';
+import getImageWithFallback from '../../lib/getImageWithFallback';
 
 export type defaultImage = {
   imageUrl: string;
@@ -66,7 +67,10 @@ const ImageUploader = ({
       >
         {!data && !uploaded && (
           <Image
-            src={defaultImage.imageUrl}
+            src={getImageWithFallback(
+              defaultImage.imageUrl,
+              'img/member_upload_default.png'
+            )}
             // src='/img/workshops-add-btn.png'
             alt={defaultImage.imageAlt}
             width={defaultImage.width}
@@ -79,7 +83,7 @@ const ImageUploader = ({
         )}
         {uploaded && (
           <Image
-            src={uploaded}
+            src={getImageWithFallback(uploaded, '/img/default/member.png')}
             alt={defaultImage.imageAlt}
             width={defaultImage.width}
             height={defaultImage.height}

@@ -93,7 +93,7 @@ async function handleRequest(request: NextRequest, method: Method) {
       data:
         method === 'DELETE'
           ? undefined
-          : method === 'PUT'
+          : method === 'PUT' || method === 'POST'
           ? await request
               .clone()
               .text()

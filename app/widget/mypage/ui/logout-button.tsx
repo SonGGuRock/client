@@ -1,13 +1,22 @@
 'use client';
 
-import useLogout from '../api/useLogout';
+import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
 import SettingMenu from './setting-menu';
 
 const LogoutButton = () => {
-  const { mutate } = useLogout();
+  const { mutate } = useMutateWithCrendetials('members/logout');
 
   const handleLogout = () => {
-    mutate();
+    mutate(
+      {
+        method: 'POST',
+      },
+      {
+        onSuccess: () => {
+          window.location.href = '/signin';
+        },
+      }
+    );
   };
   return (
     <SettingMenu.Button onClick={handleLogout}>로그아웃</SettingMenu.Button>

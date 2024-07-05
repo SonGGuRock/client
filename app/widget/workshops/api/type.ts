@@ -18,12 +18,7 @@ export type TeacherRegisterResponse = {
   teacher_id: number;
 };
 
-export type WorkshopCreateRequest = {
-  profile_picture: string;
-  name: string;
-  address: string;
-  phone_number: string;
-};
+export type WorkshopMutateRequest = Omit<Workshop, 'id'>;
 export type WorkshopCreateResponse = DataResponse<{
   workshop_id: number;
   teacher_id: number;

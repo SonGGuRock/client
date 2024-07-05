@@ -1,7 +1,7 @@
-import WorkshopInfoPage from '@/app/pages/workshops/ui/workshop-info-page';
+import WorkshopEditPage from '@/app/pages/workshops/ui/workshop-edit-page';
 
 const Page = () => {
-  return <WorkshopInfoPage />;
+  return <WorkshopEditPage />;
 };
 
 export default Page;

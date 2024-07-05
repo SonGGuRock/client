@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react';
 import IconCopy from '../../atoms/icons/icon-copy';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import useToast from '../toast/lib/useToast';
-import { Toast } from '../toast/ui/Toast';
+import Toast from '../toast/ui/Toast';
 
 interface PhoneNumberBoxProps extends PropsWithChildren {
   className?: string;
