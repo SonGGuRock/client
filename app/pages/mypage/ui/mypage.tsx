@@ -15,8 +15,8 @@ import WithdrawalButton from '@/app/widget/mypage/ui/withdrawal-button';
 import WorkShopInfo from '@/app/widget/mypage/ui/my-workshop-info';
 import { Workshop } from '@/app/widget/workshops/api/type';
 import { useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import { getAsync } from '@/app/shared/api/fetch';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { deleteAsync, getAsync } from '@/app/shared/api/fetch';
 import { ISROUTEQUEST } from '@/app/shared/const';
 import IconArrowRight from '@/app/shared/atoms/icons/icon-arrow-right';
 import Cookies from 'js-cookie';
@@ -40,8 +40,10 @@ const MyPage = () => {
     my?.workshop && router.push(`/workshops/${my.workshop.id}/settings`);
   };
 
-  const { mutate } = useMutateWithCrendetials('workshops/inactive');
-
+  const { mutate } = useMutateWithCrendetials('workshops/teachers/inactive');
+  const { mutate: inactivate } = useMutation({
+    mutationFn: () => deleteAsync('api/workshops/admin', ISROUTEQUEST),
+  });
   const goOutWorkshop = () => {
     mutate(
       {
@@ -49,8 +51,8 @@ const MyPage = () => {
       },
       {
         onSuccess: () => {
-          Cookies.remove('WORKSHOPID');
-          // router.push('/workshops');
+          inactivate();
+          router.push('/workshops');
         },
       }
     );

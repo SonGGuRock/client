@@ -5,7 +5,7 @@ import { Workshop } from '../api/type';
 import useWorkshopActivate from '../api/useWorkshopActivate';
 import WorkShopInfo from './workshop-info';
 
-interface WorkshopListProps {
+export interface WorkshopListProps {
   workshopList: Workshop[];
   status: 'approval' | 'pending' | 'rejection';
 }
@@ -19,17 +19,25 @@ const WorkshopList = ({ workshopList, status }: WorkshopListProps) => {
   };
 
   return (
-    <div>
+    <div className='relative'>
       {workshopList?.map((workshop) => (
         <div
           key={workshop.id}
-          className={`relative ${status === 'pending' && 'opacity-50'}`}
+          className={`relative ${status === 'pending' && 'opacity-50'}
+          }`}
         >
           {status === 'pending' && (
             <span className='px-3 py-1 bg-grey400 text-white rounded-full text-xs absolute top-3 right-3 z-10'>
               승인대기
             </span>
           )}
+          {status === 'rejection' && (
+            <span className='px-3 py-1 bg-grey800 text-white rounded-full text-xs absolute top-3 right-3 z-10'>
+              승인거절
+            </span>
+          )}
+          <div className='absolute inset-0 bg-black opacity-60 z-10 rounded-lg'></div>
+
           <WorkShopInfo
             workshop={workshop}
             onClick={

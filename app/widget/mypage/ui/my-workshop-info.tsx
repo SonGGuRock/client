@@ -20,7 +20,7 @@ const MyWorkShopInfo = ({
         width={343}
         height={136}
       />
-      <div className='absolute bottom-3 left-3 grid grid-rows-3'>
+      <div className='absolute bottom-3 left-3 grid grid-rows-2'>
         <span className='font-bold text-white'>{name}</span>
         <span className=' text-white'>{address}</span>
       </div>

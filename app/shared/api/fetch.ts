@@ -88,10 +88,31 @@ export const postFileAsync = async <T, K>(
   return res.json();
 };
 
+// export const deleteAsync = async <T>(
+//   path: string,
+//   params?: Record<string, any>
+// ): Promise<T> => {
+//   const response: AxiosResponse<T> = await instance.delete(path, { params });
+//   return response.data;
+// };
+
 export const deleteAsync = async <T>(
   path: string,
+  isRouteRequest?: true,
   params?: Record<string, any>
-): Promise<T> => {
-  const response: AxiosResponse<T> = await instance.delete(path, { params });
-  return response.data;
+) => {
+  try {
+    if (isRouteRequest) {
+      await axios.delete(path, {
+        params,
+      });
+    } else {
+      await instance.delete(path, {
+        params,
+      });
+    }
+  } catch (error) {
+    console.error('deleteAsync Error:', error);
+    throw error;
+  }
 };

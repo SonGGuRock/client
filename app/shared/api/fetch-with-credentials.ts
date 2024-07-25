@@ -51,7 +51,7 @@ export function useQueryWithCredentials<T>(
   }
 
   const { data, isError, isLoading } = useQuery<DataResponse<T>, unknown, T>({
-    queryKey: [path, params],
+    queryKey: params ? [path, params] : [path],
     queryFn: async () => {
       const res = await fetch(url);
       if (!res.ok) {

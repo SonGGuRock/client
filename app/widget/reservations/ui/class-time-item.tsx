@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { Reservation } from '../../../shared/modules/stepper/lib/use-form-fill';
-import { ClassTime } from './class-time-picker';
+import { ClassTimeTemp } from './class-time-picker';
 
 interface ClassTimeItemProps {
-  time: ClassTime;
+  time: ClassTimeTemp;
   onClick?: (reservationProperty: Partial<Reservation>) => void;
   isSelected: boolean;
 }

@@ -13,7 +13,7 @@ export type WorkStepType =
     }
   | {
       ko: '초벌';
-      en: 'bisque-fire';
+      en: 'bisque_fire';
     }
   | {
       ko: '시유';
@@ -21,15 +21,15 @@ export type WorkStepType =
     }
   | {
       ko: '재벌';
-      en: 'glaze-fire';
+      en: 'glaze_fire';
     }
   | {
       ko: '삼벌';
-      en: 'triple-fire';
+      en: 'triple_fire';
     }
   | {
-      ko: '보관';
-      en: 'store';
+      ko: '채색';
+      en: 'color';
     };
 
 export const WORK_STEP: WorkStepType[] = [
@@ -47,7 +47,7 @@ export const WORK_STEP: WorkStepType[] = [
   },
   {
     ko: '초벌',
-    en: 'bisque-fire',
+    en: 'bisque_fire',
   },
   {
     ko: '시유',
@@ -55,15 +55,15 @@ export const WORK_STEP: WorkStepType[] = [
   },
   {
     ko: '재벌',
-    en: 'glaze-fire',
+    en: 'glaze_fire',
   },
   {
     ko: '삼벌',
-    en: 'triple-fire',
+    en: 'triple_fire',
   },
   {
-    ko: '보관',
-    en: 'store',
+    ko: '채색',
+    en: 'color',
   },
 ];
 

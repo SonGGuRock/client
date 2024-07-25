@@ -9,3 +9,11 @@ export async function GET() {
     isAdmin,
   });
 }
+
+export async function DELETE() {
+  const cookieStore = cookies();
+  cookieStore.delete('WORKSHOPID');
+  return NextResponse.json({
+    result: 'ID deleted',
+  });
+}
