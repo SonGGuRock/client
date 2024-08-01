@@ -2,13 +2,13 @@
 
 import { Student, StudentDetail } from '@/app/lib-temp/definition';
 import Thumbnail from '../../../shared/atoms/Thumbnail';
-import PhoneNumberBox from '../../../shared/modules/phone-number/PhoneNumber';
+import PhoneNumberBox from '../../../shared/modules/phone-number/PhoneNumberBox';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import IconPlusCircle from '@/app/shared/atoms/icons/icon-plus-circle';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import ReservationAddModal from '../../reservations/ui/modal/reservation-add-modal';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
-import { Toast } from '@/app/shared/modules/toast/ui/Toast';
+import Toast from '@/app/shared/modules/toast/ui/Toast';
 
 interface StudentInfoProps {
   id: Student['id'];
@@ -43,6 +43,7 @@ const StudentInfo = ({ id }: StudentInfoProps) => {
               id={student.id}
               imageUrl={student.profile_picture}
               size='large'
+              type='student'
             />
             <p className='pt-2 pb-4 text-center'>{student.name}</p>
             <PhoneNumberBox phoneNumber={student.phone_number} />

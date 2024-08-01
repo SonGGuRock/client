@@ -8,6 +8,8 @@ export type Todo = {
   };
 };
 
+export type TodoContent = Pick<Todo, 'content' | 'is_completed'>;
+
 //   temp
 export type TodosResponse = {
   todosMock: Todo[];

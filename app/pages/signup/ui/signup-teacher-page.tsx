@@ -95,7 +95,7 @@ const SignupTeacherPage = () => {
           inputPlaceholder='- 구분없이 입력'
         />
 
-        <div className='mt-18 flex gap-4 flex-wrap mb-8'>
+        {/* <div className='mt-18 flex gap-4 flex-wrap mb-8'>
           <div className='flex gap-1 w-full'>
             <CheckBox onCheck={toggle} isChecked={isChecked} style='grey' />
             <label className='text-grey700 text-sm'>이용약관 (필수)</label>
@@ -106,8 +106,8 @@ const SignupTeacherPage = () => {
               개인정보 수집 및 이용 (필수)
             </label>
           </div>
-        </div>
-        <Button size='large' type='submit'>
+        </div> */}
+        <Button size='large' type='submit' style='primary'>
           가입 완료
         </Button>
       </form>

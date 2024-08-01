@@ -13,7 +13,11 @@ const useWorkshopSearch = (params: Record<'name', any>) => {
   const { data } = useQuery<DataResponse<Workshop[]>, unknown, Workshop[]>({
     queryKey,
     queryFn: () => {
-      return getAsync<DataResponse<Workshop[]>>('workshops', queryKey[1]);
+      return getAsync<DataResponse<Workshop[]>>(
+        'workshops',
+        undefined,
+        queryKey[1]
+      );
     },
     select: (data: DataResponse<Workshop[]>) => data.data,
     enabled: queryKey[1].name !== '',

@@ -38,7 +38,7 @@ const SigninForm = () => {
         <Link href='/reset-password'>비밀번호를 잊어버리셨나요?</Link>
       </p>
 
-      <Button size='large' type='submit'>
+      <Button size='large' type='submit' style='primary'>
         로그인
       </Button>
     </form>

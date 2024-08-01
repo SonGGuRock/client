@@ -13,8 +13,8 @@ import {
 import { useQueryClient } from '@tanstack/react-query';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
-import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 import { StudentDetail } from '@/app/lib-temp/definition';
+import Toast from '@/app/shared/modules/toast/ui/Toast';
 
 const StudentDetailPage = () => {
   const router = useRouter();

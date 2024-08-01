@@ -21,7 +21,7 @@ function StepStudent({ context }: StepStudentProps) {
   );
 
   return (
-    <div >
+    <div>
       <div>
         <Title size='large'>수강생을 선택해주세요</Title>
       </div>

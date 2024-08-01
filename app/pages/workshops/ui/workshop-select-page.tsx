@@ -2,7 +2,7 @@
 
 import Title from '@/app/shared/atoms/Title';
 import SearchBorder from '@/app/shared/modules/search-border';
-import WorkShopInfo from '@/app/widget/mypage/ui/workshop-info';
+import WorkShopInfo from '@/app/widget/mypage/ui/my-workshop-info';
 import useTeacherRegister from '@/app/widget/workshops/api/useTeacherRegister';
 import useWorkshopSearch from '@/app/widget/workshops/api/useWorkshopSearch';
 import WorkshopOnboardingCreate from '@/app/widget/workshops/ui/workshop-onboarding-create';

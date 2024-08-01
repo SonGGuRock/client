@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "app/hooks/useModalts",
     "app/_provider/notification-category-provider.tsㅌ",
-    "app/shared/api/axios-instance.ts"
+    "app/shared/api/axios-instance.ts",
+    "app/_provider/workshop-operation-providertsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,11 +1,11 @@
 import { Reservation } from '@/app/lib-temp/definition';
 import ClassTimeItem from './class-time-item';
 
-export type ClassTime = Pick<Reservation, 'reservation_date'> & {
+export type ClassTimeTemp = Pick<Reservation, 'reservation_date'> & {
   text: string;
 };
 
-const CLASS_TIMES: ClassTime[] = [
+const CLASS_TIMES: ClassTimeTemp[] = [
   { reservation_date: '1', text: '09-12시' },
   { reservation_date: '2', text: '12-15시' },
   { reservation_date: '3', text: '15-18시' },
