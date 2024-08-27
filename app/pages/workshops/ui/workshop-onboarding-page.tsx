@@ -1,11 +1,11 @@
 'use client';
 
-import Title from '@/app/shared/atoms/Title';
 import WorkshopOnboardingType from '@/app/widget/workshops/ui/workshop-onboarding-type';
 import useWorkshopRegistered from '../../../widget/workshops/api/useWorkshopRegistered';
 import WorkshopList from '@/app/widget/workshops/ui/workshop-list';
 import RejectionNotice from '@/app/widget/workshops/ui/workshop-rejection-notice';
 import Header from '@/app/shared/modules/header';
+import Title from '@/app/shared/atoms/Title';
 
 const WorkshopOnboardingPage = () => {
   const { data } = useWorkshopRegistered();
@@ -17,7 +17,9 @@ const WorkshopOnboardingPage = () => {
           <Header.Title size='medium'>공방 선택</Header.Title>
         </div>
       </Header>
-      {data && <RejectionNotice workshopList={data.rejection} />}
+      {data && data.rejection.length !== 0 && (
+        <RejectionNotice workshopList={data.rejection} />
+      )}
       <Title size='large' classNames='mt-4'>
         이용할 공방을 선택해주세요
       </Title>

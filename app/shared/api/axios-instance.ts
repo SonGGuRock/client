@@ -2,7 +2,6 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import { ErrorResponse } from './type';
 import getRefreshTokenPromise, { isErrorResponse } from './refreshTokens';
-import https from 'https';
 
 export const BASE_URL = 'https:/songgurock.duckdns.org/v1';
 

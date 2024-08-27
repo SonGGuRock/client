@@ -2,10 +2,12 @@ import DailySchedule from '@/app/widget/reservations/ui/preview/reservation-dail
 import BottomBar from '@/app/shared/modules/BottomBar';
 import ReservationsDailyList from '@/app/widget/reservations/ui/reservations-daily-list';
 import ReservationsMonthlyCalendar from '@/app/widget/reservations/ui/reservations-monthly-calendar';
+import ReservationsHeader from '@/app/widget/reservations/ui/reservations-header';
 
 export const ReservationsMonthlyPage = () => {
   return (
     <div>
+      <ReservationsHeader />
       <div className='mt-4 px-4'>
         <ReservationsMonthlyCalendar />
       </div>

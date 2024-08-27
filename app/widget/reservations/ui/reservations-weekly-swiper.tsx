@@ -2,10 +2,11 @@ import 'swiper/css';
 import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {
-  DayliyItemDate,
+  DailyItemDate,
   ReservationsDailyItem,
 } from './reservations-daily-item';
 import clsx from 'clsx';
+import { ReservationClassTime } from './time-crowds';
 const datetemp = [
   {
     date: '2024-02-14',
@@ -15,21 +16,23 @@ const datetemp = [
   },
 ];
 
-export interface DateWeeklySwiperProps {
-  dateArray: DayliyItemDate[];
+interface DayReservation extends DailyItemDate {
+  class_times: ReservationClassTime[];
+}
+
+export interface DateWeeklySwiperProps<T extends DayReservation> {
+  days: T[];
   style?: 'background-primary' | 'item-primary';
   selectedItem?: string;
   onClick?: (date: string) => void;
-  isWithTimeCrowds?: boolean;
 }
 
-const DateWeeklySwiper = ({
-  dateArray,
+function DateWeeklySwiper<T extends DayReservation>({
+  days,
   selectedItem,
   style = 'background-primary',
-  isWithTimeCrowds = true,
   onClick,
-}: DateWeeklySwiperProps) => {
+}: DateWeeklySwiperProps<T>) {
   const swiperClasses = clsx({
     'bg-beige': style === 'background-primary',
     'bg-white': style === 'item-primary',
@@ -44,21 +47,21 @@ const DateWeeklySwiper = ({
       initialSlide={1}
       modules={[FreeMode]}
     >
-      {dateArray.map((data, idx) => {
+      {days.map((day, idx) => {
         return (
-          <SwiperSlide key={`${idx}-${data}`} className='py-2'>
+          <SwiperSlide key={`${idx}-${day.date}`} className='py-2'>
             <ReservationsDailyItem
-              dateItem={data}
+              dateItem={day}
               style={style}
-              isSelected={selectedItem === data.date}
+              isSelected={selectedItem === day.date}
               onClick={onClick}
-              isWithTimeCrowds={isWithTimeCrowds}
+              classTimes={day.class_times}
             />
           </SwiperSlide>
         );
       })}
     </Swiper>
   );
-};
+}
 
 export default DateWeeklySwiper;

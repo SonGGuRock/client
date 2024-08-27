@@ -1,12 +1,31 @@
+'use client';
+
+import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
 import SubmissionSuccess from '@/app/shared/modules/success';
+import { useContext } from 'react';
+
+const classTimeeMap = new Map();
+classTimeeMap.set(0, '09-12시');
+classTimeeMap.set(1, '12-15시');
+
+const workTypeMap = new Map();
+workTypeMap.set(0, '물레');
+workTypeMap.set(1, '핸드빌딩');
 
 const ReservationsCreateSuccessPage = () => {
+  const context = useContext(ReservationCreateContext);
+  if (!context) {
+    return <div>수업 등록 실패</div>;
+  }
+
+  const { form } = context;
   const fields = [
     { label: '수강생', value: '이수아' },
-    { label: '수강날짜', value: '2024. 02. 05' },
-    { label: '수강시간', value: '12-15시' },
-    { label: '작업종류', value: '물레' },
+    { label: '수강날짜', value: form.reservation_date },
+    { label: '수강시간', value: classTimeeMap.get(form.class_time_id) },
+    { label: '작업종류', value: workTypeMap.get(form.work_type_id) },
   ];
+
   return (
     <>
       <SubmissionSuccess>

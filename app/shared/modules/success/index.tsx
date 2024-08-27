@@ -74,7 +74,9 @@ interface SubmissionButtonProps extends ClassNamesProps {
 const SubmissionButton = ({ href, classNames }: SubmissionButtonProps) => {
   return (
     <Link href={href} className={classNames}>
-      <Button size='large'>확인</Button>
+      <Button size='large' style='primary'>
+        확인
+      </Button>
     </Link>
   );
 };

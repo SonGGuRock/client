@@ -2,7 +2,6 @@
 
 import 'swiper/css';
 
-import { ButtonIndex } from '@/app/shared/atoms/button';
 import BottomBar from '@/app/shared/modules/BottomBar';
 import Header from '@/app/shared/modules/header';
 
@@ -11,6 +10,8 @@ import ReservationsDailyList from '../../../widget/reservations/ui/reservations-
 import DateWeeklySwiper from '@/app/widget/reservations/ui/reservations-weekly-swiper';
 import Link from 'next/link';
 import ReservationsHeader from '@/app/widget/reservations/ui/reservations-header';
+import ReservationWeeklyView from '@/app/widget/reservations/ui/reservation-weekly-view';
+import { ButtonIndex } from '@/app/shared/atoms/button';
 
 export const ReservationsWeeklyPage = () => {
   return (
@@ -28,11 +29,11 @@ export const ReservationsWeeklyPage = () => {
         </Header>
       </div>
 
-      <DateWeeklySwiper />
+      <ReservationWeeklyView />
       <div className='py-6 bg-white px-4'>
         <DailySchedule />
       </div>
-
+      {/* TODO:   /reservations/days 오늘 기준으로 요청 */}
       <ReservationsDailyList />
       <BottomBar />
     </div>

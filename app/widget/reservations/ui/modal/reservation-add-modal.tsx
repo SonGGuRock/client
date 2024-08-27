@@ -13,7 +13,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 import getDateArray from '@/app/shared/lib/getDateArray';
 import getDayName from '@/app/shared/lib/getDayName';
-import { DayliyItemDate } from '../reservations-daily-item';
+import { DailyItemDate } from '../reservations-daily-item';
 
 interface ReservationAddModalProps {
   studentId: Student['id'];
@@ -86,7 +86,7 @@ const ReservationAddModal = ({
           (date) => {
             return {
               date,
-              dayName: getDayName(new Date(date)) as DayliyItemDate['dayName'],
+              dayName: getDayName(new Date(date)) as DailyItemDate['dayName'],
             };
           }
         )}

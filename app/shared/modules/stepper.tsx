@@ -3,8 +3,9 @@ import Button from '../atoms/button/Button';
 import { useRouter } from 'next/navigation';
 import Back from '../atoms/Back';
 import { CraftItem, Reservation } from '@/app/lib-temp/definition';
+import { ReservationCreateBody } from '@/app/entities/reservations/types';
 
-interface StepperProps<T extends Reservation | CraftItem> {
+interface StepperProps<T extends ReservationCreateBody | CraftItem> {
   steps: Step<T>[];
   form: Partial<T>;
 }
@@ -14,7 +15,7 @@ const START_OF_STEP = 0;
 const Stepper = ({
   steps: stepsObj,
   form,
-}: StepperProps<Reservation | CraftItem>) => {
+}: StepperProps<ReservationCreateBody | CraftItem>) => {
   const { steps, handleNext, handlePrev } = useSteps(stepsObj);
   const nowStep = (steps.find((step) => step.isMount === true)?.order ?? 0) + 1;
   const router = useRouter();
@@ -39,9 +40,10 @@ const Stepper = ({
               step.isMount && (
                 <Button
                   key={idx}
+                  style='primary'
                   className='w-full'
                   size='large'
-                  disabled={!form.hasOwnProperty(step.data)}
+                  // disabled={}
                   onClick={
                     step.order === END_OF_STEP ? handleCreate : handleNext
                   }

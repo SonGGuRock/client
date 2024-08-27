@@ -5,9 +5,11 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useEffect,
   useState,
 } from 'react';
-import { ReservationTemp } from '../pages/reservations/ui/reservations-create-page';
+import { Reservation } from '../lib-temp/definition';
+import { ReservationCreateBody } from '../entities/reservations/types';
 
 export type SubmissionContext<T> = {
   form: Partial<T>;
@@ -15,15 +17,18 @@ export type SubmissionContext<T> = {
 };
 
 export const ReservationCreateContext =
-  createContext<SubmissionContext<ReservationTemp> | null>(null);
+  createContext<SubmissionContext<ReservationCreateBody> | null>(null);
 
 export default function ReservationCreateProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [form, setForm] = useState<Partial<ReservationTemp>>({});
+  const [form, setForm] = useState<Partial<ReservationCreateBody>>({});
 
+  useEffect(() => {
+    console.log('🥹', form);
+  }, [form]);
   return (
     <ReservationCreateContext.Provider value={{ form, setForm }}>
       {children}

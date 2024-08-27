@@ -38,7 +38,7 @@ export type StudentDetail = {
 };
 
 export type Reservation = {
-  student_id: number;
+  id: number;
   reservation_date: string;
   day_name: string;
   start_time: string;
@@ -51,7 +51,7 @@ export type Reservation = {
 type WORK_TYPE = 'throw' | 'hand';
 
 export type CraftItem = {
-  craft_id: number;
+  id: number;
   reservation_id: number;
   student_id: number;
   name: string;

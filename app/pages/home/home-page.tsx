@@ -1,10 +1,11 @@
 import AnnouncementBanner from '../../widget/announcements/AnnouncementBanner';
 
 import Reservations from '../../widget/reservations/ui/preview/reservation-preview-swiper';
-import Divider from '../../shared/atoms/Divider';
+
 import HomeHeader from '../../widget/home/ui/home-header';
 import StudentsTodayList from '@/app/widget/students/ui/students-today-list';
 import Todos from '@/app/widget/todos/todos';
+import Divider from '@/app/shared/atoms/Divider';
 
 const HomePage = () => {
   return (

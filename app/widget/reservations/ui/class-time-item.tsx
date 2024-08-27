@@ -1,10 +1,9 @@
 import clsx from 'clsx';
-import { Reservation } from '../../../shared/modules/stepper/lib/use-form-fill';
-import { ClassTimeTemp } from './class-time-picker';
+import { ClassTime } from './class-time-picker';
 
 interface ClassTimeItemProps {
-  time: ClassTimeTemp;
-  onClick?: (reservationProperty: Partial<Reservation>) => void;
+  time: ClassTime;
+  onClick?: (class_time_id: number) => void;
   isSelected: boolean;
 }
 
@@ -13,9 +12,7 @@ const ClassTimeItem = ({ time, onClick, isSelected }: ClassTimeItemProps) => {
     if (!onClick) {
       return;
     } else {
-      onClick({
-        reservation_class_time_id: time.reservation_class_time_id,
-      });
+      onClick(time.class_time_id);
     }
   };
   const classes = clsx(
@@ -27,7 +24,7 @@ const ClassTimeItem = ({ time, onClick, isSelected }: ClassTimeItemProps) => {
   );
   return (
     <div
-      key={time.reservation_class_time_id}
+      key={time.class_time_id}
       onClick={handleClick}
       className={`rounded-lg text-grey900 text-center text-sm py-3 ${classes}`}
     >

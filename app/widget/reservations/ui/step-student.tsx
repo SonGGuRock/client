@@ -27,9 +27,7 @@ function StepStudent({ context }: StepStudentProps) {
       </div>
 
       {isLoading && <div>수강생을 불러오고 있어요!</div>}
-      {!isLoading && students && (
-        <StudentsWithSearch context={context} students={students} />
-      )}
+      {!isLoading && students && <StudentsWithSearch context={context} />}
     </div>
   );
 }
