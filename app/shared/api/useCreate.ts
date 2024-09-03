@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useMutateWithCrendetials } from './fetch-with-credentials';
 
-const useCreate = <T>({
+const useCreate = <T, R = Response>({
   path,
   revalidate,
   params,
@@ -11,10 +11,10 @@ const useCreate = <T>({
   path: string;
   revalidate: boolean;
   params?: { [key: string]: string | number | boolean };
-  onSuccess?: () => void;
+  onSuccess?: (data: R) => void;
   onFail?: () => void;
 }) => {
-  const { mutate, ...rest } = useMutateWithCrendetials<T>(path,params);
+  const { mutate, ...rest } = useMutateWithCrendetials<T, R>(path, params);
   const queryClient = useQueryClient();
 
   const post = (content: T | undefined) => {
@@ -24,9 +24,9 @@ const useCreate = <T>({
         ...(content && { body: content }),
       },
       {
-        onSuccess: () => {
+        onSuccess: (data: R) => {
           revalidate && queryClient.invalidateQueries({ queryKey: [path] });
-          onSuccess && onSuccess();
+          onSuccess && onSuccess(data);
         },
         onError: () => {
           onFail && onFail();

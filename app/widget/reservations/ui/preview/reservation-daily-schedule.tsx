@@ -1,8 +1,9 @@
 import { class_time } from '@/app/widget/workshops/types';
 import Image from 'next/image';
+import { ClassTimeItem, ReservationListItem } from '../../types';
 
 interface Props {
-  classTimes: class_time[];
+  classTimes: ClassTimeItem[];
 }
 const DailySchedule = ({ classTimes }: Props) => {
   return (
@@ -29,7 +30,7 @@ const DailySchedule = ({ classTimes }: Props) => {
                 height={18}
               />
 
-              <span className='text-sm text-grey'>0</span>
+              <span className='text-sm text-grey'>{time.throw_count}</span>
             </span>
 
             <span className='w-full flex justify-start h-[18px]'>
@@ -40,7 +41,7 @@ const DailySchedule = ({ classTimes }: Props) => {
                 height={18}
               />
 
-              <span className='text-sm text-grey'>0</span>
+              <span className='text-sm text-grey'>{time.hand_count}</span>
             </span>
           </div>
         </li>

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { getFullToday } from '../lib/getToday';
 
 type menu =
   | {
@@ -23,7 +24,7 @@ type menu =
       kr: '마이';
     };
 
-const menus: menu[] = [
+const MENUS: menu[] = [
   {
     en: 'home',
     kr: '홈',
@@ -46,13 +47,19 @@ const menus: menu[] = [
   },
 ];
 const BottomBar = () => {
+  const getLink = (menu: menu) => {
+    if (menu.kr === '예약') {
+      return `/${menu.en}/${getFullToday()}`;
+    }
+    return `/${menu.en}`;
+  };
   return (
     <div className='w-full h-14 fixed bottom-0 left-0 z-50'>
       <div className='flex w-[375px] mx-auto h-full'>
-        {menus.map((menu, idx) => (
+        {MENUS.map((menu, idx) => (
           <Link
-            id={menu.en + idx}
-            href={`/${menu.en}`}
+            key={menu.en + idx}
+            href={getLink(menu)}
             className='w-full bg-white flex flex-wrap justify-center items-center flex-col'
           >
             <Image

@@ -3,6 +3,7 @@ import { ReservationClassTime, TimeCrowds } from './time-crowds';
 import { TodayBullet } from './today-bullet';
 import formatDateString from '@/app/shared/lib/formatDateString';
 import { ClassNamesProps } from './class-time-picker';
+import { getToday } from '@/app/shared/lib/getToday';
 
 export type DailyItemDate = {
   date: string;
@@ -47,18 +48,6 @@ export const ReservationsDailyItem = ({
 
   const getDay = (formatDate: string) => {
     return formatDate.split('-')[2];
-  };
-
-  const getToday = () => {
-    return formatDateString({
-      fullDateString: String(new Date()),
-      options: {
-        includeYear: false,
-        includeMonth: false,
-        includeHours: false,
-        includeMinutes: false,
-      },
-    });
   };
 
   return (

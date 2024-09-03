@@ -32,10 +32,10 @@ function DateWeeklySwiper<T extends DayReservation>({
   return (
     <Swiper
       className={`h-full min-h-28 ${swiperClasses}`}
-      slidesPerView={5.5}
+      slidesPerView={6.5}
       spaceBetween={4}
       freeMode={true}
-      initialSlide={1}
+      initialSlide={5}
       modules={[FreeMode]}
     >
       {days.map((day, idx) => {

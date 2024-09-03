@@ -21,7 +21,10 @@ export const ReservationsMonthlyPage = () => {
         <DailySchedule classTimes={times} />
       </div>
       {times.map((time) => (
-        <ReservationsDailyList key={time.id} reservations={time.reservations} />
+        <ReservationsDailyList
+          key={time.id}
+          classTimeWithReservations={time.reservations}
+        />
       ))}
       <BottomBar />
     </div>

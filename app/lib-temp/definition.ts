@@ -17,14 +17,6 @@ export type TodosResponse = {
 
 // students
 
-export type Student = {
-  name: string;
-  profile_picture: string;
-  id: number;
-  remaining_class_count: number;
-  last_payment_date: string;
-};
-
 export type StudentDetail = {
   name: string;
   profile_picture: string;

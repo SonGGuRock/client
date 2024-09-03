@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { DataResponse } from './type';
 import { useRouter } from 'next/navigation';
 
-export function useMutateWithCrendetials<T>(
+export function useMutateWithCrendetials<T, R = Response>(
   path: string,
   params?: { [key: string]: string | number | boolean }
 ) {
@@ -15,25 +15,32 @@ export function useMutateWithCrendetials<T>(
     url += `?${queryParams.toString()}`;
   }
 
-  return useMutation({
-    mutationFn: ({
-      method,
-      body,
-    }: {
-      method: 'POST' | 'DELETE' | 'PUT';
-      body?: T;
-    }) => {
-      const options = {
+  return useMutation<R, Error, { method: 'POST' | 'DELETE' | 'PUT'; body?: T }>(
+    {
+      mutationFn: async ({
         method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        ...(body && { body: JSON.stringify(body) }),
-      };
+        body,
+      }: {
+        method: 'POST' | 'DELETE' | 'PUT';
+        body?: T;
+      }) => {
+        const options = {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          ...(body && { body: JSON.stringify(body) }),
+        };
+        const response = await fetch(url, options);
 
-      return fetch(url, options);
-    },
-  });
+        if (!response.ok) {
+          throw new Error('useMutation API request failed');
+        }
+
+        return response.json() as Promise<R>;
+      },
+    }
+  );
 }
 
 export function useQueryWithCredentials<T>(

@@ -3,10 +3,14 @@ import Button from '../atoms/button/Button';
 import { useRouter } from 'next/navigation';
 import Back from '../atoms/Back';
 import { CraftItem, Reservation } from '@/app/lib-temp/definition';
-import { ReservationCreateBody } from '@/app/entities/reservations/types';
+import {
+  ReservationCreateBody,
+  ReservationCreateResponse,
+} from '@/app/entities/reservations/types';
 import useCreate from '../api/useCreate';
 import useFormFill from './stepper/lib/use-form-fill';
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
+import { DataResponse } from '../api/type';
 
 interface StepperProps<T extends ReservationCreateBody | CraftItem> {
   steps: Step<T>[];
@@ -17,20 +21,25 @@ const START_OF_STEP = 0;
 
 const Stepper = ({
   steps: stepsObj,
-  // form,
-}: StepperProps<ReservationCreateBody | CraftItem>) => {
+}: // form,
+StepperProps<ReservationCreateBody | CraftItem>) => {
   const { steps, handleNext, handlePrev } = useSteps(stepsObj);
-const {form} = useFormFill(ReservationCreateContext)
-  const { post } = useCreate<ReservationCreateBody>({
+  const { form } = useFormFill(ReservationCreateContext);
+  const { post } = useCreate<
+    ReservationCreateBody,
+    DataResponse<ReservationCreateResponse>
+  >({
     path: `reservations`,
     revalidate: false,
+    onSuccess: (data) => {
+      router.push(`/reservations/create/success/${data.data.student_name}`);
+    },
   });
 
   const nowStep = (steps.find((step) => step.isMount === true)?.order ?? 0) + 1;
   const router = useRouter();
   const handleCreate = () => {
-    post(form as ReservationCreateBody)
-    router.push('/reservations/create/success');
+    post(form as ReservationCreateBody);
   };
   return (
     <div className='pt-6 pb-2 px-4 '>

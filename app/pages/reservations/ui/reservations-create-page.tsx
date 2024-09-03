@@ -1,7 +1,7 @@
 'use client';
 
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
-import useSteps, { Step } from '@/app/shared/modules/stepper/lib/use-steps';
+import { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 
 import CloseButton from '@/app/shared/atoms/close-button';
 import Header from '@/app/shared/modules/header';
@@ -9,14 +9,10 @@ import Header from '@/app/shared/modules/header';
 import StepStudent from '@/app/widget/reservations/ui/step-student';
 import StepClassTime from '@/app/widget/reservations/ui/step-class-time';
 import StepWorkType from '@/app/widget/reservations/ui/step-work-type';
-import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import Stepper from '@/app/shared/modules/stepper';
 import { ReservationCreateBody } from '@/app/entities/reservations/types';
-import useCreate from '@/app/shared/api/useCreate';
 
 const ReservationsCreatePage = () => {
-  const { form } = useFormFill(ReservationCreateContext);
-
   const RESERVATION_STEPS: Step<ReservationCreateBody>[] = [
     {
       order: 0,
@@ -52,7 +48,7 @@ const ReservationsCreatePage = () => {
           <CloseButton />
         </div>
       </Header>
-      <Stepper steps={RESERVATION_STEPS}   />
+      <Stepper steps={RESERVATION_STEPS} />
     </div>
   );
 };

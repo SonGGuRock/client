@@ -7,17 +7,22 @@ import Header from '@/app/shared/modules/header';
 
 import DailySchedule from '@/app/widget/reservations/ui/preview/reservation-daily-schedule';
 import ReservationsDailyList from '../../../widget/reservations/ui/reservations-daily-list';
-import DateWeeklySwiper from '@/app/widget/reservations/ui/reservations-weekly-swiper';
 import Link from 'next/link';
 import ReservationsHeader from '@/app/widget/reservations/ui/reservations-header';
 import ReservationWeeklyView from '@/app/widget/reservations/ui/reservation-weekly-view';
 import { ButtonIndex } from '@/app/shared/atoms/button';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { ReservationListItem } from '@/app/widget/reservations/types';
+import { getTodayWithoutYear } from '@/app/shared/lib/getToday';
+import { useParams } from 'next/navigation';
 
 export const ReservationsWeeklyPage = () => {
-  const { data: times } =
-    useQueryWithCredentials<ReservationListItem[]>('reservations/days');
+  const params = useParams();
+  const date = params.date as string;
+  const { data: times } = useQueryWithCredentials<ReservationListItem[]>(
+    'reservations/days',
+    { date }
+  );
 
   if (!times) return <div>loading now </div>;
 
@@ -26,7 +31,7 @@ export const ReservationsWeeklyPage = () => {
       <ReservationsHeader />
       <div className='mt-4 px-4'>
         <Header>
-          <Header.Title>2월 24일 토요일</Header.Title>
+          <Header.Title>{getTodayWithoutYear()}</Header.Title>
           <ButtonIndex size='small'>
             <Link href='/reservations/create' className='flex items-center'>
               <ButtonIndex.AddIcon />
@@ -37,12 +42,12 @@ export const ReservationsWeeklyPage = () => {
       </div>
 
       <ReservationWeeklyView />
-      {/* 
+
       <div className='py-6 bg-white px-4'>
         <DailySchedule classTimes={times} />
-      </div> */}
+      </div>
       {times.map((time) => (
-        <ReservationsDailyList key={time.id} reservations={time.reservations} />
+        <ReservationsDailyList key={time.id} classTimeWithReservations={time} />
       ))}
       <BottomBar />
     </div>

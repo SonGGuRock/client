@@ -6,7 +6,7 @@ import Student from './student-list-item/Student';
 import ExpandedList from '../../../shared/modules/ExpandedList';
 import sliceItems from '@/app/shared/lib/sliceList';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
-import { Student as StudentType } from '@/app/lib-temp/definition';
+import type { Student as StudentType } from '@/app/entities/students/types';
 
 export default function StudentsTodayList() {
   const { data: students } = useQueryWithCredentials<StudentType[]>(
