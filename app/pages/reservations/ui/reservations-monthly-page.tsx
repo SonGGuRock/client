@@ -3,8 +3,14 @@ import BottomBar from '@/app/shared/modules/BottomBar';
 import ReservationsDailyList from '@/app/widget/reservations/ui/reservations-daily-list';
 import ReservationsMonthlyCalendar from '@/app/widget/reservations/ui/reservations-monthly-calendar';
 import ReservationsHeader from '@/app/widget/reservations/ui/reservations-header';
+import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { ReservationListItem } from '@/app/widget/reservations/types';
 
 export const ReservationsMonthlyPage = () => {
+  const { data: times } =
+    useQueryWithCredentials<ReservationListItem[]>('reservations/days');
+
+  if (!times) return <div>loading now </div>;
   return (
     <div>
       <ReservationsHeader />
@@ -12,10 +18,11 @@ export const ReservationsMonthlyPage = () => {
         <ReservationsMonthlyCalendar />
       </div>
       <div className='py-6 px-4 bg-white'>
-        <DailySchedule />
+        <DailySchedule classTimes={times} />
       </div>
-
-      <ReservationsDailyList />
+      {times.map((time) => (
+        <ReservationsDailyList key={time.id} reservations={time.reservations} />
+      ))}
       <BottomBar />
     </div>
   );

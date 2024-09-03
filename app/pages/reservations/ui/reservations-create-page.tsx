@@ -12,6 +12,7 @@ import StepWorkType from '@/app/widget/reservations/ui/step-work-type';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import Stepper from '@/app/shared/modules/stepper';
 import { ReservationCreateBody } from '@/app/entities/reservations/types';
+import useCreate from '@/app/shared/api/useCreate';
 
 const ReservationsCreatePage = () => {
   const { form } = useFormFill(ReservationCreateContext);
@@ -26,7 +27,10 @@ const ReservationsCreatePage = () => {
     {
       order: 1,
       isMount: false,
-      data: ['reservation_date', 'classtime_id']  as (keyof ReservationCreateBody)[],
+      data: [
+        'reservation_date',
+        'classtime_id',
+      ] as (keyof ReservationCreateBody)[],
       component: <StepClassTime />,
     },
     {
@@ -48,7 +52,7 @@ const ReservationsCreatePage = () => {
           <CloseButton />
         </div>
       </Header>
-      <Stepper steps={RESERVATION_STEPS} form={form} />
+      <Stepper steps={RESERVATION_STEPS}   />
     </div>
   );
 };

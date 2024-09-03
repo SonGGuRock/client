@@ -1,13 +1,16 @@
 'use client';
 
 import { StudentMain } from '@/app/widget/students/ui/student-list-item';
-import { Student } from '@/app/lib-temp/definition';
 import useSearchStudentsByInitial from '../../students/lib/useSearchByInitial';
 import Search from '@/app/shared/modules/Search';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 import { StepStudentProps } from './step-student';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
-import { useEffect } from 'react';
+import { Student } from '@/app/lib-temp/definition';
+
+interface WithStudnetId {
+  student_id: number;
+}
 
 const StudentsWithSearch = ({ context }: StepStudentProps) => {
   const { form, fill } = useFormFill(context);
@@ -44,9 +47,9 @@ const StudentsWithSearch = ({ context }: StepStudentProps) => {
               />
               <StudentMain.Name>{student.name}</StudentMain.Name>
             </StudentMain>
-            {form.id === student.id && (
+            {/* {form[`student_id`] && form[`student_id`] === student.id && (
               <CheckBox isReadOnly={true} isChecked={true} style='grey' />
-            )}
+            )} */}
           </div>
         ))}
       </div>

@@ -1,12 +1,12 @@
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
 import Title from '@/app/shared/atoms/Title';
-import { useContext } from 'react';
 import DateWeeklySwiper from './reservations-weekly-swiper';
 import ClassTimePicker from './class-time-picker';
 import useFormFill from '../../../shared/modules/stepper/lib/use-form-fill';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { ReservationDay } from './reservation-weekly-view';
 import formatToDayName from '@/app/shared/lib/formatToDayName';
+import type { WorkshopIds } from '../../workshops/types';
 
 const StepClassTime = () => {
   const { data: reservationsDays } = useQueryWithCredentials<ReservationDay[]>(
@@ -14,8 +14,13 @@ const StepClassTime = () => {
     { type: 'weekly' }
   );
 
+  const { data: workshopIds } = useQueryWithCredentials<WorkshopIds>(
+    'workshops/settings/ids'
+  );
+
   const { form, fill } = useFormFill(ReservationCreateContext);
-  if (!reservationsDays) {
+
+  if (!reservationsDays || !workshopIds) {
     return <div>loading </div>;
   }
 
@@ -40,6 +45,7 @@ const StepClassTime = () => {
       </div>
 
       <ClassTimePicker
+        classTimes={workshopIds?.class_times}
         classNames='mt-4 px-4'
         onClick={(class_time_id) => {
           fill({ class_time_id: class_time_id });

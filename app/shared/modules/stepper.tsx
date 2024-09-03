@@ -4,23 +4,32 @@ import { useRouter } from 'next/navigation';
 import Back from '../atoms/Back';
 import { CraftItem, Reservation } from '@/app/lib-temp/definition';
 import { ReservationCreateBody } from '@/app/entities/reservations/types';
+import useCreate from '../api/useCreate';
+import useFormFill from './stepper/lib/use-form-fill';
+import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
 
 interface StepperProps<T extends ReservationCreateBody | CraftItem> {
   steps: Step<T>[];
-  form: Partial<T>;
+  // form: Partial<T>;
 }
 const END_OF_STEP = 2;
 const START_OF_STEP = 0;
 
 const Stepper = ({
   steps: stepsObj,
-  form,
+  // form,
 }: StepperProps<ReservationCreateBody | CraftItem>) => {
   const { steps, handleNext, handlePrev } = useSteps(stepsObj);
+const {form} = useFormFill(ReservationCreateContext)
+  const { post } = useCreate<ReservationCreateBody>({
+    path: `reservations`,
+    revalidate: false,
+  });
+
   const nowStep = (steps.find((step) => step.isMount === true)?.order ?? 0) + 1;
   const router = useRouter();
   const handleCreate = () => {
-    // POST 요청 reservation?.data
+    post(form as ReservationCreateBody)
     router.push('/reservations/create/success');
   };
   return (

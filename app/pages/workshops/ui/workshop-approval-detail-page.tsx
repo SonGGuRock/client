@@ -73,7 +73,7 @@ const WorkshopApprovalDetailPage = () => {
 
           <div className='border-t mt-12 border-b py-8 border-grey100 flex flex-wrap w-full gap-4'>
             {pendingMember?.map((member) => (
-              <div className='w-full flex flex-wrap gap-4'>
+              <div key={member.id} className='w-full flex flex-wrap gap-4'>
                 <div className='flex w-full justify-between'>
                   <span className='text-grey700 text-sm'>이름</span>
                   <span className='text-grey900 text-sm'>{member.name}</span>

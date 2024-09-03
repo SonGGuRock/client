@@ -12,8 +12,15 @@ import Link from 'next/link';
 import ReservationsHeader from '@/app/widget/reservations/ui/reservations-header';
 import ReservationWeeklyView from '@/app/widget/reservations/ui/reservation-weekly-view';
 import { ButtonIndex } from '@/app/shared/atoms/button';
+import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { ReservationListItem } from '@/app/widget/reservations/types';
 
 export const ReservationsWeeklyPage = () => {
+  const { data: times } =
+    useQueryWithCredentials<ReservationListItem[]>('reservations/days');
+
+  if (!times) return <div>loading now </div>;
+
   return (
     <div>
       <ReservationsHeader />
@@ -30,11 +37,13 @@ export const ReservationsWeeklyPage = () => {
       </div>
 
       <ReservationWeeklyView />
+      {/* 
       <div className='py-6 bg-white px-4'>
-        <DailySchedule />
-      </div>
-      {/* TODO:   /reservations/days 오늘 기준으로 요청 */}
-      <ReservationsDailyList />
+        <DailySchedule classTimes={times} />
+      </div> */}
+      {times.map((time) => (
+        <ReservationsDailyList key={time.id} reservations={time.reservations} />
+      ))}
       <BottomBar />
     </div>
   );

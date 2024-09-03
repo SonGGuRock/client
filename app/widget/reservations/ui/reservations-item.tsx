@@ -3,16 +3,16 @@ import IconHand from '@/app/shared/atoms/icons/icon-hand';
 import IconPot from '@/app/shared/atoms/icons/icon-pot';
 import isDateInThePast from '@/app/shared/lib/isDateInThePast';
 import Image from 'next/image';
+import type { ReservationItem } from '../types';
 
 interface ReservationItemsProps {
-  reservation: Reservation;
+  reservation: ReservationItem;
 }
 
 const ReservationItem = ({
   reservation: {
     id,
     reservation_date,
-    day_name,
     start_time,
     work_type,
     remaining_class_count,

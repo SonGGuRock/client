@@ -22,7 +22,7 @@ const WorkshopCreateSuccessPage = () => {
       </div>
       <div className='absolute left-0 bottom-9 w-full px-4'>
         <Link href='/workshops'>
-          <Button size='large' type='button'>
+          <Button size='large' type='button' style='primary'>
             확인
           </Button>
         </Link>

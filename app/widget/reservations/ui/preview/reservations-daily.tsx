@@ -1,8 +1,14 @@
 import Image from 'next/image';
 import DailySchedule from './reservation-daily-schedule';
 import Link from 'next/link';
+import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { ReservationDailySummary } from '../../types';
 
 const Daily = () => {
+  const { data } = useQueryWithCredentials<ReservationDailySummary>(
+    'reservation/summary/today'
+  );
+  if (!data) return <div>loading now</div>;
   return (
     <Link href='/reservations'>
       <h2 className=' inline-block px-[12px] py-[6px] text-sm font-bold bg-brown text-white rounded-3xl'>
@@ -21,7 +27,7 @@ const Daily = () => {
           height={110}
           className='absolute top-[0px] right-6 z-50'
         />
-        <DailySchedule />
+        <DailySchedule classTimes={data.class_times} />
       </div>
     </Link>
   );

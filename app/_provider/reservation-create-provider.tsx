@@ -8,7 +8,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { Reservation } from '../lib-temp/definition';
 import { ReservationCreateBody } from '../entities/reservations/types';
 
 export type SubmissionContext<T> = {

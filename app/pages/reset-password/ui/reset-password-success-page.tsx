@@ -22,7 +22,7 @@ const ResetPasswordSuccessPage = () => {
       </div>
       <div className='absolute left-0 bottom-0 w-full'>
         <Link href='/signin'>
-          <Button size='large' type='button'>
+          <Button size='large' type='button' style='primary'>
             확인
           </Button>
         </Link>

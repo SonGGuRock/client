@@ -128,6 +128,7 @@ const StudentForm = ({ initialData, onSubmit }: StudentFormProps) => {
         <Button
           size='small'
           type='submit'
+        style='primary'
           disabled={isDisabled}
           className='absolute right-0 top-[-38px]'
         >

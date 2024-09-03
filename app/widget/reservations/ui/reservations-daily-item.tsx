@@ -2,13 +2,14 @@ import clsx from 'clsx';
 import { ReservationClassTime, TimeCrowds } from './time-crowds';
 import { TodayBullet } from './today-bullet';
 import formatDateString from '@/app/shared/lib/formatDateString';
+import { ClassNamesProps } from './class-time-picker';
 
 export type DailyItemDate = {
   date: string;
   day_name: '월' | '화' | '수' | '목' | '금' | '토' | '일';
 };
 
-export interface WeeklyVisitProps {
+export interface WeeklyVisitProps extends ClassNamesProps {
   dateItem: DailyItemDate;
   isSelected: boolean;
   style?: 'background-primary' | 'item-primary';
@@ -20,9 +21,9 @@ export const ReservationsDailyItem = ({
   dateItem,
   isSelected,
   style = 'background-primary',
-
   onClick,
   classTimes,
+  classNames,
 }: WeeklyVisitProps) => {
   const itemClasses = clsx(
     {
@@ -63,7 +64,7 @@ export const ReservationsDailyItem = ({
   return (
     <div
       onClick={handleClick}
-      className={`relative p-3  w-14 h-18 flex flex-wrap gap-[2px] justify-center itmes-center rounded-lg ${itemClasses}`}
+      className={`relative p-3  w-14 h-18 flex flex-wrap gap-[2px] justify-center itmes-center rounded-lg ${classNames} ${itemClasses}`}
     >
       {getDay(dateItem.date) === getToday() && <TodayBullet />}
       <p className='w-full text-center text-sm text-grey500'>

@@ -3,7 +3,7 @@ import { JusoRequestParams, JusoResponse } from './type';
 import axios, { AxiosResponse } from 'axios';
 
 const JUSO_URL = 'https://business.juso.go.kr/addrlink/addrLinkApi.do';
-const JUSO_API_KEY = 'devU01TX0FVVEgyMDI0MDUxNjA5MDg1MzExNDc2OTQ=';
+const JUSO_API_KEY = 'devU01TX0FVVEgyMDI0MDkwMjA4NTIzNzExNTA0OTA=';
 
 const useSearchAddress = () => {
   return useMutation<AxiosResponse<JusoResponse>, unknown, JusoRequestParams>({

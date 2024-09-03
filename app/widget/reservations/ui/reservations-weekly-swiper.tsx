@@ -6,18 +6,9 @@ import {
   ReservationsDailyItem,
 } from './reservations-daily-item';
 import clsx from 'clsx';
-import { ReservationClassTime } from './time-crowds';
-const datetemp = [
-  {
-    date: '2024-02-14',
-    dayOfWeek: '월',
-    day: 14,
-    visit: [6, 3, 2, 4],
-  },
-];
 
 interface DayReservation extends DailyItemDate {
-  class_times: ReservationClassTime[];
+  // class_times: ReservationClassTime[];
 }
 
 export interface DateWeeklySwiperProps<T extends DayReservation> {
@@ -49,13 +40,14 @@ function DateWeeklySwiper<T extends DayReservation>({
     >
       {days.map((day, idx) => {
         return (
-          <SwiperSlide key={`${idx}-${day.date}`} className='py-2'>
+          <SwiperSlide key={`${idx}-${day.date}`} className='py-2 '>
             <ReservationsDailyItem
               dateItem={day}
               style={style}
               isSelected={selectedItem === day.date}
               onClick={onClick}
-              classTimes={day.class_times}
+              // classTimes={day.class_times}
+              classNames='cursor-pointer'
             />
           </SwiperSlide>
         );

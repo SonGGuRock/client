@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { ClassTime } from './class-time-picker';
+import { class_time } from '../../workshops/types';
 
 interface ClassTimeItemProps {
-  time: ClassTime;
+  time: class_time;
   onClick?: (class_time_id: number) => void;
   isSelected: boolean;
 }
@@ -12,7 +12,7 @@ const ClassTimeItem = ({ time, onClick, isSelected }: ClassTimeItemProps) => {
     if (!onClick) {
       return;
     } else {
-      onClick(time.class_time_id);
+      onClick(time.id);
     }
   };
   const classes = clsx(
@@ -24,11 +24,11 @@ const ClassTimeItem = ({ time, onClick, isSelected }: ClassTimeItemProps) => {
   );
   return (
     <div
-      key={time.class_time_id}
+      key={time.id}
       onClick={handleClick}
       className={`rounded-lg text-grey900 text-center text-sm py-3 ${classes}`}
     >
-      {time.text}
+      {time.start_time}-{time.end_time}
     </div>
   );
 };
