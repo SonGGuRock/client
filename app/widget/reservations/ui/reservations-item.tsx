@@ -16,7 +16,7 @@ const ReservationItem = ({
 }: ReservationItemsProps) => {
   const params = useParams();
   const date = params.date as string;
-  const isFulfilled = isDateInThePast(date);
+  const isFulfilled = isDateInThePast(date, end_time);
   return (
     <div
       className={`w-full p-3 ${

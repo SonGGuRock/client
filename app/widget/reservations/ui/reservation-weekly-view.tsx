@@ -1,17 +1,12 @@
+'use client';
+
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import DateWeeklySwiper from './reservations-weekly-swiper';
 import formatToDayName, {
   EnglishDayName,
 } from '@/app/shared/lib/formatToDayName';
-import { ReservationClassTime } from './time-crowds';
-
-// type ClassTimes = {
-//   id: number;
-//   start_time: string;
-//   end_time: string;
-//   throw_count: number;
-//   hand_count: number;
-// };
+import { ReservationClassTime } from '@/app/entities/reservations/types';
+import { useParams, useRouter } from 'next/navigation';
 
 export type ReservationDay = {
   date: string;
@@ -20,6 +15,9 @@ export type ReservationDay = {
 };
 
 const ReservationWeeklyView = () => {
+  const router = useRouter();
+  const params = useParams();
+  const selectedDate = params.date as string;
   const { data: reservationsDays } = useQueryWithCredentials<ReservationDay[]>(
     'reservations/complexity',
     { type: 'weekly' }
@@ -33,9 +31,18 @@ const ReservationWeeklyView = () => {
     ...day,
     day_name: formatToDayName(day.day_name),
   }));
+
+  const handleClickDate = (date: string) => {
+    router.push(`/reservations/${date}`);
+  };
   return (
     <div>
-      <DateWeeklySwiper days={fommatted} />
+      <DateWeeklySwiper
+        days={fommatted}
+        onClick={handleClickDate}
+        selectedItem={selectedDate}
+        style='item-brown-primary'
+      />
     </div>
   );
 };

@@ -6,14 +6,15 @@ import {
   ReservationsDailyItem,
 } from './reservations-daily-item';
 import clsx from 'clsx';
+import { ReservationClassTime } from '@/app/entities/reservations/types';
 
 interface DayReservation extends DailyItemDate {
-  // class_times: ReservationClassTime[];
+  class_times?: ReservationClassTime[];
 }
 
 export interface DateWeeklySwiperProps<T extends DayReservation> {
   days: T[];
-  style?: 'background-primary' | 'item-primary';
+  style?: 'background-primary' | 'item-primary' | 'item-brown-primary';
   selectedItem?: string;
   onClick?: (date: string) => void;
 }
@@ -25,7 +26,7 @@ function DateWeeklySwiper<T extends DayReservation>({
   onClick,
 }: DateWeeklySwiperProps<T>) {
   const swiperClasses = clsx({
-    'bg-beige': style === 'background-primary',
+    'bg-beige': style === 'background-primary' || 'item-brown-primary',
     'bg-white': style === 'item-primary',
   });
 
@@ -46,7 +47,7 @@ function DateWeeklySwiper<T extends DayReservation>({
               style={style}
               isSelected={selectedItem === day.date}
               onClick={onClick}
-              // classTimes={day.class_times}
+              classTimes={day.class_times}
               classNames='cursor-pointer'
             />
           </SwiperSlide>

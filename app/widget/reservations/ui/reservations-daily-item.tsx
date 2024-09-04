@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { ReservationClassTime, TimeCrowds } from './time-crowds';
+import { TimeCrowds } from './time-crowds';
 import { TodayBullet } from './today-bullet';
-import formatDateString from '@/app/shared/lib/formatDateString';
 import { ClassNamesProps } from './class-time-picker';
 import { getToday } from '@/app/shared/lib/getToday';
+import { ReservationClassTime } from '@/app/entities/reservations/types';
 
 export type DailyItemDate = {
   date: string;
@@ -13,7 +13,7 @@ export type DailyItemDate = {
 export interface WeeklyVisitProps extends ClassNamesProps {
   dateItem: DailyItemDate;
   isSelected: boolean;
-  style?: 'background-primary' | 'item-primary';
+  style?: 'background-primary' | 'item-primary' | 'item-brown-primary';
   selectedItem?: string;
   onClick?: (date: string) => void;
   classTimes?: ReservationClassTime[];
@@ -31,6 +31,7 @@ export const ReservationsDailyItem = ({
       'bg-inherit': isSelected === false && style === 'background-primary',
       'bg-grey50': isSelected === false && style === 'item-primary',
       'bg-grey100': isSelected === true && style === 'item-primary',
+      'bg-brown': isSelected === true && style === 'item-brown-primary',
     },
     {
       'border-0': isSelected === false,
@@ -38,6 +39,8 @@ export const ReservationsDailyItem = ({
     }
   );
 
+  const isSelectedAndBrownStyle =
+    isSelected === true && style === 'item-brown-primary';
   const handleClick = () => {
     if (!onClick) {
       return;
@@ -56,10 +59,18 @@ export const ReservationsDailyItem = ({
       className={`relative p-3  w-14 h-18 flex flex-wrap gap-[2px] justify-center itmes-center rounded-lg ${classNames} ${itemClasses}`}
     >
       {getDay(dateItem.date) === getToday() && <TodayBullet />}
-      <p className='w-full text-center text-sm text-grey500'>
+      <p
+        className={`w-full text-center text-sm ${
+          isSelectedAndBrownStyle ? 'text-white' : 'text-grey500'
+        } `}
+      >
         {dateItem.day_name}
       </p>
-      <p className='w-full text-center text-base text-grey900'>
+      <p
+        className={`w-full text-center text-base ${
+          isSelectedAndBrownStyle ? 'text-white' : 'text-grey900'
+        }`}
+      >
         {getDay(dateItem.date)}
       </p>
       {classTimes && <TimeCrowds classTimes={classTimes} />}

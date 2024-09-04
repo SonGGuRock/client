@@ -9,7 +9,7 @@ const ReservationsDailyList = ({ classTimeWithReservations }: Props) => {
   const { reservations: reservationList, ...classTime } =
     classTimeWithReservations;
   return (
-    <div className='flex flex-wrap gap-2 pb-20 bg-white px-4'>
+    <div className='w-full pb-4 bg-white px-4'>
       {reservationList.map((reservation) => (
         <ReservationItem
           key={reservation.id}

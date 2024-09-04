@@ -13,7 +13,10 @@ import ReservationWeeklyView from '@/app/widget/reservations/ui/reservation-week
 import { ButtonIndex } from '@/app/shared/atoms/button';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { ReservationListItem } from '@/app/widget/reservations/types';
-import { getTodayWithoutYear } from '@/app/shared/lib/getToday';
+import {
+  getKrDateWithoutYear,
+  getTodayWithoutYear,
+} from '@/app/shared/lib/getToday';
 import { useParams } from 'next/navigation';
 
 export const ReservationsWeeklyPage = () => {
@@ -31,7 +34,7 @@ export const ReservationsWeeklyPage = () => {
       <ReservationsHeader />
       <div className='mt-4 px-4'>
         <Header>
-          <Header.Title>{getTodayWithoutYear()}</Header.Title>
+          <Header.Title>{getKrDateWithoutYear(date)}</Header.Title>
           <ButtonIndex size='small'>
             <Link href='/reservations/create' className='flex items-center'>
               <ButtonIndex.AddIcon />

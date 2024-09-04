@@ -40,3 +40,32 @@ export const getTodayWithoutYear = () => {
   const dayName = days[today.getDay()];
   return `${month}월 ${day}일 ${dayName}`;
 };
+
+/**
+ *
+ * @param date : 'YYYY-MM-DD'
+ * @returns dayName: '수요일'
+ */
+
+export function getDayOfWeek(dateString: string) {
+  const date = new Date(dateString);
+  const dayNumber = date.getDay();
+  const daysOfWeek = [
+    '일요일',
+    '월요일',
+    '화요일',
+    '수요일',
+    '목요일',
+    '금요일',
+    '토요일',
+  ];
+  return daysOfWeek[dayNumber];
+}
+
+export const getKrDateWithoutYear = (date: string) => {
+  const month = date.split('-')[1];
+  const day = date.split('-')[2];
+  const dayName = getDayOfWeek(date);
+
+  return `${month}월 ${day}일 ${dayName}`;
+};

@@ -1,11 +1,5 @@
+import { ReservationClassTime } from '@/app/entities/reservations/types';
 import Cookies from 'js-cookie';
-import { ClassTime } from '../../workshops/api/type';
-
-export type ReservationClassTime = {
-  id: number;
-  throw_count: number;
-  hand_count: number;
-} & ClassTime;
 
 interface Props {
   classTimes: ReservationClassTime[];

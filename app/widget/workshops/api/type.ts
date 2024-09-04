@@ -1,3 +1,4 @@
+import { ClassTime } from '@/app/entities/reservations/types';
 import { DataResponse } from '@/app/shared/api/type';
 
 export type Workshop = {
@@ -48,11 +49,6 @@ export type MemberTypeTitle = MemberTypeMap[MemberTypeValue];
 export type MemberType = {
   value: MemberTypeValue;
   title: MemberTypeTitle;
-};
-
-export type ClassTime = {
-  start_time: number;
-  end_time: number;
 };
 
 export type WorkStepActivation = {
