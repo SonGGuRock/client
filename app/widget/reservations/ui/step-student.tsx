@@ -4,11 +4,15 @@ import Title from '@/app/shared/atoms/Title';
 import { SubmissionContext } from '@/app/_provider/reservation-create-provider';
 import { Context } from 'react';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
-import { CraftItem, Reservation, Student } from '@/app/lib-temp/definition';
+import {
+  CraftItem,
+  StudentReservation,
+  Student,
+} from '@/app/lib-temp/definition';
 import StudentsWithSearch from './step-student-searched';
 
 export interface StepStudentProps {
-  context: Context<SubmissionContext<Reservation | CraftItem> | null>;
+  context: Context<SubmissionContext<StudentReservation | CraftItem> | null>;
 }
 
 function StepStudent({ context }: StepStudentProps) {

@@ -12,11 +12,11 @@ import ReservationsHeader from '@/app/widget/reservations/ui/reservations-header
 import ReservationWeeklyView from '@/app/widget/reservations/ui/reservation-weekly-view';
 import { ButtonIndex } from '@/app/shared/atoms/button';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
-import { ReservationListItem } from '@/app/widget/reservations/types';
 import {
-  getKrDateWithoutYear,
-  getTodayWithoutYear,
-} from '@/app/shared/lib/getToday';
+  ReservationItem,
+  ReservationListItem,
+} from '@/app/widget/reservations/types';
+import { getKrDateWithoutYear } from '@/app/shared/lib/getToday';
 import { useParams } from 'next/navigation';
 
 export const ReservationsWeeklyPage = () => {
@@ -28,6 +28,15 @@ export const ReservationsWeeklyPage = () => {
   );
 
   if (!times) return <div>loading now </div>;
+
+  const hasNoReservation = () => {
+    return (
+      times.reduce<ReservationItem[]>((acc, cur) => {
+        acc.push(...cur.reservations);
+        return acc;
+      }, []).length === 0
+    );
+  };
 
   return (
     <div>
@@ -49,9 +58,22 @@ export const ReservationsWeeklyPage = () => {
       <div className='py-6 bg-white px-4'>
         <DailySchedule classTimes={times} />
       </div>
-      {times.map((time) => (
-        <ReservationsDailyList key={time.id} classTimeWithReservations={time} />
-      ))}
+      <div className='w-full flex flex-col gap-4 bg-white px-4'>
+        {hasNoReservation() ? (
+          <div className='w-full py-10 text-sm text-gray-400 text-center'>
+            예약이 없습니다{' '}
+          </div>
+        ) : (
+          <>
+            {times.map((time) => (
+              <ReservationsDailyList
+                key={time.id}
+                classTimeWithReservations={time}
+              />
+            ))}
+          </>
+        )}
+      </div>
       <BottomBar />
     </div>
   );

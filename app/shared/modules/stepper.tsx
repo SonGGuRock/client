@@ -2,7 +2,7 @@ import useSteps, { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 import Button from '../atoms/button/Button';
 import { useRouter } from 'next/navigation';
 import Back from '../atoms/Back';
-import { CraftItem, Reservation } from '@/app/lib-temp/definition';
+import { CraftItem, StudentReservation } from '@/app/lib-temp/definition';
 import {
   ReservationCreateBody,
   ReservationCreateResponse,

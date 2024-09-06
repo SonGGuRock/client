@@ -1,9 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 export const SwitchView = () => {
+  const params = useParams();
+  const date = params.date as string;
   const path = usePathname();
   const isMonthly = path.includes('monthly');
   const { push } = useRouter();
@@ -11,7 +13,7 @@ export const SwitchView = () => {
     push(path);
   };
   const handleSwitch = () => {
-    goTo(isMonthly ? '/reservations' : '/reservations/monthly');
+    goTo(isMonthly ? `/reservations/${date}` : `/reservations/${date}/monthly`);
   };
 
   return (

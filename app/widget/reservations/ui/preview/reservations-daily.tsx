@@ -12,10 +12,10 @@ const Daily = () => {
       'reservations/summary/today'
     );
 
-  const { data: students } = useQueryWithCredentials<Student[]>(
-    'reservations/students/today'
-  );
-  if (!reservations || !students) return <div>loading now</div>;
+  // const { data: students } = useQueryWithCredentials<Student[]>(
+  //   'reservations/students/today'
+  // );
+  if (!reservations) return <div>loading now</div>;
   return (
     <Link href='/reservations'>
       <h2 className=' inline-block px-[12px] py-[6px] text-sm font-bold bg-brown text-white rounded-3xl'>
@@ -23,12 +23,11 @@ const Daily = () => {
       </h2>
       <div className='flex flex-wrap gap-4'>
         <p className='text-lg font-bold pt-4'>
-          수강생{' '}
+          오늘은{' '}
           <strong className='text-brown font-semibold'>
-            {students.length}명
+            {reservations.visitors}회
           </strong>
-          이 <br />
-          방문할 예정이에요
+          의 <br /> 수업이 진행돼요!
         </p>
         <Image
           src='/img/bg-img-pot.png'

@@ -29,7 +29,7 @@ export type StudentDetail = {
   is_active: boolean;
 };
 
-export type Reservation = {
+export type StudentReservation = {
   id: number;
   reservation_date: string;
   day_name: string;

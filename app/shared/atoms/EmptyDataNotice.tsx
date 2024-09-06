@@ -6,7 +6,7 @@ interface EmptyDataNoticeProps extends ClassNamesProps, PropsWithChildren {}
 const EmptyDataNotice = ({ children, classNames }: EmptyDataNoticeProps) => {
   return (
     <div
-      className={`flex w-full pt-16 justify-center text-sm text-grey700 ${classNames}`}
+      className={`flex w-full py-8 justify-center text-sm text-grey700 ${classNames}`}
     >
       {children}
     </div>

@@ -5,6 +5,7 @@ import { ReservationsDailyItem } from './reservations-daily-item';
 import { TimeCrowds } from './time-crowds';
 import { TodayBullet } from './today-bullet';
 import { ReservationDay } from './reservation-weekly-view';
+import { getToday } from '@/app/shared/lib/getToday';
 
 const ReservationsMonthlyCalendar = () => {
   const { data: reservationsDays } = useQueryWithCredentials<ReservationDay[]>(
@@ -50,7 +51,7 @@ const ReservationsMonthlyCalendar = () => {
               key={idx}
               className='relative w-full inline-flex flex-wrap justify-center items-center text-grey900 text-base min-h-8'
             >
-              {day.date === today && <TodayBullet positionTop={-2} />}
+              {day.date === today && <TodayBullet positionTop={-10} />}
               {day.date}
               <TimeCrowds classTimes={day.class_times} />
             </span>
