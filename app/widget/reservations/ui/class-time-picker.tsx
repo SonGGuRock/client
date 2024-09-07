@@ -1,35 +1,29 @@
-import { Reservation } from '@/app/lib-temp/definition';
+import { ReservationCreateBody } from '@/app/entities/reservations/types';
+import { WorkshopIds } from '../../workshops/types';
 import ClassTimeItem from './class-time-item';
 
-export type ClassTimeTemp = Pick<Reservation, 'reservation_date'> & {
-  text: string;
-};
-
-const CLASS_TIMES: ClassTimeTemp[] = [
-  { reservation_date: '1', text: '09-12시' },
-  { reservation_date: '2', text: '12-15시' },
-  { reservation_date: '3', text: '15-18시' },
-  { reservation_date: '4', text: '18-21시' },
-];
 export interface ClassNamesProps {
   classNames?: string;
 }
 
 interface ClassTimeProps extends ClassNamesProps {
-  selectedItem: Reservation['reservation_date'];
-  onClick?: (reservationProperty: Partial<Reservation>) => void;
+  classTimes: WorkshopIds['class_times'];
+  selectedItem?: ReservationCreateBody['class_time_id'];
+  onClick?: (class_time_id: number) => void;
 }
 const ClassTimePicker = ({
+  classTimes,
   classNames,
   onClick,
   selectedItem,
 }: ClassTimeProps) => {
   return (
     <div className={`grid grid-cols-2 grid-rows-2 gap-2 ${classNames}`}>
-      {CLASS_TIMES.map((time) => (
+      {classTimes.map((time) => (
         <ClassTimeItem
+          key={time.id}
           time={time}
-          isSelected={selectedItem === time.reservation_date}
+          isSelected={selectedItem === time.id}
           onClick={onClick}
         />
       ))}

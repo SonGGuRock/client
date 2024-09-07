@@ -1,10 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const AllVisitButton = () => {
+interface AllVisitButtonProps {
+  studentId: number;
+  studentName: string;
+}
+
+const AllVisitButton = ({ studentId, studentName }: AllVisitButtonProps) => {
   return (
     <Link
-      href='/reservations/students/1/visit'
+      href={`/students/${studentId}/visit?name=${studentName}`}
       className='border border-grey150 w-full py-3 flex justify-center gap-1 itmes-center rounded-lg'
     >
       <Image

@@ -17,14 +17,6 @@ export type TodosResponse = {
 
 // students
 
-export type Student = {
-  name: string;
-  profile_picture: string;
-  id: number;
-  remaining_class_count: number;
-  last_payment_date: string;
-};
-
 export type StudentDetail = {
   name: string;
   profile_picture: string;
@@ -37,8 +29,8 @@ export type StudentDetail = {
   is_active: boolean;
 };
 
-export type Reservation = {
-  student_id: number;
+export type StudentReservation = {
+  id: number;
   reservation_date: string;
   day_name: string;
   start_time: string;
@@ -51,7 +43,7 @@ export type Reservation = {
 type WORK_TYPE = 'throw' | 'hand';
 
 export type CraftItem = {
-  craft_id: number;
+  id: number;
   reservation_id: number;
   student_id: number;
   name: string;

@@ -1,37 +1,36 @@
 'use client';
 
 import { StudentMain } from '@/app/widget/students/ui/student-list-item';
-import { Student } from '@/app/lib-temp/definition';
 import useSearchStudentsByInitial from '../../students/lib/useSearchByInitial';
 import Search from '@/app/shared/modules/Search';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 import { StepStudentProps } from './step-student';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
-import { useEffect } from 'react';
+import { Student } from '@/app/lib-temp/definition';
 
-interface StudentsWithSearch extends StepStudentProps {
-  students: Student[];
+interface WithStudnetId {
+  student_id: number;
 }
 
-const StudentsWithSearch = ({ students, context }: StudentsWithSearch) => {
+const StudentsWithSearch = ({ context }: StepStudentProps) => {
   const { form, fill } = useFormFill(context);
-  const { keyword, handleChange, searched } =
-    useSearchStudentsByInitial(students);
+  const { searchKeyword, handleKeywordChange, searchedStudents } =
+    useSearchStudentsByInitial();
 
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
+  if (!searchedStudents) {
+    return <div>loading</div>;
+  }
   return (
     <>
       <div className='flex justify-between py-4'>
         <Search
           classNames='w-full'
-          keyword={keyword}
-          handleChange={handleChange}
+          keyword={searchKeyword}
+          handleChange={handleKeywordChange}
         />
       </div>
       <div>
-        {searched.map((student, idx) => (
+        {searchedStudents.map((student, idx) => (
           <div
             key={`${student}-${idx}`}
             className='w-full flex items-center gap-2 py-3 border-b border-grey100 last:border-0'
@@ -44,12 +43,13 @@ const StudentsWithSearch = ({ students, context }: StudentsWithSearch) => {
               <StudentMain.Thumbnail
                 id={1}
                 imageUrl={student.profile_picture}
+                type='student'
               />
               <StudentMain.Name>{student.name}</StudentMain.Name>
             </StudentMain>
-            {form.student_id === student.id && (
+            {/* {form[`student_id`] && form[`student_id`] === student.id && (
               <CheckBox isReadOnly={true} isChecked={true} style='grey' />
-            )}
+            )} */}
           </div>
         ))}
       </div>

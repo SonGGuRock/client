@@ -1,36 +1,37 @@
 import clsx from 'clsx';
-import { DateWeeklySwiperProps } from './reservations-weekly-swiper';
 import { TimeCrowds } from './time-crowds';
 import { TodayBullet } from './today-bullet';
-import formatDateString from '@/app/shared/lib/formatDateString';
+import { ClassNamesProps } from './class-time-picker';
+import { getToday } from '@/app/shared/lib/getToday';
+import { ReservationClassTime } from '@/app/entities/reservations/types';
 
-export type DayliyItemDate = {
+export type DailyItemDate = {
   date: string;
-  dayName: '월' | '화' | '수' | '목' | '금' | '토' | '일';
+  day_name: '월' | '화' | '수' | '목' | '금' | '토' | '일';
 };
 
-export interface WeeklyVisitProps {
-  // visit: number[];
-  dateItem: DayliyItemDate;
+export interface WeeklyVisitProps extends ClassNamesProps {
+  dateItem: DailyItemDate;
   isSelected: boolean;
-  style?: 'background-primary' | 'item-primary';
+  style?: 'background-primary' | 'item-primary' | 'item-brown-primary';
   selectedItem?: string;
   onClick?: (date: string) => void;
-  isWithTimeCrowds?: boolean;
+  classTimes?: ReservationClassTime[];
 }
 export const ReservationsDailyItem = ({
   dateItem,
-  // visit,
-  onClick,
   isSelected,
   style = 'background-primary',
-  isWithTimeCrowds,
+  onClick,
+  classTimes,
+  classNames,
 }: WeeklyVisitProps) => {
   const itemClasses = clsx(
     {
       'bg-inherit': isSelected === false && style === 'background-primary',
       'bg-grey50': isSelected === false && style === 'item-primary',
       'bg-grey100': isSelected === true && style === 'item-primary',
+      'bg-brown': isSelected === true && style === 'item-brown-primary',
     },
     {
       'border-0': isSelected === false,
@@ -38,6 +39,8 @@ export const ReservationsDailyItem = ({
     }
   );
 
+  const isSelectedAndBrownStyle =
+    isSelected === true && style === 'item-brown-primary';
   const handleClick = () => {
     if (!onClick) {
       return;
@@ -50,31 +53,27 @@ export const ReservationsDailyItem = ({
     return formatDate.split('-')[2];
   };
 
-  const getToday = () => {
-    return formatDateString({
-      fullDateString: String(new Date()),
-      options: {
-        includeYear: false,
-        includeMonth: false,
-        includeHours: false,
-        includeMinutes: false,
-      },
-    });
-  };
-
   return (
     <div
       onClick={handleClick}
-      className={`relative p-3  w-14 h-18 flex flex-wrap gap-[2px] justify-center itmes-center rounded-lg ${itemClasses}`}
+      className={`relative p-3  w-14 h-18 flex flex-wrap gap-[2px] justify-center itmes-center rounded-lg ${classNames} ${itemClasses}`}
     >
       {getDay(dateItem.date) === getToday() && <TodayBullet />}
-      <p className='w-full text-center text-sm text-grey500'>
-        {dateItem.dayName}
+      <p
+        className={`w-full text-center text-sm ${
+          isSelectedAndBrownStyle ? 'text-white' : 'text-grey500'
+        } `}
+      >
+        {dateItem.day_name}
       </p>
-      <p className='w-full text-center text-base text-grey900'>
+      <p
+        className={`w-full text-center text-base ${
+          isSelectedAndBrownStyle ? 'text-white' : 'text-grey900'
+        }`}
+      >
         {getDay(dateItem.date)}
       </p>
-      {isWithTimeCrowds && <TimeCrowds />}
+      {classTimes && <TimeCrowds classTimes={classTimes} />}
     </div>
   );
 };

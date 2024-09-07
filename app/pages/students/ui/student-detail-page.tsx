@@ -59,6 +59,7 @@ const StudentDetailPage = () => {
     );
   };
 
+  if (!student) return <div> 수강생 정보를 불러오고 있어요!</div>;
   const deleteStudent = () => {
     remove(
       { method: 'DELETE' },
@@ -125,7 +126,7 @@ const StudentDetailPage = () => {
       <StudentInfo id={Number(studentId)} />
       <StudentTab />
 
-      <StudentReservationList id={Number(studentId)} />
+      <StudentReservationList id={Number(studentId)} name={student.name} />
       {toast && <Toast text={toast.text ?? ''} />}
     </div>
   );

@@ -10,10 +10,9 @@ import { ReservationAddRequestBody, Student } from '@/app/lib-temp/definition';
 import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
 import { useQueryClient } from '@tanstack/react-query';
-import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 import getDateArray from '@/app/shared/lib/getDateArray';
 import getDayName from '@/app/shared/lib/getDayName';
-import { DayliyItemDate } from '../reservations-daily-item';
+import { DailyItemDate } from '../reservations-daily-item';
 
 interface ReservationAddModalProps {
   studentId: Student['id'];
@@ -82,18 +81,16 @@ const ReservationAddModal = ({
 
       <Title classNames='mt-8 mb-2'>결제일 선택</Title>
       <DateWeeklySwiper
-        dateArray={getDateArray({ beforeCount: 4, afterCount: 3 }).map(
-          (date) => {
-            return {
-              date,
-              dayName: getDayName(new Date(date)) as DayliyItemDate['dayName'],
-            };
-          }
-        )}
+        days={getDateArray({ beforeCount: 4, afterCount: 3 }).map((date) => {
+          return {
+            date,
+            day_name: getDayName(new Date(date)) as DailyItemDate['day_name'],
+          };
+        })}
         style='item-primary'
         onClick={handleSelectPaymentDate}
         selectedItem={addBody.payment_date}
-        isWithTimeCrowds={false}
+        // isWithTimeCrowds={false}
       />
       <div className='w-full flex gap-2'>
         <Button size='large' style='secondary' onClick={closeModal}>

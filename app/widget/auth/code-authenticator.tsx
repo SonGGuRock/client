@@ -77,6 +77,7 @@ const CodeAuthenticator = ({
           onClick={handleSubmit}
           disabled={status !== 'active'}
           size='large'
+          style='primary'
         >
           인증하기
         </Button>

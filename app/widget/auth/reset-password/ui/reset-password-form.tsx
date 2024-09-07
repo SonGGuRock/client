@@ -50,6 +50,7 @@ const ResetPasswordForm = () => {
           size='large'
           disabled={!isPasswordConfirmed(passwords)}
           type='submit'
+          style='primary'
         >
           변경 완료
         </Button>

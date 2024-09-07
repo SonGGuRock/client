@@ -1,46 +1,23 @@
+import { class_time } from '@/app/widget/workshops/types';
 import Image from 'next/image';
+import { ClassTimeItem, ReservationListItem } from '../../types';
 
-export type DAY_DIVIDER = {
-  id: number;
-  start_at: number;
-  end_at: number;
-};
-
-export const DAY_DIVIDERS: DAY_DIVIDER[] = [
-  {
-    id: 1,
-    start_at: 9,
-    end_at: 12,
-  },
-  {
-    id: 2,
-    start_at: 12,
-    end_at: 15,
-  },
-  {
-    id: 3,
-    start_at: 15,
-    end_at: 18,
-  },
-  {
-    id: 4,
-    start_at: 18,
-    end_at: 21,
-  },
-];
-const DailySchedule = () => {
+interface Props {
+  classTimes: ClassTimeItem[];
+}
+const DailySchedule = ({ classTimes }: Props) => {
   return (
     <ul className='flex flex-nowrap'>
-      {DAY_DIVIDERS.map((time, idx) => (
+      {classTimes?.map((time, idx) => (
         <li key={idx} className='flex flex-wrap gap-2 w-full text-sm'>
           <p className='w-full text-grey700 flex justify-between'>
-            <span>{time.start_at}</span>
-            {idx === DAY_DIVIDERS.length - 1 && <span>{time.end_at}</span>}
+            <span>{time.start_time}</span>
+            {idx === classTimes.length - 1 && <span>{time.end_time}</span>}
           </p>
           <p
             className={`w-full bg-deepGreen py-[2px] font-semibold text-xs text-white text-center ${
               idx === 0 && 'rounded-s-lg'
-            } ${idx === DAY_DIVIDERS.length - 1 && 'rounded-e-lg'}`}
+            } ${idx === classTimes.length - 1 && 'rounded-e-lg'}`}
           >
             여유
           </p>
@@ -53,7 +30,7 @@ const DailySchedule = () => {
                 height={18}
               />
 
-              <span className='text-sm text-grey'>0</span>
+              <span className='text-sm text-grey'>{time.throw_count}</span>
             </span>
 
             <span className='w-full flex justify-start h-[18px]'>
@@ -64,7 +41,7 @@ const DailySchedule = () => {
                 height={18}
               />
 
-              <span className='text-sm text-grey'>0</span>
+              <span className='text-sm text-grey'>{time.hand_count}</span>
             </span>
           </div>
         </li>

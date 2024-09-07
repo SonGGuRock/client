@@ -1,5 +1,7 @@
 'use client';
 
+import Cookies from 'js-cookie';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -8,8 +10,20 @@ import { Pagination } from 'swiper/modules';
 
 import Weekly from './reservations-weekly';
 import Daily from './reservations-daily';
+import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { WorkshopOperation } from '@/app/widget/workshops/api/type';
+import { useEffect } from 'react';
 
 export default function ReservationPreviewSwiper() {
+  const { data: operation } = useQueryWithCredentials<WorkshopOperation>(
+    'workshops/settings/operation'
+  );
+
+  useEffect(() => {
+    operation && Cookies.set('throw', JSON.stringify(operation.throw_capacity));
+    operation && Cookies.set('hand', JSON.stringify(operation.hand_capacity));
+  }, [operation]);
+
   const pagination = {
     renderBullet: function (index: number, className: string) {
       return (

@@ -15,6 +15,7 @@ const WorkshopList = ({ workshopList, status }: WorkshopListProps) => {
   const { mutate } = useWorkshopActivate();
 
   const handleClickWorkshop = (workshopId: number) => {
+    console.log('click');
     mutate(workshopId, { onSuccess: () => router.push('/home') });
   };
 
@@ -36,7 +37,7 @@ const WorkshopList = ({ workshopList, status }: WorkshopListProps) => {
               승인거절
             </span>
           )}
-          <div className='absolute inset-0 bg-black opacity-60 z-10 rounded-lg'></div>
+          {/* <div className='absolute inset-0 opacity-60 z-10 rounded-lg'></div> */}
 
           <WorkShopInfo
             workshop={workshop}

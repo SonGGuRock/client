@@ -99,6 +99,7 @@ const WorkshopCreateForm = () => {
           size='small'
           type='submit'
           disabled={isDisabled}
+          style='primary'
           className='absolute right-0 top-[-38px]'
         >
           등록

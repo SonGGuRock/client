@@ -5,7 +5,8 @@ interface TodayBulletProps {
 export const TodayBullet = ({ positionTop = 0 }: TodayBulletProps) => {
   return (
     <span
-      className={`absolute top-${positionTop}  w-1 h-1 mt-2 bg-brown rounded-full`}
+      className={`absolute  w-1 h-1 mt-2 bg-brown rounded-full`}
+      style={{ top: positionTop }}
     ></span>
   );
 };

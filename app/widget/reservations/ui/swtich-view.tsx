@@ -1,21 +1,19 @@
 'use client';
-import useToggle from '@/app/shared/lib/useToggle';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
-// interface SwitchViewProps {
-//   type: 'weekly' | 'monthly';
-// }
+import Image from 'next/image';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 export const SwitchView = () => {
-  const { open: isMonthly, toggle } = useToggle();
+  const params = useParams();
+  const date = params.date as string;
+  const path = usePathname();
+  const isMonthly = path.includes('monthly');
   const { push } = useRouter();
   const goTo = (path: string) => {
     push(path);
   };
   const handleSwitch = () => {
-    goTo(isMonthly ? '/reservations' : '/reservations/monthly');
-    toggle();
+    goTo(isMonthly ? `/reservations/${date}` : `/reservations/${date}/monthly`);
   };
 
   return (
@@ -25,6 +23,7 @@ export const SwitchView = () => {
       width={24}
       height={24}
       onClick={handleSwitch}
+      className='cursor-pointer'
     />
   );
 };

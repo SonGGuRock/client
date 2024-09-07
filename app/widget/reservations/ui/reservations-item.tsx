@@ -1,25 +1,22 @@
-import { Reservation } from '@/app/lib-temp/definition';
 import IconHand from '@/app/shared/atoms/icons/icon-hand';
 import IconPot from '@/app/shared/atoms/icons/icon-pot';
 import isDateInThePast from '@/app/shared/lib/isDateInThePast';
 import Image from 'next/image';
+import type { ClassTimeItem, ReservationItem } from '../types';
+import { useParams } from 'next/navigation';
 
 interface ReservationItemsProps {
-  reservation: Reservation;
+  reservation: ReservationItem;
+  classTime: ClassTimeItem;
 }
 
 const ReservationItem = ({
-  reservation: {
-    id,
-    reservation_date,
-    day_name,
-    start_time,
-    work_type,
-    remaining_class_count,
-    total_class_count,
-  },
+  reservation: { id, work_type, remaining_class_count, total_class_count },
+  classTime: { start_time, end_time },
 }: ReservationItemsProps) => {
-  const isFulfilled = isDateInThePast(reservation_date);
+  const params = useParams();
+  const date = params.date as string;
+  const isFulfilled = isDateInThePast(date, end_time);
   return (
     <div
       className={`w-full p-3 ${
@@ -34,15 +31,14 @@ const ReservationItem = ({
               isFulfilled ? 'text-white' : 'text-grey900'
             }`}
           >
-            한선민
+            studentName
           </p>
           <p
             className={`w-full text-xs ${
               isFulfilled ? 'text-white' : 'text-grey400'
             }`}
           >
-            {/* 오전 10:00 ~ 오후 12:00 */}
-            {start_time}
+            {`${start_time}:00 - ${end_time}:00`}
           </p>
         </div>
       </div>
