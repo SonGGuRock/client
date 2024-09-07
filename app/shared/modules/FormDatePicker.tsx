@@ -1,12 +1,11 @@
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { Value } from './form-date-select';
-import { Dispatch, SetStateAction } from 'react';
+import { Value } from './form-date-input';
 import clsx from 'clsx';
 
 interface FormDatePickerProps {
   value: Value;
-  onChange: Dispatch<SetStateAction<Value>>;
+  onChange: (value: Value) => void;
   toggle: () => void;
 }
 
@@ -22,7 +21,6 @@ const FormDatePicker = ({ value, onChange, toggle }: FormDatePickerProps) => {
     'justify-center'
   );
 
-  // absolute top-[-320px] left-0
   return (
     <div className={classes}>
       <Calendar

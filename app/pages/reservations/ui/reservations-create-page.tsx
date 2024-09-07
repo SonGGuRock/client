@@ -1,7 +1,7 @@
 'use client';
 
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
-import useSteps, { Step } from '@/app/shared/modules/stepper/lib/use-steps';
+import { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 
 import CloseButton from '@/app/shared/atoms/close-button';
 import Header from '@/app/shared/modules/header';
@@ -9,46 +9,37 @@ import Header from '@/app/shared/modules/header';
 import StepStudent from '@/app/widget/reservations/ui/step-student';
 import StepClassTime from '@/app/widget/reservations/ui/step-class-time';
 import StepWorkType from '@/app/widget/reservations/ui/step-work-type';
-import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import Stepper from '@/app/shared/modules/stepper';
-
-type WORK_TYPE = 'throw' | 'hand';
-
-export type Reservation = {
-  student_id?: number;
-  student_name?: string;
-  reservation_date?: string;
-  reservation_class_time_id?: string;
-  work_type?: WORK_TYPE;
-};
+import { ReservationCreateBody } from '@/app/entities/reservations/types';
 
 const ReservationsCreatePage = () => {
-  const { form } = useFormFill(ReservationCreateContext);
-
-  const RESERVATION_STEPS: Step<Reservation>[] = [
+  const RESERVATION_STEPS: Step<ReservationCreateBody>[] = [
     {
       order: 0,
       isMount: true,
-      data: 'student_name',
+      data: ['student_id'] as (keyof ReservationCreateBody)[],
       component: <StepStudent context={ReservationCreateContext} />,
     },
     {
       order: 1,
       isMount: false,
-      data: 'reservation_date',
+      data: [
+        'reservation_date',
+        'classtime_id',
+      ] as (keyof ReservationCreateBody)[],
       component: <StepClassTime />,
     },
     {
       order: 2,
       isMount: false,
-      data: 'work_type',
+      data: ['work_type_id'] as (keyof ReservationCreateBody)[],
       component: <StepWorkType />,
     },
   ];
-  const { handlePrev } = useSteps(RESERVATION_STEPS);
+  // const { handlePrev } = useSteps(RESERVATION_STEPS);
 
   return (
-    <div className='pt-3 pb-10'>
+    <div className='pt-3 pb-10 bg-white'>
       <Header className='px-4'>
         <div className='w-full flex gap-1 justify-between items-center'>
           <div className='flex gap-1 items-center'>
@@ -57,7 +48,7 @@ const ReservationsCreatePage = () => {
           <CloseButton />
         </div>
       </Header>
-      <Stepper steps={RESERVATION_STEPS} form={form} />
+      <Stepper steps={RESERVATION_STEPS} />
     </div>
   );
 };

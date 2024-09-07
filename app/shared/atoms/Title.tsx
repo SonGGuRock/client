@@ -1,11 +1,17 @@
+import { ClassNamesProps } from '@/app/widget/reservations/ui/class-time-picker';
 import { PropsWithChildren } from 'react';
 
-interface TitleProps extends PropsWithChildren {
+interface TitleProps extends PropsWithChildren, ClassNamesProps {
   size?: 'small' | 'medium' | 'large';
   subTitle?: string;
 }
 
-const Title = ({ size = 'medium', children, subTitle }: TitleProps) => {
+const Title = ({
+  size = 'medium',
+  children,
+  subTitle,
+  classNames,
+}: TitleProps) => {
   return (
     <h2
       className={`${
@@ -14,7 +20,7 @@ const Title = ({ size = 'medium', children, subTitle }: TitleProps) => {
           : size === 'medium'
           ? 'text-lg'
           : 'text-xl'
-      } font-semibold`}
+      } font-semibold ${classNames}`}
     >
       {subTitle && <p className='text-sm text-grey500'>{subTitle}</p>}
       {children}

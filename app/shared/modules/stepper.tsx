@@ -1,27 +1,45 @@
-import { CraftItem } from '@/app/pages/crafts/items/craft-item-create.page';
-import { Reservation } from '@/app/pages/reservations/ui/reservations-create-page';
 import useSteps, { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 import Button from '../atoms/button/Button';
 import { useRouter } from 'next/navigation';
 import Back from '../atoms/Back';
+import { CraftItem, StudentReservation } from '@/app/lib-temp/definition';
+import {
+  ReservationCreateBody,
+  ReservationCreateResponse,
+} from '@/app/entities/reservations/types';
+import useCreate from '../api/useCreate';
+import useFormFill from './stepper/lib/use-form-fill';
+import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
+import { DataResponse } from '../api/type';
 
-interface StepperProps<T extends Reservation | CraftItem> {
+interface StepperProps<T extends ReservationCreateBody | CraftItem> {
   steps: Step<T>[];
-  form: Partial<T>;
+  // form: Partial<T>;
 }
 const END_OF_STEP = 2;
 const START_OF_STEP = 0;
 
 const Stepper = ({
   steps: stepsObj,
-  form,
-}: StepperProps<Reservation | CraftItem>) => {
+}: // form,
+StepperProps<ReservationCreateBody | CraftItem>) => {
   const { steps, handleNext, handlePrev } = useSteps(stepsObj);
+  const { form } = useFormFill(ReservationCreateContext);
+  const { post } = useCreate<
+    ReservationCreateBody,
+    DataResponse<ReservationCreateResponse>
+  >({
+    path: `reservations`,
+    revalidate: false,
+    onSuccess: (data) => {
+      router.push(`/reservations/create/success/${data.data.student_name}`);
+    },
+  });
+
   const nowStep = (steps.find((step) => step.isMount === true)?.order ?? 0) + 1;
   const router = useRouter();
   const handleCreate = () => {
-    // POST 요청 reservation?.data
-    router.push('/reservations/create/success');
+    post(form as ReservationCreateBody);
   };
   return (
     <div className='pt-6 pb-2 px-4 '>
@@ -40,9 +58,10 @@ const Stepper = ({
               step.isMount && (
                 <Button
                   key={idx}
+                  style='primary'
                   className='w-full'
                   size='large'
-                  disabled={!form.hasOwnProperty(step.data)}
+                  // disabled={}
                   onClick={
                     step.order === END_OF_STEP ? handleCreate : handleNext
                   }

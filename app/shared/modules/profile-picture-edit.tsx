@@ -3,16 +3,22 @@ import Image from 'next/image';
 interface ProfilePictureEditProps {
   id: number;
   name: string;
+  imageUrl?: string;
 }
 
-const ProfilePictureEdit = ({ id, name }: ProfilePictureEditProps) => {
+const ProfilePictureEdit = ({
+  id,
+  name,
+  imageUrl,
+}: ProfilePictureEditProps) => {
   return (
     <div className='relative'>
       <Image
-        src='/img/student_default.png'
+        src={`${imageUrl ?? '/img/student_default.png'}`}
         alt=' 사진'
         width={88}
         height={88}
+        className='rounded-full'
       />
       <Image
         src='/icon/ic-camera-circle-28px.svg'

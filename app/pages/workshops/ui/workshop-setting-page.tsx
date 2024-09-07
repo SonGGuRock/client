@@ -1,7 +1,11 @@
+'use client';
+
+import useExportFromPath from '@/app/shared/lib/useExportFromPath';
 import Header from '@/app/shared/modules/header';
 import SettingMenu from '@/app/widget/mypage/ui/setting-menu';
 
 const WorkshopSettingPage = () => {
+  const workshopId = useExportFromPath({ index: 2 });
   return (
     <div className='pt-3 pb-10'>
       <Header className='px-4'>
@@ -15,19 +19,29 @@ const WorkshopSettingPage = () => {
       <div>
         <SettingMenu className='py-6'>
           <SettingMenu.Label>나의 공방</SettingMenu.Label>
-          <SettingMenu.Link href='/workshops/1'>
+          <SettingMenu.Link href={`/workshops/${workshopId}`}>
             공방 정보 설정
           </SettingMenu.Link>
-          <SettingMenu.Link href='/workshops/1/settings/operation'>
-            공방 운영 설정
+          <SettingMenu.Link
+            href={`/workshops/${workshopId}/settings/operation`}
+          >
+            운영 설정
           </SettingMenu.Link>
-          <SettingMenu.Link href=''>알림/할일 설정</SettingMenu.Link>
+          <SettingMenu.Link
+            href={`/workshops/${workshopId}/settings/environment`}
+          >
+            알림/할일 설정
+          </SettingMenu.Link>
         </SettingMenu>
 
         <SettingMenu className='py-6'>
           <SettingMenu.Label>등록 관리</SettingMenu.Label>
-          <SettingMenu.Link href=''>선생님 관리</SettingMenu.Link>
-          <SettingMenu.Link href=''>수강생 관리</SettingMenu.Link>
+          <SettingMenu.Link href='/workshops/approval/teachers'>
+            선생님 관리
+          </SettingMenu.Link>
+          <SettingMenu.Link href='/workshops/approval/students'>
+            수강생 관리
+          </SettingMenu.Link>
         </SettingMenu>
       </div>
     </div>

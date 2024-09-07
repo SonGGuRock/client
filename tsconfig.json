@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "ES2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -27,7 +28,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/hooks/useModalts",
-    "app/_provider/notification-category-provider.tsㅌ"
+    "app/_provider/notification-category-provider.tsㅌ",
+    "app/shared/api/axios-instance.ts",
+    "app/_provider/workshop-operation-providertsx"
   ],
   "exclude": ["node_modules"]
 }

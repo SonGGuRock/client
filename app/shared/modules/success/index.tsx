@@ -58,7 +58,7 @@ const Infomation = ({
       className={`w-full flex flex-wrap gap-4 py-6 px-3 border-t border-b border-grey100 ${classNames}`}
     >
       {fields.map((field) => (
-        <div className='w-full flex justify-between'>
+        <div key={field.value} className='w-full flex justify-between'>
           <label className='text-grey700 text-sm'>{field.label}</label>
           <span className='text-sm text-grey900'>{field.value}</span>
         </div>
@@ -74,7 +74,9 @@ interface SubmissionButtonProps extends ClassNamesProps {
 const SubmissionButton = ({ href, classNames }: SubmissionButtonProps) => {
   return (
     <Link href={href} className={classNames}>
-      <Button size='large'>확인</Button>
+      <Button size='large' style='primary'>
+        확인
+      </Button>
     </Link>
   );
 };

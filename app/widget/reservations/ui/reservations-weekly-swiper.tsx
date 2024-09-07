@@ -1,146 +1,60 @@
 import 'swiper/css';
 import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ReservationsDailyItem } from './reservations-daily-item';
+import {
+  DailyItemDate,
+  ReservationsDailyItem,
+} from './reservations-daily-item';
 import clsx from 'clsx';
-import { Reservation } from '@/app/pages/reservations/ui/reservations-create-page';
-const date = [
-  {
-    date: '2024-02-14',
-    dayOfWeek: '월',
-    day: 14,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-15',
-    dayOfWeek: '화',
-    day: 15,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-16',
-    dayOfWeek: '수',
-    day: 16,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-17',
-    dayOfWeek: '목',
-    day: 17,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-18',
-    dayOfWeek: '금',
-    day: 18,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-19',
-    dayOfWeek: '토',
-    day: 19,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-20',
-    dayOfWeek: '일',
-    day: 20,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-20',
-    dayOfWeek: '일',
-    day: 20,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-20',
-    dayOfWeek: '일',
-    day: 20,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-20',
-    dayOfWeek: '일',
-    day: 20,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-20',
-    dayOfWeek: '일',
-    day: 20,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-20',
-    dayOfWeek: '일',
-    day: 20,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-20',
-    dayOfWeek: '일',
-    day: 20,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-20',
-    dayOfWeek: '일',
-    day: 20,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-20',
-    dayOfWeek: '일',
-    day: 20,
-    visit: [6, 3, 2, 4],
-  },
-  {
-    date: '2024-02-20',
-    dayOfWeek: '일',
-    day: 20,
-    visit: [6, 3, 2, 4],
-  },
-];
+import { ReservationClassTime } from '@/app/entities/reservations/types';
 
-export interface ReservationsWeeklySwiperProps {
-  style?: 'background-primary' | 'item-primary';
-  selectedItem?: Reservation['reservation_date'];
-  onClick?: (reservationProperty: Partial<Reservation>) => void;
+interface DayReservation extends DailyItemDate {
+  class_times?: ReservationClassTime[];
 }
 
-const ReservationsWeeklySwiper = ({
+export interface DateWeeklySwiperProps<T extends DayReservation> {
+  days: T[];
+  style?: 'background-primary' | 'item-primary' | 'item-brown-primary';
+  selectedItem?: string;
+  onClick?: (date: string) => void;
+}
+
+function DateWeeklySwiper<T extends DayReservation>({
+  days,
   selectedItem,
   style = 'background-primary',
   onClick,
-}: ReservationsWeeklySwiperProps) => {
+}: DateWeeklySwiperProps<T>) {
   const swiperClasses = clsx({
-    'bg-beige': style === 'background-primary',
+    'bg-beige': style === 'background-primary' || 'item-brown-primary',
     'bg-white': style === 'item-primary',
   });
+
   return (
     <Swiper
       className={`h-full min-h-28 ${swiperClasses}`}
-      slidesPerView={5.5}
+      slidesPerView={6.5}
       spaceBetween={4}
       freeMode={true}
-      initialSlide={1}
+      initialSlide={5}
       modules={[FreeMode]}
     >
-      {date.map((data, idx) => {
+      {days.map((day, idx) => {
         return (
-          <SwiperSlide key={`${idx}-${data.day}`} className='py-2'>
+          <SwiperSlide key={`${idx}-${day.date}`} className='py-2 '>
             <ReservationsDailyItem
+              dateItem={day}
               style={style}
-              isSelected={selectedItem === data.date}
+              isSelected={selectedItem === day.date}
               onClick={onClick}
-              {...data}
+              classTimes={day.class_times}
+              classNames='cursor-pointer'
             />
           </SwiperSlide>
         );
       })}
     </Swiper>
   );
-};
+}
 
-export default ReservationsWeeklySwiper;
+export default DateWeeklySwiper;

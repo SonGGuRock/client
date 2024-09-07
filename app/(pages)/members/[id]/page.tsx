@@ -1,7 +1,7 @@
-import MemberPage from '@/app/pages/members/ui/member-page';
+import MemberEditPage from '../../../pages/members/ui/member-edit-page';
 
 const Page = () => {
-  return <MemberPage />;
+  return <MemberEditPage />;
 };
 
 export default Page;

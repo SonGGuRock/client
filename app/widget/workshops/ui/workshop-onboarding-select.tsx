@@ -11,7 +11,7 @@ const WorkshopOnboardingSelect = () => {
       />
       <div className='flex flex-wrap'>
         <p className='w-full text-sm'>등록된 공방이 있다면</p>
-        <p className='w-full text-base font-bold'>공방 선택하러 가기</p>
+        <p className='w-full text-base font-bold'>공방 추가하러 가기</p>
       </div>
     </div>
   );

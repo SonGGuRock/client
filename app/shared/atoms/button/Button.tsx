@@ -3,20 +3,22 @@ import { PropsWithChildren, ReactNode } from 'react';
 
 interface ButtonProps extends PropsWithChildren {
   className?: string;
-  type?: 'primary' | 'secondary';
+  style?: 'primary' | 'secondary';
   size?: 'small' | 'medium' | 'large';
   onClick?: () => void;
   disabled?: boolean;
+  type?: 'submit' | 'reset' | 'button';
   icon?: ReactNode;
 }
 
 const Button = ({
   className,
-  type = 'primary',
+  style,
   size = 'medium',
   disabled = false,
   children,
   onClick,
+  type,
   icon,
 }: ButtonProps) => {
   const buttonClasses = clsx(
@@ -43,15 +45,15 @@ const Button = ({
       'text-xs': size === 'small',
     },
     {
-      'bg-sand': !disabled && type === 'primary',
-      'text-white': type === 'primary' || disabled,
+      'bg-sand': !disabled && style === 'primary',
+      'text-white': style === 'primary' || disabled,
     },
     {
-      'bg-white': type === 'secondary',
-      'text-grey900': type === 'secondary',
-      border: type === 'secondary',
-      'border-sand': type === 'secondary',
-      'border-solid': type === 'secondary',
+      'bg-white': style === 'secondary',
+      'text-grey900': style === 'secondary',
+      border: style === 'secondary',
+      'border-sand': style === 'secondary',
+      'border-solid': style === 'secondary',
     },
     {
       'bg-grey200': disabled,
@@ -60,6 +62,7 @@ const Button = ({
 
   return (
     <button
+      type={type}
       className={`${buttonClasses} ${className}`}
       onClick={onClick}
       disabled={disabled}

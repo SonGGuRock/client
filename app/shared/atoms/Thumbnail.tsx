@@ -1,7 +1,11 @@
 import Image from 'next/image';
+import isDefaultImage from '../lib/isDefaultImage';
+import getImageWithFallback from '../lib/getImageWithFallback';
 
 type ThumbnailProps = {
   id: number;
+  imageUrl: string;
+  type: 'member' | 'student' | 'teacher' | 'workshop' | 'craft';
   className?: string;
   name?: string;
   size?: 'small' | 'medium' | 'large';
@@ -10,7 +14,9 @@ type ThumbnailProps = {
 
 const Thumbnail = ({
   id,
+  imageUrl,
   name,
+  type,
   size = 'small',
   className,
   onClick,
@@ -18,7 +24,7 @@ const Thumbnail = ({
   return (
     <Image
       className={`block rounded-full  ${className}`}
-      src='/img/student_default.png'
+      src={getImageWithFallback(imageUrl, `/img/default/${type}.png`)}
       alt={name || '유저 사진'}
       width={size === 'small' ? 32 : size === 'medium' ? 56 : 72}
       height={size === 'small' ? 32 : size === 'medium' ? 56 : 72}

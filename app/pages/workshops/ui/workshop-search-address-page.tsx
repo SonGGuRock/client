@@ -1,6 +1,5 @@
 import Header from '@/app/shared/modules/header';
-import SearchBorder from '@/app/shared/modules/search-border';
-import WorkshopAddressList from '@/app/widget/workshops/ui/workshop-address-list';
+import SearchAddress from '@/app/shared/modules/search-address/search-address';
 
 const WorkshopSearchAddressPage = () => {
   return (
@@ -12,8 +11,7 @@ const WorkshopSearchAddressPage = () => {
         </div>
       </Header>
 
-      <SearchBorder placeholder='예) 홍익로3길, 언주로 850' />
-      <WorkshopAddressList />
+      <SearchAddress />
     </div>
   );
 };

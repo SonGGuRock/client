@@ -1,22 +1,84 @@
 'use client';
 
-import AllVisitButton from '@/app/widget/reservations/ui/all-visit-button';
-import ReservationItem from '@/app/widget/reservations/ui/reservations-item';
 import Header from '@/app/shared/modules/header';
 import StudentInfo from '@/app/widget/students/ui/student-info';
 import StudentTab from '@/app/widget/students/ui/student-tab';
-import ModalMenu from '@/app/shared/atoms/ModalMenu';
-import { useRouter } from 'next/navigation';
+import ModalMenu from '@/app/shared/modules/modal/ui/ModalMenu';
+import { usePathname, useRouter } from 'next/navigation';
+import StudentReservationList from '@/app/widget/students/ui/student-reservation-list';
+import {
+  useMutateWithCrendetials,
+  useQueryWithCredentials,
+} from '@/app/shared/api/fetch-with-credentials';
+import { useQueryClient } from '@tanstack/react-query';
+import useModal from '@/app/shared/modules/modal/lib/useModal';
+import useToast from '@/app/shared/modules/toast/lib/useToast';
+import { StudentDetail } from '@/app/lib-temp/definition';
+import Toast from '@/app/shared/modules/toast/ui/Toast';
 
 const StudentDetailPage = () => {
   const router = useRouter();
+  const path = usePathname();
+  const studentId = Number(path.split('/')[2]);
+  const queryClient = useQueryClient();
+  const { closeModal } = useModal();
+  const { toggleToast, toast } = useToast();
+
+  const { data: student } = useQueryWithCredentials<StudentDetail>(
+    `students/${studentId}`
+  );
+
+  const { mutate } = useMutateWithCrendetials(
+    `/students/${studentId}/${student?.is_active ? 'inactive' : 'active'}`
+  );
+
+  const { mutate: remove } = useMutateWithCrendetials(`/students/${studentId}`);
 
   const handleClickEdit = () => {
-    router.push('/students/1/edit');
+    closeModal();
+    router.push(`/students/${studentId}/edit`);
   };
 
-  const handleClickDeactivateStudent = () => {
-    // TODO: 수강 종료
+  const toggleActiveStudent = () => {
+    mutate(
+      { method: 'PUT' },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            predicate: (query) =>
+              query.queryKey.some(
+                (key) => typeof key === 'string' && key.includes(`students`)
+              ),
+          });
+          closeModal();
+          toggleToast({
+            text: '수강 상태를 변경하였습니다',
+          });
+        },
+      }
+    );
+  };
+
+  if (!student) return <div> 수강생 정보를 불러오고 있어요!</div>;
+  const deleteStudent = () => {
+    remove(
+      { method: 'DELETE' },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            predicate: (query) =>
+              query.queryKey.some(
+                (key) => typeof key === 'string' && key.includes(`students`)
+              ),
+          });
+          closeModal();
+          toggleToast({
+            text: '수강생 정보를 삭제하였습니다',
+          });
+          router.push('/students');
+        },
+      }
+    );
   };
   return (
     <div className='py-3'>
@@ -24,35 +86,48 @@ const StudentDetailPage = () => {
         <Header>
           <Header.Back />
           <Header.MeatBall>
-            <>
-              <ModalMenu
-                iconUrl='/icon/ic-edit_24px.svg'
-                onClick={handleClickEdit}
-              >
-                프로필 수정하기
-              </ModalMenu>
-              <ModalMenu
-                type='secondary'
-                iconUrl='/icon/ic-complete-24px.svg'
-                onClick={handleClickDeactivateStudent}
-              >
-                수강 종료하기
-              </ModalMenu>
-            </>
+            {student?.is_active ? (
+              <>
+                <ModalMenu
+                  iconUrl='/icon/ic-edit_24px.svg'
+                  onClick={handleClickEdit}
+                >
+                  프로필 수정하기
+                </ModalMenu>
+                <ModalMenu
+                  type='secondary'
+                  iconUrl='/icon/ic-complete-24px.svg'
+                  onClick={toggleActiveStudent}
+                >
+                  수강 종료하기
+                </ModalMenu>
+              </>
+            ) : (
+              <>
+                <ModalMenu
+                  iconUrl='/icon/ic-edit_24px.svg'
+                  onClick={toggleActiveStudent}
+                >
+                  수강 중으로 전환하기
+                </ModalMenu>
+                <ModalMenu
+                  type='secondary'
+                  iconUrl='/icon/ic-complete-24px.svg'
+                  onClick={deleteStudent}
+                >
+                  수강생 정보 삭제하기
+                </ModalMenu>
+              </>
+            )}
           </Header.MeatBall>
         </Header>
       </div>
 
-      <StudentInfo />
+      <StudentInfo id={Number(studentId)} />
       <StudentTab />
 
-      <div className='flex flex-wrap p-4 gap-2'>
-        <ReservationItem isFulfilled={false} />
-        <ReservationItem isFulfilled={false} />
-        <ReservationItem isFulfilled={false} />
-        <ReservationItem isFulfilled />
-        <AllVisitButton />
-      </div>
+      <StudentReservationList id={Number(studentId)} name={student.name} />
+      {toast && <Toast text={toast.text ?? ''} />}
     </div>
   );
 };
