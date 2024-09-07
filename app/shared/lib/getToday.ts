@@ -12,10 +12,23 @@ export const getToday = () => {
   });
 };
 
-export const getThisMonthWithYear = () => {
+export const getKrThisMonthWithYear = () => {
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
+  return `${year}년 ${month}월`;
+};
+
+export const getLastMonthWithYear = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth()).padStart(2, '0');
+  return `${year}-${month}`;
+};
+
+export const getKrYearAndMonth = (date: string) => {
+  const year = date.split('-')[0];
+  const month = date.split('-')[1];
   return `${year}년 ${month}월`;
 };
 

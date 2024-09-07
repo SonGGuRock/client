@@ -7,7 +7,7 @@ import ReservationsMonthlyCalendar from '@/app/widget/reservations/ui/reservatio
 import ReservationsHeader from '@/app/widget/reservations/ui/reservations-header';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { ReservationListItem } from '@/app/widget/reservations/types';
-import { getThisMonthWithYear } from '@/app/shared/lib/getToday';
+import { getKrThisMonthWithYear } from '@/app/shared/lib/getToday';
 import { useParams } from 'next/navigation';
 
 export const ReservationsMonthlyPage = () => {
@@ -24,7 +24,7 @@ export const ReservationsMonthlyPage = () => {
       <ReservationsHeader />
       <div className='mt-4 px-4'>
         <p className='text-center font-bold text-grey900 text-base'>
-          {getThisMonthWithYear()}
+          {getKrThisMonthWithYear()}
         </p>
         <ReservationsMonthlyCalendar />
       </div>
