@@ -57,10 +57,10 @@ const ReservationsStudentCalendar = ({
             return (
               <span
                 key={idx}
-                className='relative w-full inline-flex justify-center items-center text-grey900 text-xs font-bold min-h-9 rounded-lg bg-yellowBeige'
+                className='relative w-full inline-flex justify-center items-center text-white text-xs font-bold min-h-9 rounded-full bg-yellowBeige'
               >
                 결제
-                {idx + 1 === today && (
+                {isToday(idx + 1) && (
                   <span className='w-1 h-1 bg-brown rounded-full absolute bottom-[-4px]'></span>
                 )}
               </span>
@@ -79,7 +79,7 @@ const ReservationsStudentCalendar = ({
                   width={36}
                   height={36}
                 />
-                {idx + 1 === today && (
+                {isToday(idx + 1) && (
                   <span className='w-1 h-1 bg-brown rounded-full absolute bottom-[-4px]'></span>
                 )}
               </span>
