@@ -8,13 +8,18 @@ import CraftsEditButton from '@/app/widget/crafts/ui/crafts-edit-button';
 import CraftsList from '@/app/widget/crafts/ui/crafts-list';
 import CraftsListTab from '@/app/widget/crafts/ui/crafts-list-tab';
 import CraftsStatusTab from '@/app/widget/crafts/ui/crafts-status-tab';
+import { useRouter } from 'next/navigation';
 
-const CraftsListPage = () => {
+const CraftListPage = () => {
+  const router = useRouter();
+  const handleCreateCraft = () => {
+    router.push('/crafts/create');
+  };
   return (
     <div className='pt-2'>
       <Header className='px-4 '>
         <Header.Title>작품</Header.Title>
-        <ButtonIndex size='small'>
+        <ButtonIndex size='small' onClick={handleCreateCraft}>
           <ButtonIndex.AddIcon />새 등록
         </ButtonIndex>
       </Header>
@@ -36,4 +41,4 @@ const CraftsListPage = () => {
   );
 };
 
-export default CraftsListPage;
+export default CraftListPage;

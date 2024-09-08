@@ -1,4 +1,4 @@
-import ReservationCreateProvider from '@/app/_provider/reservation-create-provider';
+import { ReservationCreateProvider } from '@/app/_provider/reservation-create-provider';
 import { PropsWithChildren } from 'react';
 
 const Layout = ({ children }: PropsWithChildren) => {

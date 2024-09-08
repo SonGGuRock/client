@@ -16,7 +16,11 @@ const CraftsList = () => {
   return (
     <div className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>
       {craft_list.map((craft) => (
-        <CraftItem craftId={craft.craft_id} onClick={() => {}} />
+        <CraftItem
+          key={craft.craft_id}
+          craftId={craft.craft_id}
+          onClick={() => {}}
+        />
       ))}
     </div>
   );
