@@ -2,6 +2,7 @@ import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 import Image from 'next/image';
 import { ClassNamesProps } from '../../reservations/ui/class-time-picker';
 import CraftItemWorkstep from './craft-item-workstep';
+import { CraftSummary } from '@/app/entities/crafts/types';
 
 // type CraftStatus = {
 //   id: number;
@@ -10,19 +11,13 @@ import CraftItemWorkstep from './craft-item-workstep';
 // };
 
 export interface CraftThumbnailProps extends ClassNamesProps {
-  workstep: WorkStepType['ko'];
-  imgUrl: string;
-  craftName?: string;
-  craftId: string;
-  created_at?: string;
+  craft: CraftSummary;
+  showWorkStatus: boolean;
 }
 
 export default function CraftThumbnail({
-  workstep,
-  imgUrl,
-  craftId,
-  craftName,
-  created_at,
+  craft,
+  showWorkStatus,
   classNames,
 }: CraftThumbnailProps) {
   // 타입 해결하기!
@@ -50,11 +45,13 @@ export default function CraftThumbnail({
     //   <p className='text-sm text-grey400'>{created_at}</p>
     // </li>
     <div className={`relative list-none ${classNames}`}>
-      <CraftItemWorkstep
-        classNames='absolute left-0 top-0'
-        workstep='초벌'
-        style='black'
-      />
+      {showWorkStatus && craft.now_work_step && (
+        <CraftItemWorkstep
+          classNames='absolute left-0 top-0'
+          workstep={craft.now_work_step}
+          style='black'
+        />
+      )}
       <Image
         className='rounded-lg object-cover block w-full h-full'
         src='/mock/refire.png'

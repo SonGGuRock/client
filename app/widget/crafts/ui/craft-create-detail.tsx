@@ -4,39 +4,31 @@ import useModal from '@/app/shared/modules/modal/lib/useModal';
 import ModalContentWithInput from '@/app/shared/modules/modal/ui/ModalContentWithInput';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 import CraftItem from './craft-item';
-import { Craft } from '../api/type';
 import useCreate from '@/app/shared/api/useCreate';
-import { CraftCreateBody } from '@/app/entities/crafts/types';
+import { CraftCreateBody, CraftSummaries } from '@/app/entities/crafts/types';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import { CraftCreateContext } from '@/app/_provider/craft-create-provide';
-
-const craft_list: Craft[] = [
-  {
-    craft_id: '1',
-    name: '작품명',
-    updated_at: '2024-01-24',
-    now_work_step: '삼벌',
-    thumbnail: '',
-    item_count: 1,
-  },
-  {
-    craft_id: '1',
-    name: '작품명',
-    updated_at: '2024-01-24',
-    now_work_step: '삼벌',
-    thumbnail: '',
-    item_count: 1,
-  },
-];
+import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { useQueryClient } from '@tanstack/react-query';
+import { CraftItemCreateContext } from '@/app/_provider/craft-item-create-provider';
 
 const CraftCreateDetail = () => {
-  const { form } = useFormFill(CraftCreateContext);
+  const query = useQueryClient();
+  const { form: craftCreateBody, fill: fillCraftCreateBodyAndTitle } =
+    useFormFill(CraftCreateContext);
+  const { fill: fillCraftItemCreateBody } = useFormFill(CraftItemCreateContext);
   const { openModal, closeModal } = useModal();
+  const { data } = useQueryWithCredentials<CraftSummaries>(
+    `crafts/students/${craftCreateBody.student_id}`
+  );
   const { post } = useCreate<CraftCreateBody>({
     path: `crafts`,
     revalidate: false,
     onSuccess: () => {
       closeModal();
+      query.invalidateQueries({
+        queryKey: [`crafts/students/${craftCreateBody.student_id}`],
+      });
     },
   });
   const handleOpenModalCreateCraft = () => {
@@ -46,28 +38,35 @@ const CraftCreateDetail = () => {
         placeholder='작품 이름을 입력하세요'
         onClose={closeModal}
         onDone={(content) => {
-          post({ student_id: form.student_id as number, name: content });
+          post({
+            student_id: craftCreateBody.student_id as number,
+            name: content,
+          });
         }}
       />
     );
   };
 
+  const handleClickCraft = (craftId: number, craftName: string) => {
+    fillCraftCreateBodyAndTitle({ title: craftName });
+    fillCraftItemCreateBody({ craft_id: craftId });
+  };
+
+  if (!data) return <div>loading now </div>;
+
+  const { totalPages, crafts } = data;
   return (
     <div>
       <Title size='large'>작품 폴더를 선택해주세요</Title>
-      <div className='grid grid-cols-3 gap-2'>
+      <div className='grid grid-cols-3 gap-2 my-4'>
         <div
           onClick={handleOpenModalCreateCraft}
-          className='my-4 bg-grey50 rounded-lg w-full h-[108px] flex justify-center items-center'
+          className=' bg-grey50 rounded-lg w-full h-[108px] flex justify-center items-center'
         >
           <IconPlusCircleGray />
         </div>
-        {craft_list.map((craft) => (
-          <CraftItem
-            key={craft.craft_id}
-            craftId={craft.craft_id}
-            onClick={() => {}}
-          />
+        {crafts.map((craft) => (
+          <CraftItem key={craft.id} craft={craft} onClick={handleClickCraft} />
         ))}
       </div>
 

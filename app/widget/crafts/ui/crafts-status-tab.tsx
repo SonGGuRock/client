@@ -7,13 +7,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { clsx } from 'clsx';
 import { FreeMode } from 'swiper/modules';
 import { WORK_STEP } from '@/app/shared/atoms/work-step-label';
-
-type CratsStatus = '진행중' | '완성' | '보관';
+import { CraftStatus } from '@/app/entities/crafts/types';
 
 const CraftsStatusTab = ({ classNames }: ClassNamesProps) => {
-  const [activeStatus, setActiveStatus] = useState<CratsStatus>('진행중');
+  const [activeStatus, setActiveStatus] = useState<CraftStatus>('진행중');
 
-  const handleStauts = (status: CratsStatus) => {
+  const handleStauts = (status: CraftStatus) => {
     setActiveStatus(status);
   };
 
@@ -83,10 +82,8 @@ const CraftsStatusTab = ({ classNames }: ClassNamesProps) => {
           freeMode={true}
         >
           {WORK_STEP.map((step, idx) => (
-            <SwiperSlide>
-              <li key={`${step.en}-${idx}`} className={classes}>
-                {step.ko}
-              </li>
+            <SwiperSlide key={`${step.en}-${idx}`}>
+              <li className={classes}>{step.ko}</li>
             </SwiperSlide>
           ))}
         </Swiper>

@@ -1,12 +1,12 @@
-import { Craft } from '../api/type';
+import { CraftSummary } from '@/app/entities/crafts/types';
 import CraftItem from './craft-item';
 
-const craft_list: Craft[] = [
+const craft_list: CraftSummary[] = [
   {
-    craft_id: '1',
+    id: 1,
     name: '작품명',
     updated_at: '2024-01-24',
-    now_work_step: '삼벌',
+    now_work_step: 'bisque_fire',
     thumbnail: '',
     item_count: 1,
   },
@@ -16,11 +16,7 @@ const CraftsList = () => {
   return (
     <div className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>
       {craft_list.map((craft) => (
-        <CraftItem
-          key={craft.craft_id}
-          craftId={craft.craft_id}
-          onClick={() => {}}
-        />
+        <CraftItem key={craft.id} craft={craft} onClick={() => {}} />
       ))}
     </div>
   );

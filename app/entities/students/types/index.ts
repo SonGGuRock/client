@@ -8,6 +8,7 @@ export type Student = {
 
 export type StudentVisit = {
   reservation: boolean;
+  reservation_id: number | null;
   payment: boolean;
   craft_item: {
     id: number;

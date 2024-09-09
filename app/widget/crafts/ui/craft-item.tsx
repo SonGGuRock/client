@@ -1,16 +1,17 @@
+import { CraftSummary } from '@/app/entities/crafts/types';
 import { ClassNamesProps } from '../../reservations/ui/class-time-picker';
 import CraftThumbnail from './craft-thumbnail';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 
 interface CraftItemProps extends ClassNamesProps {
-  craftId: string;
-  onClick: (id: string) => void;
+  craft: CraftSummary;
+  onClick: (id: number, name: string) => void;
   isEditMode?: boolean;
   isChecked?: boolean;
 }
 
 const CraftItem = ({
-  craftId,
+  craft,
   isEditMode = false,
   isChecked = false,
   onClick,
@@ -21,16 +22,15 @@ const CraftItem = ({
     // </li>
     <div
       className={`${isEditMode && 'relative'}`}
-      onClick={() => onClick(craftId)}
+      onClick={() => onClick(craft.id, craft.name)}
     >
       <CraftThumbnail
-        workstep='성형'
-        imgUrl='/img/craft_default.png'
-        craftId={craftId}
         classNames='w-full h-[108px] mb-2'
+        craft={craft}
+        showWorkStatus={false}
       />
-      <p className='text-sm text-grey900'>한선민</p>
-      <p className='text-sm text-grey400'>5</p>
+      <p className='text-sm text-grey900'>{craft.name}</p>
+      <p className='text-sm text-grey400'>{craft.item_count}</p>
       {isEditMode && (
         <p className='absolute right-1 bottom-12'>
           <CheckBox

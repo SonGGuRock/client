@@ -6,6 +6,7 @@ import { ReservationCreateBody } from '@/app/entities/reservations/types';
 import { CraftItem } from '@/app/lib-temp/definition';
 import {
   CraftCreateBody,
+  CraftCreateBodyAndTitle,
   CraftItemCreateBody,
 } from '@/app/entities/crafts/types';
 
@@ -22,7 +23,9 @@ export type Step<T> =
       ? {
           order: number;
           isMount: boolean;
-          data: keyof CraftCreateBody | CraftItemCreateBody;
+          data:
+            | (keyof CraftCreateBodyAndTitle)[]
+            | (keyof CraftItemCreateBody)[];
           component: ReactNode;
         }
       : never);
