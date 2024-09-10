@@ -1,7 +1,7 @@
-import CraftItemDetailPage from '@/app/pages/crafts/items/craft-item-detail-page';
+import CraftItemDetailPage from '@/app/pages/crafts/item/craft-item-detail-page';
 
-const Page = ()=>{
-    return <CraftItemDetailPage /> 
-}
+const Page = () => {
+  return <CraftItemDetailPage />;
+};
 
 export default Page;

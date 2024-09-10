@@ -16,12 +16,13 @@ const CraftItemDetailContent = () => {
       <div className='px-4'>
         <CraftItemAuthor />
 
-        <CraftItemInfo workstep='초벌' classDate='2024. 01. 23' />
+        <CraftItemInfo workstep='shape' classDate='2024. 01. 23' />
 
         {/* <button className='block border rounded-lg border-grey200 text-grey700 py-[6px] pl-2 pr-3'>
         초벌
       </button> */}
         <Textarea
+          readonly={true}
           classNames='block w-full mt-4 mb-8 h-[120px]'
           value='건강과 지속 가능성을 추구하는 이들을 위해, 맛과 영양이 가득한 채식
         요리 레시피를 소개합니다. 이 글에서는 간단하지만 맛있는 채식 요리

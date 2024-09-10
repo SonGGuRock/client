@@ -9,11 +9,7 @@ import PortalModal from '../../../shared/modules/modal/ui/PotalModal';
 import useModal from '../../../shared/modules/modal/lib/useModal';
 import CraftsEditModalContent from './crafts-edit-modal-content';
 import useToast from '../../../shared/modules/toast/lib/useToast';
-<<<<<<< HEAD
 import Toast from '../../../shared/modules/toast/ui/Toast';
-=======
-import ToastContent from '../../../shared/modules/toast/ui/Toast';
->>>>>>> 071495db5a8b27534032a7a6d370118db3e9993e
 import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 import ModalContentInfoType from '@/app/shared/modules/modal/ui/modal-content-info-type';
 
@@ -22,9 +18,7 @@ const Crafts_temp = [1, 2, 3, 4, 5];
 const CraftsEditList = () => {
   const { toast, toggleToast } = useToast();
   const { isOpen, openModal, closeModal } = useModal();
-  const [selectedList, setSelectedList] = useState<
-    CraftThumbnailProps['craftId'][]
-  >([1, 2]);
+  const [selectedList, setSelectedList] = useState<number[]>([1, 2]);
 
   const handleSelectAll = () => {
     setSelectedList([1, 2, 3, 4, 5]);
@@ -80,17 +74,17 @@ const CraftsEditList = () => {
           {!isDeselectedAll ? '선택해제' : '전체선택'}
         </label>
       </div>
-      <div className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>
+      {/* <div className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>
         {Crafts_temp.map((craft) => (
           <CraftItem
             key={craft}
             onClick={handleSelectItem}
             isEditMode
             isChecked={!!selectedList.find((id) => id === craft)}
-            craftId={craft}
+            craft={craft}
           />
         ))}
-      </div>
+      </div> */}
 
       {toast && <Toast {...toast} />}
 

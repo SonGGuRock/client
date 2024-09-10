@@ -6,7 +6,7 @@ import { getKrYearAndMonth } from '@/app/shared/lib/getToday';
 interface ReservationsStudentCalendarProps {
   visits: StuentVisitWithDate[];
   yearAndMonth: string;
-  onClickDate: (reservationId: number) => void;
+  onClickDate: (reservationId: number, reservationDate: string) => void;
 }
 
 const ReservationsStudentCalendar = ({
@@ -85,7 +85,10 @@ const ReservationsStudentCalendar = ({
                   width={36}
                   height={36}
                   onClick={() => {
-                    onClickDate(visitDay.reservation_id!);
+                    onClickDate(
+                      visitDay.reservation_id!,
+                      getKrYearAndMonth(yearAndMonth) + ` ${idx + 1}일`
+                    );
                   }}
                   className='cursor-pointer'
                 />
@@ -94,7 +97,10 @@ const ReservationsStudentCalendar = ({
               <span
                 key={idx}
                 onClick={() => {
-                  onClickDate(visitDay.reservation_id!);
+                  onClickDate(
+                    visitDay.reservation_id!,
+                    getKrYearAndMonth(yearAndMonth) + ` ${idx + 1}일`
+                  );
                 }}
                 className='cursor-pointer relative w-full inline-flex justify-center items-center text-white text-base bg-brown rounded-full min-h-9 opacity-50'
               >

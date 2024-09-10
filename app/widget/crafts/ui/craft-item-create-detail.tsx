@@ -13,6 +13,7 @@ import Image from 'next/image';
 import CraftWorkStatusModal from './craft-work-status-modal';
 import ReservationDateModal from './reservation-date-modal';
 import useWorkStep from '@/app/entities/crafts/hooks/useWorkStep';
+import { useState } from 'react';
 
 const CraftItemCreateDetail = () => {
   const { form: craftCreateBodyAndTitle } = useFormFill(CraftCreateContext);
@@ -20,6 +21,7 @@ const CraftItemCreateDetail = () => {
     useFormFill(CraftItemCreateContext);
   const { getWorkStepKrWithIcon } = useWorkStep();
   const { openModal } = useModal();
+  const [reservationDate, setReservationDate] = useState<string | null>(null);
 
   const handleOpenModalUploadPicture = () => {
     openModal(
@@ -42,7 +44,13 @@ const CraftItemCreateDetail = () => {
   };
 
   const handleOpenModalReservationDate = () => {
-    openModal(<ReservationDateModal />);
+    openModal(
+      <ReservationDateModal
+        onSelectDate={(date) => {
+          setReservationDate(date);
+        }}
+      />
+    );
   };
 
   const handleUpload = (url: string) => {
@@ -82,7 +90,7 @@ const CraftItemCreateDetail = () => {
             : '작업 상태 선택'}
         </SelectLikeButton>
         <SelectLikeButton onClick={handleOpenModalReservationDate}>
-          수업일 선택
+          {reservationDate ?? '수업일 선택'}
         </SelectLikeButton>
       </div>
 

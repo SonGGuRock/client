@@ -4,7 +4,7 @@ import { ClassNamesProps } from '../../reservations/ui/class-time-picker';
 import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 
 interface CraftItemInfoProps extends ClassNamesProps {
-  workstep: WorkStepType['ko'];
+  workstep: WorkStepType['en'];
   classDate: string;
 }
 

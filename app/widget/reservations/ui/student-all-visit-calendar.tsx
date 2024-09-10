@@ -8,7 +8,7 @@ import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials
 
 interface StudentVisitsCalendaProps {
   studentId: number;
-  onClickDate: (reservationId: number) => void;
+  onClickDate: (reservationId: number, reservationDate: string) => void;
 }
 
 const StudentAllVisitCalendar = ({

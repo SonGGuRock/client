@@ -1,11 +1,11 @@
 import GoTo from '@/app/shared/atoms/GoTo';
-import IconPlusCircle from '@/app/shared/atoms/icons/icon-plus-circle';
 
 import 'swiper/css';
 import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CraftItemWorkstep from '@/app/widget/crafts/ui/craft-item-workstep';
 import Image from 'next/image';
+import IconPlusCircleGray from '@/app/shared/atoms/icons/icon-plus-circle_gray';
 
 const CraftItemDetailOthers = () => {
   return (
@@ -25,14 +25,14 @@ const CraftItemDetailOthers = () => {
       >
         <SwiperSlide>
           <li className='flex justify-center items-center rounded-lg bg-grey100 h-full'>
-            <IconPlusCircle />
+            <IconPlusCircleGray />
           </li>
         </SwiperSlide>
         <SwiperSlide>
           <li className='w-[88px] h-[88px] relative'>
             <CraftItemWorkstep
               classNames='absolute left-0 top-0'
-              workstep='초벌'
+              workstep='color'
               style='black'
             />
             <Image

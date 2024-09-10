@@ -2,7 +2,7 @@ import { ButtonIndex } from '@/app/shared/atoms/button';
 import Header from '@/app/shared/modules/header';
 import CraftsEditList from '@/app/widget/crafts/ui/crafts-edit-list';
 
-const CraftsEditPage = () => {
+const CraftListEditPage = () => {
   return (
     <div className='pt-2  min-h-screen relative'>
       <Header className='px-4 '>
@@ -15,4 +15,4 @@ const CraftsEditPage = () => {
   );
 };
 
-export default CraftsEditPage;
+export default CraftListEditPage;

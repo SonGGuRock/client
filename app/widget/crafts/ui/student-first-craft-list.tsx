@@ -17,6 +17,10 @@ const StudentsFirstCraftList = ({
   const handleMore = (studentId: number) => {
     router.push(`/students/${studentId}`);
   };
+
+  const handleClickItem = (craftId: number) => {
+    router.push(`/crafts/${craftId}/detail`);
+  };
   return (
     <div className='mt-4 flex gap-8'>
       {studentList.map((student) => (
@@ -45,7 +49,13 @@ const StudentsFirstCraftList = ({
           </div>
           <span className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>
             {student.crafts.map((craft) => (
-              <CraftItem key={craft.id} craft={craft} onClick={() => {}} />
+              <CraftItem
+                key={craft.id}
+                craft={craft}
+                onClick={() => {
+                  handleClickItem(craft.id);
+                }}
+              />
             ))}
           </span>
         </div>

@@ -4,14 +4,19 @@ import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import StudentAllVisitCalendar from '../../reservations/ui/student-all-visit-calendar';
 import { CraftCreateContext } from '@/app/_provider/craft-create-provide';
 
-const ReservationDateModal = () => {
+interface ReservationDateModalProps {
+  onSelectDate: (date: string) => void;
+}
+
+const ReservationDateModal = ({ onSelectDate }: ReservationDateModalProps) => {
   const { closeModal } = useModal();
   const { form: craftCreateBody } = useFormFill(CraftCreateContext);
   const { form: craftItemCreateBody, fill: fillCraftItemCreateBody } =
     useFormFill(CraftItemCreateContext);
 
-  const handleClickDate = (id: number) => {
+  const handleClickDate = (id: number, date: string) => {
     fillCraftItemCreateBody({ reservation_id: id });
+    onSelectDate(date);
     closeModal();
   };
   return (
