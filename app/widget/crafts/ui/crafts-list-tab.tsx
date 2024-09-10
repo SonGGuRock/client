@@ -1,16 +1,19 @@
 'use client';
-import useToggle from '@/app/shared/lib/useToggle';
 import TabLayout from '@/app/shared/modules/tab/TabLayout';
 import TabMenu from '@/app/shared/modules/tab/TabMenu';
 
-const CraftsListTab = () => {
-  const { open: off, toggle } = useToggle();
+interface CraftsListTabProps {
+  isCraftFirstView: boolean;
+  onSwap: () => void;
+}
+
+const CraftsListTab = ({ isCraftFirstView, onSwap }: CraftsListTabProps) => {
   return (
     <TabLayout>
-      <TabMenu active={!off} onClick={toggle}>
+      <TabMenu active={isCraftFirstView} onClick={onSwap}>
         작업별
       </TabMenu>
-      <TabMenu active={off} onClick={toggle}>
+      <TabMenu active={!isCraftFirstView} onClick={onSwap}>
         회원별
       </TabMenu>
     </TabLayout>

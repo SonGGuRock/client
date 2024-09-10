@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { WorkStepType } from '../../../shared/atoms/work-step-label';
 import { ClassNamesProps } from '@/app/widget/reservations/ui/class-time-picker';
+import { WORK_STEP_MAP } from '@/app/entities/crafts/constants';
 
 export interface WorkstepProps extends ClassNamesProps {
   workstep: WorkStepType['en'];
@@ -15,10 +16,7 @@ const CraftItemWorkstep = ({ workstep, classNames, style }: WorkstepProps) => {
     >
       <Image
         className={`${style === 'black' && 'invert'}`}
-        src={`/icon/workstep/ic-${
-          workstep
-          // WORK_STEP.find((item) => item.ko === workstep)?.en
-        }-24px.svg`}
+        src={`/icon/workstep/ic-${workstep}-24px.svg`}
         alt={`${workstep} 아이콘`}
         width={20}
         height={20}
@@ -28,7 +26,7 @@ const CraftItemWorkstep = ({ workstep, classNames, style }: WorkstepProps) => {
           style === 'black' && 'text-white'
         } `}
       >
-        {workstep}
+        {WORK_STEP_MAP[workstep]}
       </span>
     </span>
   );
