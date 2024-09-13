@@ -7,13 +7,13 @@ import Image from 'next/image';
 import CraftStatusButtons from './craft-status-buttons';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
-import { CraftItemCreateContext } from '@/app/_provider/craft-item-create-provider';
+import { CraftItemMutateContext } from '@/app/_provider/craft-item-create-provider';
 import { CraftStatus } from '@/app/entities/crafts/types';
 
 const CraftWorkStatusModal = () => {
   const { closeModal } = useModal();
   const { form: craftItemCreateBody, fill: fillCraftItemCreateBody } =
-    useFormFill(CraftItemCreateContext);
+    useFormFill(CraftItemMutateContext);
   const { data: setting } = useQueryWithCredentials<WorkshopDefaultSettingIds>(
     'workshops/settings/ids'
   );

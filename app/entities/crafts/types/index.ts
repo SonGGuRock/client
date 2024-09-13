@@ -50,3 +50,42 @@ export type CraftSummaryList = {
 };
 
 export type CraftSummaryForStudentList = CraftSummaryForStudent[];
+
+export type CommentAuthor = {
+  id: number;
+  profile_picture: string;
+  name: string;
+};
+export type Comment = {
+  id: number;
+  content: string;
+  updated_at: string;
+  like_count: number;
+  is_liked: boolean;
+  author: CommentAuthor;
+};
+export type ItemOthers = {
+  id: number;
+  picture: string;
+  work_step: WorkStepType['en'];
+};
+export type AuthorStudent = {
+  id: number;
+  profile_picture: string;
+  name: string;
+};
+
+export type CraftItemDetail = {
+  id: number;
+  picture: string;
+  work_step: WorkStepType['en'];
+  content: string;
+  reservation_date: string;
+  updated_at: string;
+  craft_name: string;
+
+  comments: Comment[];
+  items: ItemOthers[];
+
+  student: AuthorStudent;
+};

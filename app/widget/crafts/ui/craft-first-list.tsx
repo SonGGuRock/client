@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 
 interface CraftFirstListProps {
   craftList: CraftSummary[];
-
   showCraftName?: boolean;
 }
 

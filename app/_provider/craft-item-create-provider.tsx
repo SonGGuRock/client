@@ -4,10 +4,10 @@ import { ReactNode, createContext, useEffect, useState } from 'react';
 import { SubmissionContext } from './reservation-create-provider';
 import { CraftItemCreateBody } from '../entities/crafts/types';
 
-export const CraftItemCreateContext =
+export const CraftItemMutateContext =
   createContext<SubmissionContext<CraftItemCreateBody> | null>(null);
 
-export default function CraftItemCreateProvider({
+export default function CraftItemMutateProvider({
   children,
 }: {
   children: ReactNode;
@@ -17,8 +17,8 @@ export default function CraftItemCreateProvider({
     console.log('🥹 CraftItemCreateBody', form);
   }, [form]);
   return (
-    <CraftItemCreateContext.Provider value={{ form, setForm }}>
+    <CraftItemMutateContext.Provider value={{ form, setForm }}>
       {children}
-    </CraftItemCreateContext.Provider>
+    </CraftItemMutateContext.Provider>
   );
 }

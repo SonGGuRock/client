@@ -11,6 +11,7 @@ const CraftListEditPage = () => {
       </Header>
 
       <CraftsEditList />
+      
     </div>
   );
 };

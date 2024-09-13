@@ -1,4 +1,4 @@
-import { CraftItemCreateContext } from '@/app/_provider/craft-item-create-provider';
+import { CraftItemMutateContext } from '@/app/_provider/craft-item-create-provider';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import StudentAllVisitCalendar from '../../reservations/ui/student-all-visit-calendar';
@@ -12,7 +12,7 @@ const ReservationDateModal = ({ onSelectDate }: ReservationDateModalProps) => {
   const { closeModal } = useModal();
   const { form: craftCreateBody } = useFormFill(CraftCreateContext);
   const { form: craftItemCreateBody, fill: fillCraftItemCreateBody } =
-    useFormFill(CraftItemCreateContext);
+    useFormFill(CraftItemMutateContext);
 
   const handleClickDate = (id: number, date: string) => {
     fillCraftItemCreateBody({ reservation_id: id });

@@ -1,3 +1,5 @@
+'use client';
+
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import ModalMenu from '@/app/shared/modules/modal/ui/ModalMenu';
@@ -7,7 +9,7 @@ import SelectLikeButton from '@/app/shared/atoms/select-like-button';
 import Textarea from '@/app/shared/atoms/textarea';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import { CraftCreateContext } from '@/app/_provider/craft-create-provide';
-import { CraftItemCreateContext } from '@/app/_provider/craft-item-create-provider';
+import { CraftItemMutateContext } from '@/app/_provider/craft-item-create-provider';
 import ImageUploaderWithText from '@/app/shared/modules/image-uploader/ImageUploaderWithText';
 import Image from 'next/image';
 import CraftWorkStatusModal from './craft-work-status-modal';
@@ -18,7 +20,7 @@ import { useState } from 'react';
 const CraftItemCreateDetail = () => {
   const { form: craftCreateBodyAndTitle } = useFormFill(CraftCreateContext);
   const { form: craftItemCreateBody, fill: fillCraftItemCreateBody } =
-    useFormFill(CraftItemCreateContext);
+    useFormFill(CraftItemMutateContext);
   const { getWorkStepKrWithIcon } = useWorkStep();
   const { openModal } = useModal();
   const [reservationDate, setReservationDate] = useState<string | null>(null);

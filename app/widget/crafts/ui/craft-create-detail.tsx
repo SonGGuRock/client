@@ -10,13 +10,13 @@ import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import { CraftCreateContext } from '@/app/_provider/craft-create-provide';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { useQueryClient } from '@tanstack/react-query';
-import { CraftItemCreateContext } from '@/app/_provider/craft-item-create-provider';
+import { CraftItemMutateContext } from '@/app/_provider/craft-item-create-provider';
 
 const CraftCreateDetail = () => {
   const query = useQueryClient();
   const { form: craftCreateBody, fill: fillCraftCreateBodyAndTitle } =
     useFormFill(CraftCreateContext);
-  const { fill: fillCraftItemCreateBody } = useFormFill(CraftItemCreateContext);
+  const { fill: fillCraftItemCreateBody } = useFormFill(CraftItemMutateContext);
   const { openModal, closeModal } = useModal();
   const { data } = useQueryWithCredentials<CraftSummaries>(
     `crafts/students/${craftCreateBody.student_id}`

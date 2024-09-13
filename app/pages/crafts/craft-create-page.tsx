@@ -14,11 +14,11 @@ import useCreate from '@/app/shared/api/useCreate';
 import CraftCreateDetail from '@/app/widget/crafts/ui/craft-create-detail';
 import { CraftCreateContext } from '@/app/_provider/craft-create-provide';
 import CraftItemCreateDetail from '@/app/widget/crafts/ui/craft-item-create-detail';
-import { CraftItemCreateContext } from '@/app/_provider/craft-item-create-provider';
+import { CraftItemMutateContext } from '@/app/_provider/craft-item-create-provider';
 
 const CraftCreatePage = () => {
   const router = useRouter();
-  const { form } = useFormFill(CraftItemCreateContext);
+  const { form } = useFormFill(CraftItemMutateContext);
   const { post: createCraftItem } = useCreate<CraftItemCreateBody>({
     path: `crafts/items`,
     revalidate: false,
