@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import isDefaultImage from '../lib/isDefaultImage';
+import isDefaultProfilePicture from '../lib/isDefaultImage';
 import getImageWithFallback from '../lib/getImageWithFallback';
 
 type ThumbnailProps = {

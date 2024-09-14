@@ -2,7 +2,7 @@ import { Announcment } from '@/app/widget/announcements/lib/type';
 import IconNoticeFill from '../atoms/icons/icon-notice-fill';
 import formatDateString from '../lib/formatDateString';
 import Thumbnail from '../atoms/Thumbnail';
-import isDefaultImage from '../lib/isDefaultImage';
+import isDefaultProfilePicture from '../lib/isDefaultImage';
 
 export type ArticleProps = {
   content: Announcment;
@@ -21,7 +21,7 @@ const Article = ({ content }: ArticleProps) => {
           <Thumbnail
             id={content.author.id}
             imageUrl={
-              isDefaultImage(content.author.profile_picture)
+              isDefaultProfilePicture(content.author.profile_picture)
                 ? '/img/teacher-charactar.png'
                 : content.author.profile_picture
             }

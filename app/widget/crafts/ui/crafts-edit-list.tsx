@@ -107,7 +107,9 @@ const CraftsEditList = () => {
               handleSelectItem(craft.id);
             }}
             isEditMode={true}
-            isChecked={}
+            isChecked={
+              selectedList.find((id) => id === craft.id) ? true : false
+            }
           />
         ))}
       </div>

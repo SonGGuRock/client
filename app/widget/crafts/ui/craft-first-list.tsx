@@ -23,7 +23,7 @@ const CraftFirstList = ({
           key={craft.id}
           craft={craft}
           onClick={() => {
-            handleClickItem(craft.id);
+            handleClickItem(1);
           }}
           showCraftName={showCraftName}
         />

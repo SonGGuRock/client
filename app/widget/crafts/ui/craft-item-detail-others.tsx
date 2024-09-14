@@ -6,16 +6,22 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import CraftItemWorkstep from '@/app/widget/crafts/ui/craft-item-workstep';
 import Image from 'next/image';
 import IconPlusCircleGray from '@/app/shared/atoms/icons/icon-plus-circle_gray';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { CraftItemDetail } from '@/app/entities/crafts/types';
 
 const CraftItemDetailOthers = () => {
   const params = useParams();
   const itemId = params.id as string;
+  const router = useRouter();
   const { data: craftDetail } = useQueryWithCredentials<CraftItemDetail>(
     `/crafts/items/${itemId}`
   );
+
+  const handleCreateItem = () => {
+    //TODO: [id], [itemId] 로 nested
+    router.push(`/crafts/2/create?name=${craftDetail?.craft_name}`);
+  };
   if (!craftDetail) return <div>loading now</div>;
   return (
     <div className='px-4'>
@@ -32,7 +38,7 @@ const CraftItemDetailOthers = () => {
         freeMode={true}
         className='h-[88px]'
       >
-        <SwiperSlide>
+        <SwiperSlide onClick={handleCreateItem}>
           <li className='flex justify-center items-center rounded-lg bg-grey100 h-full'>
             <IconPlusCircleGray />
           </li>

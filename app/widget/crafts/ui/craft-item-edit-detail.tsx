@@ -16,18 +16,21 @@ import Textarea from '@/app/shared/atoms/textarea';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 import useWorkStep from '@/app/entities/crafts/hooks/useWorkStep';
 import { CraftItemDetail } from '@/app/entities/crafts/types';
+import { WORK_STEP_MAP } from '@/app/entities/crafts/constants';
 
-interface CraftItemEditDetailProps {
-  craftDetail: Pick<
-    CraftItemDetail,
-    'id' | 'picture' | 'craft_name' | 'updated_at' | 'content' | 'work_step'
-  >;
-}
+// interface CraftItemEditDetailProps {
+//   craftDetail: Pick<
+//     CraftItemDetail,
+//     'id' | 'picture' | 'craft_name' | 'updated_at' | 'content' | 'work_step'
+//   >;
+// }
 
-const CraftItemEditDetail = ({ craftDetail }: CraftItemEditDetailProps) => {
-  const { fill: fillCraftItemCreateBody } = useFormFill(CraftItemMutateContext);
+const CraftItemEditDetail = () => {
+  const { form, fill: fillCraftItemCreateBody } = useFormFill(
+    CraftItemMutateContext
+  );
+  const { getWorkStepEn, getWorkStepKrWithIcon } = useWorkStep();
 
-  const { getWorkStepKrWithIcon } = useWorkStep();
   const { openModal } = useModal();
   const [reservationDate, setReservationDate] = useState<string | null>(null);
 
@@ -73,14 +76,19 @@ const CraftItemEditDetail = ({ craftDetail }: CraftItemEditDetailProps) => {
 
   return (
     <div className='relative'>
-      <Title size='large'>{craftDetail.craft_name}</Title>
+      <Title size='medium'>
+        craft name의{' '}
+        {form.work_step_id
+          ? WORK_STEP_MAP[getWorkStepEn(form.work_step_id)!]
+          : ''}
+      </Title>
       <div
         onClick={handleOpenModalUploadPicture}
         className='my-4 bg-grey50 rounded-lg w-full h-[320px] overflow-hidden flex justify-center items-center'
       >
-        {craftDetail.picture ? (
+        {form.picture ? (
           <Image
-            src={craftDetail.picture}
+            src={form.picture}
             width={320}
             height={320}
             alt='수강생 작품 사진'
@@ -93,8 +101,8 @@ const CraftItemEditDetail = ({ craftDetail }: CraftItemEditDetailProps) => {
 
       <div className='flex gap-2'>
         <SelectLikeButton onClick={handleOpenModalWorkStep}>
-          {craftDetail.work_step
-            ? getWorkStepKrWithIcon(craftDetail.work_step)
+          {form.work_step_id
+            ? getWorkStepKrWithIcon(form.work_step_id)
             : '작업 상태 선택'}
         </SelectLikeButton>
         <SelectLikeButton onClick={handleOpenModalReservationDate}>
@@ -103,7 +111,7 @@ const CraftItemEditDetail = ({ craftDetail }: CraftItemEditDetailProps) => {
       </div>
 
       <Textarea
-        value={craftDetail.content}
+        value={form.content}
         onChange={handleChangeTextArea}
         placeholder='작품을 설명해주세요'
         classNames='mt-4 w-full'

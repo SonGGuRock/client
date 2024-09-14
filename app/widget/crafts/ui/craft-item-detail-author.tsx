@@ -1,5 +1,7 @@
 import { AuthorStudent } from '@/app/entities/crafts/types';
 import Thumbnail from '@/app/shared/atoms/Thumbnail';
+import { formatDate } from '@/app/shared/lib/formatDate';
+import formatDateString from '@/app/shared/lib/formatDateString';
 
 interface CraftItemDetailAuthor {
   author: AuthorStudent;
@@ -20,7 +22,9 @@ const CraftItemDetailAuthor = ({
       />
       <div className='flex flex-wrap w-full gap-1'>
         <p className='w-full text-base text-grey900'>{author.name}</p>
-        <p className='w-full text-xs text-grey400'>{updatedAt}</p>
+        <p className='w-full text-xs text-grey400'>
+          {formatDateString({ fullDateString: updatedAt })}
+        </p>
       </div>
     </div>
   );
