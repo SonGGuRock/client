@@ -47,7 +47,7 @@ const CraftCreateDetail = () => {
     );
   };
 
-  const handleClickCraft = (craftId: number, craftName: string) => {
+  const handleClickCraft = (craftId: number, _: number, craftName?: string) => {
     fillCraftCreateBodyAndTitle({ title: craftName });
     fillCraftItemCreateBody({ craft_id: craftId });
   };

@@ -4,12 +4,14 @@ import { useMutateWithCrendetials } from './fetch-with-credentials';
 const useCreate = <T, R = Response>({
   path,
   revalidate,
+  revalidatePath,
   params,
   onSuccess,
   onFail,
 }: {
   path: string;
   revalidate: boolean;
+  revalidatePath?: string;
   params?: { [key: string]: string | number | boolean };
   onSuccess?: (data: R) => void;
   onFail?: () => void;
@@ -25,7 +27,10 @@ const useCreate = <T, R = Response>({
       },
       {
         onSuccess: (data: R) => {
-          revalidate && queryClient.invalidateQueries({ queryKey: [path] });
+          revalidate &&
+            queryClient.invalidateQueries({
+              queryKey: [revalidatePath ?? path],
+            });
           onSuccess && onSuccess(data);
         },
         onError: () => {

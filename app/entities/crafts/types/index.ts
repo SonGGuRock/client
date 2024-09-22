@@ -31,6 +31,8 @@ export type CraftSummary = {
   updated_at: string;
   now_work_step: number | null;
   item_count: number;
+  student_name: string;
+  now_craft_item: number | null;
 };
 
 export type CraftSummaryForStudent = {
@@ -78,7 +80,7 @@ export type AuthorStudent = {
 export type CraftItemDetail = {
   id: number;
   picture: string;
-  work_step: WorkStepType['en'];
+  work_step: number;
   content: string;
   reservation_date: string;
   updated_at: string;

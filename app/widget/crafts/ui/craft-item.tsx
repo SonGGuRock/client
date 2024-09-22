@@ -8,7 +8,7 @@ import CheckBox from '@/app/shared/atoms/CheckBox';
 
 interface CraftItemProps extends ClassNamesProps {
   craft: CraftSummary;
-  onClick: (id: number, name: string) => void;
+  onClick: (id: number, itemId: number, craftName?: string) => void;
   showCraftName?: boolean;
   isEditMode?: boolean;
   isChecked?: boolean;
@@ -30,7 +30,7 @@ const CraftItem = ({
   return (
     <div
       className={`${isEditMode && 'relative'}`}
-      onClick={() => onClick(craft.id, craft.name)}
+      onClick={() => onClick(craft.id, craft.now_craft_item!, craft.name)}
     >
       <CraftThumbnail
         classNames='w-full h-[108px] mb-2'
@@ -41,7 +41,7 @@ const CraftItem = ({
       {showCraftName ? (
         <p className='text-sm text-grey900'>{craft.name}</p>
       ) : (
-        <p className='text-sm text-grey900'>student name</p>
+        <p className='text-sm text-grey900'>{craft.student_name}</p>
       )}
       <p className='text-sm text-grey400'>{craft.item_count}</p>
       {isEditMode && (

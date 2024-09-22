@@ -15,7 +15,6 @@ import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 import BottomBar from '@/app/shared/modules/BottomBar';
 import Header from '@/app/shared/modules/header';
 import CraftFirstList from '@/app/widget/crafts/ui/craft-first-list';
-import CraftItem from '@/app/widget/crafts/ui/craft-item';
 import CraftsEditButton from '@/app/widget/crafts/ui/crafts-edit-button';
 import CraftsListTab from '@/app/widget/crafts/ui/crafts-list-tab';
 import CraftsStatusTab from '@/app/widget/crafts/ui/crafts-status-tab';

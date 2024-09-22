@@ -5,30 +5,32 @@ import Header from '@/app/shared/modules/header';
 import { useParams, useRouter } from 'next/navigation';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import useDelete from '@/app/shared/api/useDelete';
-import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 import ModalContentInfoType from '@/app/shared/modules/modal/ui/modal-content-info-type';
 
 const CraftItemDetailHeader = () => {
   const params = useParams();
-  const craftId = params.id as string;
+  const craftId = params['id'] as string;
+  const itemId = params['itemId'] as string;
   const router = useRouter();
   const { closeModal, openModal } = useModal();
   const { remove } = useDelete({
-    path: '/crafts/items/아이템id',
+    path: `/crafts/items/${itemId}`,
     revalidate: true,
     revalidatePath: 'crafts',
   });
 
   const handleEdit = () => {
-    closeModal();
-    router.push(`/crafts/${craftId}/edit`);
+    // closeModal();
+    router.push(`/crafts/${craftId}/${itemId}/edit`);
   };
 
   const handleDelete = () => {
     openModal(
       <ModalContentInfoType
         text='정말 삭제하시겠습니까?'
-        onClickPrimary={() => {}}
+        onClickPrimary={() => {
+          remove();
+        }}
         onClickSecondary={() => {
           closeModal();
         }}

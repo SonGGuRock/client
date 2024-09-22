@@ -10,7 +10,8 @@ import { CraftItemDetail } from '@/app/entities/crafts/types';
 
 const CraftItemDetailContent = () => {
   const params = useParams();
-  const itemId = params.id as string;
+  const craftId = params['id'];
+  const itemId = params['itemId'] as string;
   const { data: craftDetail } = useQueryWithCredentials<CraftItemDetail>(
     `/crafts/items/${itemId}`
   );
@@ -35,9 +36,6 @@ const CraftItemDetailContent = () => {
           classDate={craftDetail.reservation_date}
         />
 
-        {/* <button className='block border rounded-lg border-grey200 text-grey700 py-[6px] pl-2 pr-3'>
-        초벌
-      </button> */}
         <Textarea
           readonly={true}
           classNames='block w-full mt-4 mb-8 h-[120px]'

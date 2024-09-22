@@ -22,12 +22,12 @@ export default function formatDateString({
   };
   const fullOption = { ...defaultOptions, ...options };
   const date = new Date(fullDateString);
-
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const koreanDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+  const year = koreanDate.getFullYear();
+  const month = String(koreanDate.getMonth() + 1).padStart(2, '0');
+  const day = String(koreanDate.getDate()).padStart(2, '0');
+  const hours = String(koreanDate.getHours()).padStart(2, '0');
+  const minutes = String(koreanDate.getMinutes()).padStart(2, '0');
 
   let formattedDate = '';
   if (fullOption.includeYear === true) {

@@ -48,7 +48,7 @@ const CraftItemDetailOthers = () => {
             <li className='w-[88px] h-[88px] relative'>
               <CraftItemWorkstep
                 classNames='absolute left-0 top-0'
-                workstep={item.work_step}
+                workstep={Number(item.work_step)}
                 style='black'
               />
               <Image

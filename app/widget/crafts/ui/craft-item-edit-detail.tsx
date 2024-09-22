@@ -3,7 +3,7 @@
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import { CraftItemMutateContext } from '@/app/_provider/craft-item-create-provider';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ModalMenu from '@/app/shared/modules/modal/ui/ModalMenu';
 import ImageUploaderWithText from '@/app/shared/modules/image-uploader/ImageUploaderWithText';
 import CraftWorkStatusModal from './craft-work-status-modal';
@@ -15,17 +15,18 @@ import SelectLikeButton from '@/app/shared/atoms/select-like-button';
 import Textarea from '@/app/shared/atoms/textarea';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
 import useWorkStep from '@/app/entities/crafts/hooks/useWorkStep';
-import { CraftItemDetail } from '@/app/entities/crafts/types';
 import { WORK_STEP_MAP } from '@/app/entities/crafts/constants';
-
-// interface CraftItemEditDetailProps {
-//   craftDetail: Pick<
-//     CraftItemDetail,
-//     'id' | 'picture' | 'craft_name' | 'updated_at' | 'content' | 'work_step'
-//   >;
-// }
+import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { CraftItemDetail } from '@/app/entities/crafts/types';
+import { useParams } from 'next/navigation';
 
 const CraftItemEditDetail = () => {
+  const params = useParams();
+  const craftId = params['id'] as string;
+  const itemId = params['itemId'] as string;
+  const { data: craftDetail } = useQueryWithCredentials<CraftItemDetail>(
+    `/crafts/items/${itemId}`
+  );
   const { form, fill: fillCraftItemCreateBody } = useFormFill(
     CraftItemMutateContext
   );
@@ -74,13 +75,18 @@ const CraftItemEditDetail = () => {
     });
   };
 
+  useEffect(() => {
+    fillCraftItemCreateBody({
+      picture: craftDetail?.picture,
+      content: craftDetail?.content,
+      work_step_id: craftDetail?.work_step,
+    });
+  }, [craftDetail]);
+
   return (
     <div className='relative'>
-      <Title size='medium'>
-        craft name의{' '}
-        {form.work_step_id
-          ? WORK_STEP_MAP[getWorkStepEn(form.work_step_id)!]
-          : ''}
+      <Title size='small'>
+        {craftDetail?.craft_name}&nbsp;&nbsp;&nbsp;{WORK_STEP_MAP[getWorkStepEn(craftDetail?.work_step!)!]}&nbsp;
       </Title>
       <div
         onClick={handleOpenModalUploadPicture}
@@ -101,8 +107,8 @@ const CraftItemEditDetail = () => {
 
       <div className='flex gap-2'>
         <SelectLikeButton onClick={handleOpenModalWorkStep}>
-          {form.work_step_id
-            ? getWorkStepKrWithIcon(form.work_step_id)
+          {craftDetail?.work_step
+            ? getWorkStepKrWithIcon(craftDetail?.work_step)
             : '작업 상태 선택'}
         </SelectLikeButton>
         <SelectLikeButton onClick={handleOpenModalReservationDate}>

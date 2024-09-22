@@ -3,8 +3,6 @@ import Image from 'next/image';
 import { ClassNamesProps } from '../../reservations/ui/class-time-picker';
 import CraftItemWorkstep from './craft-item-workstep';
 import { CraftSummary } from '@/app/entities/crafts/types';
-import useWorkStep from '@/app/entities/crafts/hooks/useWorkStep';
-import getImageWithFallback from '@/app/shared/lib/getImageWithFallback';
 import { isDefaultThumbnail } from '@/app/shared/lib/isDefaultImage';
 
 export interface CraftThumbnailProps extends ClassNamesProps {
@@ -17,13 +15,12 @@ export default function CraftThumbnail({
   showWorkStatus,
   classNames,
 }: CraftThumbnailProps) {
-  const { getWorkStepEn } = useWorkStep();
   return (
     <div className={`relative list-none ${classNames}`}>
       {showWorkStatus && craft.now_work_step && (
         <CraftItemWorkstep
           classNames='absolute left-0 top-0'
-          workstep={getWorkStepEn(craft.now_work_step)!}
+          workstep={craft.now_work_step!}
           style='black'
         />
       )}

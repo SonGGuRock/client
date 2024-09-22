@@ -1,47 +1,29 @@
 'use client';
 
 import { CraftItemMutateContext } from '@/app/_provider/craft-item-create-provider';
-import {
-  CraftItemCreateBody,
-  CraftItemDetail,
-} from '@/app/entities/crafts/types';
-import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { CraftItemCreateBody } from '@/app/entities/crafts/types';
 import useUpdate from '@/app/shared/api/useUpdate';
 import Button from '@/app/shared/atoms/button/Button';
 import Header from '@/app/shared/modules/header';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import CraftItemEditDetail from '@/app/widget/crafts/ui/craft-item-edit-detail';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 
 const CraftItemEditPage = () => {
-  // const params = useParams();
-  // const craftId = params.id as string;
   const router = useRouter();
-  const { data: craftDetail } = useQueryWithCredentials<CraftItemDetail>(
-    `/crafts/items/${1}`
-  );
+  const params = useParams();
+  const craftId = params['id'] as string;
+  const itemId = params['itemId'] as string;
   const { update } = useUpdate<CraftItemCreateBody>({
-    path: `/crafts/items/${1}`,
+    path: `/crafts/items/${itemId}`,
     revalidate: true,
     onSuccess: () => {
-      router.push('crafts/1/detail');
+      router.push(`crafts/${craftId}/${itemId}`);
     },
   });
 
-  const { form, fill: fillCraftItemCreateBody } = useFormFill(
-    CraftItemMutateContext
-  );
+  const { form } = useFormFill(CraftItemMutateContext);
 
-  useEffect(() => {
-    fillCraftItemCreateBody({
-      picture: craftDetail?.picture,
-      content: craftDetail?.content,
-    });
-  }, [craftDetail]);
-
-  if (!craftDetail) return <div>loading now</div>;
-  const { comments, items, student, ...rest } = craftDetail;
   const handleUpdateSubmit = () => {
     update(form as CraftItemCreateBody);
   };
