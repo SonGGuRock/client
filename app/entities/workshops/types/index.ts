@@ -18,3 +18,15 @@ export type WorkshopDefaultSettingIds = {
   work_types: WorkType[];
   work_steps: WorkStep[];
 };
+
+type WorkshopAddress = {
+  roadAddr?: string;
+  restAddr?: string;
+};
+
+export type WorkshopCrateBody = {
+  name: string;
+  profile_picture: string;
+  address: WorkshopAddress;
+  phone_number: string;
+};

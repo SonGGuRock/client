@@ -17,7 +17,7 @@ import {
   Announcment,
 } from '@/app/widget/announcements/lib/type';
 import { useQueryClient } from '@tanstack/react-query';
-import { Toast } from '@/app/shared/modules/toast/ui/Toast';
+import Toast from '@/app/shared/modules/toast/ui/toast';
 
 const AnnouncementDetailPage = () => {
   const queryClient = useQueryClient();

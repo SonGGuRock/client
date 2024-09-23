@@ -22,7 +22,10 @@ const OperationSettingClasstime = () => {
       </SettingMenu>
       <ul className='flex flex-wrap gap-4 mx-4 mb-6'>
         {operation.class_times.map((time, idx) => (
-          <li className='w-full flex gap-2 flex-nowrap  items-center'>
+          <li
+            key={time.start_time}
+            className='w-full flex gap-2 flex-nowrap  items-center'
+          >
             <ClasstimeSettingItem key={time.start_time} index={idx} />
             <span
               onClick={() => {

@@ -2,17 +2,15 @@
 
 import { useState } from 'react';
 import CraftItem from './craft-item';
-import { CraftThumbnailProps } from './craft-thumbnail';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 import Image from 'next/image';
 import PortalModal from '../../../shared/modules/modal/ui/PotalModal';
 import useModal from '../../../shared/modules/modal/lib/useModal';
 import CraftsEditModalContent from './crafts-edit-modal-content';
 import useToast from '../../../shared/modules/toast/lib/useToast';
-import Toast from '../../../shared/modules/toast/ui/Toast';
+import Toast from '../../../shared/modules/toast/ui/toast';
 import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 import ModalContentInfoType from '@/app/shared/modules/modal/ui/modal-content-info-type';
-import CraftFirstList from './craft-first-list';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { CraftSummaryList } from '@/app/entities/crafts/types';
 

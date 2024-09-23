@@ -18,7 +18,10 @@ const Page = () => {
         </div>
       </Header>
 
-      <StudentAllVisitCalendar studentId={Number(studentId)} />
+      <StudentAllVisitCalendar
+        studentId={Number(studentId)}
+        onClickDate={() => {}}
+      />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import useToast from '@/app/shared/modules/toast/lib/useToast';
 import Back from '@/app/shared/atoms/Back';
 import Button from '@/app/shared/atoms/button/Button';
 import Title from '@/app/shared/atoms/Title';
-import Toast from '@/app/shared/modules/toast/ui/Toast';
+import Toast from '@/app/shared/modules/toast/ui/toast';
 import ArticleEditor from '@/app/shared/modules/ArticleEditor';
 
 const AnnouncementCreatePage = () => {

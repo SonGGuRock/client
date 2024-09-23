@@ -64,7 +64,7 @@ const WithdrawalReasonList = () => {
               <Input
                 placeholder='사유 입력'
                 onChange={handleEtcChange}
-                isReadOnly={!item.checked}
+                // isReadOnly={!item.checked}
               />
             </span>
           )}

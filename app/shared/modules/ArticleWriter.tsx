@@ -1,6 +1,7 @@
 import { ArticleCreateRequest } from '@/app/pages/announcements/ui/announcement-create-page';
-import CheckBox, { FormCheckBox } from '../atoms/CheckBox';
+
 import { UseFormRegister } from 'react-hook-form';
+import FormCheckBox from '../atoms/FormCheckBox';
 
 type ArticleEditorProps = {
   body?: ArticleCreateRequest;

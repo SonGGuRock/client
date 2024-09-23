@@ -15,7 +15,8 @@ const UserCrafts = ({ userId, userName, crafts }: UserCraftsProps) => {
     <div className='mt-4'>
       <div className='relative'>
         <span className='flex gap-2 mb-4'>
-          <Thumbnail id={userId} name={userName} /> {userName}
+          <Thumbnail id={userId} name={userName} imageUrl='' type='student' />{' '}
+          {userName}
           <GoTo href='' title='더보기' />
         </span>
         {/* <Swiper
@@ -27,7 +28,7 @@ const UserCrafts = ({ userId, userName, crafts }: UserCraftsProps) => {
         <ul className='flex justify-between gap-2'>
           {crafts.map((craft) => (
             // <SwiperSlide key={craft.craftId}>
-            <CraftThumbnail {...craft} />
+            <CraftThumbnail key={craft.craft.id} {...craft} />
             // </SwiperSlide>
           ))}
         </ul>
