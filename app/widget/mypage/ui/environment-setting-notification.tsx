@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { WorkshopEnvironment } from '../../workshops/api/type';
 import { SettingMenuActivation } from './setting-menu/setting-menu-activation';
 import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
-import Toast from '@/app/shared/modules/toast/ui/Toast';
+import Toast from '@/app/shared/modules/toast/ui/toast';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
 
 const titleMap: Record<keyof WorkshopEnvironment, string> = {
@@ -55,6 +55,7 @@ const EnvironmentSettingNotification = (env: WorkshopEnvironment) => {
     <div className='w-full flex flex-wrap gap-2 pt-1'>
       {envMap.map(({ field, title, isActive }, _) => (
         <SettingMenuActivation
+          key={field}
           classNames={
             field === 'is_active_todo'
               ? 'w-full p-4 border-b border-grey100'

@@ -1,13 +1,11 @@
 import { ArticleCreateRequest } from '@/app/pages/announcements/ui/announcement-create-page';
 import CheckBox from '../atoms/CheckBox';
-import { UseFormRegister } from 'react-hook-form';
 
 type ArticleEditorProps = {
   body?: ArticleCreateRequest;
-  register: UseFormRegister<ArticleCreateRequest>;
 };
 
-const ArticleEditor = ({}: ArticleEditorProps) => {
+const ArticleEditor = ({ body }: ArticleEditorProps) => {
   return (
     <div className='mt-4'>
       <div className='border-b pb-4'>
@@ -22,13 +20,13 @@ const ArticleEditor = ({}: ArticleEditorProps) => {
       <textarea
         placeholder='내용을 입력하세요'
         className='mt-8 w-full min-h-[320px]'
-        value={content}
+        value={body?.content}
       />
       <div className='flex justify-end gap-2 items-center'>
         <CheckBox
           onCheck={() => {}}
           style='grey'
-          isChecked={is_representative_announcement}
+          isChecked={body?.is_representative_announcement}
         />
         <label>대표 공지로 등록</label>
       </div>

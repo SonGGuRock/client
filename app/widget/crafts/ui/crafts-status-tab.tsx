@@ -1,30 +1,28 @@
 'use client';
 
 import 'swiper/css';
-import { useState } from 'react';
 import { ClassNamesProps } from '../../reservations/ui/class-time-picker';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { clsx } from 'clsx';
 import { FreeMode } from 'swiper/modules';
+import { WORK_STEP, WorkStepType } from '@/app/shared/atoms/work-step-label';
+import { CraftStatus } from '@/app/entities/crafts/types';
 
-type CratsStatus = '진행중' | '완성' | '보관';
+interface CraftsStatusTab extends ClassNamesProps {
+  activeStatus: CraftStatus;
+  acitveWorkstep: WorkStepType['en'] | 'all';
+  onClick: (
+    params: { status: CraftStatus } | { work_step: WorkStepType['en'] | 'all' }
+  ) => void;
+}
 
-const CraftsStatusTab = ({ classNames }: ClassNamesProps) => {
-  const [activeStatus, setActiveStatus] = useState<CratsStatus>('진행중');
-
-  const handleStauts = (status: CratsStatus) => {
-    setActiveStatus(status);
-  };
-
+const CraftsStatusTab = ({
+  acitveWorkstep,
+  activeStatus,
+  onClick,
+  classNames,
+}: CraftsStatusTab) => {
   const classes = clsx(
-    // {
-    //   'bg-brown': activeCategory === category.ko,
-    //   'text-white': activeCategory === category.ko,
-    // },
-    {
-      'bg-white': true,
-      'text-grey400': true,
-    },
     'rounded-lg',
     'py-1',
     'px-3',
@@ -40,10 +38,10 @@ const CraftsStatusTab = ({ classNames }: ClassNamesProps) => {
       <div className='flex justify-between w-full h-9 rounded-lg bg-grey100 text-grey300 text-sm'>
         <span
           onClick={() => {
-            handleStauts('진행중');
+            onClick({ status: 'ongoing' });
           }}
           className={`w-full text-sm font-bold inline-flex justify-center items-center py-2 ${
-            activeStatus === '진행중' &&
+            activeStatus === 'ongoing' &&
             'text-grey900 bg-white rounded-lg border-2 border-grey100'
           }`}
         >
@@ -52,10 +50,10 @@ const CraftsStatusTab = ({ classNames }: ClassNamesProps) => {
 
         <span
           onClick={() => {
-            handleStauts('완성');
+            onClick({ status: 'completed' });
           }}
           className={`w-full text-sm font-bold inline-flex justify-center items-center py-2 ${
-            activeStatus === '완성' &&
+            activeStatus === 'completed' &&
             'text-grey900 bg-white rounded-lg border-2 border-grey100'
           }`}
         >
@@ -63,17 +61,17 @@ const CraftsStatusTab = ({ classNames }: ClassNamesProps) => {
         </span>
         <span
           onClick={() => {
-            handleStauts('보관');
+            onClick({ status: 'keep' });
           }}
           className={`w-full text-sm font-bold inline-flex justify-center items-center py-2 ${
-            activeStatus === '보관' &&
+            activeStatus === 'keep' &&
             'text-grey900 bg-white rounded-lg border-2 border-grey100'
           }`}
         >
           보관
         </span>
       </div>
-      {activeStatus === '진행중' && (
+      {activeStatus === 'ongoing' && (
         <Swiper
           className='mt-4'
           modules={[FreeMode]}
@@ -81,15 +79,36 @@ const CraftsStatusTab = ({ classNames }: ClassNamesProps) => {
           spaceBetween={8}
           freeMode={true}
         >
-          <SwiperSlide>
-            <li className={classes}>초벌</li>
+          <SwiperSlide key='all'>
+            <li
+              className={`${classes} ${
+                acitveWorkstep === 'all'
+                  ? 'bg-brown text-white'
+                  : 'bg-white text-grey400'
+              }`}
+              onClick={() => {
+                onClick({ work_step: 'all' });
+              }}
+            >
+              전체
+            </li>
           </SwiperSlide>
-          <SwiperSlide>
-            <li className={classes}>초벌</li>
-          </SwiperSlide>
-          <SwiperSlide>
-            <li className={classes}>초벌</li>
-          </SwiperSlide>
+          {WORK_STEP.map((step, idx) => (
+            <SwiperSlide key={`${step.en}-${idx}`}>
+              <li
+                className={`${classes} ${
+                  acitveWorkstep === step.en
+                    ? 'bg-brown text-white'
+                    : 'bg-white text-grey400'
+                }`}
+                onClick={() => {
+                  onClick({ work_step: step.en });
+                }}
+              >
+                {step.ko}
+              </li>
+            </SwiperSlide>
+          ))}
         </Swiper>
       )}
     </div>

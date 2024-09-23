@@ -25,10 +25,10 @@ const ModalContentInfoType = ({
         </p>
       </div>
       <div className='w-full flex justify-center gap-2'>
-        <Button size='large' type='secondary' onClick={onClickSecondary}>
+        <Button size='large' style='secondary' onClick={onClickSecondary}>
           {secondaryButtonText}
         </Button>
-        <Button size='large' type='primary' onClick={onClickPrimary}>
+        <Button size='large' style='primary' onClick={onClickPrimary}>
           {primaryButtonText}
         </Button>
       </div>

@@ -1,5 +1,7 @@
-const isDefaultImage = (srcUrl: string) => {
+export const isDefaultProfilePicture = (srcUrl: string) => {
   return srcUrl === 'https://default-profile-picture';
 };
 
-export default isDefaultImage;
+export const isDefaultThumbnail = (srcUrl: string) => {
+  return srcUrl === 'https://default-thumbnail';
+};

@@ -10,9 +10,32 @@ import StepStudent from '@/app/widget/reservations/ui/step-student';
 import StepClassTime from '@/app/widget/reservations/ui/step-class-time';
 import StepWorkType from '@/app/widget/reservations/ui/step-work-type';
 import Stepper from '@/app/shared/modules/stepper';
-import { ReservationCreateBody } from '@/app/entities/reservations/types';
+import {
+  ReservationCreateBody,
+  ReservationCreateResponse,
+} from '@/app/entities/reservations/types';
+import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
+import useCreate from '@/app/shared/api/useCreate';
+import { DataResponse } from '@/app/shared/api/type';
+import { useRouter } from 'next/navigation';
 
 const ReservationsCreatePage = () => {
+  const router = useRouter();
+  const { form } = useFormFill(ReservationCreateContext);
+  const { post } = useCreate<
+    ReservationCreateBody,
+    DataResponse<ReservationCreateResponse>
+  >({
+    path: `reservations`,
+    revalidate: false,
+    onSuccess: (data) => {
+      router.push(`/reservations/create/success/${data.data.student_name}`);
+    },
+  });
+
+  const handleCreate = () => {
+    post(form as ReservationCreateBody);
+  };
   const RESERVATION_STEPS: Step<ReservationCreateBody>[] = [
     {
       order: 0,
@@ -48,7 +71,7 @@ const ReservationsCreatePage = () => {
           <CloseButton />
         </div>
       </Header>
-      <Stepper steps={RESERVATION_STEPS} />
+      <Stepper steps={RESERVATION_STEPS} onCreate={handleCreate} />
     </div>
   );
 };

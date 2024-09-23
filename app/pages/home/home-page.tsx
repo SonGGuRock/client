@@ -6,6 +6,7 @@ import HomeHeader from '../../widget/home/ui/home-header';
 import StudentsTodayList from '@/app/widget/students/ui/students-today-list';
 import Todos from '@/app/widget/todos/todos';
 import Divider from '@/app/shared/atoms/Divider';
+import CraftsPreview from '@/app/widget/crafts/ui/crafts-preview';
 
 const HomePage = () => {
   return (
@@ -25,7 +26,7 @@ const HomePage = () => {
         {/* Suspense fallback={Students} */}
         <StudentsTodayList />
         <Divider />
-        {/* <CraftsPreview /> */}
+        <CraftsPreview />
       </section>
     </div>
   );

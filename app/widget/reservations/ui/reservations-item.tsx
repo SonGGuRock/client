@@ -11,7 +11,14 @@ interface ReservationItemsProps {
 }
 
 const ReservationItem = ({
-  reservation: { id, work_type, remaining_class_count, total_class_count },
+  reservation: {
+    id,
+    work_type,
+    remaining_class_count,
+    total_class_count,
+    student_id,
+    student_name,
+  },
   classTime: { start_time, end_time },
 }: ReservationItemsProps) => {
   const params = useParams();
@@ -31,7 +38,7 @@ const ReservationItem = ({
               isFulfilled ? 'text-white' : 'text-grey900'
             }`}
           >
-            studentName
+            {student_name}
           </p>
           <p
             className={`w-full text-xs ${

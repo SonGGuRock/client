@@ -46,6 +46,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'default-thumbnail',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

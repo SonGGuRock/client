@@ -1,7 +1,9 @@
-import CraftsEditPage from '@/app/pages/crafts/crafts-edit-page';
+'use client';
+
+import CraftListEditPage from '@/app/pages/crafts/craft-list-edit-page';
 
 const Page = () => {
-  return <CraftsEditPage />;
+  return <CraftListEditPage />;
 };
 
 export default Page;

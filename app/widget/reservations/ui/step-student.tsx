@@ -4,18 +4,23 @@ import Title from '@/app/shared/atoms/Title';
 import { SubmissionContext } from '@/app/_provider/reservation-create-provider';
 import { Context } from 'react';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
-import {
-  CraftItem,
-  StudentReservation,
-  Student,
-} from '@/app/lib-temp/definition';
 import StudentsWithSearch from './step-student-searched';
+import {
+  CraftCreateBody,
+  CraftItemCreateBody,
+} from '@/app/entities/crafts/types';
+import { Student } from '@/app/entities/students/types';
+import { ReservationCreateBody } from '@/app/entities/reservations/types';
 
-export interface StepStudentProps {
-  context: Context<SubmissionContext<StudentReservation | CraftItem> | null>;
+export interface StepStudentProps<
+  T extends ReservationCreateBody | CraftCreateBody
+> {
+  context: Context<SubmissionContext<T> | null>;
 }
 
-function StepStudent({ context }: StepStudentProps) {
+function StepStudent<T extends ReservationCreateBody | CraftCreateBody>({
+  context,
+}: StepStudentProps<T>) {
   const { data: students, isLoading } = useQueryWithCredentials<Student[]>(
     'students',
     {

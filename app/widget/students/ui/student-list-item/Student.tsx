@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Label from '../../../../shared/atoms/Label';
-import Thumbnail from '../../../../shared/atoms/Thumbnail';
-import { Student } from '@/app/lib-temp/definition';
+import type { Student } from '@/app/entities/students/types';
 
 export type StudentProps = {
   student: Student;

@@ -14,7 +14,10 @@ import { useQueryClient } from '@tanstack/react-query';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
 import { StudentDetail } from '@/app/lib-temp/definition';
-import Toast from '@/app/shared/modules/toast/ui/Toast';
+import Toast from '@/app/shared/modules/toast/ui/toast';
+import useToggle from '@/app/shared/lib/useToggle';
+import CraftFirstList from '@/app/widget/crafts/ui/craft-first-list';
+import { CraftSummaryList } from '@/app/entities/crafts/types';
 
 const StudentDetailPage = () => {
   const router = useRouter();
@@ -23,15 +26,18 @@ const StudentDetailPage = () => {
   const queryClient = useQueryClient();
   const { closeModal } = useModal();
   const { toggleToast, toast } = useToast();
+  const { toggle: toggleTap, open: showCrafts } = useToggle();
 
   const { data: student } = useQueryWithCredentials<StudentDetail>(
     `students/${studentId}`
+  );
+  const { data: craftList } = useQueryWithCredentials<CraftSummaryList>(
+    `crafts/students/${studentId}`
   );
 
   const { mutate } = useMutateWithCrendetials(
     `/students/${studentId}/${student?.is_active ? 'inactive' : 'active'}`
   );
-
   const { mutate: remove } = useMutateWithCrendetials(`/students/${studentId}`);
 
   const handleClickEdit = () => {
@@ -60,6 +66,7 @@ const StudentDetailPage = () => {
   };
 
   if (!student) return <div> 수강생 정보를 불러오고 있어요!</div>;
+
   const deleteStudent = () => {
     remove(
       { method: 'DELETE' },
@@ -124,9 +131,14 @@ const StudentDetailPage = () => {
       </div>
 
       <StudentInfo id={Number(studentId)} />
-      <StudentTab />
-
-      <StudentReservationList id={Number(studentId)} name={student.name} />
+      <StudentTab showCrafts={showCrafts} onSwap={toggleTap} />
+      {!showCrafts ? (
+        <StudentReservationList id={Number(studentId)} name={student.name} />
+      ) : (
+        craftList && (
+          <CraftFirstList craftList={craftList?.crafts} showCraftName={true} />
+        )
+      )}
       {toast && <Toast text={toast.text ?? ''} />}
     </div>
   );

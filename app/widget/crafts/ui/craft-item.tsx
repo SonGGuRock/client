@@ -1,36 +1,49 @@
+import {
+  CraftSummary,
+  CraftSummaryForStudent,
+} from '@/app/entities/crafts/types';
 import { ClassNamesProps } from '../../reservations/ui/class-time-picker';
 import CraftThumbnail from './craft-thumbnail';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 
 interface CraftItemProps extends ClassNamesProps {
-  craftId: number;
-  onClick: (id: number) => void;
+  craft: CraftSummary;
+  onClick: (id: number, itemId: number, craftName?: string) => void;
+  showCraftName?: boolean;
   isEditMode?: boolean;
   isChecked?: boolean;
 }
 
 const CraftItem = ({
-  craftId,
+  craft,
+  showCraftName = true,
   isEditMode = false,
   isChecked = false,
   onClick,
 }: CraftItemProps) => {
+  const isCraftSummary = (
+    craft: CraftSummary | CraftSummaryForStudent
+  ): craft is CraftSummary => {
+    return (craft as CraftSummary).item_count !== undefined;
+  };
+
   return (
-    // <li className='flex justify-center items-center rounded-lg h-full'>
-    //   <CraftItemWorkstep workstep='초벌' />
-    // </li>
     <div
       className={`${isEditMode && 'relative'}`}
-      onClick={() => onClick(craftId)}
+      onClick={() => onClick(craft.id, craft.now_craft_item!, craft.name)}
     >
       <CraftThumbnail
-        workstep='성형'
-        imgUrl='/img/craft_default.png'
-        craftId={craftId}
         classNames='w-full h-[108px] mb-2'
+        craft={craft}
+        showWorkStatus={true}
       />
-      <p className='text-sm text-grey900'>한선민</p>
-      <p className='text-sm text-grey400'>5</p>
+
+      {showCraftName ? (
+        <p className='text-sm text-grey900'>{craft.name}</p>
+      ) : (
+        <p className='text-sm text-grey900'>{craft.student_name}</p>
+      )}
+      <p className='text-sm text-grey400'>{craft.item_count}</p>
       {isEditMode && (
         <p className='absolute right-1 bottom-12'>
           <CheckBox

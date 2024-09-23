@@ -3,7 +3,9 @@ export type ReservationItem = {
   work_type: string;
   remaining_class_count: number;
   total_class_count: number;
-};
+} & StudentItem;
+
+export type StudentItem = { student_id: number; student_name: string };
 
 export type ClassTimeItem = {
   id: number;

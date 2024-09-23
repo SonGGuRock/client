@@ -1,19 +1,17 @@
 import useSteps, { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 import Button from '../atoms/button/Button';
-import { useRouter } from 'next/navigation';
 import Back from '../atoms/Back';
-import { CraftItem, StudentReservation } from '@/app/lib-temp/definition';
+import { ReservationCreateBody } from '@/app/entities/reservations/types';
 import {
-  ReservationCreateBody,
-  ReservationCreateResponse,
-} from '@/app/entities/reservations/types';
-import useCreate from '../api/useCreate';
-import useFormFill from './stepper/lib/use-form-fill';
-import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
-import { DataResponse } from '../api/type';
+  CraftCreateBody,
+  CraftItemCreateBody,
+} from '@/app/entities/crafts/types';
 
-interface StepperProps<T extends ReservationCreateBody | CraftItem> {
+interface StepperProps<
+  T extends ReservationCreateBody | CraftCreateBody | CraftItemCreateBody
+> {
   steps: Step<T>[];
+  onCreate: () => void;
   // form: Partial<T>;
 }
 const END_OF_STEP = 2;
@@ -21,25 +19,15 @@ const START_OF_STEP = 0;
 
 const Stepper = ({
   steps: stepsObj,
+  onCreate,
 }: // form,
-StepperProps<ReservationCreateBody | CraftItem>) => {
+StepperProps<
+  ReservationCreateBody | CraftCreateBody | CraftItemCreateBody
+>) => {
   const { steps, handleNext, handlePrev } = useSteps(stepsObj);
-  const { form } = useFormFill(ReservationCreateContext);
-  const { post } = useCreate<
-    ReservationCreateBody,
-    DataResponse<ReservationCreateResponse>
-  >({
-    path: `reservations`,
-    revalidate: false,
-    onSuccess: (data) => {
-      router.push(`/reservations/create/success/${data.data.student_name}`);
-    },
-  });
-
   const nowStep = (steps.find((step) => step.isMount === true)?.order ?? 0) + 1;
-  const router = useRouter();
   const handleCreate = () => {
-    post(form as ReservationCreateBody);
+    onCreate();
   };
   return (
     <div className='pt-6 pb-2 px-4 '>
@@ -50,7 +38,7 @@ StepperProps<ReservationCreateBody | CraftItem>) => {
           {END_OF_STEP + 1}
         </p>
       </div>
-      <div className='min-h-[560px] relative'>
+      <div className='mt-4 min-h-[560px] relative'>
         {steps.filter((step) => step.isMount)[0].component}
         <div className='w-full px-4 fixed left-0 bottom-8'>
           {steps.map(

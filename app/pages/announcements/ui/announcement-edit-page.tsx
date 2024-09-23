@@ -4,7 +4,6 @@ import useToast from '@/app/shared/modules/toast/lib/useToast';
 import Back from '@/app/shared/atoms/Back';
 import Button from '@/app/shared/atoms/button/Button';
 import Title from '@/app/shared/atoms/Title';
-import ToastContent from '@/app/shared/modules/toast/ui/Toast';
 import ArticleWriter from '@/app/shared/modules/ArticleWriter';
 import { useQueryClient } from '@tanstack/react-query';
 import { usePathname, useRouter } from 'next/navigation';
@@ -16,6 +15,7 @@ import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credential
 import { ArticleCreateRequest } from './announcement-create-page';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { DataResponse } from '@/app/shared/api/type';
+import Toast from '@/app/shared/modules/toast/ui/toast';
 
 const AnnouncementEditPage = () => {
   const { toast, toggleToast } = useToast();

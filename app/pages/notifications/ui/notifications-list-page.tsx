@@ -18,6 +18,7 @@ export const CATEGORIES: NotificationCategories[] = [
 ];
 
 const NotificationsListPage = () => {
+  const context = useNotificationCategories();
   return (
     <div className='py-3 px-4'>
       <div className='flex w-full items-center justify-between text-lg font-semibold'>
@@ -28,11 +29,11 @@ const NotificationsListPage = () => {
         <span className='text-grey900 text-sm'>전체 읽음</span>
       </div>
 
-      <Categories
+      {/* <Categories
         classNames='mt-4 mb-5'
         categories={CATEGORIES}
-        context={NotificationContext}
-      />
+        context={context}
+      /> */}
       <NotificationsList />
     </div>
   );

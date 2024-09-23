@@ -2,13 +2,13 @@
 
 import useToast from '@/app/shared/modules/toast/lib/useToast';
 import Back from '@/app/shared/atoms/Back';
-import ModalMenu from '@/app/shared/atoms/ModalMenu';
 import MeatBall from '@/app/shared/atoms/MeatBall';
-import Toast from '@/app/shared/modules/toast/ui/Toast';
+import Toast from '@/app/shared/modules/toast/ui/toast';
 import ArtilcePreview from '@/app/shared/modules/ArticlePreview';
 import { usePathname, useRouter } from 'next/navigation';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import PortalModal from '@/app/shared/modules/modal/ui/PotalModal';
+import ModalMenu from '@/app/shared/modules/modal/ui/ModalMenu';
 
 const AnnouncementDetailPage = () => {
   const { openModal } = useModal();
@@ -55,9 +55,12 @@ const AnnouncementDetailPage = () => {
         <MeatBall onClick={handleOpenModal} />
       </div>
       <ArtilcePreview
-        size='large'
-        title='12/31 쉽니다'
-        updated_at='2024-01-24'
+        content={{
+          id: 1,
+          title: '쉽니다',
+          updated_at: '2024-09-24',
+          is_representative_announcement: false,
+        }}
       />
       <div className='pt-8'>
         여행은 새로운 경험과 추억을 선사하지만, 올바른 준비가 필수입니다. 이번
