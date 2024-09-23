@@ -11,17 +11,16 @@ const StudentHeader = () => {
         <Header.Back />
         <Header.MeatBall>
           <ModalLayout>
+            <ModalMenu iconUrl='/icon/ic-edit_24px.svg' onClick={() => {}}>
+              프로필 수정하기
+            </ModalMenu>
             <ModalMenu
-              text='프로필 수정하기'
-              iconUrl='/icon/ic-edit_24px.svg'
-              onClick={() => {}}
-            />
-            <ModalMenu
-              text='수강 종료하기'
               iconUrl='/icon/ic-complete-24px.svg'
               onClick={() => {}}
               type='secondary'
-            />
+            >
+              수강 종료하기
+            </ModalMenu>
           </ModalLayout>
         </Header.MeatBall>
       </Header>

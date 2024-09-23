@@ -2,25 +2,25 @@
 
 import { useState } from 'react';
 import CraftItem from './craft-item';
-import { CraftThumbnailProps } from './craft-thumbnail';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 import Image from 'next/image';
 import PortalModal from '../../../shared/modules/modal/ui/PotalModal';
 import useModal from '../../../shared/modules/modal/lib/useModal';
 import CraftsEditModalContent from './crafts-edit-modal-content';
 import useToast from '../../../shared/modules/toast/lib/useToast';
+import Toast from '../../../shared/modules/toast/ui/toast';
 import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 import ModalContentInfoType from '@/app/shared/modules/modal/ui/modal-content-info-type';
-import Toast from '@/app/shared/modules/toast/ui/Toast';
-
-const Crafts_temp = [1, 2, 3, 4, 5];
+import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { CraftSummaryList } from '@/app/entities/crafts/types';
 
 const CraftsEditList = () => {
   const { toast, toggleToast } = useToast();
   const { isOpen, openModal, closeModal } = useModal();
-  const [selectedList, setSelectedList] = useState<
-    CraftThumbnailProps['craftId'][]
-  >([1, 2]);
+  const [selectedList, setSelectedList] = useState<number[]>([1, 2]);
+
+  const { data: craftList } =
+    useQueryWithCredentials<CraftSummaryList>('crafts');
 
   const handleSelectAll = () => {
     setSelectedList([1, 2, 3, 4, 5]);
@@ -31,7 +31,7 @@ const CraftsEditList = () => {
   };
 
   const isDeselectedAll = selectedList.length === 0;
-  const handleCheck = () => {
+  const handleCheckAll = () => {
     isDeselectedAll ? handleSelectAll() : handleDeselect();
   };
 
@@ -64,9 +64,15 @@ const CraftsEditList = () => {
       />
     );
   };
+
+  if (!craftList) return <div>loading now</div>;
+
   return (
     <div>
-      <div className='mt-6 px-4 flex gap-2 items-center' onClick={handleCheck}>
+      <div
+        className='mt-6 px-4 flex gap-2 items-center'
+        onClick={handleCheckAll}
+      >
         <CheckBox
           isChecked={!isDeselectedAll}
           style='grey'
@@ -76,14 +82,32 @@ const CraftsEditList = () => {
           {!isDeselectedAll ? '선택해제' : '전체선택'}
         </label>
       </div>
-      <div className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>
+
+      {/* <CraftFirstList craftList={craftList.crafts} /> */}
+      {/* <div className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>
         {Crafts_temp.map((craft) => (
           <CraftItem
             key={craft}
             onClick={handleSelectItem}
             isEditMode
             isChecked={!!selectedList.find((id) => id === craft)}
-            craftId={craft}
+            craft={craft}
+          />
+        ))}
+      </div> */}
+
+      <div className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>
+        {craftList.crafts.map((craft) => (
+          <CraftItem
+            key={craft.id}
+            craft={craft}
+            onClick={() => {
+              handleSelectItem(craft.id);
+            }}
+            isEditMode={true}
+            isChecked={
+              selectedList.find((id) => id === craft.id) ? true : false
+            }
           />
         ))}
       </div>

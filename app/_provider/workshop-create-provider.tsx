@@ -2,28 +2,17 @@
 
 import { ReactNode, createContext, useState } from 'react';
 import { SubmissionContext } from './reservation-create-provider';
-
-type WorkshopAddress = {
-  roadAddr?: string;
-  restAddr?: string;
-};
-
-type WorkshopForm = {
-  name: string;
-  profile_picture: string;
-  address: WorkshopAddress;
-  phone_number: string;
-};
+import { WorkshopCrateBody } from '../entities/workshops/types';
 
 export const WorkshopFormContext =
-  createContext<SubmissionContext<WorkshopForm> | null>(null);
+  createContext<SubmissionContext<WorkshopCrateBody> | null>(null);
 
 export default function WorkshopCreateProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [form, setForm] = useState<Partial<WorkshopForm>>({});
+  const [form, setForm] = useState<Partial<WorkshopCrateBody>>({});
 
   return (
     <WorkshopFormContext.Provider value={{ form, setForm }}>

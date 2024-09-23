@@ -6,13 +6,16 @@ import Search from '@/app/shared/modules/Search';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 import { StepStudentProps } from './step-student';
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
-import { Student } from '@/app/lib-temp/definition';
+import { ReservationCreateBody } from '@/app/entities/reservations/types';
+import { CraftCreateBody } from '@/app/entities/crafts/types';
 
 interface WithStudnetId {
   student_id: number;
 }
 
-const StudentsWithSearch = ({ context }: StepStudentProps) => {
+function StudentsWithSearch<T extends ReservationCreateBody | CraftCreateBody>({
+  context,
+}: StepStudentProps<T>) {
   const { form, fill } = useFormFill(context);
   const { searchKeyword, handleKeywordChange, searchedStudents } =
     useSearchStudentsByInitial();
@@ -55,6 +58,6 @@ const StudentsWithSearch = ({ context }: StepStudentProps) => {
       </div>
     </>
   );
-};
+}
 
 export default StudentsWithSearch;

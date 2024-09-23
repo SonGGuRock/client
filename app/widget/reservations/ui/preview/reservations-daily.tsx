@@ -3,7 +3,6 @@ import DailySchedule from './reservation-daily-schedule';
 import Link from 'next/link';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { ReservationDailySummary } from '../../types';
-import { Student } from '@/app/entities/students/types';
 import { getTodayWithoutYear } from '@/app/shared/lib/getToday';
 
 const Daily = () => {

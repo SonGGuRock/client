@@ -4,11 +4,11 @@ import useToast from '@/app/shared/modules/toast/lib/useToast';
 import Back from '@/app/shared/atoms/Back';
 import Button from '@/app/shared/atoms/button/Button';
 import Title from '@/app/shared/atoms/Title';
-import { Toast } from '@/app/shared/modules/toast/ui/Toast';
 import ArticleWriter from '@/app/shared/modules/ArticleWriter';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
 import { useRouter } from 'next/navigation';
+import Toast from '@/app/shared/modules/toast/ui/toast';
 
 export type ArticleCreateRequest = {
   title: string;

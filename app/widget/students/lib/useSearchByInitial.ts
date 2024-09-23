@@ -37,8 +37,8 @@
 
 import { ChangeEvent, useEffect, useState } from 'react';
 import { makeRegexByCho } from './search-by-initial-consonant';
-import { Student } from '@/app/lib-temp/definition';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import { Student } from '@/app/entities/students/types';
 
 export type StudentSearchParams = {
   active?: 0 | 1;

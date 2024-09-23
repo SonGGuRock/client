@@ -1,22 +1,24 @@
 'use client';
 
-import { ReactNode, createContext, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 import { SubmissionContext } from './reservation-create-provider';
-import { CraftItem } from '../entities/crafts/types';
+import { CraftItemCreateBody } from '../entities/crafts/types';
 
-export const CraftItemCreateContext =
-  createContext<SubmissionContext<CraftItem> | null>(null);
+export const CraftItemMutateContext =
+  createContext<SubmissionContext<CraftItemCreateBody> | null>(null);
 
-export default function CraftItemCreateProvider({
+export default function CraftItemMutateProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [form, setForm] = useState<Partial<CraftItem>>({});
-
+  const [form, setForm] = useState<Partial<CraftItemCreateBody>>({});
+  useEffect(() => {
+    console.log('🥹 CraftItemCreateBody', form);
+  }, [form]);
   return (
-    <CraftItemCreateContext.Provider value={{ form, setForm }}>
+    <CraftItemMutateContext.Provider value={{ form, setForm }}>
       {children}
-    </CraftItemCreateContext.Provider>
+    </CraftItemMutateContext.Provider>
   );
 }

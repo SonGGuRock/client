@@ -1,7 +1,6 @@
 'use client';
 
 import useToggle from '@/app/shared/lib/useToggle';
-import CheckBox from '@/app/shared/atoms/CheckBox';
 import Button from '@/app/shared/atoms/button/Button';
 import FormInput from '@/app/shared/modules/FormInput';
 import FormDateInput from '@/app/shared/modules/form-date-input';

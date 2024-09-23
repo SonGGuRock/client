@@ -1,6 +1,5 @@
-import { class_time } from '@/app/widget/workshops/types';
 import Image from 'next/image';
-import { ClassTimeItem, ReservationListItem } from '../../types';
+import { ClassTimeItem } from '../../types';
 
 interface Props {
   classTimes: ClassTimeItem[];
@@ -24,7 +23,7 @@ const DailySchedule = ({ classTimes }: Props) => {
           <div className='w-full flex flex-nowrap justify-center gap-1'>
             <span className='w-full flex justify-end h-[18px]'>
               <Image
-                src='/icon_pot.png'
+                src='/icon/icon_pot.png'
                 alt='icon of the pot'
                 width={18}
                 height={18}
@@ -35,7 +34,7 @@ const DailySchedule = ({ classTimes }: Props) => {
 
             <span className='w-full flex justify-start h-[18px]'>
               <Image
-                src='/icon_hand.png'
+                src='/icon/icon_hand.png'
                 alt='icon of the pot'
                 width={18}
                 height={18}

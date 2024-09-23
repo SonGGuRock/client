@@ -7,7 +7,7 @@ import IconPlusCircle from '@/app/shared/atoms/icons/icon-plus-circle';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import ReservationAddModal from '../../reservations/ui/modal/reservation-add-modal';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
-import Toast from '@/app/shared/modules/toast/ui/Toast';
+import Toast from '@/app/shared/modules/toast/ui/toast';
 import { Student, StudentDetail } from '@/app/entities/students/types';
 
 interface StudentInfoProps {

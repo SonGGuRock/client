@@ -62,7 +62,9 @@ const VerificationCode = ({
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               handleChange(idx, event)
             }
-            ref={(el) => (inputRefs.current[idx] = el)}
+            ref={(el) => {
+              inputRefs.current[idx] = el;
+            }}
           />
         ))}
       </div>

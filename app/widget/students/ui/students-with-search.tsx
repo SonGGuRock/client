@@ -48,6 +48,7 @@ const StudentsWithSearch = () => {
               <StudentMain.Thumbnail
                 id={student.id}
                 imageUrl={student.profile_picture}
+                type='student'
               />
               <StudentMain.Name>{student.name}</StudentMain.Name>
               <StudentMain.RemainingClassCount>

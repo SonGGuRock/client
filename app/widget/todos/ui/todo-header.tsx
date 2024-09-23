@@ -13,9 +13,10 @@ interface TodoHeaderProps {
 }
 
 const TodoHeader = ({ allCount, restCount }: TodoHeaderProps) => {
-  const postTodo = useCreate<TodoCreateBody>({
+  const { post } = useCreate<TodoCreateBody>({
     path: 'todos',
     revalidate: true,
+    revalidatePath: 'todos',
   });
   const { openModal, closeModal } = useModal();
   const openAddModal = () => {
@@ -23,7 +24,7 @@ const TodoHeader = ({ allCount, restCount }: TodoHeaderProps) => {
       <ModalContentWithInput
         title='할 일 추가'
         placeholder='오늘의 할 일을 입력하세요'
-        onDone={(content) => postTodo({ content })}
+        onDone={(content) => post({ content })}
         onClose={closeModal}
       />
     );

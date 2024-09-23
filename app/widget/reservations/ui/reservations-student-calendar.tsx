@@ -6,11 +6,13 @@ import { getKrYearAndMonth } from '@/app/shared/lib/getToday';
 interface ReservationsStudentCalendarProps {
   visits: StuentVisitWithDate[];
   yearAndMonth: string;
+  onClickDate: (reservationId: number, reservationDate: string) => void;
 }
 
 const ReservationsStudentCalendar = ({
   visits,
   yearAndMonth,
+  onClickDate,
 }: ReservationsStudentCalendarProps) => {
   const now = new Date();
   const year = now.getFullYear();
@@ -24,7 +26,9 @@ const ReservationsStudentCalendar = ({
     return Number(date.split('-')[2]);
   };
   const paymentDays = visits.filter((visit) => visit.payment === true);
-  const reservationDays = visits.filter((visit) => visit.reservation === true);
+  const reservationDays = visits.filter(
+    (visit) => visit.reservation_id !== null
+  );
 
   const isToday = (day: number) => {
     return day === today && Number(yearAndMonth.split('-')[1]) === month;
@@ -50,9 +54,10 @@ const ReservationsStudentCalendar = ({
           const isPaymentDay = paymentDays.find((day) => {
             return getDate(day.date) === idx + 1;
           });
-          const isVisitedDay = reservationDays.find(
+          const visitDay = reservationDays.find(
             (day) => getDate(day.date) === idx + 1
           );
+
           if (isPaymentDay) {
             return (
               <span
@@ -61,37 +66,48 @@ const ReservationsStudentCalendar = ({
               >
                 결제
                 {isToday(idx + 1) && (
-                  <span className='w-1 h-1 bg-brown rounded-full absolute bottom-[-4px]'></span>
+                  <span className='w-1 h-1 bg-brown rounded-full absolute bottom-[-8px]'></span>
                 )}
               </span>
             );
-          } else if (isVisitedDay) {
-            return isVisitedDay.craft_item ? (
+          } else if (!!visitDay) {
+            return visitDay.craft_item ? (
               <span
                 key={idx}
                 className='relative w-full inline-flex justify-center items-center min-h-9'
               >
+                {isToday(idx + 1) && (
+                  <span className='w-1 h-1 bg-brown rounded-full absolute bottom-[-8px]'></span>
+                )}
                 <Image
                   alt='수강생 작품 썸네일'
-                  src={
-                    isVisitedDay.craft_item.picture ?? '/img/craft_default.png'
-                  }
+                  src={visitDay.craft_item.picture ?? '/img/craft_default.png'}
                   width={36}
                   height={36}
+                  onClick={() => {
+                    onClickDate(
+                      visitDay.reservation_id!,
+                      getKrYearAndMonth(yearAndMonth) + ` ${idx + 1}일`
+                    );
+                  }}
+                  className='cursor-pointer'
                 />
-                {isToday(idx + 1) && (
-                  <span className='w-1 h-1 bg-brown rounded-full absolute bottom-[-4px]'></span>
-                )}
               </span>
             ) : (
               <span
                 key={idx}
-                className='relative w-full inline-flex justify-center items-center text-white text-base bg-brown rounded-full min-h-9 opacity-50'
+                onClick={() => {
+                  onClickDate(
+                    visitDay.reservation_id!,
+                    getKrYearAndMonth(yearAndMonth) + ` ${idx + 1}일`
+                  );
+                }}
+                className='cursor-pointer relative w-full inline-flex justify-center items-center text-white text-base bg-brown rounded-full min-h-9 opacity-50'
               >
-                {idx + 1}
                 {idx + 1 === today && (
-                  <span className='w-1 h-1 bg-brown rounded-full absolute bottom-[-4px]'></span>
+                  <span className='w-1 h-1 bg-brown rounded-full absolute bottom-[-8px]'></span>
                 )}
+                {idx + 1}
               </span>
             );
           } else {
@@ -100,10 +116,10 @@ const ReservationsStudentCalendar = ({
                 key={idx}
                 className='relative w-full inline-flex justify-center items-center text-grey900 text-base min-h-9'
               >
-                {idx + 1}
                 {isToday(idx + 1) && (
-                  <span className='w-1 h-1 bg-brown rounded-full absolute top-[-4px]'></span>
+                  <span className='w-1 h-1 bg-brown rounded-full absolute top-[-8px]'></span>
                 )}
+                {idx + 1}
               </span>
             );
           }

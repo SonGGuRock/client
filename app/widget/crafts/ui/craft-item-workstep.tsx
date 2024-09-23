@@ -1,12 +1,15 @@
 import Image from 'next/image';
-import { WORK_STEP, WorkStepType } from '../../../shared/atoms/work-step-label';
 import { ClassNamesProps } from '@/app/widget/reservations/ui/class-time-picker';
+import { WORK_STEP_MAP } from '@/app/entities/crafts/constants';
+import useWorkStep from '@/app/entities/crafts/hooks/useWorkStep';
 
 export interface WorkstepProps extends ClassNamesProps {
-  workstep: WorkStepType['ko'];
+  workstep: number;
   style?: 'black';
 }
 const CraftItemWorkstep = ({ workstep, classNames, style }: WorkstepProps) => {
+  const { getWorkStepEn } = useWorkStep();
+  const formatted = getWorkStepEn(workstep);
   return (
     <span
       className={`w-fit flex gap-[2px] py-1 pl-1 pr-2 itmes-center rounded-tl-lg rounded-br-lg ${
@@ -15,10 +18,8 @@ const CraftItemWorkstep = ({ workstep, classNames, style }: WorkstepProps) => {
     >
       <Image
         className={`${style === 'black' && 'invert'}`}
-        src={`/icon/workstep/ic-${
-          WORK_STEP.find((item) => item.ko === workstep)?.en
-        }-24px.svg`}
-        alt={`${workstep} 아이콘`}
+        src={`/icon/workstep/ic-${formatted}-24px.svg`}
+        alt={`${formatted} 아이콘`}
         width={20}
         height={20}
       />
@@ -27,7 +28,7 @@ const CraftItemWorkstep = ({ workstep, classNames, style }: WorkstepProps) => {
           style === 'black' && 'text-white'
         } `}
       >
-        {workstep}
+        {WORK_STEP_MAP[formatted!]}
       </span>
     </span>
   );

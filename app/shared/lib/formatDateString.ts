@@ -23,25 +23,33 @@ export default function formatDateString({
   const fullOption = { ...defaultOptions, ...options };
   const date = new Date(fullDateString);
 
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
+  // `Intl.DateTimeFormat`을 사용해 한국 시간대로 날짜 및 시간 변환
+  const koreanDateParts = new Intl.DateTimeFormat('ko-KR', {
+    year: fullOption.includeYear ? 'numeric' : undefined,
+    month: fullOption.includeMonth ? '2-digit' : undefined,
+    day: fullOption.includeDay ? '2-digit' : undefined,
+    hour: fullOption.includeHours ? '2-digit' : undefined,
+    minute: fullOption.includeMinutes ? '2-digit' : undefined,
+    hour12: false,
+    timeZone: 'Asia/Seoul',
+  }).formatToParts(date);
 
-  let formattedDate = '';
-  if (fullOption.includeYear === true) {
-    formattedDate += `${year}`;
-  }
-  if (fullOption.includeMonth)
-    formattedDate += `${fullOption.includeYear ? '-' : ''}${month}`;
-  if (fullOption.includeDay)
-    formattedDate += `${
-      fullOption.includeYear || fullOption.includeMonth ? '-' : ''
-    }${day}`;
-  if (fullOption.includeHours) formattedDate += ` ${hours}`;
-  if (fullOption.includeMinutes)
-    formattedDate += `${fullOption.includeHours ? ':' : ''}${minutes}`;
+  let formattedDate = koreanDateParts
+    .map(({ type, value }) => {
+      if (type === 'year' && fullOption.includeYear) return value;
+      if (type === 'month' && fullOption.includeMonth)
+        return `${fullOption.includeYear ? '-' : ''}${value}`;
+      if (type === 'day' && fullOption.includeDay)
+        return `${
+          fullOption.includeYear || fullOption.includeMonth ? '-' : ''
+        }${value}`;
+      if (type === 'hour' && fullOption.includeHours) return ` ${value}`;
+      if (type === 'minute' && fullOption.includeMinutes)
+        return `${fullOption.includeHours ? ':' : ''}${value}`;
+      return '';
+    })
+    .join('')
+    .trim();
 
-  return formattedDate.trim();
+  return formattedDate;
 }

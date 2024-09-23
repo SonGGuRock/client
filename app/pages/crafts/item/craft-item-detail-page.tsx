@@ -1,17 +1,17 @@
 'use client';
 
-import Comment from '@/app/shared/modules/comments';
+import CraftComments from '@/app/widget/crafts/ui/craft-comments';
 import CraftItemDetailContent from '@/app/widget/crafts/ui/craft-item-detail-content';
 import CraftItemDetailHeader from '@/app/widget/crafts/ui/craft-item-detail-header';
 import CraftItemDetailOthers from '@/app/widget/crafts/ui/craft-item-detail-others';
 
 const CraftItemDetailPage = () => {
   return (
-    <div className='relative'>
+    <div className='relative pb-6'>
       <CraftItemDetailHeader />
       <CraftItemDetailContent />
       <CraftItemDetailOthers />
-      <Comment classNames='py-6 px-4' />
+      <CraftComments classNames='py-6 px-4' />
     </div>
   );
 };

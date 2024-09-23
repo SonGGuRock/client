@@ -1,9 +1,11 @@
 import Image from 'next/image';
-import useToggle from '../lib/useToggle';
 
-const LikeButton = () => {
-  const { open: isLiked, toggle } = useToggle();
+interface LikeButtonProps {
+  isLiked: boolean;
+  toggleLike: () => void;
+}
 
+const LikeButton = ({ isLiked, toggleLike }: LikeButtonProps) => {
   return (
     <Image
       src={
@@ -14,7 +16,8 @@ const LikeButton = () => {
       alt='하트 모양 아이콘'
       width={18}
       height={18}
-      onClick={toggle}
+      onClick={toggleLike}
+      className='cursor-pointer'
     />
   );
 };

@@ -1,7 +1,7 @@
-import isDefaultImage from './isDefaultImage';
+import { isDefaultProfilePicture } from './isDefaultImage';
 
 const getImageWithFallback = (imageUrl: string, defaultSrc: string) => {
-  return isDefaultImage(imageUrl) ? defaultSrc : imageUrl;
+  return isDefaultProfilePicture(imageUrl) ? defaultSrc : imageUrl;
 };
 
 export default getImageWithFallback;

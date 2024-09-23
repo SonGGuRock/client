@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 
 import MeatBall from '@/app/shared/atoms/MeatBall';
 import Thumbnail from '@/app/shared/atoms/Thumbnail';
-import Toast from '@/app/shared/modules/toast/ui/Toast';
+import Toast from '@/app/shared/modules/toast/ui/toast';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
 import ModalContentWithInput from '@/app/shared/modules/modal/ui/ModalContentWithInput';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
