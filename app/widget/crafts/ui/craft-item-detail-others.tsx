@@ -12,7 +12,7 @@ import { CraftItemDetail } from '@/app/entities/crafts/types';
 
 const CraftItemDetailOthers = () => {
   const params = useParams();
-  const itemId = params.id as string;
+  const itemId = params['itemId'];
   const router = useRouter();
   const { data: craftDetail } = useQueryWithCredentials<CraftItemDetail>(
     `/crafts/items/${itemId}`

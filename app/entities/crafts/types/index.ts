@@ -91,3 +91,7 @@ export type CraftItemDetail = {
 
   student: AuthorStudent;
 };
+
+export type TodayStudentCrafts = AuthorStudent & {
+  crafts: CraftSummary[];
+};

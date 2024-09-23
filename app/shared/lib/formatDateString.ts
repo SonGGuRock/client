@@ -22,26 +22,34 @@ export default function formatDateString({
   };
   const fullOption = { ...defaultOptions, ...options };
   const date = new Date(fullDateString);
-  const koreanDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
-  const year = koreanDate.getFullYear();
-  const month = String(koreanDate.getMonth() + 1).padStart(2, '0');
-  const day = String(koreanDate.getDate()).padStart(2, '0');
-  const hours = String(koreanDate.getHours()).padStart(2, '0');
-  const minutes = String(koreanDate.getMinutes()).padStart(2, '0');
 
-  let formattedDate = '';
-  if (fullOption.includeYear === true) {
-    formattedDate += `${year}`;
-  }
-  if (fullOption.includeMonth)
-    formattedDate += `${fullOption.includeYear ? '-' : ''}${month}`;
-  if (fullOption.includeDay)
-    formattedDate += `${
-      fullOption.includeYear || fullOption.includeMonth ? '-' : ''
-    }${day}`;
-  if (fullOption.includeHours) formattedDate += ` ${hours}`;
-  if (fullOption.includeMinutes)
-    formattedDate += `${fullOption.includeHours ? ':' : ''}${minutes}`;
+  // `Intl.DateTimeFormat`을 사용해 한국 시간대로 날짜 및 시간 변환
+  const koreanDateParts = new Intl.DateTimeFormat('ko-KR', {
+    year: fullOption.includeYear ? 'numeric' : undefined,
+    month: fullOption.includeMonth ? '2-digit' : undefined,
+    day: fullOption.includeDay ? '2-digit' : undefined,
+    hour: fullOption.includeHours ? '2-digit' : undefined,
+    minute: fullOption.includeMinutes ? '2-digit' : undefined,
+    hour12: false,
+    timeZone: 'Asia/Seoul',
+  }).formatToParts(date);
 
-  return formattedDate.trim();
+  let formattedDate = koreanDateParts
+    .map(({ type, value }) => {
+      if (type === 'year' && fullOption.includeYear) return value;
+      if (type === 'month' && fullOption.includeMonth)
+        return `${fullOption.includeYear ? '-' : ''}${value}`;
+      if (type === 'day' && fullOption.includeDay)
+        return `${
+          fullOption.includeYear || fullOption.includeMonth ? '-' : ''
+        }${value}`;
+      if (type === 'hour' && fullOption.includeHours) return ` ${value}`;
+      if (type === 'minute' && fullOption.includeMinutes)
+        return `${fullOption.includeHours ? ':' : ''}${value}`;
+      return '';
+    })
+    .join('')
+    .trim();
+
+  return formattedDate;
 }
