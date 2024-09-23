@@ -7,11 +7,9 @@ import CraftItemCreateDetail from '@/app/widget/crafts/ui/craft-item-create-deta
 import useFormFill from '@/app/shared/modules/stepper/lib/use-form-fill';
 import { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 import StepStudent from '@/app/widget/reservations/ui/step-student';
-import { CraftItem } from '@/app/lib-temp/definition';
+import { CraftItem } from '@/app/entities/crafts/types';
 
 const CraftItemCreatePage = () => {
-  const { form } = useFormFill(CraftItemCreateContext);
-
   const CRAFT_STEPS: Step<CraftItem>[] = [
     {
       order: 0,
@@ -45,7 +43,7 @@ const CraftItemCreatePage = () => {
       </Header>
 
       {/* <input type='file' accept='image/*' capture></input> */}
-      <Stepper steps={CRAFT_STEPS} form={form} />
+      <Stepper steps={CRAFT_STEPS} />
     </div>
   );
 };

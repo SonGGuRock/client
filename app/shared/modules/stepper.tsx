@@ -2,7 +2,6 @@ import useSteps, { Step } from '@/app/shared/modules/stepper/lib/use-steps';
 import Button from '../atoms/button/Button';
 import { useRouter } from 'next/navigation';
 import Back from '../atoms/Back';
-import { CraftItem, StudentReservation } from '@/app/lib-temp/definition';
 import {
   ReservationCreateBody,
   ReservationCreateResponse,
@@ -11,18 +10,17 @@ import useCreate from '../api/useCreate';
 import useFormFill from './stepper/lib/use-form-fill';
 import { ReservationCreateContext } from '@/app/_provider/reservation-create-provider';
 import { DataResponse } from '../api/type';
+import { CraftItem } from '@/app/entities/crafts/types';
 
 interface StepperProps<T extends ReservationCreateBody | CraftItem> {
   steps: Step<T>[];
-  // form: Partial<T>;
 }
 const END_OF_STEP = 2;
 const START_OF_STEP = 0;
 
 const Stepper = ({
   steps: stepsObj,
-}: // form,
-StepperProps<ReservationCreateBody | CraftItem>) => {
+}: StepperProps<ReservationCreateBody | CraftItem>) => {
   const { steps, handleNext, handlePrev } = useSteps(stepsObj);
   const { form } = useFormFill(ReservationCreateContext);
   const { post } = useCreate<

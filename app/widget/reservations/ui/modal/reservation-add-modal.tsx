@@ -6,13 +6,13 @@ import DropDown from '@/app/shared/atoms/drop-down';
 import DateWeeklySwiper from '../reservations-weekly-swiper';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import { useState } from 'react';
-import { ReservationAddRequestBody, Student } from '@/app/lib-temp/definition';
 import { useMutateWithCrendetials } from '@/app/shared/api/fetch-with-credentials';
-import useToast from '@/app/shared/modules/toast/lib/useToast';
 import { useQueryClient } from '@tanstack/react-query';
 import getDateArray from '@/app/shared/lib/getDateArray';
 import getDayName from '@/app/shared/lib/getDayName';
 import { DailyItemDate } from '../reservations-daily-item';
+import { Student } from '@/app/entities/students/types';
+import { ReservationAddRequestBody } from '@/app/entities/reservations/types';
 
 interface ReservationAddModalProps {
   studentId: Student['id'];

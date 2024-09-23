@@ -1,6 +1,5 @@
 'use client';
 
-import { Student, StudentDetail } from '@/app/lib-temp/definition';
 import Thumbnail from '../../../shared/atoms/Thumbnail';
 import PhoneNumberBox from '../../../shared/modules/phone-number/PhoneNumberBox';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
@@ -9,6 +8,7 @@ import useModal from '@/app/shared/modules/modal/lib/useModal';
 import ReservationAddModal from '../../reservations/ui/modal/reservation-add-modal';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
 import Toast from '@/app/shared/modules/toast/ui/Toast';
+import { Student, StudentDetail } from '@/app/entities/students/types';
 
 interface StudentInfoProps {
   id: Student['id'];

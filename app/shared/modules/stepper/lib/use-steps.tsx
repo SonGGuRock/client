@@ -1,10 +1,9 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ReservationCreateBody } from '@/app/entities/reservations/types';
-import { CraftItem } from '@/app/lib-temp/definition';
-
+import { CraftItem } from '@/app/entities/crafts/types';
 export type Step<T> =
   | (T extends ReservationCreateBody
       ? {
