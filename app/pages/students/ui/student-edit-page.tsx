@@ -1,6 +1,6 @@
 'use client';
 
-import { StudentDetail } from '@/app/lib-temp/definition';
+import { StudentDetail } from '@/app/entities/students/types';
 import {
   useMutateWithCrendetials,
   useQueryWithCredentials,

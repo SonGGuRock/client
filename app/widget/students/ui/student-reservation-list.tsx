@@ -1,9 +1,9 @@
-import { StudentReservation } from '@/app/lib-temp/definition';
 import AllVisitButton from '../../reservations/ui/all-visit-button';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import StudentReservationItem from '../../reservations/ui/student-reservation-item';
 import sliceList from '@/app/shared/lib/sliceList';
 import EmptyDataNotice from '@/app/shared/atoms/EmptyDataNotice';
+import { StudentReservation } from '@/app/entities/reservations/types';
 
 interface StudentReservationListProps {
   id: number;

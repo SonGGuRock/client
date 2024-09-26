@@ -2,8 +2,8 @@ import IconHand from '@/app/shared/atoms/icons/icon-hand';
 import IconPot from '@/app/shared/atoms/icons/icon-pot';
 import isDateInThePast from '@/app/shared/lib/isDateInThePast';
 import Image from 'next/image';
-import { StudentReservation } from '@/app/lib-temp/definition';
 import { getKrDateWithoutYear } from '@/app/shared/lib/getToday';
+import { StudentReservation } from '@/app/entities/reservations/types';
 
 interface ReservationItemsProps {
   reservation: StudentReservation;

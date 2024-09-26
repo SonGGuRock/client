@@ -31,3 +31,15 @@ export type StudentYearlyRecord = {
 export type StuentVisitWithDate = {
   date: string;
 } & StudentVisit;
+
+export type StudentDetail = {
+  name: string;
+  profile_picture: string;
+  id: number;
+  remaining_class_count: number;
+  total_class_count: number;
+  last_payment_date: string;
+  register_date: string;
+  phone_number: string;
+  is_active: boolean;
+};

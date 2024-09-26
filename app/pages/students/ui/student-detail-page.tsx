@@ -13,11 +13,11 @@ import {
 import { useQueryClient } from '@tanstack/react-query';
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import useToast from '@/app/shared/modules/toast/lib/useToast';
-import { StudentDetail } from '@/app/lib-temp/definition';
 import Toast from '@/app/shared/modules/toast/ui/toast';
 import useToggle from '@/app/shared/lib/useToggle';
 import CraftFirstList from '@/app/widget/crafts/ui/craft-first-list';
 import { CraftSummaryList } from '@/app/entities/crafts/types';
+import { StudentDetail } from '@/app/entities/students/types';
 
 const StudentDetailPage = () => {
   const router = useRouter();
