@@ -4,12 +4,12 @@ import { ClassNamesProps } from '../../reservations/ui/class-time-picker';
 
 interface CraftItemInfoProps extends ClassNamesProps {
   workstep: number;
-  classDate: string;
+  reservationDate: string;
 }
 
 const CraftItemInfo = ({
   workstep,
-  classDate,
+  reservationDate,
   classNames,
 }: CraftItemInfoProps) => {
   return (
@@ -17,7 +17,9 @@ const CraftItemInfo = ({
       <CraftItemInfoItem labelText='상태'>
         <CraftItemWorkstep classNames='opacity-60' workstep={workstep} />
       </CraftItemInfoItem>
-      <CraftItemInfoItem labelText='수업일'>{classDate}</CraftItemInfoItem>
+      <CraftItemInfoItem labelText='수업일'>
+        {reservationDate}
+      </CraftItemInfoItem>
     </div>
   );
 };

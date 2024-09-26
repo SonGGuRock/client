@@ -10,7 +10,6 @@ const useDelete = <T>({
 }: {
   path: string;
   revalidate: boolean;
-
   revalidatePath?: string;
   onSuccess?: () => void;
   onFail?: () => void;
@@ -18,10 +17,11 @@ const useDelete = <T>({
   const { mutate, ...rest } = useMutateWithCrendetials<T>(path);
   const queryClient = useQueryClient();
 
-  const remove = () => {
+  const remove = (content: T | undefined) => {
     mutate(
       {
         method: 'DELETE',
+        ...(content && { body: content }),
       },
       {
         onSuccess: () => {

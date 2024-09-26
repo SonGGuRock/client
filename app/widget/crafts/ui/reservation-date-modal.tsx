@@ -5,28 +5,32 @@ import StudentAllVisitCalendar from '../../reservations/ui/student-all-visit-cal
 import { CraftCreateContext } from '@/app/_provider/craft-create-provide';
 
 interface ReservationDateModalProps {
-  onSelectDate: (date: string) => void;
+  studentId: number;
+
+  onSelectDate: (id: number, date: string) => void;
 }
 
-const ReservationDateModal = ({ onSelectDate }: ReservationDateModalProps) => {
+const ReservationDateModal = ({
+  studentId,
+  onSelectDate,
+}: ReservationDateModalProps) => {
+  // TODO: 분리
   const { closeModal } = useModal();
-  const { form: craftCreateBody } = useFormFill(CraftCreateContext);
-  const { form: craftItemCreateBody, fill: fillCraftItemCreateBody } =
-    useFormFill(CraftItemMutateContext);
+  // const { form: craftCreateBody } = useFormFill(CraftCreateContext);
+  // const { form: craftItemCreateBody, fill: fillCraftItemCreateBody } =
+  //   useFormFill(CraftItemMutateContext);
 
   const handleClickDate = (id: number, date: string) => {
-    fillCraftItemCreateBody({ reservation_id: id });
-    onSelectDate(date);
+    // fillCraftItemCreateBody({ reservation_id: id });
+    onSelectDate(id, date);
     closeModal();
   };
   return (
     <div className='w-full flex flex-wrap gap-[6px]'>
-      {craftCreateBody.student_id && (
-        <StudentAllVisitCalendar
-          studentId={craftCreateBody.student_id}
-          onClickDate={handleClickDate}
-        />
-      )}
+      <StudentAllVisitCalendar
+        studentId={studentId}
+        onClickDate={handleClickDate}
+      />
     </div>
   );
 };

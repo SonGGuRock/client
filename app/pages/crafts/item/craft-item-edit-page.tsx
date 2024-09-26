@@ -17,8 +17,9 @@ const CraftItemEditPage = () => {
   const { update } = useUpdate<CraftItemCreateBody>({
     path: `/crafts/items/${itemId}`,
     revalidate: true,
+    revalidatePath: `/crafts/${craftId}/${itemId}`,
     onSuccess: () => {
-      router.push(`crafts/${craftId}/${itemId}`);
+      router.push(`/crafts/${craftId}/${itemId}`);
     },
   });
 
@@ -43,7 +44,7 @@ const CraftItemEditPage = () => {
         className='w-full'
         size='large'
         // disabled={}
-        onClick={() => {}}
+        onClick={handleUpdateSubmit}
       >
         완료
       </Button>

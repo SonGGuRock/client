@@ -1,8 +1,7 @@
 'use client';
 
 import { ClassNamesProps } from '@/app/widget/reservations/ui/class-time-picker';
-import clsx from 'clsx';
-import { useEffect } from 'react';
+import clsx from 'clsx'; 
 
 interface CheckBoxProps extends ClassNamesProps {
   isChecked?: boolean;
@@ -40,11 +39,6 @@ const CheckBox = ({
       'bg-grey900': style === 'grey',
     }
   );
-
-  useEffect(() => {
-    console.log('✅', isChecked, isReadOnly ? 'Pending Component' : '진짜');
-  }, [isChecked]);
-
   return (
     <input
       readOnly={isReadOnly}

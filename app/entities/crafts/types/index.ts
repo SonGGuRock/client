@@ -82,10 +82,10 @@ export type CraftItemDetail = {
   picture: string;
   work_step: number;
   content: string;
+  reservation_id: number;
   reservation_date: string;
   updated_at: string;
   craft_name: string;
-
   comments: Comment[];
   items: ItemOthers[];
 
@@ -95,3 +95,5 @@ export type CraftItemDetail = {
 export type TodayStudentCrafts = AuthorStudent & {
   crafts: CraftSummary[];
 };
+
+export type CraftsMoveReqeustBody = { crafts: number[]; status: CraftStatus };

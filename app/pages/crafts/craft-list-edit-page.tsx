@@ -6,12 +6,14 @@ const CraftListEditPage = () => {
   return (
     <div className='pt-2  min-h-screen relative'>
       <Header className='px-4 '>
-        <Header.Title size='small'>작품 편집</Header.Title>
+        <div className='flex gap-2 items-center'>
+          <Header.Back />
+          <Header.Title size='small'>작품 편집</Header.Title>
+        </div>
         <ButtonIndex size='small'>완료</ButtonIndex>
       </Header>
 
       <CraftsEditList />
-      
     </div>
   );
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CraftItem from './craft-item';
 import CheckBox from '@/app/shared/atoms/CheckBox';
 import Image from 'next/image';
@@ -9,21 +9,36 @@ import useModal from '../../../shared/modules/modal/lib/useModal';
 import CraftsEditModalContent from './crafts-edit-modal-content';
 import useToast from '../../../shared/modules/toast/lib/useToast';
 import Toast from '../../../shared/modules/toast/ui/toast';
-import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 import ModalContentInfoType from '@/app/shared/modules/modal/ui/modal-content-info-type';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { CraftSummaryList } from '@/app/entities/crafts/types';
+import { useSearchParams } from 'next/navigation';
+import useDelete from '@/app/shared/api/useDelete';
 
 const CraftsEditList = () => {
-  const { toast, toggleToast } = useToast();
+  const searchParams = useSearchParams();
+  const status = searchParams.get('status');
+  const { toast } = useToast();
   const { isOpen, openModal, closeModal } = useModal();
-  const [selectedList, setSelectedList] = useState<number[]>([1, 2]);
+  const [selectedList, setSelectedList] = useState<number[]>([]);
 
-  const { data: craftList } =
-    useQueryWithCredentials<CraftSummaryList>('crafts');
+  const { data: craftList } = useQueryWithCredentials<CraftSummaryList>(
+    `crafts?work_step=all&status=${status}&page=0`
+  );
+
+  // TODO: check!!
+  const { remove } = useDelete<{ craft_id: number[] }>({
+    path: 'crafts',
+    revalidate: true,
+    revalidatePath: `crafts?work_step=all&status=${status}&page=0`,
+  });
+
+  useEffect(() => {
+    craftList && setSelectedList(craftList.crafts.map((craft) => craft.id));
+  }, [craftList]);
 
   const handleSelectAll = () => {
-    setSelectedList([1, 2, 3, 4, 5]);
+    craftList && setSelectedList(craftList.crafts.map((craft) => craft.id));
   };
 
   const handleDeselect = () => {
@@ -42,15 +57,7 @@ const CraftsEditList = () => {
   };
 
   const handleOnEditModal = () => {
-    openModal(
-      <CraftsEditModalContent
-        onClick={(workstep: WorkStepType['ko']) =>
-          toggleToast({
-            text: `${selectedList.length} 작품을 ${workstep}로 이동했어요`,
-          })
-        }
-      />
-    );
+    openModal(<CraftsEditModalContent selectedCrafts={selectedList} />);
   };
 
   const handleOnDeleteModal = () => {
@@ -59,7 +66,9 @@ const CraftsEditList = () => {
         text='선택하신 작품을 삭제하시겠습니까?'
         primaryButtonText='삭제'
         secondaryButtonText='취소'
-        onClickPrimary={() => {}}
+        onClickPrimary={() => {
+          remove({ craft_id: selectedList });
+        }}
         onClickSecondary={closeModal}
       />
     );
@@ -82,19 +91,6 @@ const CraftsEditList = () => {
           {!isDeselectedAll ? '선택해제' : '전체선택'}
         </label>
       </div>
-
-      {/* <CraftFirstList craftList={craftList.crafts} /> */}
-      {/* <div className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>
-        {Crafts_temp.map((craft) => (
-          <CraftItem
-            key={craft}
-            onClick={handleSelectItem}
-            isEditMode
-            isChecked={!!selectedList.find((id) => id === craft)}
-            craft={craft}
-          />
-        ))}
-      </div> */}
 
       <div className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>
         {craftList.crafts.map((craft) => (

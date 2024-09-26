@@ -32,8 +32,11 @@ const CraftItemEditDetail = () => {
   );
   const { getWorkStepEn, getWorkStepKrWithIcon } = useWorkStep();
 
-  const { openModal } = useModal();
-  const [reservationDate, setReservationDate] = useState<string | null>(null);
+  const { openModal } = useModal(); 
+
+  const [reservationDate, setReservationDate] = useState(
+    craftDetail?.reservation_date
+  );
 
   const handleOpenModalUploadPicture = () => {
     openModal(
@@ -55,11 +58,13 @@ const CraftItemEditDetail = () => {
     openModal(<CraftWorkStatusModal />);
   };
 
-  const handleOpenModalReservationDate = () => {
+  const handleOpenModalReservationDate = (studentId: number) => {
     openModal(
       <ReservationDateModal
-        onSelectDate={(date) => {
+        studentId={studentId}
+        onSelectDate={(id, date) => {
           setReservationDate(date);
+          fillCraftItemCreateBody({ reservation_id: id });
         }}
       />
     );
@@ -83,10 +88,13 @@ const CraftItemEditDetail = () => {
     });
   }, [craftDetail]);
 
+  if (!craftDetail) return <div>loading</div>;
+
   return (
     <div className='relative'>
       <Title size='small'>
-        {craftDetail?.craft_name}&nbsp;&nbsp;&nbsp;{WORK_STEP_MAP[getWorkStepEn(craftDetail?.work_step!)!]}&nbsp;
+        {craftDetail?.craft_name}&nbsp;&nbsp;&nbsp;
+        {WORK_STEP_MAP[getWorkStepEn(craftDetail?.work_step!)!]}&nbsp;
       </Title>
       <div
         onClick={handleOpenModalUploadPicture}
@@ -107,11 +115,15 @@ const CraftItemEditDetail = () => {
 
       <div className='flex gap-2'>
         <SelectLikeButton onClick={handleOpenModalWorkStep}>
-          {craftDetail?.work_step
-            ? getWorkStepKrWithIcon(craftDetail?.work_step)
+          {form?.work_step_id
+            ? getWorkStepKrWithIcon(form.work_step_id)
             : '작업 상태 선택'}
         </SelectLikeButton>
-        <SelectLikeButton onClick={handleOpenModalReservationDate}>
+        <SelectLikeButton
+          onClick={() => {
+            handleOpenModalReservationDate(craftDetail.student.id);
+          }}
+        >
           {reservationDate ?? '수업일 선택'}
         </SelectLikeButton>
       </div>

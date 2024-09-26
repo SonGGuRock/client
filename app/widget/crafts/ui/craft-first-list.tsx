@@ -14,7 +14,7 @@ const CraftFirstList = ({
   const router = useRouter();
 
   const handleClickItem = (craftId: number, itemId: number) => {
-    router.push(`/crafts/${craftId}/${itemId}`);
+    itemId && router.push(`/crafts/${craftId}/${itemId}`);
   };
   return (
     <div className='mt-4 px-4 grid grid-cols-3 gap-x-2 gap-y-6'>

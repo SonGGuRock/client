@@ -33,7 +33,7 @@ const CraftItemDetailContent = () => {
 
         <CraftItemInfo
           workstep={craftDetail.work_step}
-          classDate={craftDetail.reservation_date}
+          reservationDate={craftDetail.reservation_date}
         />
 
         <Textarea

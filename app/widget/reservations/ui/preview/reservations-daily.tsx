@@ -3,7 +3,7 @@ import DailySchedule from './reservation-daily-schedule';
 import Link from 'next/link';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { ReservationDailySummary } from '../../types';
-import { getTodayWithoutYear } from '@/app/shared/lib/getToday';
+import { getFullToday, getTodayWithoutYear } from '@/app/shared/lib/getToday';
 
 const Daily = () => {
   const { data: reservations } =
@@ -16,7 +16,7 @@ const Daily = () => {
   // );
   if (!reservations) return <div>loading now</div>;
   return (
-    <Link href='/reservations'>
+    <Link href={`/reservations/${getFullToday()}`}>
       <h2 className=' inline-block px-[12px] py-[6px] text-sm font-bold bg-brown text-white rounded-3xl'>
         {getTodayWithoutYear()}
       </h2>

@@ -4,9 +4,7 @@ import {
   CraftQueryParams,
   CraftStatus,
   CraftSummaryList,
-  CraftSummaryForStudent,
   CraftSummaryForStudentList,
-  CraftSummary,
 } from '@/app/entities/crafts/types';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { ButtonIndex } from '@/app/shared/atoms/button';
@@ -77,8 +75,10 @@ const CraftListPage = () => {
                 activeStatus={craftQueries.status}
               />
               <div className='w-full flex justify-between'>
-                <CraftsEditButton />
-                <DropDown>
+                {craftList.crafts.length !== 0 && (
+                  <CraftsEditButton status={craftQueries.status} />
+                )}
+                <DropDown  >
                   <DropDown.Option value='최근등록순'>
                     최근등록순
                   </DropDown.Option>
