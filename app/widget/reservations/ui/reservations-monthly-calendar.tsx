@@ -6,6 +6,7 @@ import { TimeCrowds } from './time-crowds';
 import { TodayBullet } from './today-bullet';
 import { ReservationDay } from './reservation-weekly-view';
 import { getToday } from '@/app/shared/lib/getToday';
+import Loader from '@/app/shared/atoms/loader';
 
 const ReservationsMonthlyCalendar = () => {
   const { data: reservationsDays } = useQueryWithCredentials<ReservationDay[]>(
@@ -14,7 +15,7 @@ const ReservationsMonthlyCalendar = () => {
   );
 
   if (!reservationsDays) {
-    return <div>loading </div>;
+    return <Loader />;
   }
 
   const now = new Date();

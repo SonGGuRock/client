@@ -1,11 +1,11 @@
 'use client';
- 
+
 import { ClassNamesProps } from '../../reservations/ui/class-time-picker';
 import { useParams } from 'next/navigation';
 import { useQueryWithCredentials } from '../../../shared/api/fetch-with-credentials';
 import { CraftItemDetail } from '@/app/entities/crafts/types';
 import EmptyDataNotice from '@/app/shared/atoms/EmptyDataNotice';
-import CraftCommentInput from './craft-comment-input'; 
+import CraftCommentInput from './craft-comment-input';
 import CraftCommentItem from './craft-comment-item';
 
 const CraftComments = ({ classNames }: ClassNamesProps) => {
@@ -15,7 +15,7 @@ const CraftComments = ({ classNames }: ClassNamesProps) => {
     `/crafts/items/${itemId}`
   );
 
-  if (!craftDetail) return <div>loading now</div>;
+  if (!craftDetail) return <></>;
   const { comments } = craftDetail;
   return (
     <div className={classNames}>
@@ -30,7 +30,11 @@ const CraftComments = ({ classNames }: ClassNamesProps) => {
       <ul className='w-full flex flex-wrap gap-6 mt-4'>
         {comments.length !== 0 &&
           comments.map((comment) => (
-            <CraftCommentItem key={comment.id} comment={comment} itemId={itemId}/>
+            <CraftCommentItem
+              key={comment.id}
+              comment={comment}
+              itemId={itemId}
+            />
           ))}
       </ul>
     </div>

@@ -14,7 +14,7 @@ export default function StudentsTodayList() {
     'reservations/students/today'
   );
 
-  if (!students) return <div>수강생을 불러오고 있어요</div>;
+  if (!students) return <></>;
 
   const { limited, rest } = sliceList(4, students);
   return (

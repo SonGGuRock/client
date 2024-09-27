@@ -22,7 +22,7 @@ const CraftItemDetailOthers = () => {
     //TODO: [id], [itemId] 로 nested
     router.push(`/crafts/2/create?name=${craftDetail?.craft_name}`);
   };
-  if (!craftDetail) return <div>loading now</div>;
+  if (!craftDetail) return <></>;
   return (
     <div className='px-4'>
       <div className='w-full relative mb-4'>

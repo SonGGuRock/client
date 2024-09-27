@@ -1,6 +1,7 @@
 import { CraftSummary } from '@/app/entities/crafts/types';
 import CraftItem from './craft-item';
 import { useRouter } from 'next/navigation';
+import EmptyDataNotice from '@/app/shared/atoms/EmptyDataNotice';
 
 interface CraftFirstListProps {
   craftList: CraftSummary[];
@@ -26,6 +27,7 @@ const CraftFirstList = ({
           showCraftName={showCraftName}
         />
       ))}
+      
     </div>
   );
 };

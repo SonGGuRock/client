@@ -53,7 +53,6 @@ export const ReservationsDailyItem = ({
     return formatDate.split('-')[2];
   };
 
-  console.log(getDay(dateItem.date), getToday());
   return (
     <div
       onClick={handleClick}

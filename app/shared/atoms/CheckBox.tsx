@@ -41,10 +41,6 @@ const CheckBox = ({
     }
   );
 
-  useEffect(() => {
-    console.log('✅', isChecked, isReadOnly ? 'Pending Component' : '진짜');
-  }, [isChecked]);
-
   return (
     <input
       readOnly={isReadOnly}

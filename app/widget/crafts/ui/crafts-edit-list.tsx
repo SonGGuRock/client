@@ -13,6 +13,7 @@ import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 import ModalContentInfoType from '@/app/shared/modules/modal/ui/modal-content-info-type';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { CraftSummaryList } from '@/app/entities/crafts/types';
+import Loader from '@/app/shared/atoms/loader';
 
 const CraftsEditList = () => {
   const { toast, toggleToast } = useToast();
@@ -65,7 +66,7 @@ const CraftsEditList = () => {
     );
   };
 
-  if (!craftList) return <div>loading now</div>;
+  if (!craftList) return <Loader />;
 
   return (
     <div>

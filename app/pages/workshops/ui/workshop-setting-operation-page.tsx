@@ -9,6 +9,7 @@ import OperationSettingReservation from '@/app/widget/mypage/ui/operation-settin
 import OperationSettingCapacity from '@/app/widget/mypage/ui/operation-setting-capacity';
 import OperationSettingThrow from '@/app/widget/mypage/ui/operation-setting-throw';
 import useOperationSetting from '@/app/widget/mypage/lib/useOperationSetting';
+import Loader from '@/app/shared/atoms/loader';
 
 const WorkshopSettingOperationPage = () => {
   const { mutate } = useMutateWithCrendetials<WorkshopOperation>(
@@ -17,7 +18,7 @@ const WorkshopSettingOperationPage = () => {
 
   const { operation } = useOperationSetting();
   if (!operation) {
-    return <div>loading</div>;
+    return <Loader />;
   }
   const handleUpdate = () => {
     mutate({

@@ -8,7 +8,7 @@ const StepWorkType = () => {
     'workshops/settings/ids'
   );
 
-  if (!workshopIds) return <div> loading now </div>;
+  if (!workshopIds) return <></>;
   return (
     <div>
       <div className='pt-1 pb-4 '>

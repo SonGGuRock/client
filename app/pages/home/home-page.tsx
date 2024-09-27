@@ -13,17 +13,13 @@ const HomePage = () => {
     <div>
       <section className='bg-grey50 h-[376px] w-full px-4 rounded-es-2xl rounded-ee-2xl'>
         <HomeHeader />
-        <AnnouncementBanner />
-        {/* Suspense fallback={Calandar} */}
+        <AnnouncementBanner /> 
         <Reservations />
       </section>
 
-      <section>
-        {/* Suspense fallback={TodosSkeleton} */}
+      <section> 
         <Todos />
-        <Divider />
-        {/* Suspense fallback={Gallery} */}
-        {/* Suspense fallback={Students} */}
+        <Divider /> 
         <StudentsTodayList />
         <Divider />
         <CraftsPreview />

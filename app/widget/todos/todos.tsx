@@ -4,12 +4,13 @@ import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials
 import { Todo } from './lib/type';
 import TodoHeader from './ui/todo-header';
 import TodoList from './ui/todo-list';
+import Loader from '@/app/shared/atoms/loader';
 
 export default function Todos() {
   const { data: todos } = useQueryWithCredentials<Todo[]>('todos');
 
   if (!todos) {
-    return <div>loading</div>;
+    return <Loader />;
   }
   const notCompletedTodos = todos.filter((todo) => !todo.is_completed);
 

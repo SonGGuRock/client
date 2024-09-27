@@ -8,7 +8,7 @@ interface ClasstimeSettingItemProps {
 const ClasstimeSettingItem = ({ index }: ClasstimeSettingItemProps) => {
   const { operation, set } = useOperationSetting();
   if (!operation) {
-    return <div> loading</div>;
+    return <></>;
   }
   return (
     <span className='w-full flex justify-center  items-center'>

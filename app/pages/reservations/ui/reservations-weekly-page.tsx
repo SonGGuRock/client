@@ -18,6 +18,7 @@ import {
 } from '@/app/widget/reservations/types';
 import { getKrDateWithoutYear } from '@/app/shared/lib/getToday';
 import { useParams } from 'next/navigation';
+import Loader from '@/app/shared/atoms/loader';
 
 export const ReservationsWeeklyPage = () => {
   const params = useParams();
@@ -27,7 +28,7 @@ export const ReservationsWeeklyPage = () => {
     { date }
   );
 
-  if (!times) return <div>loading now </div>;
+  if (!times) return <Loader />;
 
   const hasNoReservation = () => {
     return (
