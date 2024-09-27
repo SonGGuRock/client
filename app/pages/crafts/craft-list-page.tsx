@@ -9,6 +9,8 @@ import {
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { ButtonIndex } from '@/app/shared/atoms/button';
 import DropDown from '@/app/shared/atoms/drop-down';
+import EmptyDataNotice from '@/app/shared/atoms/EmptyDataNotice';
+import Loader from '@/app/shared/atoms/loader';
 import { WorkStepType } from '@/app/shared/atoms/work-step-label';
 import BottomBar from '@/app/shared/modules/BottomBar';
 import Header from '@/app/shared/modules/header';
@@ -44,7 +46,7 @@ const CraftListPage = () => {
   const handleViewTap = () => {
     setIsCraftFirstView((prev) => !prev);
   };
-  if (!craftList) return <div>loading now</div>;
+  if (!craftList) return <Loader />;
 
   const isCraftSummaryList = (
     craftList: CraftSummaryList | CraftSummaryForStudentList
@@ -86,6 +88,9 @@ const CraftListPage = () => {
               </div>
             </div>
             <CraftFirstList craftList={craftList.crafts} />
+            {craftList.crafts.length === 0 && (
+              <EmptyDataNotice>작품이 없습니다</EmptyDataNotice>
+            )}
           </>
         ) : (
           <StudentsFirstCraftList studentList={craftList} />

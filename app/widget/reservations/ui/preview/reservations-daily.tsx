@@ -14,7 +14,7 @@ const Daily = () => {
   // const { data: students } = useQueryWithCredentials<Student[]>(
   //   'reservations/students/today'
   // );
-  if (!reservations) return <div>loading now</div>;
+  if (!reservations) return <></>;
   return (
     <Link href={`/reservations/${getFullToday()}`}>
       <h2 className=' inline-block px-[12px] py-[6px] text-sm font-bold bg-brown text-white rounded-3xl'>

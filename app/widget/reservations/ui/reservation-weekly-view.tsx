@@ -24,7 +24,7 @@ const ReservationWeeklyView = () => {
   );
 
   if (!reservationsDays) {
-    return <div>loading </div>;
+    return <></>;
   }
 
   const fommatted = reservationsDays.map((day) => ({

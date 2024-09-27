@@ -8,7 +8,7 @@ const OperationSettingWorkstep = () => {
   const { operation, set } = useOperationSetting();
 
   if (!operation) {
-    return <div>loading</div>;
+    return <></>;
   }
 
   const formatted = Object.keys(operation.work_step_activation).map(

@@ -21,7 +21,7 @@ const StepClassTime = () => {
   const { form, fill } = useFormFill(ReservationCreateContext);
 
   if (!reservationsDays || !workshopIds) {
-    return <div>loading </div>;
+    return <></>;
   }
 
   const fommatted = reservationsDays.map((day) => ({

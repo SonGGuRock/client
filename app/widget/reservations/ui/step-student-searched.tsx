@@ -21,7 +21,7 @@ function StudentsWithSearch<T extends ReservationCreateBody | CraftCreateBody>({
     useSearchStudentsByInitial();
 
   if (!searchedStudents) {
-    return <div>loading</div>;
+    return <></>;
   }
   return (
     <>

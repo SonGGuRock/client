@@ -11,6 +11,7 @@ import { CraftCreateContext } from '@/app/_provider/craft-create-provide';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { useQueryClient } from '@tanstack/react-query';
 import { CraftItemMutateContext } from '@/app/_provider/craft-item-create-provider';
+import Loader from '@/app/shared/atoms/loader';
 
 const CraftCreateDetail = () => {
   const query = useQueryClient();
@@ -52,7 +53,7 @@ const CraftCreateDetail = () => {
     fillCraftItemCreateBody({ craft_id: craftId });
   };
 
-  if (!data) return <div>loading now </div>;
+  if (!data) return <Loader />;
 
   const { totalPages, crafts } = data;
   return (

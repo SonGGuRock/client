@@ -26,7 +26,7 @@ const CraftWorkStatusModal = () => {
     fillCraftItemCreateBody({ work_step_id: workStepId });
   };
 
-  if (!setting) return <div>loading now</div>;
+  if (!setting) return <></>;
   return (
     <div className='flex flex-wrap gap-[6px]'>
       <Title size='medium' classNames='w-full'>

@@ -9,6 +9,7 @@ import useSearchStudentsByInitial, {
 import Search from '@/app/shared/modules/Search';
 import StudentsTab from './students-tab';
 import EmptyDataNotice from '@/app/shared/atoms/EmptyDataNotice';
+import Loader from '@/app/shared/atoms/loader';
 
 const StudentsWithSearch = () => {
   const {
@@ -23,6 +24,7 @@ const StudentsWithSearch = () => {
     handleParams({ sort: value });
   };
 
+  if (!searchedStudents) return <Loader />;
   return (
     <>
       <StudentsTab onSwitch={handleParams} />
@@ -36,7 +38,7 @@ const StudentsWithSearch = () => {
       </div>
 
       <div className='px-4 flex flex-wrap'>
-        {searchedStudents?.map((student) => (
+        {searchedStudents.map((student) => (
           <Link
             key={student.id}
             href={`/students/${student.id}`}

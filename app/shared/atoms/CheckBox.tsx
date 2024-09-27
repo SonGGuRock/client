@@ -1,7 +1,7 @@
 'use client';
 
 import { ClassNamesProps } from '@/app/widget/reservations/ui/class-time-picker';
-import clsx from 'clsx'; 
+import clsx from 'clsx';
 
 interface CheckBoxProps extends ClassNamesProps {
   isChecked?: boolean;

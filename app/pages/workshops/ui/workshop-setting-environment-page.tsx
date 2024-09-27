@@ -1,6 +1,7 @@
 'use client';
 
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
+import Loader from '@/app/shared/atoms/loader';
 import Header from '@/app/shared/modules/header';
 import EnvironmentSettingNotification from '@/app/widget/mypage/ui/environment-setting-notification';
 import { WorkshopEnvironment } from '@/app/widget/workshops/api/type';
@@ -10,7 +11,7 @@ const WorkshopSettingEnvironmentPage = () => {
     'workshops/settings/environment'
   );
   if (!env) {
-    return <div>loading</div>;
+    return <Loader />;
   }
 
   return (

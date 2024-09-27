@@ -5,7 +5,7 @@ const OperationSettingReservation = () => {
   const { operation, set } = useOperationSetting();
 
   if (!operation) {
-    return <div>loading</div>;
+    return <></>;
   }
 
   return (

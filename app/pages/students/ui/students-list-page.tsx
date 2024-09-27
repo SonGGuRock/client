@@ -17,6 +17,7 @@ const StudentsListPage = () => {
         <Link href='/students/create'>
           <Button
             size='small'
+            style='primary'
             icon={
               <Image
                 src='/icon/ic_plus_white.svg'

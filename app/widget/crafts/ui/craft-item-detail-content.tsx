@@ -7,6 +7,7 @@ import Textarea from '@/app/shared/atoms/textarea';
 import { useParams } from 'next/navigation';
 import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials';
 import { CraftItemDetail } from '@/app/entities/crafts/types';
+import Loader from '@/app/shared/atoms/loader';
 
 const CraftItemDetailContent = () => {
   const params = useParams();
@@ -15,7 +16,7 @@ const CraftItemDetailContent = () => {
   const { data: craftDetail } = useQueryWithCredentials<CraftItemDetail>(
     `/crafts/items/${itemId}`
   );
-  if (!craftDetail) return <div>loading now</div>;
+  if (!craftDetail) return <Loader />;
   return (
     <div>
       <Image

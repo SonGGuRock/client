@@ -9,6 +9,7 @@ import { useQueryWithCredentials } from '@/app/shared/api/fetch-with-credentials
 import { ReservationListItem } from '@/app/widget/reservations/types';
 import { getKrThisMonthWithYear } from '@/app/shared/lib/getToday';
 import { useParams } from 'next/navigation';
+import Loader from '@/app/shared/atoms/loader';
 
 export const ReservationsMonthlyPage = () => {
   const params = useParams();
@@ -18,7 +19,7 @@ export const ReservationsMonthlyPage = () => {
     { date }
   );
 
-  if (!times) return <div>loading now </div>;
+  if (!times) return <Loader />;
   return (
     <div>
       <ReservationsHeader />
