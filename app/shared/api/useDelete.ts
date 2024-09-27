@@ -17,7 +17,7 @@ const useDelete = <T>({
   const { mutate, ...rest } = useMutateWithCrendetials<T>(path);
   const queryClient = useQueryClient();
 
-  const remove = (content: T | undefined) => {
+  const remove = (content?: T) => {
     mutate(
       {
         method: 'DELETE',

@@ -48,8 +48,10 @@ const CraftItemCreateDetail = () => {
   const handleOpenModalReservationDate = () => {
     openModal(
       <ReservationDateModal
-        onSelectDate={(date) => {
+        studentId={craftCreateBodyAndTitle.student_id!}
+        onSelectDate={(id, date) => {
           setReservationDate(date);
+          fillCraftItemCreateBody({ reservation_id: id });
         }}
       />
     );

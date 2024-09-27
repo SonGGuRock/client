@@ -1,6 +1,7 @@
 import { ButtonIndex } from '@/app/shared/atoms/button';
 import Header from '@/app/shared/modules/header';
 import CraftsEditList from '@/app/widget/crafts/ui/crafts-edit-list';
+import { Suspense } from 'react';
 
 const CraftListEditPage = () => {
   return (
@@ -13,7 +14,9 @@ const CraftListEditPage = () => {
         <ButtonIndex size='small'>완료</ButtonIndex>
       </Header>
 
-      <CraftsEditList />
+      <Suspense>
+        <CraftsEditList />
+      </Suspense>
     </div>
   );
 };
