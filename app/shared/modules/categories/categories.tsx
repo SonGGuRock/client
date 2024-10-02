@@ -10,44 +10,19 @@ import { FreeMode } from 'swiper/modules';
 import { Context } from 'react';
 import { CategoryContext } from '@/app/_provider/craft-workstep-provider';
 import { WorkStepType } from '../../atoms/work-step-label';
-
-export type NotificationCategories =
-  | {
-      ko: '전체';
-      en: 'all';
-    }
-  | {
-      ko: '예약';
-      en: 'reservation';
-    }
-  | {
-      ko: '할일';
-      en: 'todo';
-    }
-  | {
-      ko: '작품';
-      en: 'craft';
-    }
-  | {
-      ko: '공지';
-      en: 'announcement';
-    }
-  | {
-      ko: '운영';
-      en: 'enrollment';
-    }
-  | {
-      ko: '승인';
-      en: 'approval';
-    };
+import { NotificationCategories } from '@/app/entities/notifications/types';
 
 interface CategoriesProps extends ClassNamesProps {
   categories: NotificationCategories[];
-  context: Context<
-    | CategoryContext<NotificationCategories['ko'] | null>
-    | CategoryContext<WorkStepType['ko'] | null>
-  >;
+  context:
+    | CategoryContext<NotificationCategories['ko']>
+    | CategoryContext<WorkStepType['ko'] | null>;
 }
+
+// context: Context<
+//   | CategoryContext<NotificationCategories['ko'] | null>
+//   | CategoryContext<WorkStepType['ko'] | null>
+// >;
 
 const Categories = ({ categories, classNames, context }: CategoriesProps) => {
   return (

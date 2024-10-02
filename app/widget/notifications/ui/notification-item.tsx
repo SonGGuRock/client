@@ -1,29 +1,14 @@
 'use client';
 
-import { NotificationCategories } from '@/app/shared/modules/categories/categories';
+import { Notification } from '@/app/entities/notifications/types';
 import { clsx } from 'clsx';
 import { useState } from 'react';
-
-export type Notification = {
-  id: number;
-  category: NotificationCategories['ko'];
-  title: string;
-  content: string;
-  updated_at: string;
-  readers: [
-    {
-      id: number;
-      profile_picture: string;
-      name: string;
-    }
-  ];
-};
 
 interface NotificationItemProps {
   item: Notification;
 }
 const NotificationItem = ({
-  item: { id, category, title, content, updated_at, readers },
+  item: { id, category, subcategory, content, updated_at, readers },
 }: NotificationItemProps) => {
   const [isRead, setIsRead] = useState(false);
   const handleClick = () => {
@@ -39,7 +24,7 @@ const NotificationItem = ({
       onClick={handleClick}
     >
       <div>
-        <span className='text-xs font-bold text-grey900'>{title}</span>
+        <span className='text-xs font-bold text-grey900'>{subcategory}</span>
         <span className='text-grey500 text-xs'> ・ {updated_at}분 전</span>
       </div>
       <div className='w-full flex justify-between items-center'>

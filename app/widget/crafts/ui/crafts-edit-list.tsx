@@ -15,6 +15,7 @@ import { CraftSummaryList } from '@/app/entities/crafts/types';
 import { useSearchParams } from 'next/navigation';
 import useDelete from '@/app/shared/api/useDelete';
 import Loader from '@/app/shared/atoms/loader';
+import useCreate from '@/app/shared/api/useCreate';
 
 const CraftsEditList = () => {
   const searchParams = useSearchParams();
@@ -28,8 +29,8 @@ const CraftsEditList = () => {
   );
 
   // TODO: check!!
-  const { remove } = useDelete<{ craft_id: number[] }>({
-    path: 'crafts',
+  const { post } = useCreate<{ craft_id: number[] }>({
+    path: 'crafts/delete',
     revalidate: true,
     revalidatePath: `crafts?work_step=all&status=${status}&page=0`,
   });
@@ -68,7 +69,7 @@ const CraftsEditList = () => {
         primaryButtonText='삭제'
         secondaryButtonText='취소'
         onClickPrimary={() => {
-          remove({ craft_id: selectedList });
+          post({ craft_id: selectedList });
         }}
         onClickSecondary={closeModal}
       />

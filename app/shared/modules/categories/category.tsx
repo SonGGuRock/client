@@ -2,17 +2,16 @@
 
 import { clsx } from 'clsx';
 import { Context } from 'react';
-import { NotificationCategories } from './categories';
 import useCategory from './lib/useCategory';
 import { CategoryContext } from '@/app/_provider/craft-workstep-provider';
 import { WorkStepType } from '../../atoms/work-step-label';
+import { NotificationCategories } from '@/app/entities/notifications/types';
 
 export interface CategoryProps {
   category: NotificationCategories['ko'];
-  context: Context<
-    | CategoryContext<NotificationCategories['ko'] | null>
-    | CategoryContext<WorkStepType['ko'] | null>
-  >;
+  context:
+    | CategoryContext<NotificationCategories['ko']>
+    | CategoryContext<WorkStepType['ko'] | null>;
 }
 
 const CategoryItem = ({ category, context }: CategoryProps) => {
