@@ -1,9 +1,9 @@
 'use client';
 
-import { Todo, TodoContent } from '@/app/lib-temp/definition';
 import CheckBox from '../../shared/atoms/CheckBox';
 import useUpdate from '@/app/shared/api/useUpdate';
 import TodoAuthor from './ui/todo-author';
+import { Todo, TodoContent } from '@/app/entities/todos/types';
 
 const TodoItem = (todo: Todo) => {
   const { id, content, is_completed } = todo;

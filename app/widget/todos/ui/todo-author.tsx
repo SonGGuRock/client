@@ -8,9 +8,9 @@ import ModalContentWithInput from '@/app/shared/modules/modal/ui/ModalContentWit
 import useModal from '@/app/shared/modules/modal/lib/useModal';
 import { Todo } from '../lib/type';
 import useUpdate from '@/app/shared/api/useUpdate';
-import { TodoContent } from '@/app/lib-temp/definition';
 import ModalMenu from '@/app/shared/modules/modal/ui/ModalMenu';
 import useDelete from '@/app/shared/api/useDelete';
+import { TodoContent } from '@/app/entities/todos/types';
 
 const TodoAuthor = ({ id, is_completed, content, author }: Todo) => {
   const { closeModal, openModal } = useModal();
