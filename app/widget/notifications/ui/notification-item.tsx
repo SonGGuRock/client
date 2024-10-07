@@ -6,6 +6,7 @@ import {
   SubcategoryItem,
   SubcategoryKey,
 } from '@/app/entities/notifications/types';
+import useCreate from '@/app/shared/api/useCreate';
 import { clsx } from 'clsx';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -26,7 +27,11 @@ const NotificationItem = ({
   },
 }: NotificationItemProps) => {
   const router = useRouter();
-  const [isRead, setIsRead] = useState(is_read);
+  const { post } = useCreate({
+    path: `notifications/${id}`,
+    revalidate: true,
+    revalidatePath: 'notifications',
+  });
 
   const isValidSubcategoryKey = (key: string): key is SubcategoryKey => {
     return key in SUBCATEGORY_MAP;
@@ -53,7 +58,7 @@ const NotificationItem = ({
 
   const handleClick = (subCategory: string, redirectId: number) => {
     if (isValidSubcategoryKey(subCategory)) {
-      isRead === false && setIsRead(true);
+      is_read === false && post();
       const url = getRedirectUrl(subCategory, redirectId);
       router.push(url);
     }
@@ -63,7 +68,7 @@ const NotificationItem = ({
     <div
       className={clsx(
         'py-3 w-full flex flex-wrap gap-2',
-        isRead && 'opacity-50'
+        is_read && 'opacity-50'
       )}
       onClick={() => {
         handleClick(sub_category, redirect_id);

@@ -14,12 +14,7 @@ import {
 interface CategoriesProps extends ClassNamesProps {
   categories: NotificationCategoryMap;
   activeCategory: NotificationCategoryKey;
-}
-
-// context: Context<
-//   | CategoryContext<NotificationCategories['ko'] | null>
-//   | CategoryContext<WorkStepType['ko'] | null>
-// >;
+} 
 
 const Categories = ({
   categories,

@@ -30,7 +30,7 @@ type NotificationReader = {
 
 type RedirectUrlGenerator = (id?: number) => string;
 
-export type SubcategoryKey = 'new-todo';
+export type SubcategoryKey = 'new-todo' | 'todo-complete';
 
 export interface SubcategoryItem {
   title: string;
@@ -39,4 +39,8 @@ export interface SubcategoryItem {
 
 export type SubcategoryMapType = {
   [K in SubcategoryKey]: SubcategoryItem;
+};
+
+export type NotificationNew = {
+  new: boolean;
 };

@@ -35,8 +35,6 @@ const NotificationsList = () => {
         {filtered.map((noti, idx) => (
           <NotificationItem item={noti} key={idx} />
         ))}
-        {/* {activeCategory !== '전체' &&
-        filtered.map((noti, idx) => <NotificationItem item={noti} key={idx} />)} */}
         {notifications.length === 0 && (
           <EmptyDataNotice>알림이 없습니다</EmptyDataNotice>
         )}

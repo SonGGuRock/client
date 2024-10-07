@@ -9,6 +9,10 @@ export const SUBCATEGORY_MAP: SubcategoryMapType = {
     title: '새 할일',
     redirectUrl: `/home`,
   },
+  'todo-complete': {
+    title: '할일 완료',
+    redirectUrl: '/home',
+  },
 };
 
 export const CATEGORY_MAP: NotificationCategoryMap = {
