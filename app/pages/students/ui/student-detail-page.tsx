@@ -18,6 +18,7 @@ import useToggle from '@/app/shared/lib/useToggle';
 import CraftFirstList from '@/app/widget/crafts/ui/craft-first-list';
 import { CraftSummaryList } from '@/app/entities/crafts/types';
 import { StudentDetail } from '@/app/entities/students/types';
+import Loader from '@/app/shared/atoms/loader';
 
 const StudentDetailPage = () => {
   const router = useRouter();
@@ -65,7 +66,7 @@ const StudentDetailPage = () => {
     );
   };
 
-  if (!student) return <div> 수강생 정보를 불러오고 있어요!</div>;
+  if (!student) return <Loader />;
 
   const deleteStudent = () => {
     remove(
