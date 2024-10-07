@@ -19,7 +19,7 @@ const useCreate = <T, R = Response>({
   const { mutate, ...rest } = useMutateWithCrendetials<T, R>(path, params);
   const queryClient = useQueryClient();
 
-  const post = (content: T | undefined) => {
+  const post = (content?: T) => {
     mutate(
       {
         method: 'POST',
