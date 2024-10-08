@@ -30,17 +30,17 @@ export const postAsync = async <T, K>(
   params?: Record<string, any>
 ): Promise<K> => {
   try {
-    if (isRouteRequest) {
-      const response: AxiosResponse<K> = await axios.post(path, body, {
-        params,
-      });
-      return response.data;
-    } else {
-      const response: AxiosResponse<K> = await instance.post(path, body, {
-        params,
-      });
-      return response.data;
-    }
+    // if (isRouteRequest) {
+    //   const response: AxiosResponse<K> = await axios.post(path, body, {
+    //     params,
+    //   });
+    //   return response.data;
+    // } else {
+    const response: AxiosResponse<K> = await instance.post(path, body, {
+      params,
+    });
+    return response.data;
+    // }
   } catch (error) {
     console.error('Error in postAsync:', error);
     throw error;
