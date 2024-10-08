@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { ErrorResponse } from './type';
 import getRefreshTokenPromise, { isErrorResponse } from './refreshTokens';
 
-export const BASE_URL = 'https:/songgurock.duckdns.org/v1';
+export const BASE_URL = 'https://songgurock.duckdns.org/v1';
 
 const instance = axios.create({
   baseURL: BASE_URL,
