@@ -6,23 +6,23 @@ import ModalProvider from './_provider/modal-provider';
 const primaryFont = localFont({
   src: [
     {
-      path: '../public/fonts/Pretendard-Light.woff2',
+      path: '../public/fonts/pretendard-light.woff2',
       weight: '300',
     },
     {
-      path: '../public/fonts/Pretendard-Regular.woff2',
+      path: '../public/fonts/pretendard-regular.woff2',
       weight: '400',
     },
     {
-      path: '../public/fonts/Pretendard-Medium.woff2',
+      path: '../public/fonts/pretendard-medium.woff2',
       weight: '500',
     },
     {
-      path: '../public/fonts/Pretendard-Semibold.woff2',
+      path: '../public/fonts/pretendard-semibold.woff2',
       weight: '600',
     },
     {
-      path: '../public/fonts/Pretendard-Bold.woff2',
+      path: '../public/fonts/pretendard-bold.woff2',
       weight: '700',
     },
   ],
