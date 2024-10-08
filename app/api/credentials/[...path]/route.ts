@@ -72,7 +72,7 @@ async function handleRequest(request: NextRequest, method: Method) {
         } catch (err) {
           cookieStore.delete('accessToken');
           cookieStore.delete('refreshToken');
-          return NextResponse.redirect(`http://localhost:3000/signin`);
+          return NextResponse.redirect(`/signin`);
         }
       }
       return Promise.reject(error);

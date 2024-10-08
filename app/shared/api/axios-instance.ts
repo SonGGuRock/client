@@ -10,11 +10,12 @@ const instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
-  // httpsAgent: new https.Agent({
-  //   rejectUnauthorized: false,
-  // }),
 });
+
+// withCredentials: true,
+// httpsAgent: new https.Agent({
+//   rejectUnauthorized: false,
+// }),
 
 // new https.Agent({ rejectUnauthorized: false }
 
