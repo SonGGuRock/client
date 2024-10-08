@@ -8,15 +8,15 @@ export const getAsync = async <T>(
   params?: Record<string, any>
 ): Promise<T> => {
   try {
-    if (isRouteRequest) {
-      const response: AxiosResponse<T> = await axios.get(path, {
-        params,
-      });
-      return response.data;
-    } else {
-      const response: AxiosResponse<T> = await instance.get(path, { params });
-      return response.data;
-    }
+    // if (isRouteRequest) {
+    //   const response: AxiosResponse<T> = await axios.get(path, {
+    //     params,
+    //   });
+    //   return response.data;
+    // } else {
+    const response: AxiosResponse<T> = await instance.get(path, { params });
+    return response.data;
+    // }
   } catch (error) {
     console.error('getAsync Error:', error);
     throw error;
